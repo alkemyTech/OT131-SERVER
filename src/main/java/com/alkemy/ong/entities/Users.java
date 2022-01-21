@@ -1,8 +1,6 @@
 package com.alkemy.ong.entities;
 
 import java.time.LocalDate;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +10,7 @@ import javax.persistence.ManyToOne;
 import org.springframework.lang.NonNull;
 
 @Entity
-public class User {
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,12 +24,12 @@ public class User {
     @NonNull
     private String password;
     @ManyToOne
-    private Role role;
+    private Roles role;
     private LocalDate creation;
     private LocalDate discharge;
     private boolean isActive;
 
-    public User() {
+    public Users() {
     }
 
     public LocalDate getDischarge() {
@@ -42,7 +40,7 @@ public class User {
         this.discharge = discharge;
     }
 
-    public User(String firstName, String lastName, String email, String password, Role role, LocalDate creation,
+    public Users(String firstName, String lastName, String email, String password, Roles role, LocalDate creation,
             boolean isActive) {
         this.firstName = firstName;
         this.lastName = lastName;
