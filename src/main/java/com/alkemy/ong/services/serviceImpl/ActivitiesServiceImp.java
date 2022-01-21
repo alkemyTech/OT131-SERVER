@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ActivitiesServiceImpl implements ActivitiesService {
+public class ActivitiesServiceImp implements ActivitiesService {
 
     // ATTRIBUTES - Mapper and Repository
     @Autowired
@@ -28,8 +28,6 @@ public class ActivitiesServiceImpl implements ActivitiesService {
      * @return The DTO already saved
      */
     public ActivitiesDTO save(ActivitiesDTO dto) {
-
-        validation(dto);
 
         ActivitiesEntity entity = activitiesMapper.dto2Entity(dto);
         entity.setCreationDate(LocalDate.now());
@@ -57,8 +55,6 @@ public class ActivitiesServiceImpl implements ActivitiesService {
      */
     public ActivitiesDTO update(Long id, ActivitiesDTO dto) {
 
-        validation(dto);
-
         Optional<ActivitiesEntity> result = activitiesRepository.findById(id);
         if (result.isPresent()){
             ActivitiesEntity entity = activitiesMapper.updateDTO2Entity(result.get(), dto);
@@ -69,22 +65,5 @@ public class ActivitiesServiceImpl implements ActivitiesService {
         } else {
             throw new EntityException("Requested activity was not found.");
         }
-    }
-
-    /**
-     * Validates the attributos of an ActivitiesDTO and throws an Exception if something is not valid
-     * @param dto
-     * @throws EntityException
-     */
-    private void validation(ActivitiesDTO dto) throws EntityException {
-
-        if (dto.getName() == null || dto.getName().isEmpty())
-            throw new EntityException("Name cannot be null.");
-
-        if (dto.getContent() == null || dto.getContent().isEmpty())
-            throw new EntityException("Content cannot be null.");
-
-        if (dto.getImage() == null || dto.getImage().isEmpty())
-            throw new EntityException("The image cannot be null.");
     }
 }

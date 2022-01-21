@@ -1,13 +1,16 @@
 package com.alkemy.ong.entities;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import org.aspectj.bridge.IMessage;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 @Entity
@@ -22,11 +25,11 @@ public class ActivitiesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NonNull
+    @NotBlank(message = "The name must be valid")
     private String name;
-    @NonNull
+    @NotBlank(message = "The content must be valid")
     private String content;
-    @NonNull
+    @NotBlank(message = "The image must be valid")
     private String image;
 
     // TIMESTAMPS
