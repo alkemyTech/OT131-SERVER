@@ -16,6 +16,10 @@ public class ActivitiesController {
     @Autowired
     private ActivitiesService activitiesService;
 
+    /**
+     * GET Request
+     * @return A list of ActivitiesDTO with all Entities saved in DB
+     */
     @GetMapping
     public ResponseEntity<List<ActivitiesDTO>> getAll() {
 
@@ -24,6 +28,12 @@ public class ActivitiesController {
 
     }
 
+    /**
+     * POST Request /activities -
+     * Validates sent attributes name and content and saves it in activities table
+     * @param dto
+     * @return DTO already saved
+     */
     @PostMapping
     public ResponseEntity<ActivitiesDTO> save(@RequestBody ActivitiesDTO dto) {
 
@@ -32,6 +42,14 @@ public class ActivitiesController {
 
     }
 
+    /**
+     * PUT Request /activities/:id
+     * Validates that there is an ActivityEntity related to the received id in activities table.
+     * If there is not, returns an error, else it updates the Entity and returns the updated attributes
+     * @param id Of the Entity to be updated
+     * @param dto With all the new attributes
+     * @return The dto already saved
+     */
     @PutMapping("/{id}")
     public ResponseEntity<ActivitiesDTO> update(@PathVariable Long id, @RequestBody ActivitiesDTO dto) {
 

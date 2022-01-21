@@ -23,7 +23,7 @@ public class ActivitiesServiceImpl implements ActivitiesService {
     private ActivitiesRepository activitiesRepository;
 
     /**
-     * Validates the received DTO and saves it as an Entity in DB
+     * Validates the received DTO and saves it as an Entity in activities table
      * @param dto
      * @return The DTO already saved
      */
@@ -38,12 +38,23 @@ public class ActivitiesServiceImpl implements ActivitiesService {
         return activitiesMapper.entity2DTO(entitySaved);
     }
 
+    /**
+     * Returns a List of ActivitiesDTO with all Entities saved in activities table
+     * @return
+     */
     public List<ActivitiesDTO> getAll() {
 
         List<ActivitiesEntity> entities = activitiesRepository.findAll();
         return activitiesMapper.entityList2DTOList(entities);
     }
 
+    /**
+     * Updates the attributes of the ActivityEntity related to the received id
+     * with the new attributes in ActivitiesDTO
+     * @param id
+     * @param dto
+     * @return
+     */
     public ActivitiesDTO update(Long id, ActivitiesDTO dto) {
 
         validation(dto);
@@ -60,6 +71,11 @@ public class ActivitiesServiceImpl implements ActivitiesService {
         }
     }
 
+    /**
+     * Validates the attributos of an ActivitiesDTO and throws an Exception if something is not valid
+     * @param dto
+     * @throws EntityException
+     */
     private void validation(ActivitiesDTO dto) throws EntityException {
 
         if (dto.getName() == null || dto.getName().isEmpty())

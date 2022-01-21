@@ -12,6 +12,11 @@ import java.util.List;
 @Component
 public class ActivitiesMapper {
 
+    /**
+     * Converts an ActivityDTO into an ActivityEntity
+     * @param dto
+     * @return entity
+     */
     public ActivitiesEntity dto2Entity(ActivitiesDTO dto) {
 
         ActivitiesEntity entity = new ActivitiesEntity();
@@ -23,7 +28,11 @@ public class ActivitiesMapper {
         return entity;
     }
 
-
+    /**
+     * Converts an ActivityEntity into an ActivityDTO
+     * @param entity
+     * @return dto
+     */
     public ActivitiesDTO entity2DTO(ActivitiesEntity entity) {
 
         ActivitiesDTO dto = new ActivitiesDTO();
@@ -37,6 +46,11 @@ public class ActivitiesMapper {
         return dto;
     }
 
+    /**
+     * Converts a list of ActivitiesEntity into a List of ActivitiesDTO
+     * @param entities
+     * @return
+     */
     public List<ActivitiesDTO> entityList2DTOList(List<ActivitiesEntity> entities) {
 
         List<ActivitiesDTO> dtos = new ArrayList();
@@ -46,18 +60,17 @@ public class ActivitiesMapper {
         return dtos;
     }
 
+    /**
+     * Updates an ActivityEntity with the attributes of the received ActivitiesDTO
+     * @param entity
+     * @param dto
+     * @return
+     */
     public ActivitiesEntity updateDTO2Entity(ActivitiesEntity entity, ActivitiesDTO dto) {
 
         entity.setName(dto.getName());
         entity.setContent(dto.getContent());
         entity.setImage(dto.getImage());
         return entity;
-    }
-
-    private LocalDate string2LocalDate(String stringDate) {
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate date = LocalDate.parse(stringDate, formatter);
-        return date;
     }
 }
