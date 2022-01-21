@@ -8,8 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -17,13 +16,12 @@ import org.hibernate.annotations.Where;
 
 
 
-@Entity
+
 @SQLDelete(sql = "UPDATE testimonials SET is_active = false WHERE id=?")
 @Where(clause = "is_active = true")
-@Setter
-@Getter
+@Data
 
-
+@Entity
 @Table(name = "testimonials")
 public class Testimonials {
     

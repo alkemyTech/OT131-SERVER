@@ -1,27 +1,32 @@
 
 package com.alkemy.ong.dto;
 
+
 import java.io.Serializable;
-import lombok.Getter;
-import lombok.Setter;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import lombok.Data;
+import org.springframework.stereotype.Component;
 
 
 
-@Getter
-@Setter
-
+@Data
+@Component
 public class UserLoginDto implements Serializable {
     
-    private String mail;
+    @NotBlank(message = "El email no puede estar vacio")
+    @Email(message = "Se requiere un emal")
+    private String useremail;
+    @NotBlank(message = "El password no puede estar vacio")
     private String password;
 
     public UserLoginDto() {
         super();
     }
 
-    public UserLoginDto(String mail, String password) {
+    public UserLoginDto(String useremail, String password) {
         super();
-        this.mail = mail;
+        this.useremail = useremail;
         this.password = password;
     }
     
