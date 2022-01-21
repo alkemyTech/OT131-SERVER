@@ -18,8 +18,8 @@ import org.hibernate.annotations.Where;
 
 
 @Entity
-@SQLDelete(sql = "UPDATE personaje SET isActive = false WHERE id=?")
-@Where(clause = "deleted = true")
+@SQLDelete(sql = "UPDATE testimonials SET is_active = false WHERE id=?")
+@Where(clause = "is_active = true")
 @Setter
 @Getter
 
@@ -40,14 +40,14 @@ public class Testimonials {
     @Column(nullable = true)
     private String content;
     
-    @Column(name = "create-date")
+    @Column(name = "create_date")
     private LocalDate createDate;
     
-    @Column(name = "remove-date")
+    @Column(name = "remove_date")
     private LocalDate removeDate;
     
-    @Column(name = "is-active")
-    private Boolean isActive = true;
+    @Column(name = "is_active")
+    private Boolean isActive = Boolean.TRUE;
     
     
     
