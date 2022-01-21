@@ -1,19 +1,16 @@
 package com.alkemy.ong.services;
 
 import com.alkemy.ong.dto.ActivitiesDTO;
-import org.springframework.stereotype.Service;
+import com.alkemy.ong.utility.EntityException;
 
 import java.util.List;
 
 
-public interface ActivitiesService extends Service {
+public interface ActivitiesService {
 
-    ActivitiesDTO save(ActivitiesDTO dto);
+    ActivitiesDTO save(ActivitiesDTO dto) throws EntityException;
 
     List<ActivitiesDTO> getAll();
 
-    void delete(Long id);
-
-    ActivitiesDTO update(Long id, ActivitiesDTO dto);
-
+    ActivitiesDTO update(Long id, ActivitiesDTO dto) throws EntityException;
 }
