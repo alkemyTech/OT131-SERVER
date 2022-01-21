@@ -1,5 +1,7 @@
 package com.alkemy.ong.entities;
 import java.time.LocalDate;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +20,7 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @Table(name="organizations")
-public class Organization {
+public class Organizations {
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -34,15 +36,18 @@ public class Organization {
 	@NotNull
 	private  String welcomeText;
 	private String aboutUsText;
+	@Column( name ="modified_date")
 	@UpdateTimestamp
-	private LocalDate UpdateOrganization;
+	private LocalDate modifiedDate;
+	@Column(name= "created_date")
 	@CreationTimestamp
-	private LocalDate timestamps;
-
-	private boolean softDelete;
+	private LocalDate createdDate;
+	@Column(name= "removed_date")
+	private LocalDate removedDate;
+	private boolean isActive;
 	
 	
-	public Organization(String name, String images, String addres, int phone) {
+	public Organizations(String name, String images, String addres, int phone) {
 		super();
 		this.name = name;
 		this.images = images;
