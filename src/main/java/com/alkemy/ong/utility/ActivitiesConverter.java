@@ -4,13 +4,11 @@ import com.alkemy.ong.dto.ActivitiesDTO;
 import com.alkemy.ong.entities.ActivitiesEntity;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class ActivitiesMapper {
+public class ActivitiesConverter {
 
     /**
      * Converts an ActivityDTO into an ActivityEntity

@@ -5,9 +5,10 @@ import com.alkemy.ong.entities.ActivitiesEntity;
 import com.alkemy.ong.utility.EntityException;
 import com.alkemy.ong.repositories.ActivitiesRepository;
 import com.alkemy.ong.services.ActivitiesService;
-import com.alkemy.ong.utility.ActivitiesMapper;
+import com.alkemy.ong.utility.ActivitiesConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,7 +19,7 @@ public class ActivitiesServiceImp implements ActivitiesService {
 
     // ATTRIBUTES - Mapper and Repository
     @Autowired
-    private ActivitiesMapper activitiesMapper;
+    private ActivitiesConverter activitiesConverter;
     @Autowired
     private ActivitiesRepository activitiesRepository;
 
@@ -27,23 +28,25 @@ public class ActivitiesServiceImp implements ActivitiesService {
      * @param dto
      * @return The DTO already saved
      */
+    @Transactional
     public ActivitiesDTO save(ActivitiesDTO dto) {
 
-        ActivitiesEntity entity = activitiesMapper.dto2Entity(dto);
+        ActivitiesEntity entity = activitiesConverter.dto2Entity(dto);
         entity.setCreationDate(LocalDate.now());
         ActivitiesEntity entitySaved = activitiesRepository.save(entity);
 
-        return activitiesMapper.entity2DTO(entitySaved);
+        return activitiesConverter.entity2DTO(entitySaved);
     }
 
     /**
      * Returns a List of ActivitiesDTO with all Entities saved in activities table
      * @return
      */
+    @Transactional(readOnly = true)
     public List<ActivitiesDTO> getAll() {
 
         List<ActivitiesEntity> entities = activitiesRepository.findAll();
-        return activitiesMapper.entityList2DTOList(entities);
+        return activitiesConverter.entityList2DTOList(entities);
     }
 
     /**
@@ -53,13 +56,14 @@ public class ActivitiesServiceImp implements ActivitiesService {
      * @param dto
      * @return
      */
+    @Transactional
     public ActivitiesDTO update(Long id, ActivitiesDTO dto) {
 
         Optional<ActivitiesEntity> result = activitiesRepository.findById(id);
         if (result.isPresent()){
-            ActivitiesEntity entity = activitiesMapper.updateDTO2Entity(result.get(), dto);
+            ActivitiesEntity entity = activitiesConverter.updateDTO2Entity(result.get(), dto);
             ActivitiesEntity entityUpdated = activitiesRepository.save(entity);
-            ActivitiesDTO dtoUpdated = activitiesMapper.entity2DTO(entityUpdated);
+            ActivitiesDTO dtoUpdated = activitiesConverter.entity2DTO(entityUpdated);
 
             return dtoUpdated;
         } else {
