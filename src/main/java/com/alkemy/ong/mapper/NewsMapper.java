@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class NewsMapper {
 
-    public NewsDTO modelToDTO(News nw){
+    public NewsDTO converToDTO(News nw){
         return new NewsDTO(nw.getName(), nw.getContent(), nw.getImage());
     }
 
-    public News DTOToModel(NewsDTO newDTO){
+    public News converToModel(NewsDTO newDTO){
         return new News(newDTO.getName(), newDTO.getContent(), newDTO.getImage());
     }
 }

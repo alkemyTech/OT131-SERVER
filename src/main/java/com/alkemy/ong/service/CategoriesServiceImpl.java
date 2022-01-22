@@ -21,7 +21,7 @@ public class CategoriesServiceImpl implements CategoriesService{
     @Override
     public CategoriesDTO publicDataCategory(String name){
         Optional<Categories> cat = categoriesRepository.findByName(name);
-        return categoriesMapper.modelToDTO(cat.get());
+        return categoriesMapper.converToDTO(cat.get());
     }
 
 }

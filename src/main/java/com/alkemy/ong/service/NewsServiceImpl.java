@@ -21,6 +21,6 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public NewsDTO publicDataNew(String name){
         Optional<News> nw = newsRepository.findByName(name);
-        return newsMapper.modelToDTO(nw.get());
+        return newsMapper.converToDTO(nw.get());
     }
 }

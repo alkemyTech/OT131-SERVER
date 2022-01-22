@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class CategoriesMapper {
 
-    public CategoriesDTO modelToDTO(Categories category){
+    public CategoriesDTO converToDTO(Categories category){
         return new CategoriesDTO(category.getName(),category.getDescription(), category.getImage());
     }
 
-    public Categories DTOToModel(CategoriesDTO categoryDTO){
+    public Categories converToModel(CategoriesDTO categoryDTO){
         return new Categories(categoryDTO.getName(),categoryDTO.getDescription(), categoryDTO.getImage());
     }
 }
