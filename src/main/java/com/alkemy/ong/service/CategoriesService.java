@@ -7,4 +7,6 @@ public interface CategoriesService {
 
     public CategoriesDTO publicDataCategory(String name);
 
+    public void deleteCategory(Long id);
+
 }

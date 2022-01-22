@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class NewsServiceImpl implements NewsService {
+public class NewsServiceImpl implements NewsService{
 
     @Autowired
     private NewsRepository newsRepository;
@@ -22,5 +22,14 @@ public class NewsServiceImpl implements NewsService {
     public NewsDTO publicDataNew(String name){
         Optional<News> nw = newsRepository.findByName(name);
         return newsMapper.converToDTO(nw.get());
+    }
+
+    @Override
+    public void deleteNew(Long id){
+
+        Optional<News> answer = newsRepository.findById(id);
+        News nw = answer.get();
+        nw.setIsActivated(false);
+        newsRepository.save(nw);
     }
 }

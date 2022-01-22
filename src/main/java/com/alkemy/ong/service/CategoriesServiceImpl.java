@@ -24,4 +24,13 @@ public class CategoriesServiceImpl implements CategoriesService{
         return categoriesMapper.converToDTO(cat.get());
     }
 
+    @Override
+    public void deleteCategory(Long id){
+
+        Optional<Categories> answer = categoriesRepository.findById(id);
+        Categories category = answer.get();
+        category.setIsActivated(false);
+        categoriesRepository.save(category);
+    }
+
 }
