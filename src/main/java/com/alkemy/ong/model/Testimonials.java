@@ -1,5 +1,5 @@
 
-package com.alkemy.ong.entities;
+package com.alkemy.ong.model;
 
 import java.time.LocalDate;
 import javax.persistence.Column;
@@ -9,16 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
 
 
-
-
-
-
-@SQLDelete(sql = "UPDATE testimonials SET is_active = false WHERE id=?")
-@Where(clause = "is_active = true")
 @Data
 
 @Entity

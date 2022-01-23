@@ -1,6 +1,7 @@
 
 package com.alkemy.ong.dto;
 
+import java.io.Serializable;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -8,7 +9,7 @@ import lombok.Data;
 
 
 @Data
-public class RegisterUsersDTO {
+public class UsersRegisterDTO implements Serializable{
 
     @NotBlank(message = "First name can't be null")
     private String firstName;

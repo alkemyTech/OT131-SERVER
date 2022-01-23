@@ -1,5 +1,5 @@
 
-package com.alkemy.ong.entities;
+package com.alkemy.ong.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,11 +17,15 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    
     private String email;
+    
     private String password;
+    
     private String firstName;
+    
     private String lastName;
+    
+    private boolean isActive = true;
     
     
 
