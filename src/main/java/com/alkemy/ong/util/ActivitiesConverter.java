@@ -1,7 +1,7 @@
-package com.alkemy.ong.utility;
+package com.alkemy.ong.util;
 
 import com.alkemy.ong.dto.ActivitiesDTO;
-import com.alkemy.ong.entities.ActivitiesEntity;
+import com.alkemy.ong.model.ActivitiesEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

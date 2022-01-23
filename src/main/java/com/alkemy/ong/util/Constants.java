@@ -1,4 +1,4 @@
-package com.alkemy.ong.utility;
+package com.alkemy.ong.util;
 
 public final class Constants {
     

@@ -1,10 +1,7 @@
-package com.alkemy.ong.entities;
+package com.alkemy.ong.model;
 
-import com.sun.istack.NotNull;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
-import org.aspectj.bridge.IMessage;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;

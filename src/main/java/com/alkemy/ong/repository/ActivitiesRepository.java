@@ -1,6 +1,6 @@
-package com.alkemy.ong.repositories;
+package com.alkemy.ong.repository;
 
-import com.alkemy.ong.entities.ActivitiesEntity;
+import com.alkemy.ong.model.ActivitiesEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

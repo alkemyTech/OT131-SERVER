@@ -1,7 +1,7 @@
-package com.alkemy.ong.services;
+package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.ActivitiesDTO;
-import com.alkemy.ong.utility.EntityException;
+import com.alkemy.ong.util.EntityException;
 
 import java.util.List;
 

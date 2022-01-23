@@ -1,11 +1,10 @@
-package com.alkemy.ong.services.serviceImpl;
+package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.ActivitiesDTO;
-import com.alkemy.ong.entities.ActivitiesEntity;
-import com.alkemy.ong.utility.EntityException;
-import com.alkemy.ong.repositories.ActivitiesRepository;
-import com.alkemy.ong.services.ActivitiesService;
-import com.alkemy.ong.utility.ActivitiesConverter;
+import com.alkemy.ong.model.ActivitiesEntity;
+import com.alkemy.ong.util.EntityException;
+import com.alkemy.ong.repository.ActivitiesRepository;
+import com.alkemy.ong.util.ActivitiesConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
