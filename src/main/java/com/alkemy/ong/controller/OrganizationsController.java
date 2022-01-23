@@ -3,6 +3,7 @@ package com.alkemy.ong.controller;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,27 +14,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.alkemy.ong.dto.OrganizationsDTO;
-import com.alkemy.ong.entities.Organizations;
-import com.alkemy.ong.repositories.OrganizationsRepository;
-import com.alkemy.ong.services.serviceImpl.OrganizationsServiceImp;
+import com.alkemy.ong.model.Organizations;
+import com.alkemy.ong.repository.OrganizationsRepository;
+import com.alkemy.ong.service.OrganizationsServiceImp;
+import static com.alkemy.ong.util.Constants.*;
 
 @RestController
-@RequestMapping("/organization")
+@RequestMapping(REQ_GET_MAPP)
 public class OrganizationsController {
 
 	@Autowired
 	private OrganizationsServiceImp organizationService;
 	@Autowired
 	private OrganizationsRepository organizationRepository;
-
-	@GetMapping("/public/{name}")
+	private ModelMapper mapper = new ModelMapper();
+	
+	@GetMapping(POINT_GET_MAPP)
 	public ResponseEntity<?> publicDataOrganization(@PathVariable String name) {
-		Optional<Organizations> entity = organizationRepository.findByName(name);
-
-
-		return !entity.isPresent() ? 
-				new ResponseEntity<>("NAME NOT FOUND", HttpStatus.NOT_FOUND) :
-				new ResponseEntity<OrganizationsDTO>(organizationService.publicDataOrganization(name), HttpStatus.OK);
+		Optional<Organizations> org = organizationService.publicDataOrganization(name);
+		return !org.isPresent() ? 
+				new ResponseEntity<>(ENTITY_NOT_FOUND , HttpStatus.NOT_FOUND) :
+				new ResponseEntity<>(mapper.map(org.get(), OrganizationsDTO.class), HttpStatus.OK);
 	}
 
 	@GetMapping
@@ -46,8 +47,9 @@ public class OrganizationsController {
 	public ResponseEntity<?> createOrganization(@Valid @RequestBody Organizations organization) throws Exception {
 
 		if (organizationRepository.findByName(organization.getName()).isPresent()) {
-			return new ResponseEntity<>("THE NAME OF THE ORGANIZATION ALREADY EXISTS ", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(NAME_EXIST, HttpStatus.BAD_REQUEST);
 		}
+		organization.setActive(true);
 		return new ResponseEntity<Organizations>(organizationService.saveOrganization(organization), HttpStatus.CREATED);
 
 	}

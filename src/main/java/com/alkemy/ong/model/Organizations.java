@@ -1,4 +1,4 @@
-package com.alkemy.ong.entities;
+package com.alkemy.ong.model;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -44,7 +44,7 @@ public class Organizations {
 	private LocalDate createdDate;
 	@Column(name= "removed_date")
 	private LocalDate removedDate;
-	private boolean isActive;
+	private boolean isActive ;
 	
 	
 	public Organizations(String name, String images, String addres, int phone) {

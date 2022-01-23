@@ -1,4 +1,4 @@
-package com.alkemy.ong.utility;
+package com.alkemy.ong.util;
 
 import java.util.HashMap;
 import java.util.Map;
