@@ -1,4 +1,4 @@
-package com.alkemy.ong.services;
+package com.alkemy.ong.service;
 
 import java.io.IOException;
 

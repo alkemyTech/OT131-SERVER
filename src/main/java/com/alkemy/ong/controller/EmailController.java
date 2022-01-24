@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.alkemy.ong.mail.EmailRequest;
-import com.alkemy.ong.services.EmailService;
+import com.alkemy.ong.service.EmailService;
 import com.sendgrid.Response;
 
 @Controller
