@@ -6,6 +6,7 @@ public final class Constants {
 	public static final String POINT_GET_MAPP = "/public/{name}";
 	public static final String ENTITY_NOT_FOUND = "ENTITY NOT FOUND";
 	public static final String NAME_EXIST = "THE NAME OF THE ORGANIZATION ALREADY EXISTS";
+	public static final String[] URL_AUTH_REQUEST = {"/", "/auth/**", "/public/**", "/js/**", "/css/**"};
 	
   public Constants() {}
 }
