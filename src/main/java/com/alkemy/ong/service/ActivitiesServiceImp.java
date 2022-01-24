@@ -18,6 +18,7 @@ public class ActivitiesServiceImp implements ActivitiesService {
 
     // ATTRIBUTES - Mapper and Repository
     @Autowired
+    //private ModelMapper mapper;
     private ActivitiesConverter activitiesConverter;
     @Autowired
     private ActivitiesRepository activitiesRepository;
