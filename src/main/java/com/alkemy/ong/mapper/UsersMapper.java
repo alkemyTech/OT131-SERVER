@@ -7,7 +7,7 @@ import com.alkemy.ong.model.Users;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UsersConvert {
+public class UsersMapper {
 
     public Users uaserToUserDto(UsersDto usersDto) {
         Users user = new Users();

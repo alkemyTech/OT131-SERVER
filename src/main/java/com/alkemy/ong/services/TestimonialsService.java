@@ -4,7 +4,7 @@ package com.alkemy.ong.services;
 
 import com.alkemy.ong.model.Testimonials;
 
-public interface ITestimonialsService {
+public interface TestimonialsService {
 
 
     public Testimonials save(Testimonials testimonials);

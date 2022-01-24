@@ -7,7 +7,7 @@ import com.alkemy.ong.model.Users;
 
 
 
-public interface IUsersService  {
+public interface UsersService  {
     
     public Users findByMail(String email);
     
@@ -15,7 +15,7 @@ public interface IUsersService  {
     
     public Users update(UsersDto usersDto);
     
-    public void delete(UsersDto usersDto);
+    public void delete(Long id) throws Exception;
     
     public Users select(Long id);
     

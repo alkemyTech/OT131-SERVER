@@ -4,7 +4,7 @@ import com.alkemy.ong.dto.UsersRegisterDTO;
 import com.alkemy.ong.dto.UsersDto;
 import com.alkemy.ong.dto.UsersOkDto;
 import com.alkemy.ong.model.Users;
-import com.alkemy.ong.mapper.UsersConvert;
+import com.alkemy.ong.mapper.UsersMapper;
 import com.alkemy.ong.repository.UsersRepository;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +12,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UsersServiceImpl implements IUsersService {
+public class UsersServiceImpl implements UsersService {
 
     @Autowired
     UsersRepository userRepository;
 
     @Autowired
-    UsersConvert userConvert;
+    UsersMapper userConvert;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -44,13 +44,14 @@ public class UsersServiceImpl implements IUsersService {
     }
 
     @Override
-    public void delete(UsersDto usersDto) {
-        Optional<Users> user = userRepository.findById(usersDto.getId());
+    public void delete(Long id) throws Exception {
+        Optional<Users> user = userRepository.findById(id);
         if(user.isPresent()){
             user.get().setActive(false);
             userRepository.save(user.get());
+        }else{
+            throw new Exception("user not found");
         }
-        userRepository.deleteById(usersDto.getId());
     }
 
     @Override

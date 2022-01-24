@@ -7,27 +7,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TestimonialsServiceImpl implements ITestimonialsService {
+public class TestimonialsServiceImpl implements TestimonialsService {
 
     @Autowired
-    TestimonialsRepository testimonialRepository;
+    TestimonialsRepository testimonialsRepository;
 
     @Override
     public Testimonials save(Testimonials testimonials) {
-        return testimonialRepository.save(testimonials);
+        return testimonialsRepository.save(testimonials);
     }
 
     @Override
     public Testimonials update(Testimonials testimonials) {
-        return testimonialRepository.save(testimonials);
+        return testimonialsRepository.save(testimonials);
     }
 
     @Override
     public void delete(Long id) {
-        Optional<Testimonials> testimonials = testimonialRepository.findById(id);
+        Optional<Testimonials> testimonials = testimonialsRepository.findById(id);
         if (testimonials.isPresent()) {
             testimonials.get().setIsActive(false);
-            testimonialRepository.save(testimonials.get());
+            testimonialsRepository.save(testimonials.get());
         }
 
     }
