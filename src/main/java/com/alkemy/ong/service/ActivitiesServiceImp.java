@@ -5,11 +5,13 @@ import com.alkemy.ong.model.ActivitiesEntity;
 import com.alkemy.ong.util.EntityException;
 import com.alkemy.ong.repository.ActivitiesRepository;
 import com.alkemy.ong.util.ActivitiesConverter;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,9 +19,9 @@ import java.util.Optional;
 public class ActivitiesServiceImp implements ActivitiesService {
 
     // ATTRIBUTES - Mapper and Repository
-    @Autowired
-    //private ModelMapper mapper;
-    private ActivitiesConverter activitiesConverter;
+    //@Autowired
+    private ModelMapper mapper = new ModelMapper();
+    //private ActivitiesConverter activitiesConverter;
     @Autowired
     private ActivitiesRepository activitiesRepository;
 
@@ -31,11 +33,13 @@ public class ActivitiesServiceImp implements ActivitiesService {
     @Transactional
     public ActivitiesDTO save(ActivitiesDTO dto) {
 
-        ActivitiesEntity entity = activitiesConverter.dto2Entity(dto);
+        //ActivitiesEntity entity = activitiesConverter.dto2Entity(dto);
+        ActivitiesEntity entity = mapper.map(dto, ActivitiesEntity.class);
         entity.setCreationDate(LocalDate.now());
         ActivitiesEntity entitySaved = activitiesRepository.save(entity);
 
-        return activitiesConverter.entity2DTO(entitySaved);
+        //return activitiesConverter.entity2DTO(entitySaved);
+        return mapper.map(entitySaved, ActivitiesDTO.class);
     }
 
     /**
@@ -45,8 +49,13 @@ public class ActivitiesServiceImp implements ActivitiesService {
     @Transactional(readOnly = true)
     public List<ActivitiesDTO> getAll() {
 
-        List<ActivitiesEntity> entities = activitiesRepository.findAll();
-        return activitiesConverter.entityList2DTOList(entities);
+        //List<ActivitiesEntity> entities = activitiesRepository.findAll();
+        //return activitiesConverter.entityList2DTOList(entities);
+        List<ActivitiesDTO> dtos = new ArrayList();
+        for (ActivitiesEntity entity : activitiesRepository.findAll()) {
+            dtos.add(mapper.map(entity, ActivitiesDTO.class));
+        }
+        return dtos;
     }
 
     /**
@@ -61,9 +70,13 @@ public class ActivitiesServiceImp implements ActivitiesService {
 
         Optional<ActivitiesEntity> result = activitiesRepository.findById(id);
         if (result.isPresent()){
-            ActivitiesEntity entity = activitiesConverter.updateDTO2Entity(result.get(), dto);
+            //ActivitiesEntity entity = activitiesConverter.updateDTO2Entity(result.get(), dto);
+            ActivitiesEntity entity = mapper.map(dto, ActivitiesEntity.class);
+            entity.setId(id);
+            entity.setCreationDate(result.get().getCreationDate());
             ActivitiesEntity entityUpdated = activitiesRepository.save(entity);
-            ActivitiesDTO dtoUpdated = activitiesConverter.entity2DTO(entityUpdated);
+            //ActivitiesDTO dtoUpdated = activitiesConverter.entity2DTO(entityUpdated);
+            ActivitiesDTO dtoUpdated = mapper.map(entityUpdated, ActivitiesDTO.class);
 
             return dtoUpdated;
         } else {
