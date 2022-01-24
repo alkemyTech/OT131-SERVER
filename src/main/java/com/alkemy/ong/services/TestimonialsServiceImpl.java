@@ -1,7 +1,7 @@
 package com.alkemy.ong.services;
 
 import com.alkemy.ong.model.Testimonials;
-import com.alkemy.ong.repositories.TestimonialsRepository;
+import com.alkemy.ong.repository.TestimonialsRepository;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

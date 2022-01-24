@@ -28,7 +28,11 @@ target/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
-
+nb-configuration.xml
+pom.xml
+application.properties
+HELP.md
+target/
 
 ### VS Code ###
 .vscode/

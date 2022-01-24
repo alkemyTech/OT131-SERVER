@@ -5,7 +5,7 @@ import com.alkemy.ong.dto.UsersDto;
 import com.alkemy.ong.dto.UsersOkDto;
 import com.alkemy.ong.model.Users;
 import com.alkemy.ong.mapper.UsersConvert;
-import com.alkemy.ong.repositories.UsersRepository;
+import com.alkemy.ong.repository.UsersRepository;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

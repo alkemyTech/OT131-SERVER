@@ -1,5 +1,5 @@
 
-package com.alkemy.ong.repositories;
+package com.alkemy.ong.repository;
 
 import com.alkemy.ong.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
