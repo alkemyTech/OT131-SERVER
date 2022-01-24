@@ -36,3 +36,4 @@ target/
 
 ### VS Code ###
 .vscode/
+/src/main/java/com/alkemy/ong/model/Users.java

@@ -13,12 +13,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import static com.alkemy.ong.util.Constants.NAME_PARAM_EMAIL;
-import static com.alkemy.ong.util.Constants.NAME_PARAM_PASSWORD;
-import static com.alkemy.ong.util.Constants.URL_LOGIN;
-import static com.alkemy.ong.util.Constants.URL_LOGIN_SUCCESS;
-import static com.alkemy.ong.util.Constants.URL_LOGIN_FAILURE;
+
 import static com.alkemy.ong.util.Constants.URL_AUTH_REQUEST;
+import org.springframework.security.config.http.SessionCreationPolicy;
 
 @Configuration
 @EnableWebSecurity
@@ -34,20 +31,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
 
-        http.csrf().disable()
-                .authorizeRequests().antMatchers(URL_AUTH_REQUEST).permitAll()
+        httpSecurity.cors().and().csrf().disable()
+                .authorizeRequests()
+                .antMatchers(URL_AUTH_REQUEST).permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                    .loginPage(URL_LOGIN)
-                    .permitAll()
-                    .defaultSuccessUrl(URL_LOGIN_SUCCESS)
-                    .failureUrl(URL_LOGIN_FAILURE)
-                    .usernameParameter(NAME_PARAM_EMAIL)
-                    .passwordParameter(NAME_PARAM_PASSWORD);
-
+                .exceptionHandling()
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
     @Override
@@ -56,7 +49,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-    
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(usersDetailsServiceImp).passwordEncoder(passwordEncoder());
