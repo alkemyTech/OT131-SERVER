@@ -8,15 +8,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import lombok.Getter;
+
+import lombok.Data;
+// import lombok.Getter;
+// import lombok.Setter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
-@Getter
-@Setter
+// @Getter
+// @Setter
+@Data
 @Entity
 @NoArgsConstructor
 @Table(name="organizations")
