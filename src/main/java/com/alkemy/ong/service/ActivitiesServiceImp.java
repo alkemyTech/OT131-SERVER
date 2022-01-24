@@ -74,6 +74,7 @@ public class ActivitiesServiceImp implements ActivitiesService {
             ActivitiesEntity entity = mapper.map(dto, ActivitiesEntity.class);
             entity.setId(id);
             entity.setCreationDate(result.get().getCreationDate());
+            entity.setModifiedDate(LocalDate.now());
             ActivitiesEntity entityUpdated = activitiesRepository.save(entity);
             //ActivitiesDTO dtoUpdated = activitiesConverter.entity2DTO(entityUpdated);
             ActivitiesDTO dtoUpdated = mapper.map(entityUpdated, ActivitiesDTO.class);

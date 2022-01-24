@@ -12,8 +12,8 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "activities")
 @Data
-@SQLDelete(sql = "UPDATE activities SET deleted = true WHERE id=?")
-@Where(clause = "deleted=false")
+@SQLDelete(sql = "UPDATE activities SET is_active = false WHERE id=?")
+@Where(clause = "is_active=true")
 public class ActivitiesEntity {
 
     // ATTRIBUTES
@@ -32,8 +32,17 @@ public class ActivitiesEntity {
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate creationDate;
 
+    @Column(name = "modified_date")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    private LocalDate modifiedDate;
+
+    @Column(name = "deleted_date")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    private LocalDate deletedDate;
+
     // SOFT DELETE
-    private boolean deleted = Boolean.FALSE;
+    @Column(name = "is_active")
+    private boolean isActive = Boolean.TRUE;
 }
 
 /*  Crear modelo y repositorio base de Activities
