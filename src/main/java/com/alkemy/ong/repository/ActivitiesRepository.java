@@ -4,9 +4,12 @@ import com.alkemy.ong.model.ActivitiesEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ActivitiesRepository extends JpaRepository<ActivitiesEntity, Long> {
 
+    public List<ActivitiesEntity> findByIsActiveTrue();
 }
 /*
     Crear modelo y repositorio base de Activities

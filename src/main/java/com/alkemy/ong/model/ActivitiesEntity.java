@@ -1,8 +1,14 @@
 package com.alkemy.ong.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -12,6 +18,9 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "activities")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 @SQLDelete(sql = "UPDATE activities SET is_active = false WHERE id=?")
 @Where(clause = "is_active=true")
 public class ActivitiesEntity {
@@ -28,11 +37,13 @@ public class ActivitiesEntity {
     private String image;
 
     // TIMESTAMPS
-    @Column(name = "creation_date")
+    @Column(name = "created_date", updatable = false, nullable = false)
+    @CreatedDate
     @DateTimeFormat(pattern = "yyyy/MM/dd")
-    private LocalDate creationDate;
+    private LocalDate createdDate;
 
     @Column(name = "modified_date")
+    @LastModifiedDate
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate modifiedDate;
 

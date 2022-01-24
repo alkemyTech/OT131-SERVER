@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.alkemy.ong.util.Constants.REQ_GET_MAPP_ACTIVITIES;
+
 @RestController
-@RequestMapping("activities")
+@RequestMapping(REQ_GET_MAPP_ACTIVITIES)
 public class ActivitiesController {
 
     @Autowired
@@ -23,9 +25,7 @@ public class ActivitiesController {
     @GetMapping
     public ResponseEntity<List<ActivitiesDTO>> getAll() {
 
-        List<ActivitiesDTO> activities = activitiesService.getAll();
-        return ResponseEntity.ok().body(activities);
-
+        return ResponseEntity.ok().body(activitiesService.getAll());
     }
 
     /**
@@ -55,6 +55,5 @@ public class ActivitiesController {
 
         ActivitiesDTO result = activitiesService.update(id, dto);
         return ResponseEntity.ok().body(result);
-
     }
 }
