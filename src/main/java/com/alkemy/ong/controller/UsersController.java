@@ -2,7 +2,7 @@ package com.alkemy.ong.controller;
 
 import com.alkemy.ong.dto.UsersDtoResponse;
 import com.alkemy.ong.dto.NewUsersDTO;
-import com.alkemy.ong.service.UsersService;
+import com.alkemy.ong.service.UsersServiceImpl;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsersController {
 
     @Autowired
-    private UsersService usersService;
+    private UsersServiceImpl usersService;
  
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody NewUsersDTO userDTO) {
