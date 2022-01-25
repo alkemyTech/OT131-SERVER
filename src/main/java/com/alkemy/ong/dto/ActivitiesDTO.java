@@ -1,10 +1,9 @@
 package com.alkemy.ong.dto;
 
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.validation.constraints.NotBlank;
-import java.time.LocalDate;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
@@ -12,12 +11,20 @@ import java.time.LocalDate;
 public class ActivitiesDTO {
 
     private Long id;
-    @NotBlank(message = "The name must be valid")
+
+    @NotNull(message = "The name must be not null.")
+    @NotEmpty(message = "The name must be not empty.")
     private String name;
-    @NotBlank(message = "The content must be valid")
+
+    @NotNull(message = "The content must be not null.")
+    @NotEmpty(message = "The content must be not empty.")
     private String content;
-    @NotBlank(message = "The image must be valid")
+
+    @NotNull(message = "The image must be not null.")
+    @NotEmpty(message = "The image must be not empty.")
     private String image;
+
     private String createdDate;
+
     private String modifiedDate;
 }

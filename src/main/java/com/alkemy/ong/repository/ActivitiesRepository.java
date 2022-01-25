@@ -1,29 +1,16 @@
 package com.alkemy.ong.repository;
 
-import com.alkemy.ong.model.ActivitiesEntity;
+import com.alkemy.ong.model.Activities;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface ActivitiesRepository extends JpaRepository<ActivitiesEntity, Long> {
+public interface ActivitiesRepository extends JpaRepository<Activities, Long> {
 
-    public List<ActivitiesEntity> findByIsActiveTrue();
+    public List<Activities> findByIsActiveTrue();
+
+    public Optional<Activities> findByName(String name);
 }
-/*
-    Crear modelo y repositorio base de Activities
-
-    COMO desarrollador
-    QUIERO agregar la entidad Activity
-    PARA representar en la implementación la estructura de datos
-
-    Criterios de aceptación:
-    Nombre de tabla: activities.
-
-    Campos:
-    name: VARCHAR NOT NULL
-    content: TEXT NOT NULL
-    image: VARCHAR NOT NULL
-    timestamps y softDelete
-*/

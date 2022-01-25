@@ -1,16 +1,19 @@
 package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.ActivitiesDTO;
-import com.alkemy.ong.util.EntityException;
+import com.alkemy.ong.util.ParamNotFoundException;
 
 import java.util.List;
 
 
 public interface ActivitiesService {
 
-    ActivitiesDTO save(ActivitiesDTO dto) throws EntityException;
+    ActivitiesDTO save(ActivitiesDTO dto) throws ParamNotFoundException;
 
-    List<ActivitiesDTO> getAll();
+    List<ActivitiesDTO> getAllActives();
 
-    ActivitiesDTO update(Long id, ActivitiesDTO dto) throws EntityException;
+    ActivitiesDTO update(Long id, ActivitiesDTO dto) throws ParamNotFoundException;
+
+    void delete(Long id);
+
 }
