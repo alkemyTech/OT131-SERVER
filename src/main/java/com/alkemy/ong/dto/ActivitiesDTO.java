@@ -2,8 +2,7 @@ package com.alkemy.ong.dto;
 
 import lombok.*;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @NoArgsConstructor
@@ -12,16 +11,13 @@ public class ActivitiesDTO {
 
     private Long id;
 
-    @NotNull(message = "The name must be not null.")
-    @NotEmpty(message = "The name must be not empty.")
+    @NotBlank(message = "The name must be a valid value.")
     private String name;
 
-    @NotNull(message = "The content must be not null.")
-    @NotEmpty(message = "The content must be not empty.")
+    @NotBlank(message = "The content must be a valid value.")
     private String content;
 
-    @NotNull(message = "The image must be not null.")
-    @NotEmpty(message = "The image must be not empty.")
+    @NotBlank(message = "The image must be a valid value.")
     private String image;
 
     private String createdDate;
