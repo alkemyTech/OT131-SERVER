@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.alkemy.ong.OngApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 22.761 s - in com.alkemy.ong.OngApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.228 s - in com.alkemy.ong.OngApplicationTests
