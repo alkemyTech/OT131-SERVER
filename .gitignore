@@ -5,6 +5,7 @@ pom.xml
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
+!**/src/main/**/security/
 !**/src/test/**/target/
 
 ### STS ###

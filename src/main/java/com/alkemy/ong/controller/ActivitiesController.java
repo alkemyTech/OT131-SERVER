@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static com.alkemy.ong.util.Constants.REQ_GET_MAPP_ACTIVITIES;
@@ -35,7 +36,7 @@ public class ActivitiesController {
      * @return DTO already saved
      */
     @PostMapping
-    public ResponseEntity<ActivitiesDTO> save(@RequestBody ActivitiesDTO dto) {
+    public ResponseEntity<ActivitiesDTO> save(@Valid @RequestBody ActivitiesDTO dto) {
 
         ActivitiesDTO updated = activitiesService.save(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(updated);
@@ -51,7 +52,7 @@ public class ActivitiesController {
      * @return The dto already saved
      */
     @PutMapping("/{id}")
-    public ResponseEntity<ActivitiesDTO> update(@PathVariable Long id, @RequestBody ActivitiesDTO dto) {
+    public ResponseEntity<ActivitiesDTO> update(@PathVariable Long id, @Valid @RequestBody ActivitiesDTO dto) {
 
         ActivitiesDTO result = activitiesService.update(id, dto);
         return ResponseEntity.ok().body(result);
