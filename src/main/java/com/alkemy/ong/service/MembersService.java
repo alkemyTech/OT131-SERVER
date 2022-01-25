@@ -1,4 +1,4 @@
-package com.alkemy.ong.services.service;
+package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.MemberDTO;
 import com.alkemy.ong.model.Members;
