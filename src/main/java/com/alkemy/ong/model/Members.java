@@ -1,4 +1,4 @@
-package com.alkemy.ong.entities;
+package com.alkemy.ong.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -8,10 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "members")
 public class Members implements Serializable{
     
@@ -41,8 +44,20 @@ public class Members implements Serializable{
     private String description;
 
     @Column(name = "timestamp")
+    @CreationTimestamp
     private Timestamp timestamp;
 
     @Column(name = "soft_delete")
-    private Boolean softDelete;
+    private Boolean isActive;
+
+    public Members(String name, String facebookUrl, String instagramUrl, String linkedinUrl, String image, String description) {
+        this.name = name;
+        this.facebookUrl = facebookUrl;
+        this.instagramUrl = instagramUrl;
+        this.linkedinUrl = linkedinUrl;
+        this.image = image;
+        this.description = description;
+    }
+    
+    
 }

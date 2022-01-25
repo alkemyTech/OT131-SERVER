@@ -1,51 +1,51 @@
-package com.alkemy.ong.services.serviceImpl;
+package com.alkemy.ong.services.service;
 
 import com.alkemy.ong.dto.MemberDTO;
-import com.alkemy.ong.entities.Members;
+import com.alkemy.ong.model.Members;
 import com.alkemy.ong.repositories.MembersRepository;
-import com.alkemy.ong.utility.ConvertUtil;
+import com.alkemy.ong.services.mapper.MembersMapper;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.*;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MembersServices {
+public class MembersServicesImpl implements MembersService{
     
     @Autowired
     private MembersRepository membersRepository;
     
-    @Transactional
+    @Override
     public void createMember(MemberDTO memberDTO){
-        Members member = ConvertUtil.memberToEntity(memberDTO);
+        Members member = MembersMapper.memberToEntity(memberDTO);
         
         member.setTimestamp(Timestamp.from(Instant.now()));
-        member.setSoftDelete(false);
+        member.setIsActive(false);
         
         membersRepository.save(member);
     }
     
-    public Optional<Members> getMember(Long id){ 
-        return membersRepository.findById(id);
+    @Override
+    public Members getMember(Long id){ 
+        return membersRepository.findById(id).get();
     }
-    
+    @Override
     public List<MemberDTO> getMembers(){
         List<Members> members = membersRepository.findAll();
         List<MemberDTO> membersList = new ArrayList<>();
         
         for (Members member : members) {
-            membersList.add(ConvertUtil.memberToDTO(member));
+            membersList.add(MembersMapper.memberToDTO(member));
         }
         
         return membersList;
     }
     
-    @Transactional
+    @Override
     public void deleteMember(Long id){
-        Members member = getMember(id).get();
-        member.setSoftDelete(true);
+        Members member = membersRepository.findById(id).get();
+        member.setIsActive(false);
         membersRepository.save(member);   
     }    
     

@@ -1,9 +1,12 @@
 package com.alkemy.ong.dto;
 
 import javax.validation.constraints.*;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.*;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class MemberDTO {
     
     @NotNull(message = "Name cannot be null")
