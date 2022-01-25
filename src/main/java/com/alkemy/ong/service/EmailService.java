@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alkemy.ong.mail.EmailRequest;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;

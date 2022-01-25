@@ -1,13 +1,25 @@
 package com.alkemy.ong;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
-public class OngApplication {
+import com.alkemy.ong.service.EmailService;
 
+@SpringBootApplication
+public class OngApplication implements CommandLineRunner{
+
+	@Autowired EmailService sendGridEmailService;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(OngApplication.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+		this.sendGridEmailService.sendHTML("aalkymers@gmail.com", "Matiicastagno007@gmail.com", "Hello World", "Hello, <strong>how are you doing?</strong>");
+		
 	}
 
 }
