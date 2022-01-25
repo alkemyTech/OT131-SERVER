@@ -5,11 +5,9 @@ import java.io.Serializable;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
 
 @Data
-@Component
 public class UsersDto implements Serializable{
     
     

@@ -6,12 +6,10 @@ import java.io.Serializable;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
 
 
 @Data
-@Component
 public class UsersAutenticateDto implements Serializable {
     
     @NotBlank(message = "The email cannot be empty")

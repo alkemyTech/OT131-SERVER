@@ -1,6 +1,6 @@
 package com.alkemy.ong.security;
 
-import com.alkemy.ong.services.UsersDetailsServiceImp;
+import com.alkemy.ong.service.UsersDetailsServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
