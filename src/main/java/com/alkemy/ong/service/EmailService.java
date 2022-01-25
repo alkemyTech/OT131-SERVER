@@ -17,32 +17,31 @@ import com.sendgrid.helpers.mail.objects.Email;
 @Service
 public class EmailService {
 
-	@Autowired
-	SendGrid sendGrid;
-	
-	
-	public Response sendemail(EmailRequest emailrequest) {
-		
-		Mail mail = new Mail(new Email("aalkymers@gmail.com"), emailrequest.getSubject(),  new Email(emailrequest.getTo()), new Content("text/plain", emailrequest.getBody()));
-		mail.setReplyTo(new Email("abc@gmail.com"));
-		Request request = new Request();
-		
-		Response response= null;
-		
-		try {
-			
-			request.setMethod(Method.POST);
-			
-			request.setEndpoint("mail/send");
-			
-			request.setBody(mail.build());
-			
-			response = this.sendGrid.api(request);
-		} catch(IOException e) {
-			
-			System.out.println(e.getMessage());
-		}
-		
-		return response;
-	}
+    @Autowired
+    SendGrid sendGrid;
+
+    public Response sendemail(EmailRequest emailrequest) {
+
+        Mail mail = new Mail(new Email("aalkymers@gmail.com"), emailrequest.getSubject(), new Email(emailrequest.getTo()), new Content("text/plain", emailrequest.getBody()));
+        mail.setReplyTo(new Email("abc@gmail.com"));
+        Request request = new Request();
+
+        Response response = null;
+
+        try {
+
+            request.setMethod(Method.POST);
+
+            request.setEndpoint("mail/send");
+
+            request.setBody(mail.build());
+
+            response = this.sendGrid.api(request);
+        } catch (IOException e) {
+
+            System.out.println(e.getMessage());
+        }
+
+        return response;
+    }
 }
