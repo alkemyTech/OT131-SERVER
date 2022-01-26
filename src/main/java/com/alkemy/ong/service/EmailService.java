@@ -40,8 +40,8 @@ public class EmailService implements IEmailService {
     public void sendHTML(String from, String to, String subject, String body) {
     	
         Response response = sendEmail(from, to, subject, new Content("text/html", body));
-//        System.out.println("Status Code: " + response.getStatusCode() + ", Body: " + response.getBody() + ", Headers: "
-//                + response.getHeaders());
+        System.out.println("Status Code: " + response.getStatusCode() + ", Body: " + response.getBody() + ", Headers: "
+                + response.getHeaders());
     }
  
     private Response sendEmail(String from, String to, String subject, Content content) {
@@ -60,9 +60,9 @@ public class EmailService implements IEmailService {
         return response;
     }
     
-    public String getEmail () {
-
+    public void saveTemplateHTML () {
     	
+    	//ACA SETEAMOS LA VARIABLE EMAIL Y EL SUJETO A LA BASE DE DATOS
     	
     	
     	 String email = "<!doctype html>\r\n"
@@ -480,9 +480,6 @@ public class EmailService implements IEmailService {
     			+ "</body>\r\n"
     			+ "\r\n"
     			+ "</html>";
-   
-    	
-    	return email;
     }
     
 }
