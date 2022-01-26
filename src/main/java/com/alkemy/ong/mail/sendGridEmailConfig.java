@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 public class sendGridEmailConfig {
 
 	
-	@Value("${sendgrid.key}")
+	//@Value("${sendgrid.key}")
 	private String key;
 	@Bean
 	public SendGrid getSendgris() {
