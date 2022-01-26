@@ -1,17 +1,16 @@
-package com.alkemy.ong.utility.JWT;
+package com.alkemy.ong.util;
 
-import com.alkemy.ong.dto.UsersDTO;
+import com.alkemy.ong.dto.UsersDtoResponse;
+import com.alkemy.ong.dto.UsersOkDto;
+import com.alkemy.ong.service.UsersService;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.nio.charset.StandardCharsets;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Service;
@@ -23,20 +22,30 @@ public class JWT {
     private final String BEARER = "Bearer ";
     private final String SECRET_KEY = "SECRET_KEY";
     private final String AUTHORITIES = "authorities";
+    private static final String BEARER_TOKEN = "Bearer %s";
+    private static final String BEARER_PART = "Bearer ";
+    private static final String EMPTY = "";
     
-    public String createToken(Map<String,Object> claims, String subject, String role){
+    @Autowired
+    protected UsersService usersService;
+    
+    public String createToken(String subject, String role){
+        System.out.println("create token paso 0");
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList(role);
+        System.out.println("create token paso 1");
         String token = Jwts.builder().setSubject(subject)
                 .claim( AUTHORITIES, grantedAuthorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis()+1000*60*60*EXPIRACION))
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY.getBytes(StandardCharsets.UTF_8)).compact();
-        return String.format(BEARER, token);
+        System.out.println("create token paso 2");
+        return token;
     }
     
-    public String generateToken(UsersDTO login) {
-        Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, login.getEmail(), login.getRole());
+    public String generateToken(UsersDtoResponse login) {
+        //Map<String, Object> claims = new HashMap<>();
+        String token = createToken(login.getEmail(), login.getRole().getName().name());
+        return "token"; 
     }
     
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
@@ -48,5 +57,8 @@ public class JWT {
         return Jwts.parser().setSigningKey(SECRET_KEY.getBytes(StandardCharsets.UTF_8)).parseClaimsJws(token).getBody();
     }
     
-    
+    public String extractUserEmail(String authorizationHeader) {
+        String token = authorizationHeader.replace(BEARER_PART, EMPTY);
+        return extractClaim(token, Claims::getSubject);
+    }
 }
