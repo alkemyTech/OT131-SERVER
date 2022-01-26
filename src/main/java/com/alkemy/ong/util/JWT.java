@@ -3,6 +3,7 @@ package com.alkemy.ong.util;
 import com.alkemy.ong.dto.UsersDtoResponse;
 import com.alkemy.ong.dto.UsersOkDto;
 import com.alkemy.ong.service.UsersService;
+import static com.alkemy.ong.util.Constants.SECRET_KEY;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -19,10 +20,8 @@ import org.springframework.stereotype.Service;
 public class JWT {
     
     private final Integer EXPIRACION = 1 ; //set time in hours
-    private final String BEARER = "Bearer ";
-    private final String SECRET_KEY = "SECRET_KEY";
+    
     private final String AUTHORITIES = "authorities";
-    private static final String BEARER_TOKEN = "Bearer %s";
     private static final String BEARER_PART = "Bearer ";
     private static final String EMPTY = "";
     
@@ -43,9 +42,8 @@ public class JWT {
     }
     
     public String generateToken(UsersDtoResponse login) {
-        //Map<String, Object> claims = new HashMap<>();
         String token = createToken(login.getEmail(), login.getRole().getName().name());
-        return "token"; 
+        return token; 
     }
     
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {

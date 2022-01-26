@@ -31,14 +31,11 @@ public class UsersController {
     @Autowired
     UsersServiceImpl usersService;
 
-//    @Autowired
-//    AuthenticationManager authenticationManager; no se usa
-
     @PostMapping(value = REQ_MAPP_POST_LOGIN_USER)
     private ResponseEntity<?> userAuthLogin(@Valid @RequestBody LoginUsersDTO loginUser) throws Exception {
         try {
             if (usersService.login(loginUser) != null) {
-                return ResponseEntity.ok(usersService.login(loginUser));
+                return new ResponseEntity<>(usersService.login(loginUser) , HttpStatus.OK);
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new UsersNoAuthDto());
             }
