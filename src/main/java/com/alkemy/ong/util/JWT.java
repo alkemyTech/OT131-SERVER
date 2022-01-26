@@ -43,9 +43,11 @@ public class JWT {
     }
     
     public String generateToken(UsersDtoResponse login) {
+        System.out.println("Generated");
         //Map<String, Object> claims = new HashMap<>();
         String token = createToken(login.getEmail(), login.getRole().getName().name());
-        return "token"; 
+        System.out.println("Token: " + token);
+        return token; 
     }
     
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {

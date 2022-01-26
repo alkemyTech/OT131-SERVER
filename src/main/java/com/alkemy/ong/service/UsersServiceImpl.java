@@ -27,7 +27,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 public class UsersServiceImpl implements UsersService {
 
     private static final String USER_NOT_FOUND_ERROR_MESSAGE = "User not found: {0}";
-   @Autowired
+    @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
     private UsersRepository usersRepository;
@@ -38,23 +38,7 @@ public class UsersServiceImpl implements UsersService {
     @Autowired
     private JWT jwt;
 
-    
-//    public UsersServiceImpl(PasswordEncoder passwordEncoder, UsersRepository usersRepository,
-//            UsersMapper usersMapper, AuthenticationManager authenticationManager) {
-//        this.passwordEncoder = passwordEncoder;
-//        this.usersRepository = usersRepository;
-//        this.usersMapper = usersMapper;
-//        this.authenticationManager = authenticationManager;
-//    }
-//
-//    
-//    public UsersServiceImpl(PasswordEncoder passwordEncoder, UsersRepository usersRepository, UsersMapper usersMapper) {
-//        this.passwordEncoder = passwordEncoder;
-//        this.usersRepository = usersRepository;
-//        this.usersMapper = usersMapper;
-//    }
-
-    public UsersOkDto login(LoginUsersDTO loginUser) throws Exception {
+    public UsersDtoResponse login(LoginUsersDTO loginUser) throws Exception {
 
         try {
             Authentication auth = authenticationManager.authenticate(
@@ -65,7 +49,7 @@ public class UsersServiceImpl implements UsersService {
             if (users.isPresent()) {
                 Users user = users.get();
                 if (user.isActive()) {
-                    return usersMapper.userOkDtoToUser(user);
+                    return userToken(users.get());
                 } else {
                     throw new Exception("Unsubscribed user");
                 }
@@ -89,7 +73,7 @@ public class UsersServiceImpl implements UsersService {
             } else {
                 return null;
             }
-        }else{
+        } else {
             return null;
         }
     }
@@ -97,11 +81,11 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public UsersDtoResponse save(NewUsersDTO userDTO) {
         Optional<Users> user = usersRepository.findByEmail(userDTO.getEmail());
-               
+
         if (user.isPresent()) {
             throw new IllegalArgumentException("User already exists");
         }
-              
+
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         Users userModel = usersMapper.newUsersDTO2Model(userDTO);
         Users userSaved = usersRepository.save(userModel);
@@ -138,7 +122,7 @@ public class UsersServiceImpl implements UsersService {
     public Users save(UsersRegisterDTO usersRegisterDTO) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public UsersDtoResponse getUserDetails(String authHeader) {
         String userEmail = jwt.extractUserEmail(authHeader);
@@ -152,9 +136,9 @@ public class UsersServiceImpl implements UsersService {
         userResponse.setLastName(userEntity.get().getLastName());
         return userResponse;
     }
-    
-    private UsersDtoResponse userToken(Users user){
-        UsersDtoResponse tokenUser =  usersMapper.usersModel2UsersDtoResponse(user);
+
+    private UsersDtoResponse userToken(Users user) {
+        UsersDtoResponse tokenUser = usersMapper.usersModel2UsersDtoResponse(user);
         tokenUser.setRole(user.getRole());
         tokenUser.setToken(jwt.generateToken(tokenUser));
         System.out.println(tokenUser.getToken());

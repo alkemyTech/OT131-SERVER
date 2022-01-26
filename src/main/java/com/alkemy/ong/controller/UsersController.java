@@ -38,7 +38,7 @@ public class UsersController {
     private ResponseEntity<?> userAuthLogin(@Valid @RequestBody LoginUsersDTO loginUser) throws Exception {
         try {
             if (usersService.login(loginUser) != null) {
-                return ResponseEntity.ok(usersService.login(loginUser));
+                return new ResponseEntity<>(usersService.login(loginUser) , HttpStatus.OK);
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new UsersNoAuthDto());
             }

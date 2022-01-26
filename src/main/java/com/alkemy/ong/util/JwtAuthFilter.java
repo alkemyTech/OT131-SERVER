@@ -23,7 +23,7 @@ public class JwtAuthFilter extends OncePerRequestFilter{
 
     private final String HEADER = "Authorization";
     private final String PREFIX = "Bearer ";
-    private final String SECRET = "secret";
+    private final String SECRET = "SECRET_KEY";
     private final String SPACE = "";
     private final String AUTHORITIES = "authorities";
 
