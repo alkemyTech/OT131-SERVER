@@ -1,16 +1,21 @@
 package com.alkemy.ong;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.alkemy.ong.mail.WelcomeEmail;
 import com.alkemy.ong.service.EmailService;
 
 @SpringBootApplication
 public class OngApplication implements CommandLineRunner{
 
 	@Autowired EmailService sendGridEmailService;
+	
+	@Autowired 
+	WelcomeEmail welcomeEmail;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(OngApplication.class, args);
@@ -21,7 +26,7 @@ public class OngApplication implements CommandLineRunner{
 		
 		//sendGridEmailService.getEmail()
 		
-		this.sendGridEmailService.sendHTML("aalkymers@gmail.com", "matiicastagno007@gmail.com", "Hello World", "Hello, <strong>how are you doing?</strong>");
+		this.sendGridEmailService.sendWelcomeEmail("matiicastagno007@gmail.com", "aalkymers@gmail.com", welcomeEmail.getSubject(), welcomeEmail.getBody());
 		
 	}
 

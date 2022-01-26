@@ -1,7 +1,9 @@
 package com.alkemy.ong.mail;
 
 import javax.persistence.Column;
+
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,8 +14,9 @@ import lombok.NoArgsConstructor;
 
 public class WelcomeEmail {
 	
+	@Id
 	private final String subject = "Welcome to ONG Alkemy";
-	@Column (length = 5000)
+	@Column (length = 20000)
 	private final String body = "<!doctype html>\r\n"
 	+ "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:v='urn:schemas-microsoft-com:vml'\r\n"
 	+ "	xmlns:o='urn:schemas-microsoft-com:office:office'>\r\n"
