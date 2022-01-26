@@ -1,9 +1,9 @@
-package com.alkemy.ong.services.service;
+package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.MemberDTO;
 import com.alkemy.ong.model.Members;
-import com.alkemy.ong.repositories.MembersRepository;
-import com.alkemy.ong.services.mapper.MembersMapper;
+import com.alkemy.ong.mapper.MembersMapper;
+import com.alkemy.ong.repository.MembersRepository;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.*;

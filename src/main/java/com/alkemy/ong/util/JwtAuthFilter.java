@@ -1,4 +1,4 @@
-package com.alkemy.ong.utility.JWT;
+package com.alkemy.ong.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -16,9 +16,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 @Component
-public class JwtAuthFilter {
+public class JwtAuthFilter extends OncePerRequestFilter{
 
     private final String HEADER = "Authorization";
     private final String PREFIX = "Bearer ";
@@ -26,10 +27,7 @@ public class JwtAuthFilter {
     private final String SPACE = "";
     private final String AUTHORITIES = "authorities";
 
-//    @Autowired
-//    private JWT jwt;
-
-    //@Override
+    @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         try {
             String authenticationHeader = request.getHeader("Authorization");
@@ -46,7 +44,7 @@ public class JwtAuthFilter {
             chain.doFilter(request, response);
         } catch (ExpiredJwtException | 
                 UnsupportedJwtException | 
-                MalformedJwtException e) { //tomar en clase aparte para errores si es necesario, o utilizar los existentes
+                MalformedJwtException e) { 
             
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             ((HttpServletResponse) response).sendError(HttpServletResponse.SC_FORBIDDEN, e.getMessage());
