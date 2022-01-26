@@ -29,20 +29,23 @@ public class JWT {
     @Autowired
     protected UsersService usersService;
     
-    public String createToken(Map<String,Object> claims, String subject, String role){
+    public String createToken(String subject, String role){
+        System.out.println("create token paso 0");
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList(role);
+        System.out.println("create token paso 1");
         String token = Jwts.builder().setSubject(subject)
                 .claim( AUTHORITIES, grantedAuthorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis()+1000*60*60*EXPIRACION))
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY.getBytes(StandardCharsets.UTF_8)).compact();
-        return String.format(BEARER, token);
+        System.out.println("create token paso 2");
+        return token;
     }
     
     public String generateToken(UsersDtoResponse login) {
-        
-        Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, login.getEmail(), usersService.findByMail(login.getEmail()).get().getRole().getName().toString());
+        //Map<String, Object> claims = new HashMap<>();
+        String token = createToken(login.getEmail(), login.getRole().getName().name());
+        return "token"; 
     }
     
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {

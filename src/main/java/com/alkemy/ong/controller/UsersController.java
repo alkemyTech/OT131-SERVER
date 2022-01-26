@@ -31,8 +31,8 @@ public class UsersController {
     @Autowired
     UsersServiceImpl usersService;
 
-    @Autowired
-    AuthenticationManager authenticationManager;
+//    @Autowired
+//    AuthenticationManager authenticationManager; no se usa
 
     @PostMapping(value = REQ_MAPP_POST_LOGIN_USER)
     private ResponseEntity<?> userAuthLogin(@Valid @RequestBody LoginUsersDTO loginUser) throws Exception {

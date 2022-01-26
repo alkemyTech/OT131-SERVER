@@ -19,6 +19,7 @@ import com.alkemy.ong.dto.UsersDtoResponse;
 import com.alkemy.ong.dto.NewUsersDTO;
 import com.alkemy.ong.dto.UsersRegisterDTO;
 import com.alkemy.ong.util.JWT;
+import com.alkemy.ong.util.RoleName;
 import java.text.MessageFormat;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
@@ -26,11 +27,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 public class UsersServiceImpl implements UsersService {
 
     private static final String USER_NOT_FOUND_ERROR_MESSAGE = "User not found: {0}";
+   @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
     private UsersRepository usersRepository;
+    @Autowired
     private UsersMapper usersMapper;
+    @Autowired
     private AuthenticationManager authenticationManager;
-    
+    @Autowired
     private JWT jwt;
 
     
@@ -49,7 +54,6 @@ public class UsersServiceImpl implements UsersService {
 //        this.usersMapper = usersMapper;
 //    }
 
-    
     public UsersOkDto login(LoginUsersDTO loginUser) throws Exception {
 
         try {
@@ -57,6 +61,7 @@ public class UsersServiceImpl implements UsersService {
                     new UsernamePasswordAuthenticationToken(loginUser.getEmail(), loginUser.getPassword())
             );
             Optional<Users> users = usersRepository.findByEmail(auth.getName());
+//            userToken(users.get());
             if (users.isPresent()) {
                 Users user = users.get();
                 if (user.isActive()) {
@@ -92,11 +97,11 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public UsersDtoResponse save(NewUsersDTO userDTO) {
         Optional<Users> user = usersRepository.findByEmail(userDTO.getEmail());
-
+               
         if (user.isPresent()) {
             throw new IllegalArgumentException("User already exists");
         }
-
+              
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         Users userModel = usersMapper.newUsersDTO2Model(userDTO);
         Users userSaved = usersRepository.save(userModel);
@@ -148,11 +153,12 @@ public class UsersServiceImpl implements UsersService {
         return userResponse;
     }
     
-//    private UsersDtoResponse userToken(Users user){
-//        UsersDtoResponse tokenUser =  usersMapper.usersModel2UsersDtoResponse(user);
-//        tokenUser.setRole(user.getRole());
-//        tokenUser.setToken(jwt.generateToken(tokenUser));
-//        return tokenUser;
-//    }
+    private UsersDtoResponse userToken(Users user){
+        UsersDtoResponse tokenUser =  usersMapper.usersModel2UsersDtoResponse(user);
+        tokenUser.setRole(user.getRole());
+        tokenUser.setToken(jwt.generateToken(tokenUser));
+        System.out.println(tokenUser.getToken());
+        return tokenUser;
+    }
 
 }
