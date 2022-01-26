@@ -11,6 +11,11 @@ public final class Constants {
 	public static final String REQ_MAPP_CLASS_USER = "/auth";
 	public static final String REQ_MAPP_POST_LOGIN_USER = "/login";
 	public static final String REQ_MAPP_DELETE_LOGIN_USER = "/{id}";
+        
+        /*
+        Internal Key for Token
+        */
+        public static final String SECRET_KEY = "SECRET_KEY";
 	
         
   public Constants() {}
