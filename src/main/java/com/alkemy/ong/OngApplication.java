@@ -18,7 +18,10 @@ public class OngApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		this.sendGridEmailService.sendHTML("aalkymers@gmail.com", "Matiicastagno007@gmail.com", "Hello World", "Hello, <strong>how are you doing?</strong>");
+		
+		//sendGridEmailService.getEmail()
+		
+		this.sendGridEmailService.sendHTML("aalkymers@gmail.com", "matiicastagno007@gmail.com", "Hello World", "Hello, <strong>how are you doing?</strong>");
 		
 	}
 

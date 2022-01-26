@@ -1,5 +1,8 @@
 package com.alkemy.ong.mail;
 
+
+
+//@Entity
 public class EmailRequest {
 
 	private String to;
