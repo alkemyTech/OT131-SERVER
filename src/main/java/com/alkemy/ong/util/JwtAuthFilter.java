@@ -1,5 +1,6 @@
 package com.alkemy.ong.util;
 
+import static com.alkemy.ong.util.Constants.SECRET_KEY;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -23,7 +24,6 @@ public class JwtAuthFilter extends OncePerRequestFilter{
 
     private final String HEADER = "Authorization";
     private final String PREFIX = "Bearer ";
-    private final String SECRET = "SECRET_KEY";
     private final String SPACE = "";
     private final String AUTHORITIES = "authorities";
 
@@ -53,7 +53,7 @@ public class JwtAuthFilter extends OncePerRequestFilter{
 
     private Claims validateToken(HttpServletRequest request) {
         String jwtToken = request.getHeader(HEADER).replace(PREFIX, SPACE);
-        return Jwts.parser().setSigningKey(SECRET.getBytes()).parseClaimsJws(jwtToken).getBody();
+        return Jwts.parser().setSigningKey(SECRET_KEY.getBytes()).parseClaimsJws(jwtToken).getBody();
     }
 
     private void setUpAuth(Claims claims) {

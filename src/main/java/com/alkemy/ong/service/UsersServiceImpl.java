@@ -19,7 +19,6 @@ import com.alkemy.ong.dto.UsersDtoResponse;
 import com.alkemy.ong.dto.NewUsersDTO;
 import com.alkemy.ong.dto.UsersRegisterDTO;
 import com.alkemy.ong.util.JWT;
-import com.alkemy.ong.util.RoleName;
 import java.text.MessageFormat;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
@@ -45,7 +44,6 @@ public class UsersServiceImpl implements UsersService {
                     new UsernamePasswordAuthenticationToken(loginUser.getEmail(), loginUser.getPassword())
             );
             Optional<Users> users = usersRepository.findByEmail(auth.getName());
-//            userToken(users.get());
             if (users.isPresent()) {
                 Users user = users.get();
                 if (user.isActive()) {
