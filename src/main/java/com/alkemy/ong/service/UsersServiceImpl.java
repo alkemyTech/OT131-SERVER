@@ -46,7 +46,8 @@ public class UsersServiceImpl implements UsersService {
             Optional<Users> users = usersRepository.findByEmail(auth.getName());
             if (users.isPresent()) {
                 Users user = users.get();
-                if (user.isActive()) {
+                if (user.isActive()) 
+                {
                     return userToken(users.get());
                 } else {
                     throw new Exception("Unsubscribed user");
@@ -57,7 +58,7 @@ public class UsersServiceImpl implements UsersService {
         } catch (BadCredentialsException e) {
             throw new BadCredentialsException("Username does not exist");
         } catch (InternalAuthenticationServiceException e) {
-            throw new InternalAuthenticationServiceException("");
+            throw new InternalAuthenticationServiceException("Username does not exist");
         }
     }
 
