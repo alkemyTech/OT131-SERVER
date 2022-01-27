@@ -1,6 +1,7 @@
 package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.LoginUsersDTO;
+
 import com.alkemy.ong.dto.UsersDTO;
 import com.alkemy.ong.dto.UsersOkDto;
 import com.alkemy.ong.model.Users;
@@ -20,6 +21,7 @@ import com.alkemy.ong.dto.NewUsersDTO;
 import com.alkemy.ong.dto.UsersRegisterDTO;
 import com.alkemy.ong.util.JWT;
 import java.text.MessageFormat;
+import static com.alkemy.ong.util.Constants.*;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @Service
@@ -36,6 +38,8 @@ public class UsersServiceImpl implements UsersService {
     private AuthenticationManager authenticationManager;
     @Autowired
     private JWT jwt;
+    @Autowired 
+	private EmailServiceImp sendGridEmailService;
 
     public UsersDtoResponse login(LoginUsersDTO loginUser) throws Exception {
 
@@ -88,6 +92,7 @@ public class UsersServiceImpl implements UsersService {
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         Users userModel = usersMapper.newUsersDTO2Model(userDTO);
         Users userSaved = usersRepository.save(userModel);
+        //this.sendGridEmailService.sendWelcomeEmail(MAIL_ONG, "userDTO.getEmail()");
         UsersDtoResponse response = (UsersDtoResponse) usersMapper.usersModel2UsersDtoResponse(userSaved);
         return response;
     }

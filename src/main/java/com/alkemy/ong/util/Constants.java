@@ -10,6 +10,10 @@ public final class Constants {
 	public static final String[] URL_AUTH_REQUEST = {"/", "/auth/**", "/public/**", "/js/**", "/css/**"};
 	public static final String REQ_MAPP_CLASS_USER = "/auth";
 	public static final String REQ_MAPP_POST_LOGIN_USER = "/login";
+
+	public static final String REQ_MAPP_DELETE_LOGIN_USER = "/{id}";
+	public static final String MAIL_ONG = "ong131Alkemy@gmail.com";
+
 	public static final String REQ_MAPP_DELETE_LOGIN_USER = "/users/{id}";
         
         /*
