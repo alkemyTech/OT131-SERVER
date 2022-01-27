@@ -13,8 +13,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import com.alkemy.ong.mail.WelcomeEmail;
-import com.alkemy.ong.service.EmailService;
+import static com.alkemy.ong.util.Constants.*;
+
+import com.alkemy.ong.service.EmailServiceImp;
 
 @EntityScan(basePackages = {"com.alkemy.ong.model"})
 @ComponentScan(basePackages = {"com.*"})
@@ -30,10 +31,8 @@ import com.alkemy.ong.service.EmailService;
 @SpringBootApplication
 public class OngApplication implements CommandLineRunner{
 
-	@Autowired EmailService sendGridEmailService;
-	
 	@Autowired 
-	WelcomeEmail welcomeEmail;
+	private EmailServiceImp sendGridEmailService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(OngApplication.class, args);
@@ -44,7 +43,7 @@ public class OngApplication implements CommandLineRunner{
 		
 		//sendGridEmailService.getEmail()
 		
-		this.sendGridEmailService.sendWelcomeEmail("matiicastagno007@gmail.com", "aalkymers@gmail.com", welcomeEmail.getSubject(), welcomeEmail.getBody());
+		this.sendGridEmailService.sendWelcomeEmail(MAIL_ONG, "matiicastagno007@gmail.com");
 		
 	}
 
