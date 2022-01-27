@@ -24,8 +24,6 @@ import com.alkemy.ong.service.EmailServiceImp;
 @EnableWebMvc
 @RepositoryRestController
 @EnableAutoConfiguration
-// @EnableJpaAuditing
-// @EnableCaching //Hablitando el cache
 
 
 @SpringBootApplication
@@ -37,14 +35,4 @@ public class OngApplication implements CommandLineRunner{
 	public static void main(String[] args) {
 		SpringApplication.run(OngApplication.class, args);
 	}
-
-	@Override
-	public void run(String... args) throws Exception {
-		
-	
-		
-		//this.sendGridEmailService.sendWelcomeEmail(MAIL_ONG, "matiicastagno007@gmail.com");
-		
-	}
-
 }

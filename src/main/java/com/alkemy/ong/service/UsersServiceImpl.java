@@ -20,7 +20,6 @@ import com.alkemy.ong.dto.UsersDtoResponse;
 import com.alkemy.ong.dto.NewUsersDTO;
 import com.alkemy.ong.dto.UsersRegisterDTO;
 import com.alkemy.ong.util.JWT;
-import com.alkemy.ong.util.RoleName;
 import java.text.MessageFormat;
 import static com.alkemy.ong.util.Constants.*;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,7 +28,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 public class UsersServiceImpl implements UsersService {
 
     private static final String USER_NOT_FOUND_ERROR_MESSAGE = "User not found: {0}";
-   @Autowired
+    @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
     private UsersRepository usersRepository;
@@ -42,34 +41,18 @@ public class UsersServiceImpl implements UsersService {
     @Autowired 
 	private EmailServiceImp sendGridEmailService;
 
-    
-//    public UsersServiceImpl(PasswordEncoder passwordEncoder, UsersRepository usersRepository,
-//            UsersMapper usersMapper, AuthenticationManager authenticationManager) {
-//        this.passwordEncoder = passwordEncoder;
-//        this.usersRepository = usersRepository;
-//        this.usersMapper = usersMapper;
-//        this.authenticationManager = authenticationManager;
-//    }
-//
-//    
-//    public UsersServiceImpl(PasswordEncoder passwordEncoder, UsersRepository usersRepository, UsersMapper usersMapper) {
-//        this.passwordEncoder = passwordEncoder;
-//        this.usersRepository = usersRepository;
-//        this.usersMapper = usersMapper;
-//    }
-
-    public UsersOkDto login(LoginUsersDTO loginUser) throws Exception {
+    public UsersDtoResponse login(LoginUsersDTO loginUser) throws Exception {
 
         try {
             Authentication auth = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginUser.getEmail(), loginUser.getPassword())
             );
             Optional<Users> users = usersRepository.findByEmail(auth.getName());
-//            userToken(users.get());
             if (users.isPresent()) {
                 Users user = users.get();
-                if (user.isActive()) {
-                    return usersMapper.userOkDtoToUser(user);
+                if (user.isActive()) 
+                {
+                    return userToken(users.get());
                 } else {
                     throw new Exception("Unsubscribed user");
                 }
@@ -79,7 +62,7 @@ public class UsersServiceImpl implements UsersService {
         } catch (BadCredentialsException e) {
             throw new BadCredentialsException("Username does not exist");
         } catch (InternalAuthenticationServiceException e) {
-            throw new InternalAuthenticationServiceException("");
+            throw new InternalAuthenticationServiceException("Username does not exist");
         }
     }
 
@@ -93,7 +76,7 @@ public class UsersServiceImpl implements UsersService {
             } else {
                 return null;
             }
-        }else{
+        } else {
             return null;
         }
     }
@@ -101,11 +84,11 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public UsersDtoResponse save(NewUsersDTO userDTO) {
         Optional<Users> user = usersRepository.findByEmail(userDTO.getEmail());
-               
+
         if (user.isPresent()) {
             throw new IllegalArgumentException("User already exists");
         }
-              
+
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         Users userModel = usersMapper.newUsersDTO2Model(userDTO);
         Users userSaved = usersRepository.save(userModel);
@@ -143,7 +126,7 @@ public class UsersServiceImpl implements UsersService {
     public Users save(UsersRegisterDTO usersRegisterDTO) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public UsersDtoResponse getUserDetails(String authHeader) {
         String userEmail = jwt.extractUserEmail(authHeader);
@@ -157,9 +140,9 @@ public class UsersServiceImpl implements UsersService {
         userResponse.setLastName(userEntity.get().getLastName());
         return userResponse;
     }
-    
-    private UsersDtoResponse userToken(Users user){
-        UsersDtoResponse tokenUser =  usersMapper.usersModel2UsersDtoResponse(user);
+
+    private UsersDtoResponse userToken(Users user) {
+        UsersDtoResponse tokenUser = usersMapper.usersModel2UsersDtoResponse(user);
         tokenUser.setRole(user.getRole());
         tokenUser.setToken(jwt.generateToken(tokenUser));
         System.out.println(tokenUser.getToken());
