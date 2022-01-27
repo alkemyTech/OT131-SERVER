@@ -41,9 +41,9 @@ public class OngApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		//sendGridEmailService.getEmail()
+	
 		
-		this.sendGridEmailService.sendWelcomeEmail(MAIL_ONG, "matiicastagno007@gmail.com");
+		//this.sendGridEmailService.sendWelcomeEmail(MAIL_ONG, "matiicastagno007@gmail.com");
 		
 	}
 
