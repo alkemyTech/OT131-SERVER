@@ -92,7 +92,7 @@ public class UsersServiceImpl implements UsersService {
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         Users userModel = usersMapper.newUsersDTO2Model(userDTO);
         Users userSaved = usersRepository.save(userModel);
-        this.sendGridEmailService.sendWelcomeEmail(MAIL_ONG, userDTO.getEmail());
+        this.sendGridEmailService.sendWelcomeEmail(MAIL_ONG, userDTO.getEmail()); 
         UsersDtoResponse response = (UsersDtoResponse) usersMapper.usersModel2UsersDtoResponse(userSaved);
         return response;
     }
