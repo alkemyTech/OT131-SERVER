@@ -1,5 +1,6 @@
 package com.alkemy.ong.service;
 
+import static com.alkemy.ong.util.Constants.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,17 +22,23 @@ public class OrganizationsServiceImp implements OrganizationsService {
 	@Override
 	public List<OrganizationsDTO> listOrganizations() {
 		List<OrganizationsDTO> listOrganization = new ArrayList<>();
-		for (Organizations org : organizationRepository. findByIsActiveTrue()) {
-			listOrganization.add(mapper.map(org, OrganizationsDTO.class));
-		}
+		organizationRepository.findByIsActiveTrue().forEach(  
+	            (o)-> listOrganization.add(mapper.map(o, OrganizationsDTO.class))); 
 		return listOrganization;
 	}
+
 	@Override
 	public Optional<Organizations>  publicDataOrganization(String name) {
-		return organizationRepository.findByName(name);
+//Optional.of(<Objeto>): esto creará un Optional del objeto que le pasemos, pero cuidado si le pasamos un “null” lanzara un NullPointerException.
+			return Optional.of(organizationRepository.findByName(name) 
+		        .orElseThrow(() -> new NullPointerException(ENTITY_NOT_FOUND)));
 	}
 	@Override
-	public Organizations saveOrganization(Organizations organization) {
+	public Organizations saveOrganization(Organizations organization) throws Exception {
+		if (organizationRepository.findByName(organization.getName()).isPresent()) {
+			throw new IllegalArgumentException(NAME_EXIST);
+		}
+		organization.setActive(true);
 		return organizationRepository.save(organization);
 	}
 

@@ -8,7 +8,7 @@ import com.alkemy.ong.model.Organizations;
 
 public interface OrganizationsService {
 	
-	public Organizations saveOrganization(Organizations organization);
+	public Organizations saveOrganization(Organizations organization) throws Exception;
 	public List<OrganizationsDTO> listOrganizations();
 	public Optional<Organizations> publicDataOrganization(String name);
 
