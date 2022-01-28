@@ -18,7 +18,7 @@ import com.alkemy.ong.service.OrganizationsServiceImp;
 import static com.alkemy.ong.util.Constants.*;
 
 @RestController
-@RequestMapping(REQ_GET_MAPP)
+@RequestMapping(REQ_MAPP_ORG)
 public class OrganizationsController {
 
 	@Autowired
