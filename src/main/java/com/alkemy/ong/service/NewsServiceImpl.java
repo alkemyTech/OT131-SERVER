@@ -24,7 +24,7 @@ public class NewsServiceImpl implements NewsService{
     private NewsMapper newsMapper;
 
 
-    @Autowired
+
     private ModelMapper mapper = new ModelMapper();
 
     @Override

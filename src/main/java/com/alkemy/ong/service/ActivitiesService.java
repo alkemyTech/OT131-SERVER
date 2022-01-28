@@ -11,8 +11,6 @@ public interface ActivitiesService {
 
     ActivitiesDTO save(ActivitiesDTO dto) throws ParamNotFoundException;
 
-    Activities saveActivity(Activities activity) throws ParamNotFoundException;
-
     List<ActivitiesDTO> getAllActives();
 
     ActivitiesDTO update(Long id, ActivitiesDTO dto) throws ParamNotFoundException;

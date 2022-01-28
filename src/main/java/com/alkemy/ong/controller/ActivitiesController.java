@@ -30,12 +30,6 @@ public class ActivitiesController {
         return ResponseEntity.ok().body(activitiesService.getAllActives());
     }
 
-    @PostMapping
-    public ResponseEntity<ActivitiesDTO> save(@Valid @RequestBody ActivitiesDTO dto) {
-        ActivitiesDTO updated = activitiesService.save(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(updated);
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<ActivitiesDTO> update(@PathVariable Long id, @Valid @RequestBody ActivitiesDTO dto) {
         ActivitiesDTO result = activitiesService.update(id, dto);
@@ -49,15 +43,15 @@ public class ActivitiesController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createActivity(@Valid @RequestBody Activities activity) throws Exception {
+    public ResponseEntity<?> createActivity(@Valid @RequestBody ActivitiesDTO activityDTO) throws Exception {
 
-        if (activitiesRepository.findByName(activity.getName()).isPresent()) {
+        if (activitiesRepository.findByName(activityDTO.getName()).isPresent()) {
             return new ResponseEntity<>(NAME_EXIST, HttpStatus.BAD_REQUEST);
-        }else if(activity.getContent().isEmpty() || activity.getName().isEmpty()){
+        }else if(activityDTO.getContent().isEmpty() || activityDTO.getName().isEmpty()){
             return new ResponseEntity<>("Incomplete Parameters", HttpStatus.BAD_REQUEST);
         }
-        activity.setActive(true);
-        return new ResponseEntity<Activities>(activitiesService.saveActivity(activity), HttpStatus.CREATED);
+
+        return new ResponseEntity<>(activitiesService.save(activityDTO), HttpStatus.CREATED);
 
     }
 }

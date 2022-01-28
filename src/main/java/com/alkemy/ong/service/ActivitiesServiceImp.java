@@ -21,7 +21,7 @@ public class ActivitiesServiceImp implements ActivitiesService {
     private ActivitiesRepository activitiesRepository;
     private ModelMapper mapper = new ModelMapper();
 
-
+    @Override
     @Transactional
     public ActivitiesDTO save(ActivitiesDTO dto) {
 
@@ -73,8 +73,4 @@ public class ActivitiesServiceImp implements ActivitiesService {
         }
     }
 
-    @Transactional
-    public Activities saveActivity(Activities activity) {
-        return activitiesRepository.save(activity);
-    }
 }
