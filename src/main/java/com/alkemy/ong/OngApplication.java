@@ -1,9 +1,5 @@
 package com.alkemy.ong;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,9 +9,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import static com.alkemy.ong.util.Constants.*;
-
-import com.alkemy.ong.service.EmailServiceImp;
 
 @EntityScan(basePackages = {"com.alkemy.ong.model"})
 @ComponentScan(basePackages = {"com.*"})
@@ -24,15 +17,11 @@ import com.alkemy.ong.service.EmailServiceImp;
 @EnableWebMvc
 @RepositoryRestController
 @EnableAutoConfiguration
-
-
 @SpringBootApplication
-public class OngApplication implements CommandLineRunner{
+public class OngApplication {
 
-	@Autowired 
-	private EmailServiceImp sendGridEmailService;
-	
 	public static void main(String[] args) {
 		SpringApplication.run(OngApplication.class, args);
 	}
+
 }
