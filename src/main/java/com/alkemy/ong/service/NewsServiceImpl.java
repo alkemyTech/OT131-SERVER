@@ -43,6 +43,7 @@ public class NewsServiceImpl implements NewsService{
     }
 
     @Transactional
+    @Override
     public NewsDTO save(NewsDTO dto) {
 
         News entity = mapper.map(dto, News.class);
@@ -53,6 +54,7 @@ public class NewsServiceImpl implements NewsService{
     }
 
     @Transactional
+    @Override
     public NewsDTO update(Long id, NewsDTO dto) {
 
         Optional<News> result = newsRepository.findById(id);

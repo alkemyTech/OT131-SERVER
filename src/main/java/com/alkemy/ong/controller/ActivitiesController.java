@@ -43,14 +43,8 @@ public class ActivitiesController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createActivity(@Valid @RequestBody ActivitiesDTO activityDTO) throws Exception {
-
-        if (activitiesRepository.findByName(activityDTO.getName()).isPresent()) {
-            return new ResponseEntity<>(NAME_EXIST, HttpStatus.BAD_REQUEST);
-        }else if(activityDTO.getContent().isEmpty() || activityDTO.getName().isEmpty()){
-            return new ResponseEntity<>("Incomplete Parameters", HttpStatus.BAD_REQUEST);
-        }
-
+    public ResponseEntity<?> createActivity(@Valid @RequestBody ActivitiesDTO activityDTO){
+        activitiesService.save(activityDTO);
         return new ResponseEntity<>(activitiesService.save(activityDTO), HttpStatus.CREATED);
 
     }

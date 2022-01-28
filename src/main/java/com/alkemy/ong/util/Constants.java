@@ -13,7 +13,7 @@ public final class Constants {
     public static final String REQ_MAPP_CLASS_USER = "/auth";
     public static final String REQ_MAPP_POST_LOGIN_USER = "/login";
     public static final String REQ_MAPP_NEWS = "/news";
-
+    public static final String INCOMPLETE_PARAMETERS="Incomplete Parameters";
 
     public static final String MAIL_ONG = "ong131Alkemy@gmail.com";
 
