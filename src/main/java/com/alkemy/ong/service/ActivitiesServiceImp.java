@@ -72,4 +72,9 @@ public class ActivitiesServiceImp implements ActivitiesService {
             throw new ParamNotFoundException("Requested activity was not found.");
         }
     }
+
+    @Transactional
+    public Activities saveActivity(Activities activity) {
+        return activitiesRepository.save(activity);
+    }
 }
