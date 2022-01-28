@@ -32,4 +32,9 @@ public class NewsServiceImpl implements NewsService{
         nw.setIsActivated(false);
         newsRepository.save(nw);
     }
+    
+    @Override
+    public NewsDTO findById(Long Id){
+        return newsMapper.converToDTO(newsRepository.findById(Id).get());
+    }
 }

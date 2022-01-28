@@ -37,18 +37,15 @@ public class CategoriesServiceImpl implements CategoriesService {
 
     @Override
     public List<String> getAllByName() {
-        System.out.println("paso1");
         List<CategoriesDTO> listDto = listAllDto();
         List<String> listName = new ArrayList();
         for (CategoriesDTO category : listDto) {
             listName.add(category.getName());
         }
-        System.out.println(listName);
         return listName;
     }
 
     private List<Categories> listAll() {
-        System.out.println("repo ok");
         return categoriesRepository.findAll();
     }
 
@@ -58,7 +55,6 @@ public class CategoriesServiceImpl implements CategoriesService {
         for (Categories categoty : categories) {
             catDto.add(categoriesMapper.converToDTO(categoty));
         }
-        System.out.println("lista dto ok");
         return catDto;
     }
 }

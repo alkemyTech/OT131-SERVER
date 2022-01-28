@@ -8,7 +8,8 @@ import org.springframework.stereotype.Component;
 public class NewsMapper {
 
     public NewsDTO converToDTO(News nw){
-        return new NewsDTO(nw.getName(), nw.getContent(), nw.getImage());
+        //return new NewsDTO(nw.getName(), nw.getContent(), nw.getImage());
+        return new NewsDTO(nw.getName(), nw.getContent(), nw.getImage(), nw.getCategory(), nw.getDateCreated());
     }
 
     public News converToModel(NewsDTO newDTO){
