@@ -2,7 +2,7 @@ package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.ActivitiesDTO;
 import com.alkemy.ong.model.Activities;
-import com.alkemy.ong.util.ParamNotFoundException;
+import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.repository.ActivitiesRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
