@@ -50,13 +50,4 @@ public class CategoriesServiceImpl implements CategoriesService{
             throw new ParamNotFoundException("Requested category was not found.");
         }
     }
-
-    @Transactional
-    public CategoriesDTO save(CategoriesDTO dto) {
-        Categories entity = categoriesMapper.converToModel(dto);
-        Categories entitySaved = categoriesRepository.save(entity);
-
-        return categoriesMapper.converToDTO(entitySaved);
-    }
-
 }

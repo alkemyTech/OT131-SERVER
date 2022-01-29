@@ -18,16 +18,9 @@ public class CategoriesController {
     @Autowired
     private CategoriesService categoriesService;
 
-    @PostMapping
-    public ResponseEntity<CategoriesDTO> create(@Valid @RequestBody CategoriesDTO dto) {
-        CategoriesDTO result = categoriesService.save(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(result);
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<CategoriesDTO> update(@PathVariable Long id, @Valid @RequestBody CategoriesDTO dto) {
         CategoriesDTO result = categoriesService.update(id, dto);
         return ResponseEntity.ok().body(result);
     }
-
 }

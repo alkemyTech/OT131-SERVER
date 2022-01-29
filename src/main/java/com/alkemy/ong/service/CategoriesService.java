@@ -10,6 +10,4 @@ public interface CategoriesService {
     void deleteCategory(Long id);
 
     CategoriesDTO update(Long id, CategoriesDTO dto);
-
-    CategoriesDTO save(CategoriesDTO dto);
 }
