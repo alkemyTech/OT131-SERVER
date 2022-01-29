@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-import static com.alkemy.ong.util.Constants.REQ_GET_MAPP_ACTIVITIES;
+import static com.alkemy.ong.util.Constants.REQ_MAPP_ACTIVITIES;
+
 
 @RestController
-@RequestMapping(REQ_GET_MAPP_ACTIVITIES)
+@RequestMapping(REQ_MAPP_ACTIVITIES)
 public class ActivitiesController {
 
     @Autowired

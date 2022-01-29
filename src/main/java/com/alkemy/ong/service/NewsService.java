@@ -4,6 +4,7 @@ import com.alkemy.ong.dto.NewsDTO;
 
 public interface NewsService{
 
-    public NewsDTO publicDataNew(String name);
-    public void deleteNew(Long id);
+    NewsDTO publicDataNew(String name);
+    void deleteNew(Long id);
+    NewsDTO save(NewsDTO dto);
 }
