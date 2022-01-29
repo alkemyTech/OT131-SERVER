@@ -4,6 +4,7 @@ public final class Constants {
 
     public static final String REQ_MAPP_ACTIVITIES = "/activities";
     public static final String REQ_MAPP_ORG = "/organizations";
+    public static final String REQ_MAPP_CATEGORIES = "/categories";
     public static final String POINT_GET_MAPP = "/public/{name}";
     public static final String ENTITY_NOT_FOUND = "ENTITY NOT FOUND";
     public static final String NAME_EXIST = "THE NAME OF THE ORGANIZATION ALREADY EXISTS";
@@ -16,16 +17,14 @@ public final class Constants {
     public static final String MAIL_ONG = "ong131Alkemy@gmail.com";
 
     public static final String REQ_MAPP_DELETE_LOGIN_USER = "/users/{id}";
+    public static final String REQ_MAPP_GET_AUTH_ME_USER = "/me";
 
     /*
     Internal Key for Token
-    */
+     */
     public static final String SECRET_KEY = "SECRET_KEY";
-
 
     public Constants() {
     }
 
-
 }
-

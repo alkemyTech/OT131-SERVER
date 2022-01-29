@@ -12,7 +12,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 
-
 @Entity
 @Data
 @AllArgsConstructor
@@ -33,11 +32,10 @@ public class Categories {
     private String image;
 
     @NotNull
-    @NotEmpty
-    private Boolean isActivated;
+    private Boolean isActivated = Boolean.TRUE;
 
     @CreatedDate
-    @Column (updatable = false)
+    @Column(updatable = false)
     private LocalDate dateCreated;
 
     @LastModifiedDate
@@ -45,8 +43,8 @@ public class Categories {
 
     public Categories(String name, String description, String image) {
         super();
-        this.name=name;
-        this.description=description;
-        this.image=image;
+        this.name = name;
+        this.description = description;
+        this.image = image;
     }
 }

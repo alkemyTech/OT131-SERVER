@@ -20,7 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static com.alkemy.ong.util.Constants.REQ_MAPP_CLASS_USER;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_DELETE_LOGIN_USER;
+import static com.alkemy.ong.util.Constants.REQ_MAPP_GET_AUTH_ME_USER;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_POST_LOGIN_USER;
+import io.jsonwebtoken.Claims;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 
 @RestController
 @RequestMapping(value = REQ_MAPP_CLASS_USER)
