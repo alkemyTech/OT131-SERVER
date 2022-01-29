@@ -1,6 +1,7 @@
 package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.NewsDTO;
+import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.mapper.NewsMapper;
 import com.alkemy.ong.model.News;
 import com.alkemy.ong.repository.NewsRepository;
@@ -34,7 +35,13 @@ public class NewsServiceImpl implements NewsService{
     }
     
     @Override
-    public NewsDTO findById(Long Id){
-        return newsMapper.converToDTO(newsRepository.findById(Id).get());
+    public NewsDTO findById(Long id){
+        Optional<News> news = newsRepository.findById(id);
+        if(news.isPresent()){
+            NewsDTO newsDto = newsMapper.converToDTO(news.get());
+            return newsDto; 
+        }else{
+            throw new ParamNotFoundException("News with id=" + id + " not found.");
+        }
     }
 }

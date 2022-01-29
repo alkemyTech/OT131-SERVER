@@ -1,6 +1,5 @@
 package com.alkemy.ong.controller;
 
-
 import com.alkemy.ong.dto.NewsDTO;
 import com.alkemy.ong.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ public class NewsController {
     private NewsService newsService;
     
     @GetMapping("/{id}")
-    public ResponseEntity<NewsDTO> getById(@PathVariable Long id, @Valid RequestBody NewsDTO){
+    public ResponseEntity<NewsDTO> getById(@PathVariable Long id){
         return ResponseEntity.ok().body(newsService.findById(id));
     }
         
