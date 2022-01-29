@@ -44,7 +44,7 @@ public class ActivitiesController {
 
     @PostMapping
     public ResponseEntity<?> createActivity(@Valid @RequestBody ActivitiesDTO activityDTO){
-        activitiesService.save(activityDTO);
+
         return new ResponseEntity<>(activitiesService.save(activityDTO), HttpStatus.CREATED);
 
     }

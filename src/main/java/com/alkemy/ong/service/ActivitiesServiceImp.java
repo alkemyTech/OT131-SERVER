@@ -1,6 +1,7 @@
 package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.ActivitiesDTO;
+import com.alkemy.ong.exception.AlreadyExistsException;
 import com.alkemy.ong.model.Activities;
 import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.repository.ActivitiesRepository;
@@ -16,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static com.alkemy.ong.util.Constants.INCOMPLETE_PARAMETERS;
 import static com.alkemy.ong.util.Constants.NAME_EXIST;
 
 @Service
@@ -31,9 +31,7 @@ public class ActivitiesServiceImp implements ActivitiesService {
     public ActivitiesDTO save(ActivitiesDTO activityDTO) {
 
         if (activitiesRepository.findByName(activityDTO.getName()).isPresent()) {
-            throw new UnsupportedOperationException(NAME_EXIST);
-        }else if(activityDTO.getContent().isEmpty() || activityDTO.getName().isEmpty()){
-            throw new UnsupportedOperationException(INCOMPLETE_PARAMETERS);
+            throw new AlreadyExistsException(NAME_EXIST);
         }else{
             Activities entity = mapper.map(activityDTO, Activities.class);
             entity.setCreatedDate(LocalDate.now());
