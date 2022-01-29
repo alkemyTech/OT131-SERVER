@@ -12,7 +12,6 @@ import java.util.List;
 
 import static com.alkemy.ong.util.Constants.REQ_MAPP_ACTIVITIES;
 
-
 @RestController
 @RequestMapping(REQ_MAPP_ACTIVITIES)
 public class ActivitiesController {
