@@ -4,6 +4,7 @@ public final class Constants {
 
     public static final String REQ_MAPP_ACTIVITIES = "/activities";
     public static final String REQ_MAPP_ORG = "/organizations";
+    public static final String REQ_MAPP_CATEGORIES = "/categories";
     public static final String POINT_GET_MAPP = "/public/{name}";
     public static final String ENTITY_NOT_FOUND = "ENTITY NOT FOUND";
     public static final String NAME_EXIST = "THE NAME OF THE ORGANIZATION ALREADY EXISTS";
