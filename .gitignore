@@ -1,7 +1,0 @@
-pom.xml
-/target/**
-/.idea/**
-/.settings/**
-sendgrid.env
-/src/main/resources/**
-.gitignore
