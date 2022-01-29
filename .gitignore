@@ -3,3 +3,5 @@ pom.xml
 /.idea/**
 /.settings/**
 sendgrid.env
+/src/main/resources/**
+.gitignore
