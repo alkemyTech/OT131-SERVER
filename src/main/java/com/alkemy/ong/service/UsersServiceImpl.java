@@ -8,6 +8,9 @@ import com.alkemy.ong.model.Users;
 import com.alkemy.ong.mapper.UsersMapper;
 import com.alkemy.ong.repository.UsersRepository;
 import java.util.Optional;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -38,20 +41,18 @@ public class UsersServiceImpl implements UsersService {
     private AuthenticationManager authenticationManager;
     @Autowired
     private JWT jwt;
-    @Autowired 
-	private EmailServiceImp sendGridEmailService;
+    @Autowired
+    private EmailServiceImp sendGridEmailService;
 
     public UsersDtoResponse login(LoginUsersDTO loginUser) throws Exception {
 
         try {
             Authentication auth = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginUser.getEmail(), loginUser.getPassword())
-            );
+                    new UsernamePasswordAuthenticationToken(loginUser.getEmail(), loginUser.getPassword()));
             Optional<Users> users = usersRepository.findByEmail(auth.getName());
             if (users.isPresent()) {
                 Users user = users.get();
-                if (user.isActive()) 
-                {
+                if (user.isActive()) {
                     return userToken(users.get());
                 } else {
                     throw new Exception("Unsubscribed user");
@@ -64,6 +65,17 @@ public class UsersServiceImpl implements UsersService {
         } catch (InternalAuthenticationServiceException e) {
             throw new InternalAuthenticationServiceException("Username does not exist");
         }
+    }
+
+    @Transactional
+    public UsersDtoResponse register(NewUsersDTO registerUser) {
+
+        Users user = usersMapper.newUsersDTO2Model(registerUser);
+
+        save(registerUser);
+
+        return userToken(user);        
+        
     }
 
     @Override
@@ -92,7 +104,7 @@ public class UsersServiceImpl implements UsersService {
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         Users userModel = usersMapper.newUsersDTO2Model(userDTO);
         Users userSaved = usersRepository.save(userModel);
-        //this.sendGridEmailService.sendWelcomeEmail(MAIL_ONG, "userDTO.getEmail()");
+        // this.sendGridEmailService.sendWelcomeEmail(MAIL_ONG, "userDTO.getEmail()");
         UsersDtoResponse response = (UsersDtoResponse) usersMapper.usersModel2UsersDtoResponse(userSaved);
         return response;
     }
@@ -124,7 +136,8 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public Users save(UsersRegisterDTO usersRegisterDTO) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
+                                                                       // Tools | Templates.
     }
 
     @Override

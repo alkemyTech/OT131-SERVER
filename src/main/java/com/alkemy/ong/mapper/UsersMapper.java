@@ -27,7 +27,7 @@ public class UsersMapper {
         user.setEmail(registerUsersDTO.getEmail());
         user.setPassword(registerUsersDTO.getPassword());
         user.setLastName(registerUsersDTO.getLastName());
-        user.setFirstName(registerUsersDTO.getFirstName());
+        user.setFirstName(registerUsersDTO.getFirstName());            
         return user;
     }
     
@@ -60,6 +60,5 @@ public class UsersMapper {
                 userEntity.getLastName(),
                 userEntity.getEmail());
     }
-
 
 }
