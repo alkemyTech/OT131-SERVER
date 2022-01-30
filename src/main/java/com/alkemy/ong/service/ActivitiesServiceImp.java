@@ -5,10 +5,9 @@ import com.alkemy.ong.exception.AlreadyExistsException;
 import com.alkemy.ong.model.Activities;
 import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.repository.ActivitiesRepository;
+import static com.alkemy.ong.util.Constants.ERR_ACT_NOT_FOUND;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,21 +52,23 @@ public class ActivitiesServiceImp implements ActivitiesService {
     }
 
     @Transactional
-    @Override
     public ActivitiesDTO update(Long id, ActivitiesDTO dto) {
 
         Optional<Activities> result = activitiesRepository.findById(id);
-        if (result.isPresent()){
-            Activities entity = mapper.map(dto, Activities.class);
-            entity.setId(id);
-            entity.setCreatedDate(result.get().getCreatedDate());
-            entity.setModifiedDate(LocalDate.now());
-            Activities entityUpdated = activitiesRepository.save(entity);
 
-            return mapper.map(entityUpdated, ActivitiesDTO.class);
-        } else {
-            throw new ParamNotFoundException("Requested activity was not found.");
+        if (!result.isPresent()) {
+            throw new ParamNotFoundException(ERR_ACT_NOT_FOUND);
         }
+
+        Activities entity = result.get();
+        entity.setName(dto.getName());
+        entity.setContent(dto.getContent());
+        entity.setImage(dto.getImage());
+        entity.setModifiedDate(LocalDate.now());
+        
+        Activities entityUpdated = activitiesRepository.save(entity);
+
+        return mapper.map(entityUpdated, ActivitiesDTO.class);
     }
 
     @Transactional
