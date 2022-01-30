@@ -20,10 +20,7 @@ public class ActivitiesController {
 
     @Autowired
     private ActivitiesService activitiesService;
-
-    @Autowired
-    private ActivitiesRepository activitiesRepository;
-
+  
 
     @GetMapping
     public ResponseEntity<List<ActivitiesDTO>> getAllActives() {
@@ -48,4 +45,5 @@ public class ActivitiesController {
         return new ResponseEntity<>(activitiesService.save(activityDTO), HttpStatus.CREATED);
 
     }
+
 }

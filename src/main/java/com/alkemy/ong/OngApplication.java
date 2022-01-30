@@ -20,6 +20,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RepositoryRestController
 @EnableAutoConfiguration
 @SpringBootApplication
+
 public class OngApplication {
 
 	public static void main(String[] args) {
