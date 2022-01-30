@@ -27,14 +27,9 @@ public class Categories {
     @NotNull
     @NotEmpty
     private String name;
-
     private String description;
-
     private String image;
-
-    @NotNull
-    @NotEmpty
-    private Boolean isActivated;
+    private boolean isActivated;
 
     @CreatedDate
     @Column (updatable = false)

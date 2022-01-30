@@ -6,7 +6,10 @@ import com.alkemy.ong.dto.CategoriesDTO;
 public interface CategoriesService {
 
     public CategoriesDTO publicDataCategory(String name);
-
-    public void deleteCategory(Long id);
+    public String deleteCategory(Long id) throws Exception;
+   
+    
+    
+    
 
 }

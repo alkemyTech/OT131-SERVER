@@ -1,7 +1,15 @@
 package com.alkemy.ong.controller;
 
 import com.alkemy.ong.dto.ActivitiesDTO;
+import com.alkemy.ong.model.Activities;
 import com.alkemy.ong.service.ActivitiesService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +44,7 @@ public class ActivitiesController {
         return ResponseEntity.ok().body(result);
     }
 
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         activitiesService.delete(id);
