@@ -1,11 +1,14 @@
 package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.ActivitiesDTO;
+import com.alkemy.ong.exception.AlreadyExistsException;
 import com.alkemy.ong.model.Activities;
 import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.repository.ActivitiesRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.alkemy.ong.util.Constants.NAME_EXIST;
+
 @Service
 public class ActivitiesServiceImp implements ActivitiesService {
 
@@ -21,15 +26,20 @@ public class ActivitiesServiceImp implements ActivitiesService {
     private ActivitiesRepository activitiesRepository;
     private ModelMapper mapper = new ModelMapper();
 
-
+    @Override
     @Transactional
-    public ActivitiesDTO save(ActivitiesDTO dto) {
+    public ActivitiesDTO save(ActivitiesDTO activityDTO) {
 
-        Activities entity = mapper.map(dto, Activities.class);
-        entity.setCreatedDate(LocalDate.now());
-        Activities entitySaved = activitiesRepository.save(entity);
+        if (activitiesRepository.findByName(activityDTO.getName()).isPresent()) {
+            throw new AlreadyExistsException(NAME_EXIST);
+        }else{
+            Activities entity = mapper.map(activityDTO, Activities.class);
+            entity.setCreatedDate(LocalDate.now());
+            Activities entitySaved = activitiesRepository.save(entity);
 
-        return mapper.map(entitySaved, ActivitiesDTO.class);
+            return mapper.map(entitySaved, ActivitiesDTO.class);
+        }
+
     }
 
     @Transactional(readOnly = true)
@@ -43,6 +53,7 @@ public class ActivitiesServiceImp implements ActivitiesService {
     }
 
     @Transactional
+    @Override
     public ActivitiesDTO update(Long id, ActivitiesDTO dto) {
 
         Optional<Activities> result = activitiesRepository.findById(id);
@@ -60,6 +71,7 @@ public class ActivitiesServiceImp implements ActivitiesService {
     }
 
     @Transactional
+    @Override
     public void delete(Long id) {
 
         Optional<Activities> result = activitiesRepository.findById(id);
@@ -72,4 +84,5 @@ public class ActivitiesServiceImp implements ActivitiesService {
             throw new ParamNotFoundException("Requested activity was not found.");
         }
     }
+
 }
