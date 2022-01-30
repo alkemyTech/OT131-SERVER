@@ -5,6 +5,8 @@ import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.mapper.CategoriesMapper;
 import com.alkemy.ong.model.Categories;
 import com.alkemy.ong.repository.CategoriesRepository;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,5 +51,28 @@ public class CategoriesServiceImpl implements CategoriesService{
         } else {
             throw new ParamNotFoundException("Requested category was not found.");
         }
+    }
+
+    @Override
+    public List<String> getAllByName() {
+        List<CategoriesDTO> listDto = listAllDto();
+        List<String> listName = new ArrayList();
+        for (CategoriesDTO category : listDto) {
+            listName.add(category.getName());
+        }
+        return listName;
+    }
+
+    private List<Categories> listAll() {
+        return categoriesRepository.findAll();
+    }
+
+    private List<CategoriesDTO> listAllDto() {
+        List<Categories> categories = listAll();
+        List<CategoriesDTO> catDto = new ArrayList();
+        for (Categories categoty : categories) {
+            catDto.add(categoriesMapper.converToDTO(categoty));
+        }
+        return catDto;
     }
 }
