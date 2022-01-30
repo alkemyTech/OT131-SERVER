@@ -5,8 +5,9 @@ import com.alkemy.ong.dto.CategoriesDTO;
 
 public interface CategoriesService {
 
-    public CategoriesDTO publicDataCategory(String name);
+    CategoriesDTO publicDataCategory(String name);
 
-    public void deleteCategory(Long id);
+    void deleteCategory(Long id);
 
+    CategoriesDTO update(Long id, CategoriesDTO dto);
 }
