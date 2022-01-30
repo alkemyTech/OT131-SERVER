@@ -25,5 +25,7 @@ public interface UsersService  {
     public UsersDtoResponse save(NewUsersDTO user);
     
     public UsersDtoResponse getUserDetails(String authHeader); 
+    
+    public String extractPayload(String token);
 
 }

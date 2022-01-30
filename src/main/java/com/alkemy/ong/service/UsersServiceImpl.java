@@ -22,6 +22,7 @@ import com.alkemy.ong.dto.UsersRegisterDTO;
 import com.alkemy.ong.util.JWT;
 import java.text.MessageFormat;
 import static com.alkemy.ong.util.Constants.*;
+import java.util.Base64;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @Service
@@ -147,6 +148,14 @@ public class UsersServiceImpl implements UsersService {
         tokenUser.setToken(jwt.generateToken(tokenUser));
         System.out.println(tokenUser.getToken());
         return tokenUser;
+    }
+
+    @Override
+    public String extractPayload(String token) {
+        token = token.replace("Bearer ", "");
+        String[] chunks = token.split("\\.");
+        Base64.Decoder decoder = Base64.getUrlDecoder();
+        return new String(decoder.decode(chunks[1]));    
     }
 
 }

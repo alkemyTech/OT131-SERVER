@@ -22,9 +22,16 @@ import static com.alkemy.ong.util.Constants.REQ_MAPP_CLASS_USER;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_DELETE_LOGIN_USER;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_GET_AUTH_ME_USER;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_POST_LOGIN_USER;
+import static com.alkemy.ong.util.Constants.SECRET_KEY;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties.Jwt;
+
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 @RestController
 @RequestMapping(value = REQ_MAPP_CLASS_USER)
@@ -66,6 +73,11 @@ public class UsersController {
     }
     
 
+    @GetMapping(REQ_MAPP_GET_AUTH_ME_USER)
+    @PreAuthorize("hasRole('ROLE_ADMIN')") 
+    public ResponseEntity<?> authMe(@RequestHeader(name = "authorization")  String token){
+        return ResponseEntity.ok(usersService.extractPayload(token));
+    }
 
 
 }
