@@ -93,6 +93,12 @@
 			<groupId>com.sendgrid</groupId>
 			<artifactId>sendgrid-java</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+            <version>1.12.125</version>
+            <type>jar</type>
+        </dependency>
 	</dependencies>
 	<build>
 		<plugins>
