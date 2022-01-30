@@ -47,8 +47,7 @@ public class Organizations {
 	@Column(name= "created_date")
 	@CreationTimestamp
 	private LocalDate createdDate;
-	@Column(name= "removed_date")
-	private LocalDate removedDate;
+
 	private boolean isActive ;
 	
 	public Organizations(String name, String images, String addres, int phone) {

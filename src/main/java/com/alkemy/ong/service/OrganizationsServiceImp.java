@@ -42,5 +42,26 @@ public class OrganizationsServiceImp implements OrganizationsService {
 		return organizationRepository.save(organization);
 	}
 
+	@Override
+	public Organizations updateDataOrganization(Organizations entity, long id) throws Exception {
+		System.out.println(id);
+		Optional<Organizations> org =organizationRepository.findById(id);
+		System.out.println(org.get());
+		if (!org.isPresent()) {
+			throw new Exception (ENTITY_NOT_FOUND);
+		}
+		org.get().setName(entity.getName());
+		org.get().setAddres(entity.getAddres());
+		org.get().setActive(entity.isActive());
+		org.get().setAboutUsText(entity.getAboutUsText());
+		org.get().setPhone(entity.getPhone());
+		//entity.setEmail(entity.getEmail());
+		org.get().setWelcomeText(entity.getWelcomeText());
+		org.get().setImages(entity.getImages());
+		organizationRepository.save(org.get());
+		
+		return org.get();
+	}
+
 	
 }

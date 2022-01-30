@@ -11,5 +11,6 @@ public interface OrganizationsService {
 	public Organizations saveOrganization(Organizations organization) throws Exception;
 	public List<OrganizationsDTO> listOrganizations();
 	public Optional<Organizations> publicDataOrganization(String name);
+	public Organizations updateDataOrganization(Organizations entity, long id) throws Exception;
 
 }
