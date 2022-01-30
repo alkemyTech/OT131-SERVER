@@ -8,7 +8,6 @@ import com.alkemy.ong.model.Categories;
 import com.alkemy.ong.model.News;
 import com.alkemy.ong.repository.CategoriesRepository;
 import com.alkemy.ong.repository.NewsRepository;
-import com.alkemy.ong.util.ParamNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,7 +59,7 @@ public class NewsServiceImpl implements NewsService{
         News entitySaved = newsRepository.save(entity);
 
         return newsMapper.converToDTO(entitySaved);
-
+    }
     @Transactional
     @Override
     public NewsDTO update(Long id, NewsDTO dto) {
