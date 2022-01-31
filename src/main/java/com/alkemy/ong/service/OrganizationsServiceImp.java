@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.alkemy.ong.dto.OrganizationsAllDTO;
 import com.alkemy.ong.dto.OrganizationsDTO;
 import com.alkemy.ong.model.Organizations;
 import com.alkemy.ong.repository.OrganizationsRepository;
@@ -29,7 +31,6 @@ public class OrganizationsServiceImp implements OrganizationsService {
 
 	@Override
 	public Optional<Organizations>  publicDataOrganization(String name) {
-//Optional.of(<Objeto>): esto creará un Optional del objeto que le pasemos, pero cuidado si le pasamos un “null” lanzara un NullPointerException.
 			return Optional.of(organizationRepository.findByName(name) 
 		        .orElseThrow(() -> new NullPointerException(ENTITY_NOT_FOUND)));
 	}
@@ -43,10 +44,8 @@ public class OrganizationsServiceImp implements OrganizationsService {
 	}
 
 	@Override
-	public Organizations updateDataOrganization(Organizations entity, long id) throws Exception {
-		System.out.println(id);
+	public OrganizationsAllDTO updateDataOrganization(OrganizationsAllDTO entity, long id) throws Exception {
 		Optional<Organizations> org =organizationRepository.findById(id);
-		System.out.println(org.get());
 		if (!org.isPresent()) {
 			throw new Exception (ENTITY_NOT_FOUND);
 		}
@@ -55,12 +54,12 @@ public class OrganizationsServiceImp implements OrganizationsService {
 		org.get().setActive(entity.isActive());
 		org.get().setAboutUsText(entity.getAboutUsText());
 		org.get().setPhone(entity.getPhone());
-		//entity.setEmail(entity.getEmail());
+		entity.setEmail(entity.getEmail());
 		org.get().setWelcomeText(entity.getWelcomeText());
 		org.get().setImages(entity.getImages());
 		organizationRepository.save(org.get());
 		
-		return org.get();
+		return mapper.map(org.get(), OrganizationsAllDTO.class);
 	}
 
 	

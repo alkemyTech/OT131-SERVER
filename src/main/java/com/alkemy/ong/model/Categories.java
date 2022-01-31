@@ -33,8 +33,7 @@ public class Categories {
     private String image;
 
     @NotNull
-    @NotEmpty
-    private Boolean isActivated;
+    private Boolean isActivated = Boolean.TRUE ;
 
     @CreatedDate
     @Column (updatable = false)

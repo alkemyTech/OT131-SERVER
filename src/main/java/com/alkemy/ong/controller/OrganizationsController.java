@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.alkemy.ong.dto.OrganizationsAllDTO;
 import com.alkemy.ong.dto.OrganizationsDTO;
 import com.alkemy.ong.model.Activities;
 import com.alkemy.ong.model.Organizations;
@@ -92,8 +94,8 @@ public class OrganizationsController {
 	   		  @ApiResponse(responseCode = "404", description = "Organization not found", 
 	   		    content = @Content) })
 	@PostMapping(POINT_POST_MAPP)
-	public ResponseEntity<?> updateOrganization(@Valid @RequestBody Organizations organization , @RequestParam(value = "id") long id) throws Exception {
-		return new ResponseEntity<Organizations>(organizationService.updateDataOrganization(organization, id), HttpStatus.OK);
+	public ResponseEntity<?> updateOrganization(@Valid @RequestBody OrganizationsAllDTO organization , @RequestParam(value = "id") long id) throws Exception {
+		return new ResponseEntity<>(organizationService.updateDataOrganization(organization, id), HttpStatus.OK);
 	}
 	
 	
