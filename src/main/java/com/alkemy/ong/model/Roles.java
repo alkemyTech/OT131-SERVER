@@ -49,4 +49,8 @@ public class Roles {
         this.users = users;
     }
 
+    public Roles(RoleName name, @Nullable String description) {
+        this.name = name;
+        this.description = description;
+    }
 }

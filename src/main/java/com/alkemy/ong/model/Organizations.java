@@ -48,7 +48,7 @@ public class Organizations {
 	private LocalDate createdDate;
 	@Column(name= "removed_date")
 	private LocalDate removedDate;
-	private boolean isActive ;
+	private boolean isActive = Boolean.TRUE;
 	
 	
 	public Organizations(String name, String images, String addres, int phone) {

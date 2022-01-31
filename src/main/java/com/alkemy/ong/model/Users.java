@@ -51,7 +51,7 @@ public class Users {
     @CreationTimestamp
     private LocalDate creationDate;
     private LocalDate removalDate;
-    private boolean isActive;
+    private boolean isActive = Boolean.TRUE;
 
     public Users(@NotNull @NotEmpty String firstName, @NotNull @NotEmpty String lastName,
             @NotNull @NotEmpty String email, @NotNull @NotEmpty String password) {
