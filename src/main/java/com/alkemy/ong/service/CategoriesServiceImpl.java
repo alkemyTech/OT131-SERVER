@@ -61,15 +61,6 @@ public class CategoriesServiceImpl implements CategoriesService {
         }
         return categoriesMapper.converToDTO(categoriesRepository.save(categoriesMapper.converToModel(categoriesDto)));
 
-
-    @Override
-    public List<String> getAllByName() {
-        List<CategoriesDTO> listDto = listAllDto();
-        List<String> listName = new ArrayList();
-        for (CategoriesDTO category : listDto) {
-            listName.add(category.getName());
-        }
-        return listName;
     }
 
     private List<Categories> listAll() {
@@ -84,5 +75,15 @@ public class CategoriesServiceImpl implements CategoriesService {
         }
         return catDto;
     }
-      
+
+    @Override
+    public List<String> getAllByName() {
+        List<CategoriesDTO> listDto = listAllDto();
+        List<String> listName = new ArrayList();
+        for (CategoriesDTO category : listDto) {
+            listName.add(category.getName());
+        }
+        return listName;
+    }
+
 }
