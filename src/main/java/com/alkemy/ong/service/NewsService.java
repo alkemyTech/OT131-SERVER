@@ -12,4 +12,5 @@ public interface NewsService{
     void deleteNew(Long id);
     NewsDTO update(Long id, NewsDTO dto) throws ParamNotFoundException;
     NewsDTO save(NewsDTO dto) throws ParamNotFoundException;
+    NewsDTO findById(Long Id);
 }
