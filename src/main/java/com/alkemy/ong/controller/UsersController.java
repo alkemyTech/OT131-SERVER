@@ -69,7 +69,7 @@ public class UsersController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping(value = REQ_MAPP_GET_LIST_USER)
     public List<UsersOkDto> listUsers() {
 
