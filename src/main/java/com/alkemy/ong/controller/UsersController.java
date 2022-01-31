@@ -5,6 +5,7 @@ import com.alkemy.ong.dto.UsersDtoResponse;
 import com.alkemy.ong.dto.NewUsersDTO;
 import com.alkemy.ong.dto.LoginUsersDTO;
 import com.alkemy.ong.dto.UsersNoAuthDto;
+import com.alkemy.ong.dto.UsersOkDto;
 import com.alkemy.ong.service.UsersServiceImpl;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_CLASS_USER;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_DELETE_LOGIN_USER;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_POST_LOGIN_USER;
+import static com.alkemy.ong.util.Constants.REQ_MAPP_POST_REGISTER_USER;
 
 @RestController
 @RequestMapping(value = REQ_MAPP_CLASS_USER)
@@ -55,10 +57,9 @@ public class UsersController {
 
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody NewUsersDTO userDTO) {
-        UsersDtoResponse response = usersService.save(userDTO);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    @PostMapping(value = REQ_MAPP_POST_REGISTER_USER)
+    public ResponseEntity<?> register(@Valid @RequestBody NewUsersDTO userDTO) {       
+        return new ResponseEntity<>(usersService.register(userDTO), HttpStatus.CREATED);
     }
 
 
