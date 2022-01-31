@@ -73,10 +73,10 @@ public class UsersMapper {
     	try {
     		
     		List<UsersOkDto> dtos = new ArrayList<>();
-    		UsersOkDto auxDto = new UsersOkDto();
+    		
     		
     		for (Users user: allEntityUsers) {
-				
+    			UsersOkDto auxDto = new UsersOkDto();
     			auxDto.setId(user.getId());
 				auxDto.setFirstName(user.getFirstName());
 				auxDto.setLastName(user.getLastName());
