@@ -68,13 +68,17 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Transactional
+    @Override
     public UsersDtoResponse register(NewUsersDTO registerUser) {
 
         Users user = usersMapper.newUsersDTO2Model(registerUser);
 
         save(registerUser);
 
-        return userToken(user);        
+        userToken(user);  
+
+        UsersDtoResponse response = (UsersDtoResponse) usersMapper.usersModel2UsersDtoResponse(user);
+        return response;      
         
     }
 
@@ -92,7 +96,7 @@ public class UsersServiceImpl implements UsersService {
             return null;
         }
     }
-
+    @Transactional
     @Override
     public UsersDtoResponse save(NewUsersDTO userDTO) {
         Optional<Users> user = usersRepository.findByEmail(userDTO.getEmail());
