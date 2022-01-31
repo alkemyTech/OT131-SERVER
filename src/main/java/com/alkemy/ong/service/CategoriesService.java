@@ -6,10 +6,9 @@ import java.util.List;
 
 public interface CategoriesService {
 
-    CategoriesDTO publicDataCategory(String name);
 
-    void deleteCategory(Long id);
-
+    public CategoriesDTO publicDataCategory(String name);
+    public String deleteCategory(Long id) throws Exception;
     CategoriesDTO update(Long id, CategoriesDTO dto);
     List<String> getAllByName();
 }
