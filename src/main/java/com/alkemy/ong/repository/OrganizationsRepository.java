@@ -9,6 +9,7 @@ import com.alkemy.ong.model.Organizations;
 @Repository
 public interface OrganizationsRepository extends JpaRepository <Organizations, Long>{
 	
+	   public Optional<Organizations> findById(Long id);
 	   public Optional<Organizations> findByName(String name);
 	   public List<Organizations> findByIsActiveTrue();
 	   
