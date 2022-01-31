@@ -11,8 +11,6 @@ import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
-
-
 @EntityScan(basePackages = {"com.alkemy.ong.model"})
 @ComponentScan(basePackages = {"com.*"})
 @EnableJpaRepositories(basePackages = {"com.alkemy.ong.repository"})
