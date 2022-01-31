@@ -33,8 +33,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    //@Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
+
+
+    @Override
+protected void configure(HttpSecurity httpSecurity) throws Exception {
     httpSecurity.cors().and().csrf().disable()
             .addFilterBefore(new JwtAuthFilter(), UsernamePasswordAuthenticationFilter.class)
             .authorizeRequests()
@@ -47,8 +49,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers(HttpMethod.POST, "/organizations/public/**").hasAuthority("ROLE_ADMIN")
             .antMatchers(HttpMethod.DELETE,"/categories/**").hasAuthority("ROLE_ADMIN")
             .antMatchers("/swagger-ui/**","/v3/api-docs/**").permitAll()
+            .antMatchers(HttpMethod.GET, REQ_MAPP_CATEGORIES).hasAnyAuthority(AUTHENTICATED_ROLES) // Idem above
+            .antMatchers(HttpMethod.GET, REQ_MAPP_NEWS).hasAnyAuthority(AUTHENTICATED_ROLES) // Idem above
             .antMatchers(REQ_MAPP_ACTIVITIES, REQ_MAPP_ACTIVITIES + "/**").hasAuthority("ROLE_ADMIN") // Only admins can access other methods
             .antMatchers(REQ_MAPP_ORG, REQ_MAPP_ORG + "/**").hasAuthority("ROLE_ADMIN") // Idem above
+            .antMatchers(REQ_MAPP_CATEGORIES, REQ_MAPP_CATEGORIES + "/**").hasAuthority("ROLE_ADMIN") // Idem above
+            .antMatchers(REQ_MAPP_NEWS, REQ_MAPP_NEWS + "/**").hasAuthority("ROLE_ADMIN") // Idem above
             .anyRequest().authenticated() // Only authenticated users can access the rest of endpoints
             .and()
             .exceptionHandling()

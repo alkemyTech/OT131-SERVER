@@ -29,8 +29,10 @@ public class Categories {
     private String name;
     private String description;
     private String image;
-    private boolean isActivated;
+    private boolean isActivated=Boolean.TRUE;
 
+
+ 
     @CreatedDate
     @Column (updatable = false)
     private LocalDate dateCreated;
