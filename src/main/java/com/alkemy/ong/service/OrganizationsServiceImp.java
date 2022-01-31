@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.alkemy.ong.dto.OrganizationsAllDTO;
 import com.alkemy.ong.dto.OrganizationsDTO;
+import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.model.Organizations;
 import com.alkemy.ong.repository.OrganizationsRepository;
 
@@ -37,7 +38,7 @@ public class OrganizationsServiceImp implements OrganizationsService {
 	@Override
 	public Organizations saveOrganization(Organizations organization) throws Exception {
 		if (organizationRepository.findByName(organization.getName()).isPresent()) {
-			throw new IllegalArgumentException(NAME_EXIST);
+			throw new ParamNotFoundException(NAME_EXIST);
 		}
 		organization.setActive(true);
 		return organizationRepository.save(organization);
@@ -47,7 +48,7 @@ public class OrganizationsServiceImp implements OrganizationsService {
 	public OrganizationsAllDTO updateDataOrganization(OrganizationsAllDTO entity, long id) throws Exception {
 		Optional<Organizations> org =organizationRepository.findById(id);
 		if (!org.isPresent()) {
-			throw new Exception (ENTITY_NOT_FOUND);
+			throw new ParamNotFoundException (ENTITY_NOT_FOUND);
 		}
 		org.get().setName(entity.getName());
 		org.get().setAddres(entity.getAddres());
