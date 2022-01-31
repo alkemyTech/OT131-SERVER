@@ -34,10 +34,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+
     @Override
 protected void configure(HttpSecurity httpSecurity) throws Exception {
-
-
     httpSecurity.cors().and().csrf().disable()
             .addFilterBefore(new JwtAuthFilter(), UsernamePasswordAuthenticationFilter.class)
             .authorizeRequests()
