@@ -7,11 +7,15 @@ import com.alkemy.ong.dto.UsersDtoResponse;
 import com.alkemy.ong.dto.UsersOkDto;
 import com.alkemy.ong.model.Users;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 @Component
 public class UsersMapper {
-
+	
+	
     public Users uaserToUserDto(UsersDTO usersDto) {
         Users user = new Users();
         user.setId(usersDto.getId());
@@ -59,6 +63,36 @@ public class UsersMapper {
                 userEntity.getFirstName(),
                 userEntity.getLastName(),
                 userEntity.getEmail());
+    }
+    
+    public List<UsersOkDto> findallDto(List<Users> allEntityUsers){
+    	
+    	try {
+    		
+    		List<UsersOkDto> dtos = new ArrayList<>();
+    		UsersOkDto auxDto = new UsersOkDto();
+    		
+    		for (Users user: allEntityUsers) {
+				
+    			auxDto.setId(user.getId());
+				auxDto.setFirstName(user.getFirstName());
+				auxDto.setLastName(user.getLastName());
+				auxDto.setEmail(user.getEmail());
+				dtos.add(auxDto);
+				
+				//FORMA DE MAPEAR CON MODEL MAPPER (agregando dependecia)
+				//dtos.add(modelMapper.mao(user, UsersOkDto.class))
+			}
+    		
+    		return dtos;
+    		
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+    	
+    	
+    	
+    	return null;
     }
 
 

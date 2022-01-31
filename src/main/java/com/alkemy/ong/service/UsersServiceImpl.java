@@ -2,11 +2,14 @@ package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.LoginUsersDTO;
 
+
 import com.alkemy.ong.dto.UsersDTO;
 import com.alkemy.ong.dto.UsersOkDto;
 import com.alkemy.ong.model.Users;
 import com.alkemy.ong.mapper.UsersMapper;
 import com.alkemy.ong.repository.UsersRepository;
+
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -147,6 +150,12 @@ public class UsersServiceImpl implements UsersService {
         tokenUser.setToken(jwt.generateToken(tokenUser));
         System.out.println(tokenUser.getToken());
         return tokenUser;
+    }
+    
+    @Override
+    public List<UsersOkDto> listUsers() {
+    	
+    	return  usersMapper.findallDto(usersRepository.findAll());
     }
 
 }
