@@ -3,7 +3,7 @@ package com.alkemy.ong.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import java.time.LocalDate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -20,4 +20,6 @@ public class NewsDTO {
     private String image;
     @NotNull(message = "The News must have a valid category id")
     private Long idCategory;
+    
+    private LocalDate dateCreated;
 }

@@ -36,4 +36,9 @@ public class NewsController {
         NewsDTO result = newsService.update(id, dto);
         return ResponseEntity.ok().body(result);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<NewsDTO> getById(@PathVariable Long id){
+        return ResponseEntity.ok().body(newsService.findById(id));
+    }
 }
