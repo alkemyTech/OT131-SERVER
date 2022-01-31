@@ -22,6 +22,7 @@ import com.alkemy.ong.dto.UsersRegisterDTO;
 import com.alkemy.ong.util.JWT;
 import java.text.MessageFormat;
 import static com.alkemy.ong.util.Constants.*;
+import java.util.Base64;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @Service
@@ -38,8 +39,8 @@ public class UsersServiceImpl implements UsersService {
     private AuthenticationManager authenticationManager;
     @Autowired
     private JWT jwt;
-    @Autowired 
-	private EmailServiceImp sendGridEmailService;
+    @Autowired
+    private EmailServiceImp sendGridEmailService;
 
     public UsersDtoResponse login(LoginUsersDTO loginUser) throws Exception {
 
@@ -50,8 +51,7 @@ public class UsersServiceImpl implements UsersService {
             Optional<Users> users = usersRepository.findByEmail(auth.getName());
             if (users.isPresent()) {
                 Users user = users.get();
-                if (user.isActive()) 
-                {
+                if (user.isActive()) {
                     return userToken(users.get());
                 } else {
                     throw new Exception("Unsubscribed user");
@@ -92,7 +92,7 @@ public class UsersServiceImpl implements UsersService {
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         Users userModel = usersMapper.newUsersDTO2Model(userDTO);
         Users userSaved = usersRepository.save(userModel);
-        this.sendGridEmailService.sendWelcomeEmail(MAIL_ONG, userDTO.getEmail()); 
+        this.sendGridEmailService.sendWelcomeEmail(MAIL_ONG, userDTO.getEmail());
         UsersDtoResponse response = (UsersDtoResponse) usersMapper.usersModel2UsersDtoResponse(userSaved);
         return response;
     }
@@ -139,6 +139,14 @@ public class UsersServiceImpl implements UsersService {
         userResponse.setFirstName(userEntity.get().getFirstName());
         userResponse.setLastName(userEntity.get().getLastName());
         return userResponse;
+    }
+
+    @Override
+    public String extractPayload(String token) {
+        token = token.replace("Bearer ", "");
+        String[] chunks = token.split("\\.");
+        Base64.Decoder decoder = Base64.getUrlDecoder();
+        return new String(decoder.decode(chunks[1]));
     }
 
     private UsersDtoResponse userToken(Users user) {

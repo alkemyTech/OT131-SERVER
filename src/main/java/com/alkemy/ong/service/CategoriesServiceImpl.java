@@ -1,6 +1,7 @@
 package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.CategoriesDTO;
+import com.alkemy.ong.exception.AlreadyExistsException;
 import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.mapper.CategoriesMapper;
 import com.alkemy.ong.model.Categories;
@@ -9,11 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
-public class CategoriesServiceImpl implements CategoriesService{
+public class CategoriesServiceImpl implements CategoriesService {
 
     @Autowired
     private CategoriesRepository categoriesRepository;
@@ -22,13 +22,13 @@ public class CategoriesServiceImpl implements CategoriesService{
     private CategoriesMapper categoriesMapper;
 
     @Override
-    public CategoriesDTO publicDataCategory(String name){
+    public CategoriesDTO publicDataCategory(String name) {
         Optional<Categories> cat = categoriesRepository.findByName(name);
         return categoriesMapper.converToDTO(cat.get());
     }
 
     @Override
-    public void deleteCategory(Long id){
+    public void deleteCategory(Long id) {
 
         Optional<Categories> answer = categoriesRepository.findById(id);
         Categories category = answer.get();
@@ -49,5 +49,15 @@ public class CategoriesServiceImpl implements CategoriesService{
         } else {
             throw new ParamNotFoundException("Requested category was not found.");
         }
+    }
+
+    @Transactional
+    @Override
+    public CategoriesDTO addCategories(CategoriesDTO categoriesDto) {
+        if (categoriesRepository.findByName(categoriesDto.getName()).isPresent()) {
+            throw new AlreadyExistsException("category already exists");
+        }
+        return categoriesMapper.converToDTO(categoriesRepository.save(categoriesMapper.converToModel(categoriesDto)));
+
     }
 }

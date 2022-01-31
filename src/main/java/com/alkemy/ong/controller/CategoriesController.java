@@ -23,4 +23,9 @@ public class CategoriesController {
         CategoriesDTO result = categoriesService.update(id, dto);
         return ResponseEntity.ok().body(result);
     }
+
+    @PostMapping
+    public ResponseEntity<?> addCategories(@Valid @RequestBody() CategoriesDTO categoriesDto) {
+        return ResponseEntity.ok(categoriesService.addCategories(categoriesDto));
+    }
 }

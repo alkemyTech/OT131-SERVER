@@ -9,7 +9,7 @@ public interface NewsService{
 
 
     NewsDTO publicDataNew(String name);
-    void deleteNew(Long id);
+    void deleteNews(Long id);
     NewsDTO update(Long id, NewsDTO dto) throws ParamNotFoundException;
     NewsDTO save(NewsDTO dto) throws ParamNotFoundException;
 }

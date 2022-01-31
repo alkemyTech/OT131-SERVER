@@ -1,6 +1,5 @@
 package com.alkemy.ong.service;
 
-
 import com.alkemy.ong.dto.CategoriesDTO;
 
 public interface CategoriesService {
@@ -10,4 +9,6 @@ public interface CategoriesService {
     void deleteCategory(Long id);
 
     CategoriesDTO update(Long id, CategoriesDTO dto);
+
+    CategoriesDTO addCategories(CategoriesDTO categoriesDto);
 }

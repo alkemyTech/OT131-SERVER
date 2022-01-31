@@ -8,22 +8,21 @@ import com.alkemy.ong.dto.NewUsersDTO;
 import com.alkemy.ong.dto.UsersDtoResponse;
 import java.util.Optional;
 
+public interface UsersService {
 
-
-public interface UsersService  {
-    
     public Optional<Users> findByMail(String email);
-    
+
     public Users save(UsersRegisterDTO usersRegisterDTO);
-    
+
     public Users update(UsersDTO usersDto);
-    
+
     public void delete(Long id) throws Exception;
-    
+
     public Users select(Long id);
 
     public UsersDtoResponse save(NewUsersDTO user);
-    
-    public UsersDtoResponse getUserDetails(String authHeader); 
 
+    public UsersDtoResponse getUserDetails(String authHeader);
+
+    public String extractPayload(String token);
 }
