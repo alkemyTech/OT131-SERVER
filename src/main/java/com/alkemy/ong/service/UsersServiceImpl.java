@@ -73,13 +73,8 @@ public class UsersServiceImpl implements UsersService {
 
         Users user = usersMapper.newUsersDTO2Model(registerUser);
 
-        save(registerUser);
+        return save(registerUser);       
 
-        userToken(user);  
-
-        UsersDtoResponse response = (UsersDtoResponse) usersMapper.usersModel2UsersDtoResponse(user);
-        return response;      
-        
     }
 
     @Override
@@ -108,8 +103,10 @@ public class UsersServiceImpl implements UsersService {
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         Users userModel = usersMapper.newUsersDTO2Model(userDTO);
         Users userSaved = usersRepository.save(userModel);
-        // this.sendGridEmailService.sendWelcomeEmail(MAIL_ONG, "userDTO.getEmail()");
+        this.sendGridEmailService.sendWelcomeEmail(MAIL_ONG, userDTO.getEmail()); 
         UsersDtoResponse response = (UsersDtoResponse) usersMapper.usersModel2UsersDtoResponse(userSaved);
+        response.setRole(userSaved.getRole());
+        response.setToken(userToken(userSaved).getToken());
         return response;
     }
 

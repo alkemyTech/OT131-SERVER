@@ -14,14 +14,13 @@ import javax.validation.constraints.NotNull;
 
 import com.alkemy.ong.util.RoleName;
 
+
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.lang.Nullable;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import lombok.NoArgsConstructor;;
 
 @Entity
 @Data
@@ -38,7 +37,7 @@ public class Roles {
     @Enumerated(EnumType.STRING)
     private RoleName name;
     @Nullable
-    private String description;
+    private String description;    
     @OneToMany
     private List<Users> users;
 

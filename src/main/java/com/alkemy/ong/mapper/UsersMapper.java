@@ -58,7 +58,7 @@ public class UsersMapper {
         userEntity.setPassword(userDTO.getPassword());
         userEntity.setCreationDate(LocalDate.now());
         userEntity.setActive(true);
-        userEntity.setRole(rolesRepository.findByRoleName(RoleName.ROLE_USER).get());
+        userEntity.setRole(rolesRepository.findByName(RoleName.ROLE_USER).get());
         
         return userEntity;
     }

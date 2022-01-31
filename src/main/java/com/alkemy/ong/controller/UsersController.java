@@ -58,8 +58,7 @@ public class UsersController {
     }
 
     @PostMapping(value = REQ_MAPP_POST_REGISTER_USER)
-    public ResponseEntity<?> register(@Valid @RequestBody NewUsersDTO userDTO) {
-       
+    public ResponseEntity<?> register(@Valid @RequestBody NewUsersDTO userDTO) {       
         return new ResponseEntity<>(usersService.register(userDTO), HttpStatus.CREATED);
     }
 
