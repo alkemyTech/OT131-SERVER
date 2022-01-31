@@ -10,6 +10,8 @@ import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Data
 @NoArgsConstructor
@@ -38,9 +40,11 @@ public class Slides {
     private Long organizationId;
 
     @NotNull
+    @CreationTimestamp
     @Column(name = "date_created")
     private LocalDate dateCreated;
 
+    @UpdateTimestamp
     @Column(name = "date_modified")
     private LocalDate dateModified;
 

@@ -36,13 +36,11 @@ public class News {
     private String image;
 
     @NotNull
-    @NotEmpty
     @ManyToOne
     private Categories category;
 
     @NotNull
-    @NotEmpty
-    private Boolean isActivated;
+    private Boolean isActivated = Boolean.TRUE;
 
     @CreatedDate
     @Column(updatable = false)
