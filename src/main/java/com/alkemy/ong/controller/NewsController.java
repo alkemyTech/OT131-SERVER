@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alkemy.ong.dto.NewsDTO;
 import com.alkemy.ong.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
