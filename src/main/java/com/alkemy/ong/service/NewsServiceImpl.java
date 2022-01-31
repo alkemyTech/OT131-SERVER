@@ -86,4 +86,17 @@ public class NewsServiceImpl implements NewsService{
         }
 
     }
+
+    @Override
+    public NewsDTO findById(Long id){
+        Optional<News> news = newsRepository.findById(id);
+        if(news.isPresent()){
+            NewsDTO newsDto = newsMapper.converToDTO(news.get());
+            return newsDto; 
+        }else{
+            throw new ParamNotFoundException("News with id=" + id + " not found.");
+        }
+    }
+
+
 }

@@ -2,8 +2,8 @@ package com.alkemy.ong.controller;
 
 import com.alkemy.ong.dto.CategoriesDTO;
 import com.alkemy.ong.service.CategoriesService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,5 +27,11 @@ public class CategoriesController {
     @PostMapping
     public ResponseEntity<?> addCategories(@Valid @RequestBody() CategoriesDTO categoriesDto) {
         return ResponseEntity.ok(categoriesService.addCategories(categoriesDto));
+    }
+  
+    @GetMapping
+    public ResponseEntity<List<String>> listCategoriesName(){
+        return ResponseEntity.ok().body(categoriesService.getAllByName());
+
     }
 }
