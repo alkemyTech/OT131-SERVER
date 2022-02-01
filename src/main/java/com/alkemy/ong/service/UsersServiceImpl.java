@@ -27,6 +27,7 @@ import java.text.MessageFormat;
 import static com.alkemy.ong.util.Constants.*;
 import java.util.Base64;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service

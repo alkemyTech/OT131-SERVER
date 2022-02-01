@@ -1,12 +1,11 @@
 package com.alkemy.ong.controller;
 
-
 import com.alkemy.ong.dto.UsersDtoResponse;
 import com.alkemy.ong.dto.NewUsersDTO;
 import com.alkemy.ong.dto.LoginUsersDTO;
 import com.alkemy.ong.dto.UsersNoAuthDto;
 import com.alkemy.ong.dto.UsersOkDto;
-import com.alkemy.ong.model.Users;
+
 import com.alkemy.ong.dto.*;
 import com.alkemy.ong.service.UsersServiceImpl;
 import javax.validation.Valid;
@@ -20,7 +19,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-
 
 import static com.alkemy.ong.util.Constants.REQ_MAPP_CLASS_USER;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_DELETE_LOGIN_USER;
@@ -71,12 +69,16 @@ public class UsersController {
     @PutMapping(REQ_MAPP_DELETE_LOGIN_USER)
     private ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody NewUsersDTO dto) {
 
+
+    @PutMapping(REQ_MAPP_DELETE_LOGIN_USER)
+    private ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody NewUsersDTO dto) {
         UsersDtoResponse result = usersService.update(id, dto);
         return result == null?
                 ResponseEntity.status(HttpStatus.NOT_FOUND).build() :
                 ResponseEntity.ok().body(result);
 
     }
+
     @Operation(summary = "Delete user from Database (set active as false)")
 	@ApiResponses(value = { 
         @ApiResponse (responseCode = "200", description = "Login ok. Return credentials" , 
@@ -87,6 +89,7 @@ public class UsersController {
    		    content = @Content),
         @ApiResponse(responseCode = "404", description = "User not found. Wrong identifier", 
    		    content = @Content)})
+
     @DeleteMapping(value = REQ_MAPP_DELETE_LOGIN_USER)
     private ResponseEntity<?> deleteUser(@PathVariable(name = "id") Long id) throws Exception {
         try {
