@@ -9,10 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import static com.alkemy.ong.util.Constants.*;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDate;
 import java.util.Optional;
+
+
 
 @Service
 public class CategoriesServiceImpl implements CategoriesService{
@@ -28,15 +29,19 @@ public class CategoriesServiceImpl implements CategoriesService{
         Optional<Categories> cat = categoriesRepository.findByName(name);
         return categoriesMapper.converToDTO(cat.get());
     }
-
+    
     @Override
-    public void deleteCategory(Long id){
-
-        Optional<Categories> answer = categoriesRepository.findById(id);
-        Categories category = answer.get();
-        category.setIsActivated(false);
-        categoriesRepository.save(category);
+    public String deleteCategory(Long id) throws Exception{
+        Optional<Categories> category = categoriesRepository.findById(id);
+        if (category.isEmpty()) {
+        	throw new ParamNotFoundException (ENTITY_NOT_FOUND);
+        }
+        category.get().setActivated(false);
+        categoriesRepository.save(category.get());
+        return "Eliminado";
     }
+   
+
 
     @Transactional
     public CategoriesDTO update(Long id, CategoriesDTO dto) {
