@@ -8,14 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.alkemy.ong.dto.NewsDTO;
 import com.alkemy.ong.service.NewsService;
+import static com.alkemy.ong.util.Constants.REQ_MAPP_ID;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 import static com.alkemy.ong.util.Constants.REQ_MAPP_NEWS;
-
 
 @RestController
 @RequestMapping(REQ_MAPP_NEWS)
@@ -23,7 +22,7 @@ public class NewsController {
 
     @Autowired
     private NewsService newsService;
-  
+
     @PostMapping
     public ResponseEntity<NewsDTO> save(@Valid @RequestBody NewsDTO dto) {
 
@@ -38,7 +37,13 @@ public class NewsController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<NewsDTO> getById(@PathVariable Long id){
+    public ResponseEntity<NewsDTO> getById(@PathVariable Long id) {
         return ResponseEntity.ok().body(newsService.findById(id));
+    }
+
+    @DeleteMapping(REQ_MAPP_ID)
+    public ResponseEntity<?> deleteNews(@Valid @PathVariable(value = "id", required = true) Long id) {
+        newsService.deleteNew(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
