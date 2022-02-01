@@ -1,6 +1,7 @@
 package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.CategoriesDTO;
+import com.alkemy.ong.exception.AlreadyExistsException;
 import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.mapper.CategoriesMapper;
 import com.alkemy.ong.model.Categories;
@@ -79,5 +80,14 @@ public class CategoriesServiceImpl implements CategoriesService{
             catDto.add(categoriesMapper.converToDTO(categoty));
         }
         return catDto;
+    }
+
+    @Transactional
+    @Override
+    public CategoriesDTO addCategories(CategoriesDTO categoriesDto) {
+        if (categoriesRepository.findByName(categoriesDto.getName()).isPresent()) {
+            throw new AlreadyExistsException("category already exists");
+        }
+        return categoriesMapper.converToDTO(categoriesRepository.save(categoriesMapper.converToModel(categoriesDto)));
     }
 }
