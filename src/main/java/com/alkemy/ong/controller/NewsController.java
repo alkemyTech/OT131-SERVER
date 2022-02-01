@@ -9,7 +9,6 @@ import com.alkemy.ong.dto.NewsDTO;
 import com.alkemy.ong.service.NewsService;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_ID;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

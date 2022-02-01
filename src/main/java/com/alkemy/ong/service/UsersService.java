@@ -30,4 +30,5 @@ public interface UsersService {
 
     public String extractPayload(String token);
 
+    UsersDtoResponse update(Long id, NewUsersDTO dto);
 }

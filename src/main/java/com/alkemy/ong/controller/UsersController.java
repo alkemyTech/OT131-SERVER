@@ -1,22 +1,13 @@
 package com.alkemy.ong.controller;
 
-import com.alkemy.ong.dto.UsersDtoResponse;
-import com.alkemy.ong.dto.NewUsersDTO;
-import com.alkemy.ong.dto.LoginUsersDTO;
-import com.alkemy.ong.dto.UsersNoAuthDto;
-import com.alkemy.ong.dto.UsersOkDto;
+
+import com.alkemy.ong.dto.*;
 import com.alkemy.ong.service.UsersServiceImpl;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static com.alkemy.ong.util.Constants.REQ_MAPP_CLASS_USER;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_DELETE_LOGIN_USER;
@@ -44,6 +35,16 @@ public class UsersController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new UsersNoAuthDto(e.getMessage()));
         }
+
+    }
+
+    @PutMapping(REQ_MAPP_DELETE_LOGIN_USER)
+    private ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody NewUsersDTO dto) {
+
+        UsersDtoResponse result = usersService.update(id, dto);
+        return result == null?
+                ResponseEntity.status(HttpStatus.NOT_FOUND).build() :
+                ResponseEntity.ok().body(result);
 
     }
 
