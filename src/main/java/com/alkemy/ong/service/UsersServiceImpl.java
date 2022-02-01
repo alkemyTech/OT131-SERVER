@@ -20,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.alkemy.ong.dto.UsersDtoResponse;
 import com.alkemy.ong.dto.NewUsersDTO;
+import com.alkemy.ong.dto.UsersDTO;
 import com.alkemy.ong.dto.UsersRegisterDTO;
 import com.alkemy.ong.util.JWT;
 import java.text.MessageFormat;
@@ -28,9 +29,10 @@ import java.util.Base64;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
+
 @Service
 public class UsersServiceImpl implements UsersService {
-
+    
     private static final String USER_NOT_FOUND_ERROR_MESSAGE = "User not found: {0}";
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -183,6 +185,12 @@ public class UsersServiceImpl implements UsersService {
         String[] chunks = token.split("\\.");
         Base64.Decoder decoder = Base64.getUrlDecoder();
         return new String(decoder.decode(chunks[1]));
+    }
+
+    @Override
+    public Users update(UsersDTO usersDto) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }
