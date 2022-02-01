@@ -2,11 +2,16 @@
 package com.alkemy.ong.controller;
 
 import com.alkemy.ong.dto.CategoriesDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import static com.alkemy.ong.util.Constants.*;
 import com.alkemy.ong.model.Categories;
 import com.alkemy.ong.service.CategoriesService;
 import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
@@ -34,7 +39,7 @@ public class CategoriesController {
         return ResponseEntity.ok().body(categoriesService.getAllByName());
     }
     
-    @Operation(summary = "Delete  Activities by id")
+    @Operation(summary = "Delete  Categories by id")
     @ApiResponses(value = { 
     		  @ApiResponse(responseCode = "200", description = "Delete category" , 
     				    content = { @Content(mediaType = "application/json", 

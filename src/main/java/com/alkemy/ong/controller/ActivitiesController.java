@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
-
 import static com.alkemy.ong.util.Constants.*;
 
 @RestController
@@ -43,6 +42,7 @@ public class ActivitiesController {
         return new ResponseEntity<>(activitiesService.save(activityDTO), HttpStatus.CREATED);
 
     }
+
 
 
 }

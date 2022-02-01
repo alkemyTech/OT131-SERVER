@@ -45,10 +45,10 @@ protected void configure(HttpSecurity httpSecurity) throws Exception {
             .antMatchers(AUTH_ONLY_ADMINS).hasAuthority("ROLE_ADMIN") // Only Admins can access other locations in /auth/**
             .antMatchers(HttpMethod.GET, REQ_MAPP_ACTIVITIES).hasAnyAuthority(AUTHENTICATED_ROLES) // Only authenticated roles can access GET methods
             .antMatchers(HttpMethod.GET, REQ_MAPP_ORG).hasAnyAuthority(AUTHENTICATED_ROLES) // Idem above
-            .antMatchers(HttpMethod.GET, "/organizations/public/**").hasAnyAuthority(AUTHENTICATED_ROLES) 
-            .antMatchers(HttpMethod.POST, "/organizations/public/**").hasAuthority("ROLE_ADMIN")
-            .antMatchers(HttpMethod.DELETE,"/categories/**").hasAuthority("ROLE_ADMIN")
-            .antMatchers("/swagger-ui/**","/v3/api-docs/**").permitAll()
+            .antMatchers(HttpMethod.GET, URL_ORG_SECURITY).hasAnyAuthority(AUTHENTICATED_ROLES) 
+            .antMatchers(HttpMethod.POST, URL_ORG_SECURITY).hasAuthority("ROLE_ADMIN")
+            .antMatchers(HttpMethod.DELETE,REQ_MAPP_CATEGORIES+"/**").hasAuthority("ROLE_ADMIN")
+            .antMatchers(SWAGGER_SECURITY).permitAll()
             .antMatchers(HttpMethod.GET, REQ_MAPP_CATEGORIES).hasAnyAuthority(AUTHENTICATED_ROLES) // Idem above
             .antMatchers(HttpMethod.GET, REQ_MAPP_NEWS).hasAnyAuthority(AUTHENTICATED_ROLES) // Idem above
             .antMatchers(REQ_MAPP_ACTIVITIES, REQ_MAPP_ACTIVITIES + "/**").hasAuthority("ROLE_ADMIN") // Only admins can access other methods

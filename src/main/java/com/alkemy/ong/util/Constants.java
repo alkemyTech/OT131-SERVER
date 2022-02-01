@@ -22,6 +22,8 @@ public final class Constants {
     public static final String ERR_ACT_NOT_FOUND = "Requested activity was not found";
     public static final String ERR_AWS_NOT_FOUND = "You haven't selected any file to upload";
     public static final String ERR_AWS_NOT_SAVED = "The file couldn't be saved";
+    public static final String[] SWAGGER_SECURITY = {"swagger-ui.html","/swagger-ui/**","/v3/api-docs/**"};
+    public static final String[] URL_ORG_SECURITY = {"/organizations/public/**"};
 
     /*
     Internal Key for Token
