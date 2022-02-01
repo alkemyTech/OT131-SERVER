@@ -8,6 +8,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -26,7 +27,7 @@ public class Activities {
     @Column(name = "activities_id")
     private Long id;
 
-	@NotNull
+    @NotNull
     private String name;
 
     @NotNull
@@ -51,19 +52,4 @@ public class Activities {
 
     @Column(name = "is_active")
     private boolean isActive = Boolean.TRUE;
-
-	public Activities(@NotNull String name, @NotNull String content, @NotNull String image, LocalDate createdDate,
-			boolean isActive) {
-		super();
-		this.name = name;
-		this.content = content;
-		this.image = image;
-		this.createdDate = createdDate;
-		this.isActive = isActive;
-	}
-    
-    
-    
-    
-    
 }
