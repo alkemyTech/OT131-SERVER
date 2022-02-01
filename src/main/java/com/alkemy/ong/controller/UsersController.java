@@ -1,5 +1,6 @@
 package com.alkemy.ong.controller;
 
+
 import com.alkemy.ong.dto.*;
 import com.alkemy.ong.service.UsersServiceImpl;
 import javax.validation.Valid;
@@ -10,8 +11,11 @@ import org.springframework.web.bind.annotation.*;
 
 import static com.alkemy.ong.util.Constants.REQ_MAPP_CLASS_USER;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_DELETE_LOGIN_USER;
+import static com.alkemy.ong.util.Constants.REQ_MAPP_GET_AUTH_ME_USER;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_POST_LOGIN_USER;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_POST_REGISTER_USER;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 @RestController
 @RequestMapping(value = REQ_MAPP_CLASS_USER)
@@ -24,7 +28,7 @@ public class UsersController {
     private ResponseEntity<?> userAuthLogin(@Valid @RequestBody LoginUsersDTO loginUser) throws Exception {
         try {
             if (usersService.login(loginUser) != null) {
-                return new ResponseEntity<>(usersService.login(loginUser) , HttpStatus.OK);
+                return new ResponseEntity<>(usersService.login(loginUser), HttpStatus.OK);
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new UsersNoAuthDto());
             }
@@ -57,9 +61,13 @@ public class UsersController {
     }
 
     @PostMapping(value = REQ_MAPP_POST_REGISTER_USER)
-    public ResponseEntity<?> register(@Valid @RequestBody NewUsersDTO userDTO) {       
+    public ResponseEntity<?> register(@Valid @RequestBody NewUsersDTO userDTO) {
         return new ResponseEntity<>(usersService.register(userDTO), HttpStatus.CREATED);
     }
 
+    @GetMapping(REQ_MAPP_GET_AUTH_ME_USER)
+    public ResponseEntity<?> authMe(@RequestHeader(name = "authorization") String token) {
+        return ResponseEntity.ok(usersService.extractPayload(token));
+    }
 
 }
