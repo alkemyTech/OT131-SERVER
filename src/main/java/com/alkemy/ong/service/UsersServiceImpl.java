@@ -31,7 +31,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @Service
 public class UsersServiceImpl implements UsersService {
-
+    
     private static final String USER_NOT_FOUND_ERROR_MESSAGE = "User not found: {0}";
     @Autowired
     private PasswordEncoder passwordEncoder;
