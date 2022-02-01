@@ -48,4 +48,8 @@ public class Roles {
     }
     
 
+    public Roles(RoleName name, @Nullable String description) {
+        this.name = name;
+        this.description = description;
+    }
 }
