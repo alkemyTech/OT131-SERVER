@@ -27,14 +27,12 @@ public class Categories {
     @NotNull
     @NotEmpty
     private String name;
-
     private String description;
-
     private String image;
+    private boolean isActivated=Boolean.TRUE;
 
-    @NotNull
-    private Boolean isActivated = Boolean.TRUE ;
 
+ 
     @CreatedDate
     @Column (updatable = false)
     private LocalDate dateCreated;
