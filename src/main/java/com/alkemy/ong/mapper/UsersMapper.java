@@ -5,18 +5,24 @@ import com.alkemy.ong.dto.UsersRegisterDTO;
 import com.alkemy.ong.dto.UsersDTO;
 import com.alkemy.ong.dto.UsersDtoResponse;
 import com.alkemy.ong.dto.UsersOkDto;
+import com.alkemy.ong.model.Roles;
 import com.alkemy.ong.model.Users;
+import com.alkemy.ong.repository.RolesRepository;
+import com.alkemy.ong.util.RoleName;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UsersMapper {
-	
-	
+
+	@Autowired
+    RolesRepository rolesRepository;
+
     public Users uaserToUserDto(UsersDTO usersDto) {
         Users user = new Users();
         user.setId(usersDto.getId());
@@ -32,7 +38,7 @@ public class UsersMapper {
         user.setEmail(registerUsersDTO.getEmail());
         user.setPassword(registerUsersDTO.getPassword());
         user.setLastName(registerUsersDTO.getLastName());
-        user.setFirstName(registerUsersDTO.getFirstName());
+        user.setFirstName(registerUsersDTO.getFirstName());            
         return user;
     }
     
@@ -55,7 +61,8 @@ public class UsersMapper {
         userEntity.setPassword(userDTO.getPassword());
         userEntity.setCreationDate(LocalDate.now());
         userEntity.setActive(true);
-
+        userEntity.setRole(rolesRepository.findByName(RoleName.ROLE_USER).get());
+        
         return userEntity;
     }
 
@@ -82,7 +89,6 @@ public class UsersMapper {
 				auxDto.setLastName(user.getLastName());
 				auxDto.setEmail(user.getEmail());
 				dtos.add(auxDto);
-
 			}
     		
     		return dtos;
