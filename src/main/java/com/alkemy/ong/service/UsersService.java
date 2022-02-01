@@ -16,14 +16,13 @@ public interface UsersService  {
     
     public Users save(UsersRegisterDTO usersRegisterDTO);
     
-    public Users update(UsersDTO usersDto);
-    
     public void delete(Long id) throws Exception;
     
     public Users select(Long id);
 
     public UsersDtoResponse save(NewUsersDTO user);
     
-    public UsersDtoResponse getUserDetails(String authHeader); 
+    public UsersDtoResponse getUserDetails(String authHeader);
 
+    UsersDtoResponse update(Long id, NewUsersDTO dto);
 }
