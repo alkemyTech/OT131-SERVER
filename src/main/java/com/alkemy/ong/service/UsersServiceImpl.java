@@ -2,7 +2,6 @@ package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.LoginUsersDTO;
 
-import com.alkemy.ong.dto.UsersDTO;
 import com.alkemy.ong.dto.UsersOkDto;
 import com.alkemy.ong.model.Users;
 import com.alkemy.ong.mapper.UsersMapper;
@@ -27,6 +26,7 @@ import java.text.MessageFormat;
 import static com.alkemy.ong.util.Constants.*;
 import java.util.Base64;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UsersServiceImpl implements UsersService {
@@ -113,11 +113,6 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public Users update(UsersDTO usersDto) {
-        return usersRepository.save(usersMapper.uaserToUserDto(usersDto));
-    }
-
-    @Override
     public void delete(Long id) throws Exception {
         Optional<Users> user = usersRepository.findById(id);
         if (user.isPresent()) {
@@ -155,6 +150,23 @@ public class UsersServiceImpl implements UsersService {
         userResponse.setFirstName(userEntity.get().getFirstName());
         userResponse.setLastName(userEntity.get().getLastName());
         return userResponse;
+    }
+
+    @Transactional
+    public UsersDtoResponse update(Long id, NewUsersDTO dto) {
+
+        Optional<Users> result = usersRepository.findById(id);
+        if (result.isEmpty() || !result.get().isActive())
+            return null;
+
+        Users entity = result.get();
+        entity.setEmail(dto.getEmail());
+        entity.setPassword(passwordEncoder.encode(dto.getPassword()));
+        entity.setFirstName(dto.getFirstName());
+        entity.setLastName(dto.getLastName());
+
+        Users entityUpdated = usersRepository.save(entity);
+        return usersMapper.usersModel2UsersDtoResponse(entityUpdated);
     }
 
     private UsersDtoResponse userToken(Users user) {
