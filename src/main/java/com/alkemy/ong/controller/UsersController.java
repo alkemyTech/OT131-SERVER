@@ -7,6 +7,7 @@ import com.alkemy.ong.dto.UsersNoAuthDto;
 import com.alkemy.ong.dto.UsersOkDto;
 
 import com.alkemy.ong.dto.*;
+import com.alkemy.ong.model.Users;
 import com.alkemy.ong.service.UsersServiceImpl;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,10 +67,6 @@ public class UsersController {
                        
     @ApiResponse(responseCode = "404", description = "User not fouund. User id does not exist", 
                          content = @Content),})
-    @PutMapping(REQ_MAPP_DELETE_LOGIN_USER)
-    private ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody NewUsersDTO dto) {
-
-
     @PutMapping(REQ_MAPP_DELETE_LOGIN_USER)
     private ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody NewUsersDTO dto) {
         UsersDtoResponse result = usersService.update(id, dto);
