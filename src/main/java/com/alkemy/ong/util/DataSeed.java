@@ -2,15 +2,21 @@ package com.alkemy.ong.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import com.alkemy.ong.model.Activities;
+import com.alkemy.ong.model.Organizations;
+import com.alkemy.ong.model.Roles;
+import com.alkemy.ong.model.Users;
 import com.alkemy.ong.repository.ActivitiesRepository;
+import com.alkemy.ong.repository.OrganizationsRepository;
+import com.alkemy.ong.repository.RolesRepository;
+import com.alkemy.ong.repository.UsersRepository;
 
 
 @Component
-public class DataSeed implements CommandLineRunner
+public class DataSeed implements CommandLineRunner {
 
-<<<<<<< HEAD
 	@Autowired
 	private ActivitiesRepository activitiesRepository;
 	@Autowired
@@ -19,6 +25,8 @@ public class DataSeed implements CommandLineRunner
     private RolesRepository rolesRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private OrganizationsRepository organizationsRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -58,21 +66,11 @@ public class DataSeed implements CommandLineRunner
 
     private void loadOrganizationsData() {
 
-        Organizations org1 = new Organizations();
+        if ()
+        Organizations organizations = Organizations.builder()
 
     }
 
-=======
-{
-	@Autowired
-	private ActivitiesRepository activitiesRepository;
-
-	@Override
-	public void run(String... args) throws Exception {
-
-		loadActivitiesData();
-	}
->>>>>>> 3918251e20dfd8c4f525ce3fdb6e14df5fe2a3d3
 
 	private void loadActivitiesData() {
 
@@ -103,12 +101,7 @@ public class DataSeed implements CommandLineRunner
 					.build();
 				     activitiesRepository.save(activity3);
 
-<<<<<<< HEAD
 					
-=======
-			}
-		
->>>>>>> 3918251e20dfd8c4f525ce3fdb6e14df5fe2a3d3
 			
 			Activities activity4 = Activities.builder()
 					.name("Tutorias")
@@ -120,8 +113,5 @@ public class DataSeed implements CommandLineRunner
 
 			}
 
-<<<<<<< HEAD
 }
-=======
 }
->>>>>>> 3918251e20dfd8c4f525ce3fdb6e14df5fe2a3d3
