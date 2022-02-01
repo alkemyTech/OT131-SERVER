@@ -15,18 +15,13 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
+
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 
 public class Users {

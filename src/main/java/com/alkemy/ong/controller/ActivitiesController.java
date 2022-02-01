@@ -1,17 +1,14 @@
+
 package com.alkemy.ong.controller;
 
 import com.alkemy.ong.dto.ActivitiesDTO;
-import com.alkemy.ong.model.Activities;
-import com.alkemy.ong.repository.ActivitiesRepository;
 import com.alkemy.ong.service.ActivitiesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
-
 import static com.alkemy.ong.util.Constants.*;
 
 @RestController
@@ -45,5 +42,7 @@ public class ActivitiesController {
         return new ResponseEntity<>(activitiesService.save(activityDTO), HttpStatus.CREATED);
 
     }
+
+
 
 }

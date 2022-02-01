@@ -10,6 +10,7 @@ import com.alkemy.ong.repository.ActivitiesRepository;
 @Component
 public class DataSeed implements CommandLineRunner
 
+<<<<<<< HEAD
 	@Autowired
 	private ActivitiesRepository activitiesRepository;
 	@Autowired
@@ -61,6 +62,17 @@ public class DataSeed implements CommandLineRunner
 
     }
 
+=======
+{
+	@Autowired
+	private ActivitiesRepository activitiesRepository;
+
+	@Override
+	public void run(String... args) throws Exception {
+
+		loadActivitiesData();
+	}
+>>>>>>> 3918251e20dfd8c4f525ce3fdb6e14df5fe2a3d3
 
 	private void loadActivitiesData() {
 
@@ -91,7 +103,12 @@ public class DataSeed implements CommandLineRunner
 					.build();
 				     activitiesRepository.save(activity3);
 
+<<<<<<< HEAD
 					
+=======
+			}
+		
+>>>>>>> 3918251e20dfd8c4f525ce3fdb6e14df5fe2a3d3
 			
 			Activities activity4 = Activities.builder()
 					.name("Tutorias")
@@ -103,4 +120,8 @@ public class DataSeed implements CommandLineRunner
 
 			}
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 3918251e20dfd8c4f525ce3fdb6e14df5fe2a3d3

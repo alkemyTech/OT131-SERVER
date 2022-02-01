@@ -24,5 +24,6 @@ public class UsersRegisterDTO implements Serializable{
     @Size(min = 8, message = "The password must have at least 8 characters")
     @NotBlank(message = "Password can't be null")
     private String password;
+
     
 }

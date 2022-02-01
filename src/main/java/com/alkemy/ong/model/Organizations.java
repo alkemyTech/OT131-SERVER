@@ -1,25 +1,21 @@
 package com.alkemy.ong.model;
-import java.time.LocalDate;
 
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import lombok.Data;
-// import lombok.Getter;
-// import lombok.Setter;
 import lombok.NoArgsConstructor;
 
 
-// @Getter
-// @Setter
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -29,15 +25,20 @@ public class Organizations {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private long id;
+	@NotEmpty(message ="Name can't be empty")
 	@NotNull(message ="Name can't be null")
 	private String name;
-	@NotNull
+	@NotEmpty(message ="Name can't be empty")
+	@NotNull(message ="Name can't be null")
 	private String images;
 	private String addres;
 	private int phone;
-	@NotNull
+	@NotEmpty(message ="Name can't be empty")
+	@NotNull(message ="Name can't be null")
+	@Column(unique =true)
 	private String email;
-	@NotNull
+	@NotEmpty(message ="Name can't be empty")
+	@NotNull(message ="Name can't be null")
 	private  String welcomeText;
 	private String aboutUsText;
 	@Column( name ="modified_date")
@@ -46,10 +47,14 @@ public class Organizations {
 	@Column(name= "created_date")
 	@CreationTimestamp
 	private LocalDate createdDate;
+<<<<<<< HEAD
 	@Column(name= "removed_date")
 	private LocalDate removedDate;
 	private boolean isActive = Boolean.TRUE;
-	
+=======
+
+	private boolean isActive ;
+>>>>>>> 3918251e20dfd8c4f525ce3fdb6e14df5fe2a3d3
 	
 	public Organizations(String name, String images, String addres, int phone) {
 		super();
@@ -58,7 +63,4 @@ public class Organizations {
 		this.addres = addres;
 		this.phone = phone;
 	}
-
-	
-
 }
