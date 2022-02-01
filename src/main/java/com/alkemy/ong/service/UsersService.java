@@ -9,10 +9,7 @@ import com.alkemy.ong.dto.NewUsersDTO;
 import com.alkemy.ong.dto.UsersDtoResponse;
 import com.alkemy.ong.dto.UsersOkDto;
 
-<<<<<<< HEAD
 import java.util.List;
-=======
->>>>>>> 5ed7d9e3ea3c095910feed8acae13a591464c5d9
 import java.util.Optional;
 
 
