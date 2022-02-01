@@ -24,6 +24,8 @@ public final class Constants {
     public static final String ERR_ACT_NOT_FOUND = "Requested activity was not found";
     public static final String ERR_AWS_NOT_FOUND = "You haven't selected any file to upload";
     public static final String ERR_AWS_NOT_SAVED = "The file couldn't be saved";
+    public static final String REQ_MAPP_GET_AUTH_ME_USER = "/me";
+    public static final String REQ_MAPP_ID = "/{id}";
 
     //ActivitiesController Docs
     public static final String ACTIVITIES_GET_INFO = "Get a list of all active activities.";
@@ -40,13 +42,10 @@ public final class Constants {
 
     /*
     Internal Key for Token
-    */
+     */
     public static final String SECRET_KEY = "SECRET_KEY";
-
 
     public Constants() {
     }
 
-
 }
-
