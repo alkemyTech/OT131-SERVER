@@ -37,13 +37,19 @@ public class NewsServiceImpl implements NewsService{
         return newsMapper.converToDTO(nw.get());
     }
 
+    @Transactional
     @Override
     public void deleteNew(Long id){
-
         Optional<News> answer = newsRepository.findById(id);
-        News nw = answer.get();
-        nw.setIsActivated(false);
-        newsRepository.save(nw);
+        System.out.println(answer.toString());
+        if(answer.isPresent()){
+            News news = answer.get();
+            news.setIsActivated(Boolean.FALSE);
+            newsRepository.save(news);
+        }else{
+            throw new ParamNotFoundException("News does not exist");
+        }
+
     }
 
     @Transactional

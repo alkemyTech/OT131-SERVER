@@ -25,6 +25,7 @@ import com.alkemy.ong.dto.UsersRegisterDTO;
 import com.alkemy.ong.util.JWT;
 import java.text.MessageFormat;
 import static com.alkemy.ong.util.Constants.*;
+import java.util.Base64;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @Service
@@ -73,7 +74,7 @@ public class UsersServiceImpl implements UsersService {
 
         Users user = usersMapper.newUsersDTO2Model(registerUser);
 
-        return save(registerUser);       
+        return save(registerUser);
 
     }
 
@@ -91,6 +92,7 @@ public class UsersServiceImpl implements UsersService {
             return null;
         }
     }
+
     @Transactional
     @Override
     public UsersDtoResponse save(NewUsersDTO userDTO) {
@@ -103,7 +105,7 @@ public class UsersServiceImpl implements UsersService {
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         Users userModel = usersMapper.newUsersDTO2Model(userDTO);
         Users userSaved = usersRepository.save(userModel);
-        this.sendGridEmailService.sendWelcomeEmail(MAIL_ONG, userDTO.getEmail()); 
+        this.sendGridEmailService.sendWelcomeEmail(MAIL_ONG, userDTO.getEmail());
         UsersDtoResponse response = (UsersDtoResponse) usersMapper.usersModel2UsersDtoResponse(userSaved);
         response.setRole(userSaved.getRole());
         response.setToken(userToken(userSaved).getToken());
@@ -138,7 +140,7 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public Users save(UsersRegisterDTO usersRegisterDTO) {
         throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-                                                                       // Tools | Templates.
+        // Tools | Templates.
     }
 
     @Override
@@ -161,6 +163,14 @@ public class UsersServiceImpl implements UsersService {
         tokenUser.setToken(jwt.generateToken(tokenUser));
         System.out.println(tokenUser.getToken());
         return tokenUser;
+    }
+
+    @Override
+    public String extractPayload(String token) {
+        token = token.replace("Bearer ", "");
+        String[] chunks = token.split("\\.");
+        Base64.Decoder decoder = Base64.getUrlDecoder();
+        return new String(decoder.decode(chunks[1]));
     }
 
 }
