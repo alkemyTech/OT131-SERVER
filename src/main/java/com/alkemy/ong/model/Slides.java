@@ -1,22 +1,24 @@
 package com.alkemy.ong.model;
 
 import java.time.LocalDate;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Data
+@EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 public class Slides {
 
     @Id
@@ -39,12 +41,11 @@ public class Slides {
     @Column(name = "organization_id")
     private Long organizationId;
 
-    @NotNull
-    @CreationTimestamp
+    @CreatedDate
     @Column(name = "date_created")
     private LocalDate dateCreated;
 
-    @UpdateTimestamp
+    @LastModifiedDate
     @Column(name = "date_modified")
     private LocalDate dateModified;
 

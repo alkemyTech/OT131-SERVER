@@ -37,6 +37,8 @@ public final class Constants {
     public static final String ACTIVITIES_POST_INFO = "Create a new Activity.";
     public static final String ACTIVITIES_POST_OK = "Activity successfully created.";
 
+    public static final String REQ_MAPP_SLIDES = "/slides";
+    public static final String BAD_ORG_ID = "The organization was not found.";
 
 
 
