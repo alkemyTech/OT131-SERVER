@@ -4,9 +4,8 @@ import com.alkemy.ong.dto.UsersDtoResponse;
 import com.alkemy.ong.dto.NewUsersDTO;
 import com.alkemy.ong.dto.LoginUsersDTO;
 import com.alkemy.ong.dto.UsersNoAuthDto;
-import com.alkemy.ong.dto.UsersOkDto;
 
-import com.alkemy.ong.dto.*;
+import com.alkemy.ong.model.Users;
 import com.alkemy.ong.service.UsersServiceImpl;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +43,8 @@ public class UsersController {
    		  
    		@ApiResponse(responseCode = "401", description = "Unathorized. Error in log credentials", 
    		    content = @Content),})
+    
+    
     @PostMapping(value = REQ_MAPP_POST_LOGIN_USER)
     private ResponseEntity<?> userAuthLogin(@Valid @RequestBody LoginUsersDTO loginUser) throws Exception {
         try {
@@ -66,9 +67,7 @@ public class UsersController {
                        
     @ApiResponse(responseCode = "404", description = "User not fouund. User id does not exist", 
                          content = @Content),})
-    @PutMapping(REQ_MAPP_DELETE_LOGIN_USER)
-    private ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody NewUsersDTO dto) {
-
+    
 
     @PutMapping(REQ_MAPP_DELETE_LOGIN_USER)
     private ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody NewUsersDTO dto) {
@@ -101,6 +100,7 @@ public class UsersController {
         }
 
     }
+    
     @Operation(summary = "Register into the api")
 	@ApiResponses(value = { 
         @ApiResponse (responseCode = "200", description = "Register ok. Return credentials" , 
