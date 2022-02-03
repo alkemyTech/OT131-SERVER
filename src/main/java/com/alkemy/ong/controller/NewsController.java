@@ -41,7 +41,7 @@ public class NewsController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "UpdateNew by id" ,
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Activities.class)) }),
+                            schema = @Schema(implementation = NewsDTO.class)) }),
 
             @ApiResponse(responseCode = "400", description = "Invalid id supplied",
                     content = @Content),
@@ -57,7 +57,7 @@ public class NewsController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "GetNew by id" ,
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Activities.class)) }),
+                            schema = @Schema(implementation = NewsDTO.class)) }),
 
             @ApiResponse(responseCode = "400", description = "Invalid id supplied",
                     content = @Content),
@@ -72,7 +72,7 @@ public class NewsController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "DeleteNew by id" ,
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Activities.class)) }),
+                            schema = @Schema(implementation = NewsDTO.class)) }),
 
             @ApiResponse(responseCode = "400", description = "Invalid id supplied",
                     content = @Content),
