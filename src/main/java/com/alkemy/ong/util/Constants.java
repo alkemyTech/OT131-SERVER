@@ -26,6 +26,7 @@ public final class Constants {
     public static final String ERR_AWS_NOT_SAVED = "The file couldn't be saved";
     public static final String REQ_MAPP_GET_AUTH_ME_USER = "/me";
     public static final String REQ_MAPP_ID = "/{id}";
+    public static final String REQ_MAPP_TESTIMONIALS = "/testimonials";
 
     //ActivitiesController Docs
     public static final String ACTIVITIES_GET_INFO = "Get a list of all active activities.";

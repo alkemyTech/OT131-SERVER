@@ -1,5 +1,6 @@
 package com.alkemy.ong.service;
 
+import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.model.Testimonials;
 import com.alkemy.ong.repository.TestimonialsRepository;
 import java.util.Optional;
@@ -28,6 +29,8 @@ public class TestimonialsServiceImpl implements TestimonialsService {
         if (testimonials.isPresent()) {
             testimonials.get().setIsActive(false);
             testimonialsRepository.save(testimonials.get());
+        }else{
+            throw new ParamNotFoundException("Testimonial does not exist");
         }
 
     }
