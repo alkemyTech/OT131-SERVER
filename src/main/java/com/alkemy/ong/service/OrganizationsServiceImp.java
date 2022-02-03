@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.alkemy.ong.dto.OrganizationsAllDTO;
 import com.alkemy.ong.dto.OrganizationsDTO;
@@ -35,7 +36,9 @@ public class OrganizationsServiceImp implements OrganizationsService {
 			return Optional.of(organizationRepository.findByName(name) 
 		        .orElseThrow(() -> new NullPointerException(ENTITY_NOT_FOUND)));
 	}
+	
 	@Override
+	@Transactional
 	public Organizations saveOrganization(Organizations organization) throws Exception {
 		if (organizationRepository.findByName(organization.getName()).isPresent()) {
 			throw new ParamNotFoundException(NAME_EXIST);

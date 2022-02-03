@@ -6,8 +6,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,7 +43,7 @@ public class OrganizationsController {
 	 @ApiResponses(value = { 
    		  @ApiResponse(responseCode = "200", description = "Show public data Organization by name" , 
    				    content = { @Content(mediaType = "application/json", 
-   				      schema = @Schema(implementation = Activities.class)) }),
+   				      schema = @Schema(implementation = Organizations.class)) }),
    		  
    		  @ApiResponse(responseCode = "400", description = "Invalid id supplied", 
    		    content = @Content), 
@@ -60,7 +58,7 @@ public class OrganizationsController {
 	 @ApiResponses(value = { 
 	   		  @ApiResponse(responseCode = "200", description = "Show  a list public data Organization" , 
 	   				    content = { @Content(mediaType = "application/json", 
-	   				      schema = @Schema(implementation = Activities.class)) }),
+	   				      schema = @Schema(implementation = Organizations.class)) }),
 	   		  
 	   		  @ApiResponse(responseCode = "400", description = "Invalid id supplied", 
 	   		    content = @Content) })
@@ -72,7 +70,7 @@ public class OrganizationsController {
 	 @ApiResponses(value = { 
 	   		  @ApiResponse(responseCode = "200", description = "Create Organization" , 
 	   				    content = { @Content(mediaType = "application/json", 
-	   				      schema = @Schema(implementation = Activities.class)) }),
+	   				      schema = @Schema(implementation = Organizations.class)) }),
 	   		  
 	   		  @ApiResponse(responseCode = "400", description = "Invalid id supplied", 
 	   		    content = @Content), 
@@ -87,7 +85,7 @@ public class OrganizationsController {
 	 @ApiResponses(value = { 
 	   		  @ApiResponse(responseCode = "200", description = "UpdateOrganization by id" , 
 	   				    content = { @Content(mediaType = "application/json", 
-	   				      schema = @Schema(implementation = Activities.class)) }),
+	   				      schema = @Schema(implementation = Organizations.class)) }),
 	   		  
 	   		  @ApiResponse(responseCode = "400", description = "Invalid id supplied", 
 	   		    content = @Content), 

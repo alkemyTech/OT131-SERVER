@@ -48,7 +48,7 @@ public class Members implements Serializable{
     private Timestamp timestamp;
 
     @Column(name = "soft_delete")
-    private Boolean isActive;
+    private Boolean isActive = Boolean.TRUE;
 
     public Members(String name, String facebookUrl, String instagramUrl, String linkedinUrl, String image, String description) {
         this.name = name;

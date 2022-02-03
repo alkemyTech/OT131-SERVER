@@ -1,15 +1,13 @@
 package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.LoginUsersDTO;
-
+import com.alkemy.ong.dto.UsersDTO;
 import com.alkemy.ong.dto.UsersOkDto;
 import com.alkemy.ong.model.Users;
 import com.alkemy.ong.mapper.UsersMapper;
 import com.alkemy.ong.repository.UsersRepository;
 import java.util.Optional;
-
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -23,6 +21,8 @@ import com.alkemy.ong.dto.NewUsersDTO;
 import com.alkemy.ong.dto.UsersDTO;
 import com.alkemy.ong.dto.UsersRegisterDTO;
 import com.alkemy.ong.util.JWT;
+
+
 import java.text.MessageFormat;
 import static com.alkemy.ong.util.Constants.*;
 import java.util.Base64;
@@ -177,6 +177,9 @@ public class UsersServiceImpl implements UsersService {
         System.out.println(tokenUser.getToken());
         return tokenUser;
     }
+    
+    
+
 
     @Override
     public String extractPayload(String token) {

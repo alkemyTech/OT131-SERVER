@@ -36,6 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Override
+
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity.cors().and().csrf().disable()
@@ -48,9 +49,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         REQ_MAPP_ORG,
                         REQ_MAPP_CATEGORIES,
                         REQ_MAPP_NEWS).hasAnyAuthority(AUTHENTICATED_ROLES) // Only authenticated roles can access GET methods
-                .antMatchers(HttpMethod.POST, "/organizations/public/**").hasAuthority("ROLE_ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/categories/**").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                .antMatchers(HttpMethod.POST, URL_ORG_SECURITY).hasAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.DELETE,REQ_MAPP_CATEGORIES+"/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers(SWAGGER_SECURITY).permitAll()
                 .antMatchers(REQ_MAPP_ACTIVITIES, REQ_MAPP_ACTIVITIES + "/**",
                         REQ_MAPP_ORG, REQ_MAPP_ORG + "/**",
                         REQ_MAPP_CATEGORIES, REQ_MAPP_CATEGORIES + "/**",
@@ -62,7 +63,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
-
 
     @Override
     @Bean
