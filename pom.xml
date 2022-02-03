@@ -56,7 +56,6 @@
             <artifactId>modelmapper</artifactId>
             <version>2.4.4</version>
         </dependency>
-
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
@@ -100,18 +99,7 @@
             <version>1.12.125</version>
             <type>jar</type>
         </dependency>
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.6.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-webflux-ui</artifactId>
-            <version>1.6.4</version>
-        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -120,5 +108,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
