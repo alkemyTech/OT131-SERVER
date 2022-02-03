@@ -1,4 +1,3 @@
-
 package com.alkemy.ong.controller;
 
 import com.alkemy.ong.dto.CategoriesDTO;
@@ -7,8 +6,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import static com.alkemy.ong.util.Constants.*;
-import com.alkemy.ong.model.Categories;
 import com.alkemy.ong.service.CategoriesService;
 import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
@@ -35,7 +32,7 @@ public class CategoriesController {
     }
 
     @GetMapping
-    public ResponseEntity<List<String>> listCategoriesName(){
+    public ResponseEntity<List<String>> listCategoriesName() {
         return ResponseEntity.ok().body(categoriesService.getAllByName());
     }
     
@@ -43,17 +40,21 @@ public class CategoriesController {
     @ApiResponses(value = { 
     		  @ApiResponse(responseCode = "200", description = "Delete category" , 
     				    content = { @Content(mediaType = "application/json", 
-    				      schema = @Schema(implementation = Categories.class)) }),
+    				      schema = @Schema(implementation = CategoriesDTO.class)) }),
     		  
     		  @ApiResponse(responseCode = "400", description = "Invalid id supplied", 
     		    content = @Content), 
     		  @ApiResponse(responseCode = "404", description = "Category not found", 
     		    content = @Content) })
+
     @DeleteMapping("/{id}")
-    public String deleteCategories(@Valid @PathVariable  long id) throws Exception{
+    public String deleteCategories(@Valid @PathVariable long id) throws Exception {
         return categoriesService.deleteCategory(id);
     }
-    
-    
-}
 
+    @PostMapping
+    public ResponseEntity<?> addCategories(@Valid @RequestBody() CategoriesDTO categoriesDto) {
+        return ResponseEntity.ok(categoriesService.addCategories(categoriesDto));
+    }
+
+}

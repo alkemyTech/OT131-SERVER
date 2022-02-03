@@ -1,6 +1,5 @@
 package com.alkemy.ong.service;
 
-
 import com.alkemy.ong.dto.LoginUsersDTO;
 import com.alkemy.ong.dto.UsersDTO;
 import com.alkemy.ong.dto.UsersOkDto;
@@ -19,17 +18,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.alkemy.ong.dto.UsersDtoResponse;
 import com.alkemy.ong.dto.NewUsersDTO;
+import com.alkemy.ong.dto.UsersDTO;
 import com.alkemy.ong.dto.UsersRegisterDTO;
 import com.alkemy.ong.util.JWT;
 
 
 import java.text.MessageFormat;
 import static com.alkemy.ong.util.Constants.*;
+import java.util.Base64;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 
 @Service
 public class UsersServiceImpl implements UsersService {
-
+    
     private static final String USER_NOT_FOUND_ERROR_MESSAGE = "User not found: {0}";
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -73,7 +75,7 @@ public class UsersServiceImpl implements UsersService {
 
         Users user = usersMapper.newUsersDTO2Model(registerUser);
 
-        return save(registerUser);       
+        return save(registerUser);
 
     }
 
@@ -91,6 +93,7 @@ public class UsersServiceImpl implements UsersService {
             return null;
         }
     }
+
     @Transactional
     @Override
     public UsersDtoResponse save(NewUsersDTO userDTO) {
@@ -103,16 +106,11 @@ public class UsersServiceImpl implements UsersService {
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         Users userModel = usersMapper.newUsersDTO2Model(userDTO);
         Users userSaved = usersRepository.save(userModel);
-        this.sendGridEmailService.sendWelcomeEmail(MAIL_ONG, userDTO.getEmail()); 
+        this.sendGridEmailService.sendWelcomeEmail(MAIL_ONG, userDTO.getEmail());
         UsersDtoResponse response = (UsersDtoResponse) usersMapper.usersModel2UsersDtoResponse(userSaved);
         response.setRole(userSaved.getRole());
         response.setToken(userToken(userSaved).getToken());
         return response;
-    }
-
-    @Override
-    public Users update(UsersDTO usersDto) {
-        return usersRepository.save(usersMapper.uaserToUserDto(usersDto));
     }
 
     @Override
@@ -138,7 +136,7 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public Users save(UsersRegisterDTO usersRegisterDTO) {
         throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-                                                                       // Tools | Templates.
+        // Tools | Templates.
     }
 
     @Override
@@ -155,6 +153,23 @@ public class UsersServiceImpl implements UsersService {
         return userResponse;
     }
 
+    @Transactional
+    public UsersDtoResponse update(Long id, NewUsersDTO dto) {
+
+        Optional<Users> result = usersRepository.findById(id);
+        if (result.isEmpty() || !result.get().isActive())
+            return null;
+
+        Users entity = result.get();
+        entity.setEmail(dto.getEmail());
+        entity.setPassword(passwordEncoder.encode(dto.getPassword()));
+        entity.setFirstName(dto.getFirstName());
+        entity.setLastName(dto.getLastName());
+
+        Users entityUpdated = usersRepository.save(entity);
+        return usersMapper.usersModel2UsersDtoResponse(entityUpdated);
+    }
+
     private UsersDtoResponse userToken(Users user) {
         UsersDtoResponse tokenUser = usersMapper.usersModel2UsersDtoResponse(user);
         tokenUser.setRole(user.getRole());
@@ -165,5 +180,19 @@ public class UsersServiceImpl implements UsersService {
     
     
 
+
+    @Override
+    public String extractPayload(String token) {
+        token = token.replace("Bearer ", "");
+        String[] chunks = token.split("\\.");
+        Base64.Decoder decoder = Base64.getUrlDecoder();
+        return new String(decoder.decode(chunks[1]));
+    }
+
+    @Override
+    public Users update(UsersDTO usersDto) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 }

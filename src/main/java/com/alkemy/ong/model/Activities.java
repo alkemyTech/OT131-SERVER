@@ -1,3 +1,4 @@
+
 package com.alkemy.ong.model;
 
 import lombok.AllArgsConstructor;
@@ -61,9 +62,5 @@ public class Activities {
 		this.createdDate = createdDate;
 		this.isActive = isActive;
 	}
-    
-    
-    
-    
-    
+       
 }
