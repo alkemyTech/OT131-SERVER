@@ -17,7 +17,7 @@ public class SlidesMapper {
                 .build();
     }
 
-    public SlidesResponseDTO entity2dto(Slides entity) {
+    public SlidesResponseDTO entity2ResponseDTO(Slides entity) {
         return SlidesResponseDTO.builder()
                 .id(entity.getId())
                 .imageUrl(entity.getImageUrl())

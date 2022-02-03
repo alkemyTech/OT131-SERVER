@@ -54,7 +54,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(REQ_MAPP_ACTIVITIES, REQ_MAPP_ACTIVITIES + "/**",
                         REQ_MAPP_ORG, REQ_MAPP_ORG + "/**",
                         REQ_MAPP_CATEGORIES, REQ_MAPP_CATEGORIES + "/**",
-                        REQ_MAPP_NEWS, REQ_MAPP_NEWS + "/**").hasAuthority("ROLE_ADMIN") // Only admins can access other methods
+                        REQ_MAPP_NEWS, REQ_MAPP_NEWS + "/**",
+                        REQ_MAPP_SLIDES, REQ_MAPP_SLIDES + "/**").hasAuthority("ROLE_ADMIN") // Only admins can access other methods
                 .antMatchers("/public/**").permitAll() // All users can access endpoints in /public/**
                 .anyRequest().authenticated() // Only authenticated users can access the rest of endpoints
                 .and()

@@ -7,11 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 @EntityListeners(AuditingEntityListener.class)
@@ -43,10 +42,12 @@ public class Slides {
 
     @CreatedDate
     @Column(name = "date_created")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate dateCreated;
 
     @LastModifiedDate
     @Column(name = "date_modified")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate dateModified;
 
     @Column(name = "is_active")

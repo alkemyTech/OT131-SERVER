@@ -40,6 +40,10 @@ public final class Constants {
     public static final String REQ_MAPP_SLIDES = "/slides";
     public static final String BAD_ORG_ID = "The organization was not found.";
 
+    //SlidesController Docs
+    public static final String SLIDES_POST_INFO = "Create a new Slide";
+    public static final String SLIDES_POST_OK = "Slide successfully created.";
+
 
 
     /*

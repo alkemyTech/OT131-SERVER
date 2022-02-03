@@ -5,9 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,12 +12,8 @@ import javax.validation.constraints.NotNull;
 public class SlidesResponseDTO {
 
     private Long id;
-
     private String imageUrl;
-
     private String text;
-
     private Integer order;
-
     private Long organizationId;
 }
