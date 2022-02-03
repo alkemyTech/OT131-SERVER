@@ -30,7 +30,7 @@ public class Activities {
 
     @NotNull
     private String name;
-
+    @Column(length = 7000)
     @NotNull
     private String content;
 

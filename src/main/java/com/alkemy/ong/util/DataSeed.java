@@ -113,7 +113,7 @@ public class DataSeed implements CommandLineRunner {
 			
 			Activities activity4 = Activities.builder()
 					.name("Tutorias")
-					.content("Es un programa destinado a jóvenes a partir del tercer año de secundaria, cuyo objetivo es garantizar su permanencia en la escuela y construir un proyecto de vida que da sentido al colegio.")
+					.content("El objetivo de esta propuesta es lograr la integración escolar de niños y jóvenes del barrio promoviendo el soporte socioeducativo y emocional apropiado, desarrollando los recursos institucionales necesarios a través de la articulación de nuestras intervenciones con las escuelas que los alojan, con las familias de los alumnos y con ellas instancias municipales, provinciales y nacionales que correspondan.")
 					.image("image")
 					.isActive(true)
 					.build();

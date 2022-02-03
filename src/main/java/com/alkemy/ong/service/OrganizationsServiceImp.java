@@ -55,10 +55,9 @@ public class OrganizationsServiceImp implements OrganizationsService {
 		}
 		org.get().setName(entity.getName());
 		org.get().setAddres(entity.getAddres());
-		org.get().setActive(entity.isActive());
 		org.get().setAboutUsText(entity.getAboutUsText());
 		org.get().setPhone(entity.getPhone());
-		entity.setEmail(entity.getEmail());
+		org.get().setEmail(entity.getEmail());
 		org.get().setWelcomeText(entity.getWelcomeText());
 		org.get().setImages(entity.getImages());
 		organizationRepository.save(org.get());

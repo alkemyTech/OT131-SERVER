@@ -13,22 +13,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.alkemy.ong.dto.OrganizationsAllDTO;
 import com.alkemy.ong.dto.OrganizationsDTO;
-import com.alkemy.ong.model.Activities;
 import com.alkemy.ong.model.Organizations;
 import com.alkemy.ong.service.OrganizationsServiceImp;
-
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import static com.alkemy.ong.util.Constants.*;
 
+
+@Tag(name = "Organizations", description = "Create, update show Organizations")
 @RestController
 @RequestMapping(REQ_MAPP_ORG)
 public class OrganizationsController {
@@ -43,7 +42,7 @@ public class OrganizationsController {
 	 @ApiResponses(value = { 
    		  @ApiResponse(responseCode = "200", description = "Show public data Organization by name" , 
    				    content = { @Content(mediaType = "application/json", 
-   				      schema = @Schema(implementation = Organizations.class)) }),
+   				      schema = @Schema(implementation = OrganizationsDTO.class)) }),
    		  
    		  @ApiResponse(responseCode = "400", description = "Invalid id supplied", 
    		    content = @Content), 
@@ -58,7 +57,7 @@ public class OrganizationsController {
 	 @ApiResponses(value = { 
 	   		  @ApiResponse(responseCode = "200", description = "Show  a list public data Organization" , 
 	   				    content = { @Content(mediaType = "application/json", 
-	   				      schema = @Schema(implementation = Organizations.class)) }),
+	   				      schema = @Schema(implementation = OrganizationsAllDTO.class)) }),
 	   		  
 	   		  @ApiResponse(responseCode = "400", description = "Invalid id supplied", 
 	   		    content = @Content) })
@@ -70,7 +69,7 @@ public class OrganizationsController {
 	 @ApiResponses(value = { 
 	   		  @ApiResponse(responseCode = "200", description = "Create Organization" , 
 	   				    content = { @Content(mediaType = "application/json", 
-	   				      schema = @Schema(implementation = Organizations.class)) }),
+	   				      schema = @Schema(implementation = OrganizationsDTO.class)) }),
 	   		  
 	   		  @ApiResponse(responseCode = "400", description = "Invalid id supplied", 
 	   		    content = @Content), 
@@ -85,7 +84,7 @@ public class OrganizationsController {
 	 @ApiResponses(value = { 
 	   		  @ApiResponse(responseCode = "200", description = "UpdateOrganization by id" , 
 	   				    content = { @Content(mediaType = "application/json", 
-	   				      schema = @Schema(implementation = Organizations.class)) }),
+	   				      schema = @Schema(implementation = OrganizationsAllDTO.class)) }),
 	   		  
 	   		  @ApiResponse(responseCode = "400", description = "Invalid id supplied", 
 	   		    content = @Content), 
