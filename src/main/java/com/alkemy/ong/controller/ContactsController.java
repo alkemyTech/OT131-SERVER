@@ -59,6 +59,9 @@ public class ContactsController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
     
+    @Operation(
+        summary = "List all contacts",
+        description = "List all contacts")
     @GetMapping()
     public ResponseEntity<?> listContact(){
         return ResponseEntity.ok(contactService.findByAll());

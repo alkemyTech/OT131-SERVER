@@ -56,10 +56,10 @@ public class ContactsServiceImpl implements ContactsService {
     @Override
     public List<ContactsDTO> findByAll() {
         List<ContactsDTO> listContactsDto = new ArrayList<>();
-        List<Contacts> listContacts = contactRepository.findAll();
+        List<Contacts> listContacts = contactRepository.findByisActiveTrue();
         if(!listContacts.isEmpty()){
             for (Contacts listContact : listContacts) {
-                listContactsDto.add(mapper.map(listContact, ContactsDTO.class));
+                    listContactsDto.add(mapper.map(listContact, ContactsDTO.class));
             }
             return listContactsDto;
         }else{
