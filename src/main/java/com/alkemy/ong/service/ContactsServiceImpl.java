@@ -3,11 +3,15 @@ package com.alkemy.ong.service;
 import com.alkemy.ong.dto.ContactsDTO;
 import com.alkemy.ong.dto.NewContactsDTO;
 import com.alkemy.ong.exception.AlreadyExistsException;
+import com.alkemy.ong.exception.NoDataDisplayException;
 import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.model.Contacts;
 import com.alkemy.ong.repository.ContactsRepository;
 import static com.alkemy.ong.util.Constants.ERR_CONTACT_ALREADY_EXISTS;
 import static com.alkemy.ong.util.Constants.ERR_CONTACT_NOT_FOUND;
+import static com.alkemy.ong.util.Constants.NOT_DATA_DISPLAY;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +50,21 @@ public class ContactsServiceImpl implements ContactsService {
         Contacts contact = result.get();
         contact.setActive(false);
         contactRepository.save(contact);
+    }
+
+    @Transactional
+    @Override
+    public List<ContactsDTO> findByAll() {
+        List<ContactsDTO> listContactsDto = new ArrayList<>();
+        List<Contacts> listContacts = contactRepository.findAll();
+        if(!listContacts.isEmpty()){
+            for (Contacts listContact : listContacts) {
+                listContactsDto.add(mapper.map(listContact, ContactsDTO.class));
+            }
+            return listContactsDto;
+        }else{
+            throw new NoDataDisplayException(NOT_DATA_DISPLAY);
+        }
+        
     }
 }

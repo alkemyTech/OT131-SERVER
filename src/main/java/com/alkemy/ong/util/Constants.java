@@ -47,7 +47,7 @@ public final class Constants {
     public static final String CONTACTS_DELETE_INFO = "Unsubscribe the contact entered by id";
     public static final String CONTACTS_DELETE_OK = "Contact unsubscribed successfully";
 
-
+    public static final String NOT_DATA_DISPLAY = "No data to display";
     /*
     Internal Key for Token
      */
