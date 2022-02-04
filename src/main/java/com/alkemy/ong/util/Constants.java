@@ -26,6 +26,10 @@ public final class Constants {
     public static final String ERR_AWS_NOT_SAVED = "The file couldn't be saved";
     public static final String REQ_MAPP_GET_AUTH_ME_USER = "/me";
     public static final String REQ_MAPP_ID = "/{id}";
+    public static final String ERR_CONTACT_ALREADY_EXISTS = "The entered contact already exists";
+    public static final String REQ_MAPP_CONTACTS = "/contacts";
+    public static final String ERR_CONTACT_NOT_FOUND = "Requested contact was not found";
+    public static final String ERR_USER_ALREADY_EXISTS = "User already exists";
 
     //ActivitiesController Docs
     public static final String ACTIVITIES_GET_INFO = "Get a list of all active activities.";
@@ -37,7 +41,11 @@ public final class Constants {
     public static final String ACTIVITIES_POST_INFO = "Create a new Activity.";
     public static final String ACTIVITIES_POST_OK = "Activity successfully created.";
 
-
+    //ContactsController Docs
+    public static final String CONTACTS_POST_INFO = "Create a new contact";
+    public static final String CONTACTS_CREATED_OK = "Contact created successfully";
+    public static final String CONTACTS_DELETE_INFO = "Unsubscribe the contact entered by id";
+    public static final String CONTACTS_DELETE_OK = "Contact unsubscribed successfully";
 
 
     /*
