@@ -33,7 +33,7 @@ public class Slides {
     private String text;
 
     @NotNull
-    @Column(name = "order_number")
+    @Column(name = "order_number", unique= true)
     private Integer order;
 
     @NotNull

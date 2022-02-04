@@ -1,6 +1,7 @@
 package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.SlidesDTO;
+import com.alkemy.ong.dto.SlidesListDto;
 import com.alkemy.ong.dto.SlidesResponseDTO;
 import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.mapper.SlidesMapper;
@@ -13,9 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.util.Base64;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.alkemy.ong.util.Constants.BAD_ORG_ID;
 
@@ -66,4 +68,13 @@ public class SlidesServiceImpl implements SlidesService {
         return new BASE64DecodedMultipartFile(byteArray, baseString[0]);
 
     }
+
+	@Override
+	public List<SlidesListDto> getAll() {
+		 return slidesRepository.findByOrderByOrderAsc()
+	                .stream().map(slide -> new SlidesListDto(
+	                        slide.getImageUrl(),
+	                        slide.getOrder()))
+	                .collect(Collectors.toList());
+	}
 }
