@@ -47,6 +47,10 @@ public final class Constants {
     public static final String CONTACTS_DELETE_INFO = "Unsubscribe the contact entered by id";
     public static final String CONTACTS_DELETE_OK = "Contact unsubscribed successfully";
 
+    //Confirmation email
+    public static final String CONTACT_CONFIRMATION_SUBJECT = "¡Contacto registrado exitosamente!";
+    public static final String CONTACT_CONFIRMATION_PATH = "src/main/resources/templates/confirmationEmail.html";
+
 
     /*
     Internal Key for Token
