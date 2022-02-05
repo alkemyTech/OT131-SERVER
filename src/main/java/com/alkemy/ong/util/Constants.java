@@ -20,11 +20,39 @@ public final class Constants {
     public static final String INCOMPLETE_PARAMETERS = "Incomplete Parameters";
     public static final String MAIL_ONG = "ong131Alkemy@gmail.com";
     public static final String REQ_MAPP_DELETE_LOGIN_USER = "/users/{id}";
+    public static final String BAD_REQUEST = "Invalid parameter supplied";
     public static final String ERR_ACT_NOT_FOUND = "Requested activity was not found";
     public static final String ERR_AWS_NOT_FOUND = "You haven't selected any file to upload";
     public static final String ERR_AWS_NOT_SAVED = "The file couldn't be saved";
     public static final String REQ_MAPP_GET_AUTH_ME_USER = "/me";
     public static final String REQ_MAPP_ID = "/{id}";
+    public static final String ERR_CONTACT_ALREADY_EXISTS = "The entered contact already exists";
+    public static final String REQ_MAPP_CONTACTS = "/contacts";
+    public static final String ERR_CONTACT_NOT_FOUND = "Requested contact was not found";
+    public static final String ERR_USER_ALREADY_EXISTS = "User already exists";
+
+    //ActivitiesController Docs
+    public static final String ACTIVITIES_GET_INFO = "Get a list of all active activities.";
+    public static final String ACTIVITIES_GET_INFO_OK = "Returning all activities...";
+    public static final String ACTIVITIES_PUT_INFO = "Update an Activity related to sent id.";
+    public static final String ACTIVITIES_PUT_INFO_OK = "Activity successfully updated.";
+    public static final String ACTIVITIES_DELETE_INFO = "Delete an Activity related to sent id.";
+    public static final String ACTIVITIES_DELETE_OK = "Activity successfully deleted.";
+    public static final String ACTIVITIES_POST_INFO = "Create a new Activity.";
+    public static final String ACTIVITIES_POST_OK = "Activity successfully created.";
+
+    //ContactsController Docs
+    public static final String CONTACTS_POST_INFO = "Create a new contact";
+    public static final String CONTACTS_CREATED_OK = "Contact created successfully";
+    public static final String CONTACTS_DELETE_INFO = "Unsubscribe the contact entered by id";
+    public static final String CONTACTS_DELETE_OK = "Contact unsubscribed successfully";
+
+
+    public static final String NOT_DATA_DISPLAY = "No data to display";
+
+    //Confirmation email
+    public static final String CONTACT_CONFIRMATION_SUBJECT = "¡Contacto registrado exitosamente!";
+    public static final String CONTACT_CONFIRMATION_PATH = "src/main/resources/templates/confirmationEmail.html";
 
     /*
     Internal Key for Token

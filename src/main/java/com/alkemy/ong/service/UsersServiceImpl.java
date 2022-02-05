@@ -7,9 +7,7 @@ import com.alkemy.ong.model.Users;
 import com.alkemy.ong.mapper.UsersMapper;
 import com.alkemy.ong.repository.UsersRepository;
 import java.util.Optional;
-
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -21,12 +19,13 @@ import org.springframework.stereotype.Service;
 import com.alkemy.ong.dto.UsersDtoResponse;
 import com.alkemy.ong.dto.NewUsersDTO;
 import com.alkemy.ong.dto.UsersDTO;
-import com.alkemy.ong.dto.UsersRegisterDTO;
+import com.alkemy.ong.exception.AlreadyExistsException;
 import com.alkemy.ong.util.JWT;
 import java.text.MessageFormat;
 import static com.alkemy.ong.util.Constants.*;
 import java.util.Base64;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 
 
 @Service
@@ -100,7 +99,7 @@ public class UsersServiceImpl implements UsersService {
         Optional<Users> user = usersRepository.findByEmail(userDTO.getEmail());
 
         if (user.isPresent()) {
-            throw new IllegalArgumentException("User already exists");
+            throw new AlreadyExistsException(ERR_USER_ALREADY_EXISTS);
         }
 
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
@@ -131,12 +130,6 @@ public class UsersServiceImpl implements UsersService {
 
     public UsersOkDto getUserOkDto(String email) {
         return usersMapper.userOkDtoToUser(usersRepository.findByEmail(email).get());
-    }
-
-    @Override
-    public Users save(UsersRegisterDTO usersRegisterDTO) {
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
     }
 
     @Override
