@@ -12,17 +12,23 @@ import static com.alkemy.ong.util.Constants.ERR_CONTACT_NOT_FOUND;
 import static com.alkemy.ong.util.Constants.NOT_DATA_DISPLAY;
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.alkemy.ong.util.Constants.*;
+
 @Service
 public class ContactsServiceImpl implements ContactsService {
 
     @Autowired
     private ContactsRepository contactRepository;
+
+    @Autowired
+    private EmailServiceImp emailService;
 
     private ModelMapper mapper = new ModelMapper();
 
@@ -35,6 +41,8 @@ public class ContactsServiceImpl implements ContactsService {
 
         Contacts newContact = mapper.map(contact, Contacts.class);
         Contacts contactSaved = contactRepository.save(newContact);
+
+        emailService.sendContactConfirmation(MAIL_ONG, contactSaved.getEmail());
 
         return mapper.map(contactSaved, ContactsDTO.class);
     }
