@@ -54,6 +54,19 @@ public final class Constants {
     public static final String CONTACT_CONFIRMATION_SUBJECT = "¡Contacto registrado exitosamente!";
     public static final String CONTACT_CONFIRMATION_PATH = "src/main/resources/templates/confirmationEmail.html";
 
+    //ActivitiesController Docs
+    public static final String ACTIVITIES_GET_INFO = "Get a list of all active activities.";
+    public static final String ACTIVITIES_GET_INFO_OK = "Returning all activities...";
+    public static final String ACTIVITIES_PUT_INFO = "Update an Activity related to sent id.";
+    public static final String ACTIVITIES_PUT_INFO_OK = "Activity successfully updated.";
+    public static final String ACTIVITIES_DELETE_INFO = "Delete an Activity related to sent id.";
+    public static final String ACTIVITIES_DELETE_OK = "Activity successfully deleted.";
+    public static final String ACTIVITIES_POST_INFO = "Create a new Activity.";
+    public static final String ACTIVITIES_POST_OK = "Activity successfully created.";
+
+
+
+
     /*
     Internal Key for Token
      */
