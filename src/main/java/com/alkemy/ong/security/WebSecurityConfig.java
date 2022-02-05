@@ -51,6 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/organizations/public/**").hasAuthority("ROLE_ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/categories/**").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                .antMatchers(HttpMethod.GET, REQ_MAPP_CONTACTS).hasAuthority("ROLE_ADMIN")
                 .antMatchers(REQ_MAPP_ACTIVITIES, REQ_MAPP_ACTIVITIES + "/**",
                         REQ_MAPP_ORG, REQ_MAPP_ORG + "/**",
                         REQ_MAPP_CATEGORIES, REQ_MAPP_CATEGORIES + "/**",
