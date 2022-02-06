@@ -1,6 +1,7 @@
 package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.MemberDTO;
+import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.model.Members;
 import com.alkemy.ong.mapper.MembersMapper;
 import com.alkemy.ong.repository.MembersRepository;
@@ -9,6 +10,7 @@ import java.time.Instant;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import static com.alkemy.ong.util.Constants.*;
 
 @Service
 public class MembersServicesImpl implements MembersService{
@@ -44,9 +46,12 @@ public class MembersServicesImpl implements MembersService{
     
     @Override
     public void deleteMember(Long id){
-        Members member = membersRepository.findById(id).get();
-        member.setIsActive(false);
-        membersRepository.save(member);   
+        Optional<Members> member = membersRepository.findById(id);
+        if(member.isEmpty()) {
+        	throw new ParamNotFoundException(ENTITY_NOT_FOUND);
+        }
+        member.get().setIsActive(false);
+        membersRepository.save(member.get());   
     }    
     
 }
