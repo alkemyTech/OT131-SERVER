@@ -47,6 +47,7 @@ public class Organizations {
 	@Column(name= "created_date")
 	@CreationTimestamp
 	private LocalDate createdDate;
+	private Slides slide;
 
 	private boolean isActive ;
 	
