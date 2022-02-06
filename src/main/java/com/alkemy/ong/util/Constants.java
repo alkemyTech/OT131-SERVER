@@ -28,6 +28,12 @@ public final class Constants {
     public static final String REQ_MAPP_ID = "/{id}";
     public static final String REQ_MAPP_MEMBERS = "/members";
     public static final String GET_MAPP_LIST_MEMBERS = "/members";
+    public static final String ERR_MEMBER_ALREADY_EXISTS = "Member already exists";
+    public static final String ERR_FB_MEMBER_ALREADY_EXISTS = "There is already a member created with the Facebook entered";
+    public static final String ERR_IG_MEMBER_ALREADY_EXISTS = "There is already a member created with the Instagram entered";
+    public static final String ERR_LI_MEMBER_ALREADY_EXISTS = "There is already a member created with the Linkedin entered";
+    public static final String MEMBERS_POST_INFO = "Create a new member";
+    public static final String MEMBERS_CREATED_OK = "Member created successfully";
 
     //ActivitiesController Docs
     public static final String ACTIVITIES_GET_INFO = "Get a list of all active activities.";

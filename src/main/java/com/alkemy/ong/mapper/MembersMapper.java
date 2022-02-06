@@ -6,7 +6,8 @@ import com.alkemy.ong.model.Members;
 public class MembersMapper {
     
     public static MemberDTO memberToDTO(Members member){
-        return new MemberDTO(member.getName(), 
+        return new MemberDTO(member.getIdMember(),
+                        member.getName(), 
                         member.getFacebookUrl(), 
                         member.getInstagramUrl(), 
                         member.getLinkedinUrl(), 

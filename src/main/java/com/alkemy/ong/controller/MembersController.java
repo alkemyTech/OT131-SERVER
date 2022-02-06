@@ -12,12 +12,17 @@ import static com.alkemy.ong.util.Constants.*;
 import java.util.List;
 import static com.alkemy.ong.util.Constants.GET_MAPP_LIST_MEMBERS;
 import com.alkemy.ong.dto.MemberDTO;
+import com.alkemy.ong.dto.NewMemberDTO;
 import com.alkemy.ong.service.MembersService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import javax.validation.Valid;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -56,4 +61,16 @@ public class MembersController {
 
     }
 
+    @Operation(summary = MEMBERS_POST_INFO)
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = MEMBERS_CREATED_OK,
+                content = {
+                    @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = MemberDTO.class))}),
+        @ApiResponse(responseCode = "400", description = ERR_MEMBER_ALREADY_EXISTS)})
+    @PostMapping
+    public ResponseEntity<MemberDTO> createMember(@Valid @RequestBody NewMemberDTO memberDTO) {
+        MemberDTO response = membersService.createMember(memberDTO);
+        return ResponseEntity.status(HttpStatus.SC_CREATED).body(response);
+    }
 }
