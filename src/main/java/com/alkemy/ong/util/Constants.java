@@ -34,6 +34,7 @@ public final class Constants {
     public static final String ERR_LI_MEMBER_ALREADY_EXISTS = "There is already a member created with the Linkedin entered";
     public static final String MEMBERS_POST_INFO = "Create a new member";
     public static final String MEMBERS_CREATED_OK = "Member created successfully";
+    public static final String ERR_MEMBER_ALREADY_REMOVED ="The member no longer exists";
 
     //ActivitiesController Docs
     public static final String ACTIVITIES_GET_INFO = "Get a list of all active activities.";

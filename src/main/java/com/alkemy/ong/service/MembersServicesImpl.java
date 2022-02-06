@@ -65,10 +65,13 @@ public class MembersServicesImpl implements MembersService{
     }
 
     @Override
-    public void deleteMember(Long id){
+    public void deleteMember(Long id) {
         Optional<Members> member = membersRepository.findById(id);
         if(member.isEmpty()) {
             throw new ParamNotFoundException(ENTITY_NOT_FOUND);
+        }
+        if(!member.get().getIsActive()) {
+            throw new ParamNotFoundException(ERR_MEMBER_ALREADY_REMOVED);
         }
         member.get().setIsActive(false);
         membersRepository.save(member.get());
