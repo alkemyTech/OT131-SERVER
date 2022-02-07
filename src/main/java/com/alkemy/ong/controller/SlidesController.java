@@ -71,7 +71,7 @@ public class SlidesController {
     @ApiResponses(value = { 
     @ApiResponse (responseCode = "200", description = "Update ok. Return credentials" , 
                                  content = { @Content(mediaType = "application/json", 
-                                   schema = @Schema(implementation = Slides.class)) }),
+                                   schema = @Schema(implementation = SlidesUpdateDto.class)) }),
                        
     @ApiResponse(responseCode = "404", description = "Slide not found. Slide id does not exist", 
                          content = @Content),})
@@ -88,12 +88,11 @@ public class SlidesController {
     @Operation(summary = "Delete slide from Database (set active as false)")
 	@ApiResponses(value = { 
         @ApiResponse (responseCode = "200", description = "Delete ok. Return credentials" , 
-   				    content = {@Content(mediaType = "application/json", 
-   				      schema = @Schema(implementation = Slides.class)) }),
+   				    content = {@Content(mediaType = "application/json") }),
    		  
    		@ApiResponse(responseCode = "403", description = "Forbidden. Only admin users can delete registers from db", 
    		    content = @Content),
-        @ApiResponse(responseCode = "404", description = "Slide not found. Wrong identifier", 
+        @ApiResponse(responseCode = "404", description = "S not found. Wrong identifier", 
    		    content = @Content)})
     @DeleteMapping(REQ_MAPP_DELETE_SLIDES)
     private ResponseEntity<?> deleteSlides(@PathVariable(name = "id") Long id) throws Exception {
