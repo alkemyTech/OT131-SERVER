@@ -7,9 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -36,6 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Override
+
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity.cors().and().csrf().disable()
@@ -48,13 +47,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         REQ_MAPP_ORG,
                         REQ_MAPP_CATEGORIES,
                         REQ_MAPP_NEWS).hasAnyAuthority(AUTHENTICATED_ROLES) // Only authenticated roles can access GET methods
-                .antMatchers(HttpMethod.POST, "/organizations/public/**").hasAuthority("ROLE_ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/categories/**").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                .antMatchers(HttpMethod.POST, URL_ORG_SECURITY).hasAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.DELETE,REQ_MAPP_CATEGORIES+"/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers(SWAGGER_SECURITY).permitAll()
                 .antMatchers(REQ_MAPP_ACTIVITIES, REQ_MAPP_ACTIVITIES + "/**",
                         REQ_MAPP_ORG, REQ_MAPP_ORG + "/**",
                         REQ_MAPP_CATEGORIES, REQ_MAPP_CATEGORIES + "/**",
-                        REQ_MAPP_NEWS, REQ_MAPP_NEWS + "/**").hasAuthority("ROLE_ADMIN") // Only admins can access other methods
+                        REQ_MAPP_NEWS, REQ_MAPP_NEWS + "/**",
+                        REQ_MAPP_SLIDES, REQ_MAPP_SLIDES + "/**", // Only admins can access other methods
+                        REQ_MAPP_TESTIMONIALS +"/**").hasAuthority("ROLE_ADMIN") // Only admins can access other methods
+
                 .antMatchers("/public/**").permitAll() // All users can access endpoints in /public/**
                 .anyRequest().authenticated() // Only authenticated users can access the rest of endpoints
                 .and()
@@ -62,7 +64,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
-
 
     @Override
     @Bean

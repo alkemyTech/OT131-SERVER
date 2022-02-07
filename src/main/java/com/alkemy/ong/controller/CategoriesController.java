@@ -1,11 +1,14 @@
 package com.alkemy.ong.controller;
 
 import com.alkemy.ong.dto.CategoriesDTO;
-import com.alkemy.ong.model.Categories;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import com.alkemy.ong.service.CategoriesService;
 import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
@@ -32,18 +35,18 @@ public class CategoriesController {
     public ResponseEntity<List<String>> listCategoriesName() {
         return ResponseEntity.ok().body(categoriesService.getAllByName());
     }
+    
+    @Operation(summary = "Delete  Categories by id")
+    @ApiResponses(value = { 
+    		  @ApiResponse(responseCode = "200", description = "Delete category" , 
+    				    content = { @Content(mediaType = "application/json", 
+    				      schema = @Schema(implementation = CategoriesDTO.class)) }),
+    		  
+    		  @ApiResponse(responseCode = "400", description = "Invalid id supplied", 
+    		    content = @Content), 
+    		  @ApiResponse(responseCode = "404", description = "Category not found", 
+    		    content = @Content) })
 
-    @Operation(summary = "Delete  Activities by id")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Delete category",
-                content = {
-                    @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Categories.class))}),
-
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied",
-                content = @Content),
-        @ApiResponse(responseCode = "404", description = "Category not found",
-                content = @Content)})
     @DeleteMapping("/{id}")
     public String deleteCategories(@Valid @PathVariable long id) throws Exception {
         return categoriesService.deleteCategory(id);
