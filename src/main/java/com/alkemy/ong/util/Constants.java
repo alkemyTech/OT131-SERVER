@@ -53,6 +53,10 @@ public final class Constants {
     Internal Key for Token
      */
     public static final String SECRET_KEY = "SECRET_KEY";
+    
+    //Slides Update
+    public static final String REQ_MAPP_UPDATE_SLIDES = "/{id}";
+    public static final String REQ_MAPP_DELETE_SLIDES = "/{id}";
 
     public Constants() {
     }

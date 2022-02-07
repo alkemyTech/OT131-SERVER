@@ -2,6 +2,8 @@ package com.alkemy.ong.mapper;
 
 import com.alkemy.ong.dto.SlidesDTO;
 import com.alkemy.ong.dto.SlidesResponseDTO;
+import com.alkemy.ong.dto.SlidesUpdateDto;
+import com.alkemy.ong.dto.SlidesUpdateResponseDTO;
 import com.alkemy.ong.model.Slides;
 import org.springframework.stereotype.Component;
 
@@ -27,4 +29,13 @@ public class SlidesMapper {
                 .build();
     }
     
+    public SlidesUpdateResponseDTO entity3ResponseDTO(Slides entity) {
+        return SlidesUpdateResponseDTO.builder()
+                .imageUrl(entity.getImageUrl())
+                .text(entity.getText())
+                .order(entity.getOrder())
+                .organizationId(entity.getOrganizationId())
+                .dateModifed(null)
+                .build();
+    }
 }

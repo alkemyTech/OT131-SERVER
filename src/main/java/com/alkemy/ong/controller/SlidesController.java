@@ -1,5 +1,9 @@
 package com.alkemy.ong.controller;
 
+import com.alkemy.ong.dto.SlidesUpdateDto;
+import com.alkemy.ong.dto.SlidesUpdateResponseDTO;
+import com.alkemy.ong.model.Slides;
+import com.alkemy.ong.model.Users;
 import com.alkemy.ong.dto.SlidesDTO;
 import com.alkemy.ong.dto.SlidesListDto;
 import com.alkemy.ong.dto.SlidesResponseDTO;
@@ -13,8 +17,11 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -60,4 +67,42 @@ public class SlidesController {
     }
     
     
+    @Operation(summary = "Update slide data")
+    @ApiResponses(value = { 
+    @ApiResponse (responseCode = "200", description = "Update ok. Return credentials" , 
+                                 content = { @Content(mediaType = "application/json", 
+                                   schema = @Schema(implementation = Slides.class)) }),
+                       
+    @ApiResponse(responseCode = "404", description = "Slide not found. Slide id does not exist", 
+                         content = @Content),})
+    @PutMapping(REQ_MAPP_UPDATE_SLIDES)
+    private ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody SlidesUpdateDto dto) {
+    	SlidesUpdateResponseDTO result = slidesService.update(id, dto);
+        return result == null?
+                ResponseEntity.status(HttpStatus.NOT_FOUND).build() :
+                ResponseEntity.ok().body(result);
+
+    }
+    
+    
+    @Operation(summary = "Delete slide from Database (set active as false)")
+	@ApiResponses(value = { 
+        @ApiResponse (responseCode = "200", description = "Delete ok. Return credentials" , 
+   				    content = {@Content(mediaType = "application/json", 
+   				      schema = @Schema(implementation = Slides.class)) }),
+   		  
+   		@ApiResponse(responseCode = "403", description = "Forbidden. Only admin users can delete registers from db", 
+   		    content = @Content),
+        @ApiResponse(responseCode = "404", description = "Slide not found. Wrong identifier", 
+   		    content = @Content)})
+    @DeleteMapping(REQ_MAPP_DELETE_SLIDES)
+    private ResponseEntity<?> deleteSlides(@PathVariable(name = "id") Long id) throws Exception {
+        try {
+            slidesService.delete(id);
+            return ResponseEntity.status(HttpStatus.OK).build();
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.OK).body(e.getMessage());
+        }
+    }
 }

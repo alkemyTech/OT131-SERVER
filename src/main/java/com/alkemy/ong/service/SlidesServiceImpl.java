@@ -1,15 +1,20 @@
 package com.alkemy.ong.service;
 
+import com.alkemy.ong.dto.SlidesUpdateDto;
+import com.alkemy.ong.dto.SlidesUpdateResponseDTO;
 import com.alkemy.ong.dto.SlidesDTO;
+
 import com.alkemy.ong.dto.SlidesListDto;
 import com.alkemy.ong.dto.SlidesResponseDTO;
 import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.mapper.SlidesMapper;
 import com.alkemy.ong.model.Organizations;
 import com.alkemy.ong.model.Slides;
+import com.alkemy.ong.model.Users;
 import com.alkemy.ong.repository.OrganizationsRepository;
 import com.alkemy.ong.repository.SlidesRepository;
 import com.alkemy.ong.util.BASE64DecodedMultipartFile;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +23,7 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.time.LocalDate;
 
 import static com.alkemy.ong.util.Constants.BAD_ORG_ID;
 
@@ -77,4 +83,33 @@ public class SlidesServiceImpl implements SlidesService {
 	                        slide.getOrder()))
 	                .collect(Collectors.toList());
 	}
+	
+	@Override
+	public SlidesUpdateResponseDTO update(Long id, SlidesUpdateDto dto) {
+		Optional<Slides> result = slidesRepository.findById(id);
+        if (result.isEmpty() || !result.get().isActive())
+            return null;
+        
+        Slides entity = result.get();
+        entity.setDateModified(dto.getDateModifed());
+        entity.setImageUrl(dto.getImageUrl());
+        entity.setOrder(dto.getOrder());
+        entity.setText(dto.getText());
+        entity.setOrganizationId(dto.getOrganizationId());
+        
+        Slides entityUpdate = slidesRepository.save(entity);
+        		
+		return slidesMapper.entity3ResponseDTO(entityUpdate);
+	}
+	
+	public void delete(Long id) throws Exception{
+		Optional<Slides> slide = slidesRepository.findById(id);
+        if (slide.isPresent()) {
+        	slide.get().setActive(false);
+        	slidesRepository.save(slide.get());
+        } else {
+            throw new Exception("slide not found");
+        }
+	}
+	
 }
