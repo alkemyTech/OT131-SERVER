@@ -4,9 +4,6 @@ import com.alkemy.ong.dto.UsersDtoResponse;
 import com.alkemy.ong.dto.NewUsersDTO;
 import com.alkemy.ong.dto.LoginUsersDTO;
 import com.alkemy.ong.dto.UsersNoAuthDto;
-import com.alkemy.ong.dto.UsersOkDto;
-
-import com.alkemy.ong.dto.*;
 import com.alkemy.ong.model.Users;
 import com.alkemy.ong.service.UsersServiceImpl;
 import javax.validation.Valid;

@@ -49,6 +49,10 @@ public class UsersDetailsServiceImp implements UserDetailsService {
             throw new InternalAuthenticationServiceException("The entered user does not exist");
         }
     }
-}
+
+    }
+    
+    
+
 
 

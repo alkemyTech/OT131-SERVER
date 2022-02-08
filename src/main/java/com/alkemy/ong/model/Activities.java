@@ -1,6 +1,8 @@
+
 package com.alkemy.ong.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -12,6 +14,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
+@Builder
 @Entity
 @Data
 @NoArgsConstructor
@@ -27,7 +30,7 @@ public class Activities {
 
     @NotNull
     private String name;
-
+    @Column(length = 7000)
     @NotNull
     private String content;
 
@@ -50,4 +53,17 @@ public class Activities {
 
     @Column(name = "is_active")
     private boolean isActive = Boolean.TRUE;
+
+
+	public Activities(@NotNull String name, @NotNull String content, @NotNull String image, LocalDate createdDate,
+			boolean isActive) {
+		super();
+		this.name = name;
+		this.content = content;
+		this.image = image;
+		this.createdDate = createdDate;
+		this.isActive = isActive;
+	}
+       
+
 }
