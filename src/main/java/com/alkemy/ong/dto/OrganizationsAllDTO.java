@@ -1,8 +1,12 @@
 package com.alkemy.ong.dto;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import com.alkemy.ong.model.Slides;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,5 +36,6 @@ public class OrganizationsAllDTO {
 	private  String welcomeText;
 	private String aboutUsText;
 	private boolean isActive;
+	private List<Slides> slides;
 
 }

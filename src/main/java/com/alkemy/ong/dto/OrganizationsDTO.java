@@ -1,5 +1,9 @@
 package com.alkemy.ong.dto;
 
+import java.util.List;
+
+import com.alkemy.ong.model.Slides;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,5 +16,6 @@ public class OrganizationsDTO {
 	private String images;
 	private String addres;
 	private int phone;
+	private List <Slides> slides;
 
 }
