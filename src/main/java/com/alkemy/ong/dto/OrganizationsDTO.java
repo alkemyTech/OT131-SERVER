@@ -17,5 +17,7 @@ public class OrganizationsDTO {
 	private String addres;
 	private int phone;
 	private List <Slides> slides;
-
+        private String facebookUrl;
+        private String instagramUrl;
+        private String linkedinUrl;
 }

@@ -57,7 +57,9 @@ public class Organizations {
 	private List <Slides> slide;
 	private Boolean isActive = Boolean.TRUE;
 	
-
+        private String facebookUrl;
+        private String instagramUrl;
+        private String linkedinUrl;
 	
 
 }

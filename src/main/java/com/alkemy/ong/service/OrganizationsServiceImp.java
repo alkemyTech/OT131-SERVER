@@ -66,6 +66,9 @@ public class OrganizationsServiceImp implements OrganizationsService {
 		org.get().setWelcomeText(entity.getWelcomeText());
 		org.get().setImages(entity.getImages());
 		org.get().setSlide(entity.getSlides());
+                org.get().setFacebookUrl(entity.getFacebookUrl());
+                org.get().setInstagramUrl(entity.getInstagramUrl());
+                org.get().setLinkedinUrl(entity.getLinkedinUrl());
 		organizationRepository.save(org.get());
 		
 		return mapper.map(org.get(), OrganizationsAllDTO.class);
