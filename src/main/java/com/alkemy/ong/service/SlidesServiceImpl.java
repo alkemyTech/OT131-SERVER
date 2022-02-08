@@ -111,5 +111,14 @@ public class SlidesServiceImpl implements SlidesService {
             throw new Exception("slide not found");
         }
 	}
-	
+        
+    public SlidesResponseDTO findById(Long id){
+        Optional<Slides> slides = slidesRepository.findById(id);
+        if(slides.isPresent()){
+            SlidesResponseDTO slidesResponseDTO = slidesMapper.entity2ResponseDTO(slides.get());
+            return slidesResponseDTO;
+        } else {
+            throw new ParamNotFoundException("Slides with id=" + id + " not found.");
+        }
+    }
 }

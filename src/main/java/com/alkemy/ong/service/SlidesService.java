@@ -13,4 +13,5 @@ public interface SlidesService {
     List<SlidesListDto> getAll();
     public SlidesUpdateResponseDTO update(Long id,SlidesUpdateDto dto);
     public void delete(Long id) throws Exception;
+    public SlidesResponseDTO findById(Long id);
 }

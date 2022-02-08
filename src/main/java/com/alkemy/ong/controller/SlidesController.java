@@ -104,4 +104,13 @@ public class SlidesController {
             return ResponseEntity.status(HttpStatus.OK).body(e.getMessage());
         }
     }
+    
+    @Operation(summary = "Show Slide by Id")
+	@ApiResponses(value = {
+            @ApiResponse(responseCode = "404", description = "Slide not found. Wrong identifier", 
+                        content = @Content)})
+    @GetMapping(REQ_MAPP_ID)
+    public ResponseEntity<SlidesResponseDTO> getById(@PathVariable Long id) {
+        return ResponseEntity.ok().body(slidesService.findById(id));
+    }  
 }
