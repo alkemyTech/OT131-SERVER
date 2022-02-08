@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,9 +36,9 @@ public class Slides {
     @Column(name = "order_number")
     private Integer order;
 
-    @NotNull
-    @Column(name = "organization_id")
-    private Long organizationId;
+    @NotNull    
+    @ManyToOne
+    private Organizations organization;
 
     @NotNull
     @CreationTimestamp
@@ -50,5 +51,7 @@ public class Slides {
 
     @Column(name = "is_active")
     private boolean isActive = Boolean.TRUE;
+
+
 
 }

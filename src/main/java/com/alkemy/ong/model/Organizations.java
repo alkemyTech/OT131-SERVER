@@ -1,11 +1,14 @@
 package com.alkemy.ong.model;
 
 import java.time.LocalDate;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -47,7 +50,8 @@ public class Organizations {
 	@Column(name= "created_date")
 	@CreationTimestamp
 	private LocalDate createdDate;
-	private Slides slide;
+	@OneToMany (mappedBy = "organization")
+	private List <Slides> slide;
 
 	private boolean isActive ;
 	
