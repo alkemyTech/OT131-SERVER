@@ -13,10 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_CATEGORIES;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 
 @RestController
 @RequestMapping(REQ_MAPP_CATEGORIES)
@@ -25,32 +22,36 @@ public class CategoriesController {
     @Autowired
     private CategoriesService categoriesService;
 
+    @Operation(
+            summary = "Update a Category",
+            description = "To update an existing category you must access this endpoint")
+
     @PutMapping("/{id}")
     public ResponseEntity<CategoriesDTO> update(@PathVariable Long id, @Valid @RequestBody CategoriesDTO dto) {
         CategoriesDTO result = categoriesService.update(id, dto);
         return ResponseEntity.ok().body(result);
     }
 
+    @Operation(
+            summary = "List category names",
+            description = "To list the names of the categories that already exist, you must access this endpoint")
+
     @GetMapping
     public ResponseEntity<List<String>> listCategoriesName() {
         return ResponseEntity.ok().body(categoriesService.getAllByName());
     }
     
-    @Operation(summary = "Delete  Categories by id")
-    @ApiResponses(value = { 
-    		  @ApiResponse(responseCode = "200", description = "Delete category" , 
-    				    content = { @Content(mediaType = "application/json", 
-    				      schema = @Schema(implementation = CategoriesDTO.class)) }),
-    		  
-    		  @ApiResponse(responseCode = "400", description = "Invalid id supplied", 
-    		    content = @Content), 
-    		  @ApiResponse(responseCode = "404", description = "Category not found", 
-    		    content = @Content) })
-
+    @Operation(
+            summary = "Delete  Categories",
+            description = "To delete a category you must access this endpoint")
     @DeleteMapping("/{id}")
     public String deleteCategories(@Valid @PathVariable long id) throws Exception {
         return categoriesService.deleteCategory(id);
     }
+
+    @Operation(
+            summary = "Add  Categories",
+            description = "To add a category you must access this endpoint")
 
     @PostMapping
     public ResponseEntity<?> addCategories(@Valid @RequestBody() CategoriesDTO categoriesDto) {

@@ -1,10 +1,13 @@
 package com.alkemy.ong.service;
 
+import com.alkemy.ong.dto.TestimonialsAddNewDto;
 import com.alkemy.ong.dto.TestimonialsDto;
+import com.alkemy.ong.exception.AlreadyExistsException;
 import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.model.Testimonials;
 import com.alkemy.ong.repository.TestimonialsRepository;
 import static com.alkemy.ong.util.Constants.ENTITY_NOT_FOUND;
+import static com.alkemy.ong.util.Constants.ERROR_EXIST;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.modelmapper.ModelMapper;
@@ -19,9 +22,14 @@ public class TestimonialsServiceImpl implements TestimonialsService {
     
     private ModelMapper mapper = new ModelMapper();
 
+    @Transactional
     @Override
-    public Testimonials save(Testimonials testimonials) {
-        return testimonialsRepository.save(testimonials);
+    public TestimonialsDto save(TestimonialsAddNewDto testimonialsAddNewDto) {
+        if(testimonialsRepository.findByName(testimonialsAddNewDto.getName()) != null){
+            return mapper.map(testimonialsRepository.save(mapper.map(testimonialsAddNewDto, Testimonials.class)), TestimonialsDto.class);
+        }else{
+            throw new AlreadyExistsException(ERROR_EXIST);
+        }
     }
 
     @Transactional

@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TestimonialsRepository extends JpaRepository<Testimonials, Long>{
     
+    public Testimonials findByName(String name);
     
 }
