@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static com.alkemy.ong.util.Constants.*;
 import java.util.List;
 import static com.alkemy.ong.util.Constants.GET_MAPP_LIST_MEMBERS;
+import static com.alkemy.ong.util.Constants.MEMBERS_LIST_OK;
 import com.alkemy.ong.dto.MemberDTO;
 import com.alkemy.ong.dto.NewMemberDTO;
 import com.alkemy.ong.service.MembersService;
@@ -34,7 +35,16 @@ public class MembersController {
     @Autowired
     MembersService membersService;
 
-    @GetMapping(GET_MAPP_LIST_MEMBERS)
+   
+    @Operation(summary = MEMBERS_LIST_INFO)
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = MEMBERS_LIST_OK,
+                content = {
+                    @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = MemberDTO.class))}),
+                            })
+
+    @GetMapping()
     public ResponseEntity<List<MemberDTO>> listMembers() {
 
         return ResponseEntity.status(HttpStatus.SC_OK).body(membersService.getMembers());
