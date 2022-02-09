@@ -44,6 +44,13 @@ public final class Constants {
     public static final String ACTIVITIES_POST_INFO = "Create a new Activity.";
     public static final String ACTIVITIES_POST_OK = "Activity successfully created.";
 
+    public static final String REQ_MAPP_SLIDES = "/slides";
+    public static final String BAD_ORG_ID = "The organization was not found.";
+
+    //SlidesController Docs
+    public static final String SLIDES_POST_INFO = "Create a new Slide";
+    public static final String SLIDES_POST_OK = "Slide successfully created.";
+    public static final String SLIDES_GET_INFO = "Show list of Slides";
     //ContactsController Docs
     public static final String CONTACTS_POST_INFO = "Create a new contact";
     public static final String CONTACTS_CREATED_OK = "Contact created successfully";
@@ -66,6 +73,10 @@ public final class Constants {
     Internal Key for Token
      */
     public static final String SECRET_KEY = "SECRET_KEY";
+    
+    //Slides Update
+    public static final String REQ_MAPP_UPDATE_SLIDES = "/{id}";
+    public static final String REQ_MAPP_DELETE_SLIDES = "/{id}";
 
     public Constants() {
     }
