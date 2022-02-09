@@ -11,6 +11,8 @@ import com.alkemy.ong.repository.RolesRepository;
 import com.alkemy.ong.util.RoleName;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -68,6 +70,32 @@ public class UsersMapper {
                 userEntity.getFirstName(),
                 userEntity.getLastName(),
                 userEntity.getEmail());
+    }
+
+    public List<UsersOkDto> findallDto(List<Users> allEntityUsers){
+
+    	try {
+    		
+    		List<UsersOkDto> dtos = new ArrayList<UsersOkDto>();
+    		
+    		
+    		for (Users user: allEntityUsers) {
+    			UsersOkDto auxDto = new UsersOkDto();
+    			auxDto.setId(user.getId());
+				auxDto.setFirstName(user.getFirstName());
+				auxDto.setLastName(user.getLastName());
+				auxDto.setEmail(user.getEmail());
+				dtos.add(auxDto);
+			}
+    		
+    		return dtos;
+    		
+		} catch (Exception e) {
+			
+			System.out.print("NO SETEA LA LISTA DTOS: " + e.getMessage());
+			return null;
+		}
+    	
     }
 
 }

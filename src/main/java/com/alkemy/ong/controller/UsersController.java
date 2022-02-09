@@ -1,9 +1,11 @@
 package com.alkemy.ong.controller;
 
 import com.alkemy.ong.dto.UsersDtoResponse;
+
 import com.alkemy.ong.dto.NewUsersDTO;
 import com.alkemy.ong.dto.LoginUsersDTO;
 import com.alkemy.ong.dto.UsersNoAuthDto;
+import com.alkemy.ong.dto.UsersOkDto;
 import com.alkemy.ong.model.Users;
 import com.alkemy.ong.service.UsersServiceImpl;
 import javax.validation.Valid;
@@ -23,8 +25,12 @@ import static com.alkemy.ong.util.Constants.REQ_MAPP_DELETE_LOGIN_USER;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_GET_AUTH_ME_USER;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_POST_LOGIN_USER;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_POST_REGISTER_USER;
+import static com.alkemy.ong.util.Constants.REQ_MAPP_GET_LIST_USER;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
+
 
 @RestController
 @RequestMapping(value = REQ_MAPP_CLASS_USER)
@@ -119,5 +125,12 @@ public class UsersController {
     public ResponseEntity<?> authMe(@RequestHeader(name = "authorization") String token) {
         return ResponseEntity.ok(usersService.extractPayload(token));
     }
+    
+    @GetMapping(value = REQ_MAPP_GET_LIST_USER)
+    public List<UsersOkDto> listUsers() {
+
+    	return usersService.listUsers();
+    }
+
 
 }

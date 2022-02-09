@@ -26,6 +26,8 @@ import com.alkemy.ong.util.JWT;
 import java.text.MessageFormat;
 import static com.alkemy.ong.util.Constants.*;
 import java.util.Base64;
+import java.util.List;
+
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 
@@ -188,6 +190,12 @@ public class UsersServiceImpl implements UsersService {
     public Users update(UsersDTO usersDto) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public List<UsersOkDto> listUsers() {
+    	
+    	return  usersMapper.findallDto(usersRepository.findAll());
     }
 
 }
