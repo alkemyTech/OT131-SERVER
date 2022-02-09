@@ -2,8 +2,6 @@ package com.alkemy.ong.repository;
 
 import java.util.List;
 import java.util.Optional;
-
-import com.alkemy.ong.model.Organizations;
 import com.alkemy.ong.model.Slides;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,22 +10,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SlidesRepository extends JpaRepository<Slides, Long> {
-   
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @Query("SELECT c FROM Slide c WHERE organization_id = :idOrg")
+    @Query("SELECT c FROM Slides c WHERE organization_id = :idOrg")
     public Optional <List<Slides>> findByOrganizationId (@Param ("idOrg") Long id);
+ 
+
 
 }
