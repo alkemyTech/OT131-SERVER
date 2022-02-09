@@ -90,4 +90,11 @@ public class CategoriesServiceImpl implements CategoriesService{
         }
         return categoriesMapper.converToDTO(categoriesRepository.save(categoriesMapper.converToModel(categoriesDto)));
     }
+    
+    @Override
+    public CategoriesDTO detailCategory(Long id) throws Exception {
+    	
+    	return categoriesMapper.converToDTO(categoriesRepository.getById(id));
+    }
+
 }
