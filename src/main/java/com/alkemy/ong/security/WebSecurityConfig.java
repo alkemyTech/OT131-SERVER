@@ -52,7 +52,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(SWAGGER_SECURITY).permitAll()
                 .antMatchers(REQ_MAPP_ACTIVITIES, REQ_MAPP_ACTIVITIES + "/**",
                         REQ_MAPP_ORG, REQ_MAPP_ORG + "/**",
-                        REQ_MAPP_CATEGORIES, REQ_MAPP_CATEGORIES + "/**",
+                        REQ_MAPP_CATEGORIES, REQ_MAPP_CATEGORIES + "/**",                               
+                        REQ_MAPP_MEMBERS+"/**", // Only admins can access other methods
                         REQ_MAPP_NEWS, REQ_MAPP_NEWS + "/**",
                         REQ_MAPP_SLIDES, REQ_MAPP_SLIDES + "/**", // Only admins can access other methods
                         REQ_MAPP_TESTIMONIALS +"/**").hasAuthority("ROLE_ADMIN")

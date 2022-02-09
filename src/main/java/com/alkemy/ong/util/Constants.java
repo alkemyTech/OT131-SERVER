@@ -28,6 +28,19 @@ public final class Constants {
     public static final String[] URL_ORG_SECURITY = {"/organizations/public/**"};
     public static final String REQ_MAPP_GET_AUTH_ME_USER = "/me";
     public static final String REQ_MAPP_ID = "/{id}";
+
+    public static final String REQ_MAPP_MEMBERS = "/members";
+    public static final String GET_MAPP_LIST_MEMBERS = "/members";
+    public static final String ERR_MEMBER_ALREADY_EXISTS = "Member already exists";
+    public static final String ERR_FB_MEMBER_ALREADY_EXISTS = "There is already a member created with the Facebook entered";
+    public static final String ERR_IG_MEMBER_ALREADY_EXISTS = "There is already a member created with the Instagram entered";
+    public static final String ERR_LI_MEMBER_ALREADY_EXISTS = "There is already a member created with the Linkedin entered";
+    public static final String MEMBERS_POST_INFO = "Create a new member";
+    public static final String MEMBERS_CREATED_OK = "Member created successfully";
+    public static final String MEMBERS_LIST_INFO = "Get a list of Members";
+    public static final String MEMBERS_LIST_OK = "Returns a list of members";
+    public static final String ERR_MEMBER_ALREADY_REMOVED ="The member no longer exists";
+
     public static final String REQ_MAPP_TESTIMONIALS = "/testimonials";
     public static final String ERR_CONTACT_ALREADY_EXISTS = "The entered contact already exists";
     public static final String REQ_MAPP_CONTACTS = "/contacts";

@@ -2,14 +2,17 @@ package com.alkemy.ong.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Data
@@ -43,11 +46,15 @@ public class Members implements Serializable{
     @Column(name = "description")
     private String description;
 
-    @Column(name = "timestamp")
     @CreationTimestamp
-    private Timestamp timestamp;
+    @Column(name = "date_created")
+    private LocalDate dateCreated;
 
-    @Column(name = "soft_delete")
+    @UpdateTimestamp
+    @Column(name = "date_modified")
+    private LocalDate dateModified;
+
+    @Column(name = "is_active")
     private Boolean isActive = Boolean.TRUE;
 
     public Members(String name, String facebookUrl, String instagramUrl, String linkedinUrl, String image, String description) {
