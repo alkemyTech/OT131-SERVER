@@ -12,10 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrganizationsDTO {
-	private String name;
-	private String images;
-	private String addres;
-	private int phone;
-	private List <Slides> slides;
-
+    private String name;
+    private String images;
+    private String addres;
+    private int phone;
+    private List<Slides> slides;
+    private String facebookUrl;
+    private String instagramUrl;
+    private String linkedinUrl;
 }

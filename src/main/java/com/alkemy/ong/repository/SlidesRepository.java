@@ -2,8 +2,6 @@ package com.alkemy.ong.repository;
 
 import java.util.List;
 import java.util.Optional;
-
-import com.alkemy.ong.model.Organizations;
 import com.alkemy.ong.model.Slides;
 
 import java.util.List;

@@ -38,4 +38,7 @@ public class OrganizationsAllDTO {
 	private boolean isActive;
 	private List<Slides> slides;
 
+        private String facebookUrl;
+        private String instagramUrl;
+        private String linkedinUrl; 
 }
