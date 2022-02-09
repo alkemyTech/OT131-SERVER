@@ -14,8 +14,6 @@ public interface UsersService {
 
     public Optional<Users> findByMail(String email);
 
-    public Users save(UsersRegisterDTO usersRegisterDTO);
-
     public Users update(UsersDTO usersDto);
 
     public void delete(Long id) throws Exception;

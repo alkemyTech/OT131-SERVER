@@ -7,18 +7,23 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.alkemy.ong.dto.OrganizationsAllDTO;
 import com.alkemy.ong.dto.OrganizationsDTO;
 import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.model.Organizations;
 import com.alkemy.ong.repository.OrganizationsRepository;
+import com.alkemy.ong.repository.SlidesRepository;
 
 @Service
 public class OrganizationsServiceImp implements OrganizationsService {
 
 	@Autowired
 	private OrganizationsRepository organizationRepository;
+
+	@Autowired
+	private SlidesRepository slidesRepository;
 	
 	private ModelMapper mapper = new ModelMapper();
 	
@@ -35,12 +40,15 @@ public class OrganizationsServiceImp implements OrganizationsService {
 			return Optional.of(organizationRepository.findByName(name) 
 		        .orElseThrow(() -> new NullPointerException(ENTITY_NOT_FOUND)));
 	}
+	
 	@Override
+	@Transactional
 	public Organizations saveOrganization(Organizations organization) throws Exception {
 		if (organizationRepository.findByName(organization.getName()).isPresent()) {
 			throw new ParamNotFoundException(NAME_EXIST);
 		}
-		organization.setActive(true);
+		organization.setIsActive(true);
+		organization.setSlide(slidesRepository.findByOrganizationId(organization.getId()).get());
 		return organizationRepository.save(organization);
 	}
 
@@ -52,12 +60,15 @@ public class OrganizationsServiceImp implements OrganizationsService {
 		}
 		org.get().setName(entity.getName());
 		org.get().setAddres(entity.getAddres());
-		org.get().setActive(entity.isActive());
 		org.get().setAboutUsText(entity.getAboutUsText());
 		org.get().setPhone(entity.getPhone());
-		entity.setEmail(entity.getEmail());
+		org.get().setEmail(entity.getEmail());
 		org.get().setWelcomeText(entity.getWelcomeText());
 		org.get().setImages(entity.getImages());
+		org.get().setSlide(entity.getSlides());
+                org.get().setFacebookUrl(entity.getFacebookUrl());
+                org.get().setInstagramUrl(entity.getInstagramUrl());
+                org.get().setLinkedinUrl(entity.getLinkedinUrl());
 		organizationRepository.save(org.get());
 		
 		return mapper.map(org.get(), OrganizationsAllDTO.class);

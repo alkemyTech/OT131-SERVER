@@ -2,14 +2,16 @@
 package com.alkemy.ong.service;
 
 
-import com.alkemy.ong.model.Testimonials;
+import com.alkemy.ong.dto.TestimonialsAddNewDto;
+import com.alkemy.ong.dto.TestimonialsDto;
+
 
 public interface TestimonialsService {
 
 
-    public Testimonials save(Testimonials testimonials);
+    public TestimonialsDto save(TestimonialsAddNewDto testimonialsAddNewDto);
 
-    public Testimonials update(Testimonials testimonials);
+    public TestimonialsDto updateTestimonails(TestimonialsDto testimonials,long id);
 
     public void delete(Long id);
 

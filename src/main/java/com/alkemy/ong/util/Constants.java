@@ -24,8 +24,11 @@ public final class Constants {
     public static final String ERR_ACT_NOT_FOUND = "Requested activity was not found";
     public static final String ERR_AWS_NOT_FOUND = "You haven't selected any file to upload";
     public static final String ERR_AWS_NOT_SAVED = "The file couldn't be saved";
+    public static final String[] SWAGGER_SECURITY = {"swagger-ui.html","/swagger-ui/**","/v3/api-docs/**"};
+    public static final String[] URL_ORG_SECURITY = {"/organizations/public/**"};
     public static final String REQ_MAPP_GET_AUTH_ME_USER = "/me";
     public static final String REQ_MAPP_ID = "/{id}";
+
     public static final String REQ_MAPP_MEMBERS = "/members";
     public static final String GET_MAPP_LIST_MEMBERS = "/members";
     public static final String ERR_MEMBER_ALREADY_EXISTS = "Member already exists";
@@ -38,6 +41,12 @@ public final class Constants {
     public static final String MEMBERS_LIST_OK = "Returns a list of members";
     public static final String ERR_MEMBER_ALREADY_REMOVED ="The member no longer exists";
 
+    public static final String REQ_MAPP_TESTIMONIALS = "/testimonials";
+    public static final String ERR_CONTACT_ALREADY_EXISTS = "The entered contact already exists";
+    public static final String REQ_MAPP_CONTACTS = "/contacts";
+    public static final String ERR_CONTACT_NOT_FOUND = "Requested contact was not found";
+    public static final String ERR_USER_ALREADY_EXISTS = "User already exists";
+
     //ActivitiesController Docs
     public static final String ACTIVITIES_GET_INFO = "Get a list of all active activities.";
     public static final String ACTIVITIES_GET_INFO_OK = "Returning all activities...";
@@ -48,13 +57,39 @@ public final class Constants {
     public static final String ACTIVITIES_POST_INFO = "Create a new Activity.";
     public static final String ACTIVITIES_POST_OK = "Activity successfully created.";
 
+    public static final String REQ_MAPP_SLIDES = "/slides";
+    public static final String BAD_ORG_ID = "The organization was not found.";
+
+    //SlidesController Docs
+    public static final String SLIDES_POST_INFO = "Create a new Slide";
+    public static final String SLIDES_POST_OK = "Slide successfully created.";
+    public static final String SLIDES_GET_INFO = "Show list of Slides";
+    //ContactsController Docs
+    public static final String CONTACTS_POST_INFO = "Create a new contact";
+    public static final String CONTACTS_CREATED_OK = "Contact created successfully";
+    public static final String CONTACTS_DELETE_INFO = "Unsubscribe the contact entered by id";
+    public static final String CONTACTS_DELETE_OK = "Contact unsubscribed successfully";
 
 
+    public static final String NOT_DATA_DISPLAY = "No data to display";
+
+    //Confirmation email
+    public static final String CONTACT_CONFIRMATION_SUBJECT = "¡Contacto registrado exitosamente!";
+    public static final String CONTACT_CONFIRMATION_PATH = "src/main/resources/templates/confirmationEmail.html";
+
+   
+    
+    //Message the error
+    public static final String ERROR_EXIST = "The item you want to add already exists";
 
     /*
     Internal Key for Token
      */
     public static final String SECRET_KEY = "SECRET_KEY";
+    
+    //Slides Update
+    public static final String REQ_MAPP_UPDATE_SLIDES = "/{id}";
+    public static final String REQ_MAPP_DELETE_SLIDES = "/{id}";
 
     public Constants() {
     }
