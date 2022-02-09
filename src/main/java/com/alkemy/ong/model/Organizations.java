@@ -1,15 +1,21 @@
 package com.alkemy.ong.model;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +28,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Table(name="organizations")
+@EntityListeners(AuditingEntityListener.class)
 public class Organizations {
 	
 	@Id
@@ -38,6 +45,7 @@ public class Organizations {
 	@NotNull	
 	private  String welcomeText;
 	@Column (length = 5000)
+	@Size (max = 5000)
 	private String aboutUsText;
 	@Column( name ="modified_date")
 	@UpdateTimestamp
@@ -45,11 +53,13 @@ public class Organizations {
 	@Column(name= "created_date")
 	@CreationTimestamp
 	private LocalDate createdDate;
-	@Column(name= "removed_date")
-	private LocalDate removedDate;
-	private boolean isActive = Boolean.TRUE;
+	@OneToMany (mappedBy = "organization")
+	private List <Slides> slide;
+	private Boolean isActive = Boolean.TRUE;
 	
-
+        private String facebookUrl;
+        private String instagramUrl;
+        private String linkedinUrl;
 	
 
 }

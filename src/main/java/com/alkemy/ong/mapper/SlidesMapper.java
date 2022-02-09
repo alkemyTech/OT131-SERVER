@@ -5,16 +5,22 @@ import com.alkemy.ong.dto.SlidesResponseDTO;
 import com.alkemy.ong.dto.SlidesUpdateDto;
 import com.alkemy.ong.dto.SlidesUpdateResponseDTO;
 import com.alkemy.ong.model.Slides;
+import com.alkemy.ong.repository.OrganizationsRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class SlidesMapper {
 
+    @Autowired
+    OrganizationsRepository organizationsRepository;
+
     public Slides dto2Entity(SlidesDTO dto) {
         return Slides.builder()
                 .text(dto.getText())
                 .order(dto.getOrder())
-                .organizationId(dto.getOrganizationId())
+                .organization(organizationsRepository.getById(dto.getOrganizationId()))
                 .isActive(Boolean.TRUE)
                 .build();
     }
@@ -25,7 +31,7 @@ public class SlidesMapper {
                 .imageUrl(entity.getImageUrl())
                 .text(entity.getText())
                 .order(entity.getOrder())
-                .organizationId(entity.getOrganizationId())
+                .organization(organizationsRepository.getById(entity.getOrganization().getId()))
                 .build();
     }
     
@@ -34,7 +40,7 @@ public class SlidesMapper {
                 .imageUrl(entity.getImageUrl())
                 .text(entity.getText())
                 .order(entity.getOrder())
-                .organizationId(entity.getOrganizationId())
+                .organization(organizationsRepository.getById(entity.getOrganization().getId()))
                 .dateModifed(null)
                 .build();
     }

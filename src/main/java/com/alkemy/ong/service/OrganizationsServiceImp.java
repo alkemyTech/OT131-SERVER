@@ -14,12 +14,16 @@ import com.alkemy.ong.dto.OrganizationsDTO;
 import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.model.Organizations;
 import com.alkemy.ong.repository.OrganizationsRepository;
+import com.alkemy.ong.repository.SlidesRepository;
 
 @Service
 public class OrganizationsServiceImp implements OrganizationsService {
 
 	@Autowired
 	private OrganizationsRepository organizationRepository;
+
+	@Autowired
+	private SlidesRepository slidesRepository;
 	
 	private ModelMapper mapper = new ModelMapper();
 	
@@ -43,7 +47,8 @@ public class OrganizationsServiceImp implements OrganizationsService {
 		if (organizationRepository.findByName(organization.getName()).isPresent()) {
 			throw new ParamNotFoundException(NAME_EXIST);
 		}
-		organization.setActive(true);
+		organization.setIsActive(true);
+		organization.setSlide(slidesRepository.findByOrganizationId(organization.getId()).get());
 		return organizationRepository.save(organization);
 	}
 
@@ -60,6 +65,10 @@ public class OrganizationsServiceImp implements OrganizationsService {
 		org.get().setEmail(entity.getEmail());
 		org.get().setWelcomeText(entity.getWelcomeText());
 		org.get().setImages(entity.getImages());
+		org.get().setSlide(entity.getSlides());
+                org.get().setFacebookUrl(entity.getFacebookUrl());
+                org.get().setInstagramUrl(entity.getInstagramUrl());
+                org.get().setLinkedinUrl(entity.getLinkedinUrl());
 		organizationRepository.save(org.get());
 		
 		return mapper.map(org.get(), OrganizationsAllDTO.class);

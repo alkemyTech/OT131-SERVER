@@ -48,8 +48,8 @@ public class SlidesServiceImpl implements SlidesService {
         if (entity.getOrder() == null)
             entity.setOrder((int) (slidesRepository.count() + 1));
 
-        Optional<Organizations> org = organizationsRepository.findById(entity.getOrganizationId());
-        if (org.isEmpty() || !org.get().isActive())
+        Optional<Organizations> org = organizationsRepository.findById(entity.getOrganization().getId());
+        if (org.isEmpty() || !org.get().getIsActive())
             throw new ParamNotFoundException(BAD_ORG_ID);
 
         MultipartFile decodedImage = decodeBase64Image2MultipartFile(dto.getImage64());
@@ -95,7 +95,7 @@ public class SlidesServiceImpl implements SlidesService {
         entity.setImageUrl(dto.getImageUrl());
         entity.setOrder(dto.getOrder());
         entity.setText(dto.getText());
-        entity.setOrganizationId(dto.getOrganizationId());
+        entity.setOrganization(organizationsRepository.getById(dto.getOrganization().getId()));
         
         Slides entityUpdate = slidesRepository.save(entity);
         		

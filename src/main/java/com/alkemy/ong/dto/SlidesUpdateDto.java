@@ -2,6 +2,8 @@ package com.alkemy.ong.dto;
 
 import java.time.LocalDate;
 
+import com.alkemy.ong.model.Organizations;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +18,6 @@ public class SlidesUpdateDto {
     private String imageUrl;
     private String text;
     private Integer order;
-    private Long organizationId;
+    private Organizations organization;
     private LocalDate dateModifed;
 }
