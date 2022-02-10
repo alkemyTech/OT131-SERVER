@@ -47,7 +47,7 @@ public class NewsController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "new not found",
                     content = @Content) })
-    @PutMapping("/{id}")
+    @PutMapping(REQ_MAPP_ID)
     public ResponseEntity<NewsDTO> update(@PathVariable Long id, @Valid @RequestBody NewsDTO dto) {
         NewsDTO result = newsService.update(id, dto);
         return ResponseEntity.ok().body(result);
@@ -63,7 +63,7 @@ public class NewsController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "new not found",
                     content = @Content) })
-    @GetMapping("/{id}")
+    @GetMapping(REQ_MAPP_ID)
     public ResponseEntity<NewsDTO> getById(@PathVariable Long id) {
         return ResponseEntity.ok().body(newsService.findById(id));
     }

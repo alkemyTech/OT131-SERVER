@@ -2,6 +2,7 @@ package com.alkemy.ong.controller;
 
 import com.alkemy.ong.dto.CategoriesDTO;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_CATEGORIES;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_DETAIL_CAT;
-
+import static com.alkemy.ong.util.Constants.REQ_MAPP_ID;
 
 @RestController
 @RequestMapping(REQ_MAPP_CATEGORIES)
@@ -28,7 +29,7 @@ public class CategoriesController {
             summary = "Update a Category",
             description = "To update an existing category you must access this endpoint")
 
-    @PutMapping("/{id}")
+    @PutMapping(REQ_MAPP_ID)
     public ResponseEntity<CategoriesDTO> update(@PathVariable Long id, @Valid @RequestBody CategoriesDTO dto) {
         CategoriesDTO result = categoriesService.update(id, dto);
         return ResponseEntity.ok().body(result);
@@ -46,7 +47,7 @@ public class CategoriesController {
     @Operation(
             summary = "Delete  Categories",
             description = "To delete a category you must access this endpoint")
-    @DeleteMapping("/{id}")
+    @DeleteMapping(REQ_MAPP_ID)
     public String deleteCategories(@Valid @PathVariable long id) throws Exception {
         return categoriesService.deleteCategory(id);
     }
