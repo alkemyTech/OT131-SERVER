@@ -3,8 +3,6 @@ package com.alkemy.ong.service;
 import com.alkemy.ong.dto.CommentsDTO;
 import com.alkemy.ong.dto.CommentsResponseDTO;
 import com.alkemy.ong.dto.UsersDtoResponse;
-import com.alkemy.ong.exception.NotAllowedException;
-import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.mapper.CommentsMapper;
 import com.alkemy.ong.model.Comments;
 import com.alkemy.ong.repository.CommentsRepository;
@@ -15,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.nio.file.AccessDeniedException;
 import java.util.Optional;
 
-import static com.alkemy.ong.util.Constants.ENTITY_NOT_FOUND;
 import static com.alkemy.ong.util.Constants.FORBIDDEN_MSG;
 import static com.alkemy.ong.util.RoleName.ROLE_ADMIN;
 

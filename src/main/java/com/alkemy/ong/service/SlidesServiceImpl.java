@@ -10,7 +10,6 @@ import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.mapper.SlidesMapper;
 import com.alkemy.ong.model.Organizations;
 import com.alkemy.ong.model.Slides;
-import com.alkemy.ong.model.Users;
 import com.alkemy.ong.repository.OrganizationsRepository;
 import com.alkemy.ong.repository.SlidesRepository;
 import com.alkemy.ong.util.BASE64DecodedMultipartFile;
@@ -23,7 +22,6 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.time.LocalDate;
 
 import static com.alkemy.ong.util.Constants.BAD_ORG_ID;
 
