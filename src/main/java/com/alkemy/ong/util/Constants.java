@@ -95,6 +95,8 @@ public final class Constants {
 
     public static final String REQ_MAPP_DETAIL_CAT = "/{id}";
 
+    public static final String FORBIDDEN_MSG = "You don't have enough permissions to perform this action.";
+
     public Constants() {
     }
 
