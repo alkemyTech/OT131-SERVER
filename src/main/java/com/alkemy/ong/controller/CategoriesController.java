@@ -3,6 +3,15 @@ package com.alkemy.ong.controller;
 import com.alkemy.ong.dto.CategoriesDTO;
 
 
+=======
+import com.alkemy.ong.dto.NewsDTO;
+import com.alkemy.ong.dto.OrganizationsDTO;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +37,16 @@ public class CategoriesController {
     @Operation(
             summary = "Update a Category",
             description = "To update an existing category you must access this endpoint")
+    @ApiModelProperty(notes="id category",name="id",required=true,value= "http://localhost:8080/categories/1")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "UpdateNew by id" ,
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CategoriesDTO.class)) }),
+
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Category not found",
+                    content = @Content) })
 
     @PutMapping(REQ_MAPP_ID)
     public ResponseEntity<CategoriesDTO> update(@PathVariable Long id, @Valid @RequestBody CategoriesDTO dto) {
@@ -38,6 +57,15 @@ public class CategoriesController {
     @Operation(
             summary = "List category names",
             description = "To list the names of the categories that already exist, you must access this endpoint")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "UpdateNew by id" ,
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CategoriesDTO.class)) }),
+
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "category not found",
+                    content = @Content) })
 
     @GetMapping
     public ResponseEntity<List<String>> listCategoriesName() {
@@ -47,7 +75,21 @@ public class CategoriesController {
     @Operation(
             summary = "Delete  Categories",
             description = "To delete a category you must access this endpoint")
+
     @DeleteMapping(REQ_MAPP_ID)
+=======
+    @ApiModelProperty(notes="id category",name="id",required=true,value= "http://localhost:8080/categories/1")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "UpdateNew by id" ,
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CategoriesDTO.class)) }),
+
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "category not found",
+                    content = @Content) })
+   
+
     public String deleteCategories(@Valid @PathVariable long id) throws Exception {
         return categoriesService.deleteCategory(id);
     }
@@ -55,12 +97,38 @@ public class CategoriesController {
     @Operation(
             summary = "Add  Categories",
             description = "To add a category you must access this endpoint")
+    @ApiModelProperty(notes="DTO category",name="DTO",required=true,value= "{\n" +
+            "    \"name\": \"Aca staesdfsdflgo\",\n" +
+            "    \"image\":\"imagenJuego.jpg\",\n" +
+            "    \"description\":\"Area de juegos\"\n" +
+            "}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "UpdateNew by id" ,
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CategoriesDTO.class)) }),
+
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "category not found",
+                    content = @Content) })
 
     @PostMapping
     public ResponseEntity<?> addCategories(@Valid @RequestBody() CategoriesDTO categoriesDto) {
         return ResponseEntity.ok(categoriesService.addCategories(categoriesDto));
     }
 
+    @Operation(summary = "Get a category",
+                description = "Get a detail of category")
+    @ApiModelProperty(notes="id category",name="id",required=true,value= "http://localhost:8080/categories/1")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Show public data Organization by name" ,
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CategoriesDTO.class)) }),
+
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Category not found",
+                    content = @Content) })
     @GetMapping(REQ_MAPP_DETAIL_CAT)
     public CategoriesDTO detailCategories(@Valid @PathVariable("id") long id) throws Exception{
         return categoriesService.detailCategory(id);
