@@ -48,19 +48,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         REQ_MAPP_CATEGORIES,
                         REQ_MAPP_NEWS).hasAnyAuthority(AUTHENTICATED_ROLES) // Only authenticated roles can access GET methods
                 .antMatchers(HttpMethod.POST, URL_ORG_SECURITY).hasAuthority("ROLE_ADMIN")
-                .antMatchers(HttpMethod.DELETE,REQ_MAPP_CATEGORIES+"/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.DELETE).hasAuthority("ROLE_ADMIN")
                 .antMatchers(SWAGGER_SECURITY).permitAll()
-                .antMatchers(REQ_MAPP_ACTIVITIES, REQ_MAPP_ACTIVITIES + "/**",
-                        REQ_MAPP_ORG, REQ_MAPP_ORG + "/**",
-                        REQ_MAPP_CATEGORIES, REQ_MAPP_CATEGORIES + "/**",                               
-                        REQ_MAPP_MEMBERS+"/**", // Only admins can access other methods
-                        REQ_MAPP_NEWS, REQ_MAPP_NEWS + "/**",
-                        REQ_MAPP_SLIDES, REQ_MAPP_SLIDES + "/**", // Only admins can access other methods
-                        REQ_MAPP_TESTIMONIALS +"/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers(REQ_MAPP_ACTIVITIES, REQ_MAPP_ACTIVITIES + REQ_MAPP_ID,
+                		REQ_MAPP_ORG, REQ_MAPP_ORG + REQ_MAPP_ID,
+                		REQ_MAPP_CATEGORIES, REQ_MAPP_CATEGORIES + REQ_MAPP_ID,                               
+                		REQ_MAPP_MEMBERS, REQ_MAPP_MEMBERS + REQ_MAPP_ID, 
+                		REQ_MAPP_NEWS, REQ_MAPP_NEWS + REQ_MAPP_ID,
+                		REQ_MAPP_SLIDES, REQ_MAPP_SLIDES + REQ_MAPP_ID, 
+                		REQ_MAPP_TESTIMONIALS, REQ_MAPP_TESTIMONIALS + REQ_MAPP_ID,
+                		REQ_MAPP_CONTACTS, REQ_MAPP_CONTACTS + REQ_MAPP_ID,
+                        REQ_MAPP_GET_LIST_USER).hasAuthority("ROLE_ADMIN")
                  // Only admins can access other methods
-                .antMatchers(REQ_MAPP_TESTIMONIALS +"/**",
-                        REQ_MAPP_CONTACTS +"/**",
-                        REQ_MAPP_GET_LIST_USER).hasAuthority("ROLE_ADMIN") // Only admins can access other methods
                 .antMatchers("/public/**").permitAll() // All users can access endpoints in /public/**
                 .anyRequest().authenticated() // Only authenticated users can access the rest of endpoints
                 .and()
