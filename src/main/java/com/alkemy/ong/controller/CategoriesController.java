@@ -1,11 +1,6 @@
 package com.alkemy.ong.controller;
-
 import com.alkemy.ong.dto.CategoriesDTO;
 
-
-=======
-import com.alkemy.ong.dto.NewsDTO;
-import com.alkemy.ong.dto.OrganizationsDTO;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -75,9 +70,7 @@ public class CategoriesController {
     @Operation(
             summary = "Delete  Categories",
             description = "To delete a category you must access this endpoint")
-
     @DeleteMapping(REQ_MAPP_ID)
-=======
     @ApiModelProperty(notes="id category",name="id",required=true,value= "http://localhost:8080/categories/1")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "UpdateNew by id" ,
