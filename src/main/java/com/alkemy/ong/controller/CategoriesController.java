@@ -1,5 +1,4 @@
 package com.alkemy.ong.controller;
-
 import com.alkemy.ong.dto.CategoriesDTO;
 
 
@@ -72,7 +71,6 @@ public class CategoriesController {
     @Operation(
             summary = "Delete  Categories",
             description = "To delete a category you must access this endpoint")
-
     @DeleteMapping(REQ_MAPP_ID)
     @ApiModelProperty(notes="id category",name="id",required=true,value= "http://localhost:8080/categories/1")
     @ApiResponses(value = {
