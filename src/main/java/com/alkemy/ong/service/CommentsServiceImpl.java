@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.file.AccessDeniedException;
+import java.util.List;
 import java.util.Optional;
 
 import static com.alkemy.ong.util.Constants.FORBIDDEN_MSG;
@@ -53,4 +54,10 @@ public class CommentsServiceImpl implements CommentsService {
                 !(userLogged.getEmail().equals(entity.getUsers().getEmail()) || userLogged.getRole().getName().equals(ROLE_ADMIN)))
             throw new AccessDeniedException(FORBIDDEN_MSG);
     }
+    @Transactional (readOnly = true)
+    @Override
+    public Optional<List<String>> listComments() throws AccessDeniedException {        
+        return commentsRepository.listComments();
+    }
+   
 }
