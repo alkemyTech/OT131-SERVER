@@ -77,4 +77,36 @@ public class MembersServicesImpl implements MembersService{
         membersRepository.save(member.get());
     }
 
+	@Override
+	public NewMemberDTO updateMember(NewMemberDTO memberDTO,Long id) {
+		Optional<Members> members =membersRepository.findById(id);
+		if (!members.isPresent()) {
+			throw new ParamNotFoundException (ENTITY_NOT_FOUND);
+		}
+		if (!memberDTO.getFacebookUrl().isBlank()
+                && membersRepository.findByFacebookUrl(memberDTO.getFacebookUrl()).isPresent()) {
+            throw new AlreadyExistsException(ERR_FB_MEMBER_ALREADY_EXISTS);
+        }
+
+        if (!memberDTO.getInstagramUrl().isBlank()
+                && membersRepository.findByInstagramUrl(memberDTO.getInstagramUrl()).isPresent()) {
+            throw new AlreadyExistsException(ERR_IG_MEMBER_ALREADY_EXISTS);
+        }
+
+        if (!memberDTO.getLinkedinUrl().isBlank()
+                && membersRepository.findByLinkedinUrl(memberDTO.getLinkedinUrl()).isPresent()) {
+            throw new AlreadyExistsException(ERR_LI_MEMBER_ALREADY_EXISTS);
+        }
+
+		members.get().setName(memberDTO.getName());
+		members.get().setDescription(memberDTO.getDescription());
+		members.get().setFacebookUrl(memberDTO.getFacebookUrl());
+		members.get().setImage(memberDTO.getImage());
+		members.get().setInstagramUrl(memberDTO.getInstagramUrl());
+		members.get().setLinkedinUrl(memberDTO.getLinkedinUrl());
+		membersRepository.save(members.get());
+		return mapper.map(members.get(), NewMemberDTO.class);
+	
+	}
+
 }

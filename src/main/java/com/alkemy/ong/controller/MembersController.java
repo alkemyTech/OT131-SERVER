@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import static com.alkemy.ong.util.Constants.*;
 import java.util.List;
-import static com.alkemy.ong.util.Constants.GET_MAPP_LIST_MEMBERS;
 import static com.alkemy.ong.util.Constants.MEMBERS_LIST_OK;
 import com.alkemy.ong.dto.MemberDTO;
 import com.alkemy.ong.dto.NewMemberDTO;
@@ -23,6 +22,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import javax.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -81,6 +81,19 @@ public class MembersController {
     @PostMapping
     public ResponseEntity<MemberDTO> createMember(@Valid @RequestBody NewMemberDTO memberDTO) {
         MemberDTO response = membersService.createMember(memberDTO);
+        return ResponseEntity.status(HttpStatus.SC_CREATED).body(response);
+    }
+    
+    @Operation(summary = MEMBERS_PUT_INFO)
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = MEMBERS_UPDATE_OK,
+                content = {
+                    @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = NewMemberDTO.class))}),
+        @ApiResponse(responseCode = "400", description = ENTITY_NOT_FOUND)})
+    @PutMapping(REQ_MAPP_ID)
+    public ResponseEntity<NewMemberDTO> updateMember(@Valid @RequestBody NewMemberDTO memberDTO,@PathVariable Long id) {
+    	NewMemberDTO response = membersService.updateMember(memberDTO, id);
         return ResponseEntity.status(HttpStatus.SC_CREATED).body(response);
     }
 }

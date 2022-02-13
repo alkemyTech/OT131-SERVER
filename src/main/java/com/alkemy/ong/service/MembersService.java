@@ -11,5 +11,6 @@ public interface MembersService {
     public Members getMember(Long id);
     public List<MemberDTO> getMembers();
     public void deleteMember(Long id);
+    public NewMemberDTO updateMember(NewMemberDTO memberDTO, Long id);
     
 }

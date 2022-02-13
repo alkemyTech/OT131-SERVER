@@ -40,6 +40,8 @@ public final class Constants {
     public static final String MEMBERS_LIST_INFO = "Get a list of Members";
     public static final String MEMBERS_LIST_OK = "Returns a list of members";
     public static final String ERR_MEMBER_ALREADY_REMOVED ="The member no longer exists";
+    public static final String MEMBERS_PUT_INFO = "Update a member";
+    public static final String MEMBERS_UPDATE_OK = "Member update successfully";
 
     public static final String REQ_MAPP_TESTIMONIALS = "/testimonials";
     public static final String ERR_CONTACT_ALREADY_EXISTS = "The entered contact already exists";
