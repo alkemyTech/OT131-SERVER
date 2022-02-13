@@ -14,7 +14,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SlidesRepository extends JpaRepository<Slides, Long> {
    
+
     @Query("SELECT c FROM Slides c WHERE organization_id = :idOrg")
+
     public Optional <List<Slides>> findByOrganizationId (@Param ("idOrg") Long id);
 	
 	public List<Slides> findByOrderByOrderAsc();

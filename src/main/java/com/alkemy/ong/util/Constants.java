@@ -92,7 +92,11 @@ public final class Constants {
     //Slides Update
     public static final String REQ_MAPP_UPDATE_SLIDES = "/{id}";
     public static final String REQ_MAPP_DELETE_SLIDES = "/{id}";
+    
+    public static final String REQ_MAPP_GET_LIST_USER = "/users";
 
+    public static final String REQ_MAPP_DETAIL_CAT = "/{id}";
+    
     public Constants() {
     }
 

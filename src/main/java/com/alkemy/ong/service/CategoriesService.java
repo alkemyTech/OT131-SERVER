@@ -14,4 +14,6 @@ public interface CategoriesService {
     List<String> getAllByName();
 
     CategoriesDTO addCategories(CategoriesDTO categoriesDto);
+    
+    public CategoriesDTO detailCategory(Long id) throws Exception;
 }
