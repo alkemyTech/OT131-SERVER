@@ -82,7 +82,12 @@ public final class Constants {
     public static final String NEWS_PAGE_URL = "localhost:8080/news?page=";
     public static final String NEWS_PAGE_INFO = "Shows the paginated news of 10 elements";
     public static final String NEWS_PAGE_OK = "Get news listing";
-    
+
+    //Testimonials
+    public static final String TESTIMONIALS_PAGE_URL = "localhost:8080/testimonials?page=";
+    public static final String TESTIMONIALS_PAGE_INFO = "Returns a page of 10 testimonials elements";
+    public static final String TESTIMONIALS_PAGE_OK = "Get testimonials listing";
+
     //Confirmation email
     public static final String CONTACT_CONFIRMATION_SUBJECT = "¡Contacto registrado exitosamente!";
     public static final String CONTACT_CONFIRMATION_PATH = "src/main/resources/templates/confirmationEmail.html";
