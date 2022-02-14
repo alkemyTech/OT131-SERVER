@@ -12,10 +12,8 @@ import static com.alkemy.ong.util.Constants.ERROR_EXIST;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.nio.file.AccessDeniedException;
 import java.util.Optional;
-
 import static com.alkemy.ong.util.Constants.FORBIDDEN_MSG;
 import static com.alkemy.ong.util.RoleName.ROLE_ADMIN;
 import java.util.List;
@@ -59,6 +57,7 @@ public class CommentsServiceImpl implements CommentsService {
             throw new AccessDeniedException(FORBIDDEN_MSG);
     }
 
+
     @Override
     public List<AllCommentsResponseDTO> getNewAndAllComment(Long id) {
         List<Comments> listComments = commentsRepository.getNewsAndAllComments(id);
@@ -70,5 +69,11 @@ public class CommentsServiceImpl implements CommentsService {
     }
     
     
-    
+    @Transactional (readOnly = true)
+    @Override
+    public Optional<List<String>> listComments() throws AccessDeniedException {        
+        return commentsRepository.listComments();
+    }
+   
+
 }

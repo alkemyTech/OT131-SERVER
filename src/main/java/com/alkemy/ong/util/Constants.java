@@ -71,6 +71,10 @@ public final class Constants {
     public static final String CONTACTS_DELETE_INFO = "Unsubscribe the contact entered by id";
     public static final String CONTACTS_DELETE_OK = "Contact unsubscribed successfully";
 
+    // CommentsController Docs
+    public static final String COMMENTS_PUT_INFO = "Update a comment related to sent id.";
+    public static final String COMMENTS_PUT_INFO_OK = "Comment successfully updated.";
+
 
     public static final String NOT_DATA_DISPLAY = "No data to display";
 
