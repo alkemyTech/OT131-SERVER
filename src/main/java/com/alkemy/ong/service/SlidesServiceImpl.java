@@ -56,7 +56,7 @@ public class SlidesServiceImpl implements SlidesService {
         entity.setImageUrl(amazonS3Service.uploadFile(decodedImage).getFileUrl());
 
         Slides entityUpdated = slidesRepository.save(entity);
-        return slidesMapper.entity2ResponseDTO(entity);
+        return slidesMapper.entity2ResponseDTO(entityUpdated);
     }
 
     private MultipartFile decodeBase64Image2MultipartFile(String image64) {

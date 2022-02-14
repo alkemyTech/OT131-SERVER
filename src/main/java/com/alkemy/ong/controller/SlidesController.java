@@ -75,7 +75,7 @@ public class SlidesController {
                        
     @ApiResponse(responseCode = "404", description = "Slide not found. Slide id does not exist", 
                          content = @Content),})
-    @PutMapping(REQ_MAPP_UPDATE_SLIDES)
+    @PutMapping(REQ_MAPP_ID)
     private ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody SlidesUpdateDto dto) {
     	SlidesUpdateResponseDTO result = slidesService.update(id, dto);
         return result == null?
@@ -94,7 +94,7 @@ public class SlidesController {
    		    content = @Content),
         @ApiResponse(responseCode = "404", description = "S not found. Wrong identifier", 
    		    content = @Content)})
-    @DeleteMapping(REQ_MAPP_DELETE_SLIDES)
+    @DeleteMapping(REQ_MAPP_ID)
     private ResponseEntity<?> deleteSlides(@PathVariable(name = "id") Long id) throws Exception {
         try {
             slidesService.delete(id);

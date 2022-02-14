@@ -74,6 +74,21 @@ public final class Constants {
 
 
     public static final String NOT_DATA_DISPLAY = "No data to display";
+    
+    //Pagination
+    public static final Integer PAGE_SIZE = 10;
+    public static final String PAGE_NOT_FOUND = "The requested page doesn't exist";
+    public static final String WRONG_PAGE_NUMBER = "Page number can't be less than 0";
+    
+    //News
+    public static final String NEWS_PAGE_URL = "localhost:8080/news?page=";
+    public static final String NEWS_PAGE_INFO = "Shows the paginated news of 10 elements";
+    public static final String NEWS_PAGE_OK = "Get news listing";
+
+    //Testimonials
+    public static final String TESTIMONIALS_PAGE_URL = "localhost:8080/testimonials?page=";
+    public static final String TESTIMONIALS_PAGE_INFO = "Returns a page of 10 testimonials elements";
+    public static final String TESTIMONIALS_PAGE_OK = "Get testimonials listing";
 
     //Confirmation email
     public static final String CONTACT_CONFIRMATION_SUBJECT = "¡Contacto registrado exitosamente!";

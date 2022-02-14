@@ -2,7 +2,6 @@ package com.alkemy.ong.mapper;
 
 import com.alkemy.ong.dto.SlidesDTO;
 import com.alkemy.ong.dto.SlidesResponseDTO;
-import com.alkemy.ong.dto.SlidesUpdateDto;
 import com.alkemy.ong.dto.SlidesUpdateResponseDTO;
 import com.alkemy.ong.model.Slides;
 import com.alkemy.ong.repository.OrganizationsRepository;
@@ -31,7 +30,7 @@ public class SlidesMapper {
                 .imageUrl(entity.getImageUrl())
                 .text(entity.getText())
                 .order(entity.getOrder())
-                .organization(organizationsRepository.getById(entity.getOrganization().getId()))
+                .organizationId(entity.getOrganization().getId())
                 .build();
     }
     

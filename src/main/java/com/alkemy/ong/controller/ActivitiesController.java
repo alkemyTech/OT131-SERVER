@@ -46,7 +46,7 @@ public class ActivitiesController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = ERR_ACT_NOT_FOUND,
                     content = @Content)})
-    @PutMapping("/{id}")
+    @PutMapping(REQ_MAPP_ID)
     public ResponseEntity<ActivitiesDTO> update(@PathVariable Long id,
                                                 @Valid @RequestBody ActivitiesDTO dto) {
         ActivitiesDTO result = activitiesService.update(id, dto);
@@ -61,7 +61,7 @@ public class ActivitiesController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = ERR_ACT_NOT_FOUND,
                     content = @Content)})
-    @DeleteMapping("/{id}")
+    @DeleteMapping(REQ_MAPP_ID)
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         activitiesService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
