@@ -11,6 +11,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -20,6 +26,9 @@ import java.util.Optional;
 
 import static com.alkemy.ong.util.Constants.REQ_MAPP_COMMENTS;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_ID;
+import static com.alkemy.ong.util.Constants.COMMENTS_GET_INFO;
+import static com.alkemy.ong.util.Constants.COMMENTS_GET_OK;
+import static com.alkemy.ong.util.Constants.COMMENTS_GET_DENIED;
 
 @RestController
 @RequestMapping(REQ_MAPP_COMMENTS)
@@ -40,7 +49,14 @@ public class CommentsController {
             return new ResponseEntity(e.getMessage(), HttpStatus.FORBIDDEN);
         }
     }
-
+    
+    @Operation(summary = COMMENTS_GET_INFO)
+    @ApiResponses(value = {
+        @ApiResponse (responseCode = "200", description = COMMENTS_GET_OK,
+                content = {
+                    @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CommentsDTO.class))}),
+        @ApiResponse(responseCode = "403", description = COMMENTS_GET_DENIED)})
     @GetMapping
     public Optional<List<String>> listComments () throws AccessDeniedException {
         return commentsService.listComments();
