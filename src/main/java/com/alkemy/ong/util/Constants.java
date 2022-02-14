@@ -6,6 +6,7 @@ public final class Constants {
     public static final String REQ_MAPP_ORG = "/organizations";
     public static final String REQ_MAPP_CATEGORIES = "/categories";
     public static final String REQ_MAPP_NEWS = "/news";
+    public static final String REQ_MAPP_GET_ALL_COMMENTS_TO_NEWS = "/{id}/comments";
     public static final String REQ_MAPP_COMMENTS = "/comments";
     public static final String POINT_GET_MAPP = "/public/{name}";
     public static final String POINT_POST_MAPP = "/public";
@@ -24,7 +25,7 @@ public final class Constants {
     public static final String ERR_ACT_NOT_FOUND = "Requested activity was not found";
     public static final String ERR_AWS_NOT_FOUND = "You haven't selected any file to upload";
     public static final String ERR_AWS_NOT_SAVED = "The file couldn't be saved";
-    public static final String[] SWAGGER_SECURITY = {"swagger-ui.html","/swagger-ui/**","/v3/api-docs/**"};
+    public static final String[] SWAGGER_SECURITY = {"/api/docs/**","/swagger-ui/**", "/v3/api-docs/**"};
     public static final String[] URL_ORG_SECURITY = {"/organizations/public/**"};
     public static final String REQ_MAPP_GET_AUTH_ME_USER = "/me";
     public static final String REQ_MAPP_ID = "/{id}";
@@ -73,6 +74,9 @@ public final class Constants {
     public static final String COMMENTS_GET_INFO = "Get a list of Comments ordered by date";
     public static final String COMMENTS_GET_OK = "Access Granted. Returns list of comment";
     public static final String COMMENTS_GET_DENIED = "Access Denied. Not enough credentials to access this route"; 
+    public static final String COMMENTS_PUT_INFO = "Update a comment related to sent id.";
+    public static final String COMMENTS_PUT_INFO_OK = "Comment successfully updated.";
+
 
     public static final String NOT_DATA_DISPLAY = "No data to display";
 
