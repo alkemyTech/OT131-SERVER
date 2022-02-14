@@ -40,6 +40,8 @@ public final class Constants {
     public static final String MEMBERS_LIST_INFO = "Get a list of Members";
     public static final String MEMBERS_LIST_OK = "Returns a list of members";
     public static final String ERR_MEMBER_ALREADY_REMOVED ="The member no longer exists";
+    public static final String MEMBERS_PUT_INFO = "Update a member";
+    public static final String MEMBERS_UPDATE_OK = "Member update successfully";
 
     public static final String REQ_MAPP_TESTIMONIALS = "/testimonials";
     public static final String ERR_CONTACT_ALREADY_EXISTS = "The entered contact already exists";
@@ -92,7 +94,10 @@ public final class Constants {
     public static final String CONTACT_CONFIRMATION_SUBJECT = "¡Contacto registrado exitosamente!";
     public static final String CONTACT_CONFIRMATION_PATH = "src/main/resources/templates/confirmationEmail.html";
 
-   
+    //Members
+    public static final String MEMBERS_PAGE_URL = "localhost:8080/members?page=";
+    public static final String MEMBERS_PAGE_INFO = "Returns a page of 10 members elements";
+    public static final String MEMBERS_PAGE_OK = "Get members list";
     
     //Message the error
     public static final String ERROR_EXIST = "The item you want to add already exists";

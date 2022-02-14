@@ -1,9 +1,16 @@
 package com.alkemy.ong.mapper;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.alkemy.ong.dto.MemberDTO;
 import com.alkemy.ong.model.Members;
 
+import org.modelmapper.ModelMapper;
+
 public class MembersMapper {
+    
+    private ModelMapper mapper = new ModelMapper();
     
     public static MemberDTO memberToDTO(Members member){
         return new MemberDTO(member.getIdMember(),
@@ -22,5 +29,10 @@ public class MembersMapper {
                         dto.getLinkedinUrl(), 
                         dto.getImage(), 
                         dto.getDescription());
+    }
+
+    public List<MemberDTO> listMembersToDto(List<Members> list) {   
+     return list.stream().map(members -> mapper.map(members, MemberDTO.class))
+            .collect(Collectors.toList());
     }
 }
