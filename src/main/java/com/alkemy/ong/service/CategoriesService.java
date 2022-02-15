@@ -1,7 +1,12 @@
 package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.CategoriesDTO;
+import com.alkemy.ong.dto.PagesDTO;
+import com.alkemy.ong.model.Categories;
+
 import java.util.List;
+
+import org.springframework.data.domain.Page;
 
 public interface CategoriesService {
 
@@ -16,4 +21,8 @@ public interface CategoriesService {
     CategoriesDTO addCategories(CategoriesDTO categoriesDto);
     
     public CategoriesDTO detailCategory(Long id) throws Exception;
+    
+    public 	PagesDTO<CategoriesDTO> getAll(Integer page);
+    
+    public PagesDTO<CategoriesDTO> responsePage(Page<Categories> page);
 }
