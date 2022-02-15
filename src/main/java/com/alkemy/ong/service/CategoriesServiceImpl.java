@@ -1,18 +1,28 @@
 package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.CategoriesDTO;
+import com.alkemy.ong.dto.NewsDTO;
+import com.alkemy.ong.dto.PagesDTO;
 import com.alkemy.ong.exception.AlreadyExistsException;
 import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.mapper.CategoriesMapper;
 import com.alkemy.ong.model.Categories;
+import com.alkemy.ong.model.News;
 import com.alkemy.ong.repository.CategoriesRepository;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import static com.alkemy.ong.util.Constants.*;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 
@@ -24,6 +34,7 @@ public class CategoriesServiceImpl implements CategoriesService{
 
     @Autowired
     private CategoriesMapper categoriesMapper;
+    private ModelMapper mapper = new ModelMapper();
 
     @Override
     public CategoriesDTO publicDataCategory(String name){
@@ -96,5 +107,28 @@ public class CategoriesServiceImpl implements CategoriesService{
     	
     	return categoriesMapper.converToDTO(categoriesRepository.getById(id));
     }
-
+    @Override
+    public 	PagesDTO<CategoriesDTO> getAll(Integer page){
+    	 if (page < 0) {
+    		 throw new ParamNotFoundException(WRONG_PAGE_NUMBER);
+    	 }
+    	  Pageable property = PageRequest.of(page, PAGE_SIZE);
+    	  Page<Categories> pageCategory = categoriesRepository.findAll(property);
+    	  
+    	  return responsePage(pageCategory);
+    }
+    @Override
+    public PagesDTO<CategoriesDTO> responsePage(Page<Categories> page) {
+    	if (page.isEmpty()) {
+    		 throw new ParamNotFoundException(PAGE_NOT_FOUND);
+    }
+    	Page<CategoriesDTO> pagesCategories = new PageImpl<CategoriesDTO>(
+    			page.getContent().stream().map(categ -> mapper.map(categ, CategoriesDTO.class))
+    			.collect(Collectors.toList()), 
+    					PageRequest.of( page.getNumber(), page.getSize()),
+    					page.getTotalElements());
+    	return new PagesDTO<CategoriesDTO>(pagesCategories,CATEGORIES_PAGE_URL);
+    			
+    }
+    
 }

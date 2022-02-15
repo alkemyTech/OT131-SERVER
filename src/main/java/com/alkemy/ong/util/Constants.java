@@ -115,6 +115,11 @@ public final class Constants {
 
     public static final String REQ_MAPP_DETAIL_CAT = "/{id}";
     
+    public static final String REQ_MAPP_PAGE = "/";
+    
+    //Categories
+    public static final String CATEGORIES_PAGE_URL = "localhost:8080/categories/?page=";
+    
     public Constants() {
     }
 

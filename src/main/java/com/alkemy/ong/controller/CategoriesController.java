@@ -1,6 +1,6 @@
 package com.alkemy.ong.controller;
 import com.alkemy.ong.dto.CategoriesDTO;
-
+import com.alkemy.ong.dto.PagesDTO;
 
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -22,6 +22,8 @@ import javax.validation.Valid;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_CATEGORIES;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_DETAIL_CAT;
 import static com.alkemy.ong.util.Constants.REQ_MAPP_ID;
+import static com.alkemy.ong.util.Constants.REQ_MAPP_PAGE;
+import static com.alkemy.ong.util.Constants.WRONG_PAGE_NUMBER;
 
 @RestController
 @RequestMapping(REQ_MAPP_CATEGORIES)
@@ -126,6 +128,22 @@ public class CategoriesController {
     @GetMapping(REQ_MAPP_DETAIL_CAT)
     public CategoriesDTO detailCategories(@Valid @PathVariable("id") long id) throws Exception{
         return categoriesService.detailCategory(id);
+    }
+    
+    
+    @Operation(summary = "Get a list paginated category ",
+            description = "Get a list category")
+@ApiModelProperty(notes="Number page",name="id",required=true,value= "http://localhost:8080/categories/?page=0")
+@ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Show a list Categories" ,
+                content = { @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = (PagesDTO.class))) }),
+
+        @ApiResponse(responseCode = "400", description = WRONG_PAGE_NUMBER,
+                content = @Content) })
+    @GetMapping(REQ_MAPP_PAGE)
+    public ResponseEntity<?> getAll(@Valid @RequestParam ("page")Integer page){
+    	 return ResponseEntity.ok().body(categoriesService.getAll(page));
     }
 
 }
