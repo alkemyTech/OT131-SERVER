@@ -7,7 +7,9 @@ import com.alkemy.ong.dto.MemberDTO;
 import com.alkemy.ong.model.Members;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MembersMapper {
     
     private ModelMapper mapper = new ModelMapper();
