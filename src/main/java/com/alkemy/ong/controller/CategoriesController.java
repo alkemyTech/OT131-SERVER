@@ -137,7 +137,7 @@ public class CategoriesController {
 @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Show a list Categories" ,
                 content = { @Content(mediaType = "application/json",
-                        schema = @Schema(implementation = (PagesDTO.class))) }),
+                        schema = @Schema(implementation = PagesDTO.class)) }),
 
         @ApiResponse(responseCode = "400", description = WRONG_PAGE_NUMBER,
                 content = @Content) })
