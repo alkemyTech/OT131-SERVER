@@ -74,6 +74,12 @@ public class CommentsServiceImpl implements CommentsService {
     public Optional<List<String>> listComments() throws AccessDeniedException {        
         return commentsRepository.listComments();
     }
+
+    @Transactional
+    @Override
+    public void delete(Long id) {
+        commentsRepository.deleteById(id);
+    }
    
 
 }

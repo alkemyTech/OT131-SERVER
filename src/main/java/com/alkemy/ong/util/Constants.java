@@ -76,7 +76,9 @@ public final class Constants {
     public static final String COMMENTS_GET_DENIED = "Access Denied. Not enough credentials to access this route"; 
     public static final String COMMENTS_PUT_INFO = "Update a comment related to sent id.";
     public static final String COMMENTS_PUT_INFO_OK = "Comment successfully updated.";
-
+    public static final String COMMENTS_DELETE_INFO = "Delete comment by id";
+    public static final String COMMENTS_DELETE_OK = "Comment successfully deleted.";
+    public static final String ERR_COMMENT_NOT_FOUND = "Requested comment was not found";
 
     public static final String NOT_DATA_DISPLAY = "No data to display";
 

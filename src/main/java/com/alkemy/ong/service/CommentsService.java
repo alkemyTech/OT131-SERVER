@@ -15,4 +15,5 @@ public interface CommentsService {
 
     Optional<List<String>> listComments() throws AccessDeniedException;
     
+    void delete(Long id);
 }

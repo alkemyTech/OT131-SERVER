@@ -73,5 +73,20 @@ public class CommentsController {
     public Optional<List<String>> listComments() throws AccessDeniedException {
         return commentsService.listComments();
     }
-
+    
+    
+    @Operation(summary = COMMENTS_DELETE_INFO)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = COMMENTS_DELETE_OK,
+                    content = {@Content}),
+            @ApiResponse(responseCode = "400", description = BAD_REQUEST,
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = ERR_COMMENT_NOT_FOUND,
+                    content = @Content)})
+    @DeleteMapping(REQ_MAPP_ID)
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        commentsService.delete(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+    
 }
