@@ -84,9 +84,13 @@ public class CommentsController {
             @ApiResponse(responseCode = "404", description = ERR_COMMENT_NOT_FOUND,
                     content = @Content)})
     @DeleteMapping(REQ_MAPP_ID)
-    public ResponseEntity<Void> delete(@PathVariable Long id){
-        commentsService.delete(id);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    public ResponseEntity<Void> delete(@PathVariable Long id, HttpServletRequest request){        
+        try {
+            commentsService.delete(id, request.getHeader("Authorization"));
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (AccessDeniedException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.FORBIDDEN);
+        }
     }
     
 }

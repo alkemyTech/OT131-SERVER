@@ -56,8 +56,8 @@ public class CommentsServiceImpl implements CommentsService {
                 !(userLogged.getEmail().equals(entity.getUsers().getEmail()) || userLogged.getRole().getName().equals(ROLE_ADMIN)))
             throw new AccessDeniedException(FORBIDDEN_MSG);
     }
-
-
+    
+    
     @Override
     public List<AllCommentsResponseDTO> getNewAndAllComment(Long id) {
         List<Comments> listComments = commentsRepository.getNewsAndAllComments(id);
@@ -77,9 +77,14 @@ public class CommentsServiceImpl implements CommentsService {
 
     @Transactional
     @Override
-    public void delete(Long id) {
-        commentsRepository.deleteById(id);
+    public void delete(Long id, String authorization) throws AccessDeniedException {
+        Optional<Comments> result = commentsRepository.findById(id);
+        UsersDtoResponse userLogged = usersService.getUserDetails(authorization);
+        if(result.isPresent() && userLogged.getEmail().equals(result.get().getUsers().getEmail()) || userLogged.getRole().getName().equals(ROLE_ADMIN)){
+            commentsRepository.deleteById(id);
+        } else{
+            throw new AccessDeniedException(FORBIDDEN_MSG);
+        }
     }
    
-
 }
