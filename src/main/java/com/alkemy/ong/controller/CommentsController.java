@@ -39,6 +39,26 @@ public class CommentsController {
 
     @Autowired
     private CommentsService commentsService;
+    
+    @Operation(summary = COMMENTS_POST_INFO)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = COMMENTS_POST_OK,
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CommentsResponseDTO.class))}),
+            @ApiResponse(responseCode = "400", description = BAD_REQUEST,
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = ENTITY_NOT_FOUND,
+                    content = @Content)})
+    @PostMapping()
+    public ResponseEntity<CommentsResponseDTO> create(@RequestParam Long news_id, @RequestParam String body, HttpServletRequest request) throws AccessDeniedException{
+        
+            CommentsResponseDTO response = commentsService.create(news_id, body, request.getHeader("Authorization"));
+            return ResponseEntity.ok().body(response);
+    }
+    
+    
+    
+    
 
     @Operation(summary = COMMENTS_PUT_INFO)
     @ApiResponses(value = {

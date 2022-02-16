@@ -73,10 +73,13 @@ public final class Constants {
     public static final String CONTACTS_CREATED_OK = "Contact created successfully";
     public static final String CONTACTS_DELETE_INFO = "Unsubscribe the contact entered by id";
     public static final String CONTACTS_DELETE_OK = "Contact unsubscribed successfully";
+    
      //CommentController Docs
     public static final String COMMENTS_GET_INFO = "Get a list of Comments ordered by date";
     public static final String COMMENTS_GET_OK = "Access Granted. Returns list of comment";
     public static final String COMMENTS_GET_DENIED = "Access Denied. Not enough credentials to access this route"; 
+    public static final String COMMENTS_POST_INFO = "Create new Comment";
+    public static final String COMMENTS_POST_OK = "Comment created successfully";
     public static final String COMMENTS_PUT_INFO = "Update a comment related to sent id.";
     public static final String COMMENTS_PUT_INFO_OK = "Comment successfully updated.";
     public static final String COMMENTS_DELETE_INFO = "Delete comment by id";

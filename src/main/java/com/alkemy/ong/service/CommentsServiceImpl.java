@@ -8,6 +8,7 @@ import com.alkemy.ong.exception.NoDataDisplayException;
 import com.alkemy.ong.mapper.CommentsMapper;
 import com.alkemy.ong.model.Comments;
 import com.alkemy.ong.repository.CommentsRepository;
+import com.alkemy.ong.repository.NewsRepository;
 import static com.alkemy.ong.util.Constants.ERROR_EXIST;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,33 @@ public class CommentsServiceImpl implements CommentsService {
 
     @Autowired
     private UsersService usersService;
+    
+    @Autowired
+    private NewsRepository newsRepository;
+    
+    @Override
+    @Transactional
+    public CommentsResponseDTO create(Long news_id, String body ,String authorization) throws AccessDeniedException{
+        //verificar news existente
+        UsersDtoResponse userLogged = usersService.getUserDetails(authorization);
+        if(newsRepository.findById(news_id).isPresent() && !body.isEmpty() || body != null){
+            
+            Comments comment = commentsMapper.comments2Entity(
+                    newsRepository.findById(news_id).get(), 
+                    usersService.findByMail(userLogged.getEmail()).get(), 
+                    body);
+            
+            commentsRepository.save(comment);
+                    
+                    
+           return commentsMapper.entity2ResponseDTO(comment);
+                
+        } else {
+            throw new AccessDeniedException(FORBIDDEN_MSG);
+        }
+             
+    }
+    
 
     @Override
     @Transactional

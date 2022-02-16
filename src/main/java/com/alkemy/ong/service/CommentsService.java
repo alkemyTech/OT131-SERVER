@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CommentsService {
-
+    
+    CommentsResponseDTO create(Long news_id, String body ,String authorization) throws AccessDeniedException;
+     
     CommentsResponseDTO update(Long id, CommentsDTO dto, String authorization) throws AccessDeniedException;
     
     List<AllCommentsResponseDTO> getNewAndAllComment(Long id);

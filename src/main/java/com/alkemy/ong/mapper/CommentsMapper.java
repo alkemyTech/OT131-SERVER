@@ -3,6 +3,8 @@ package com.alkemy.ong.mapper;
 import com.alkemy.ong.dto.AllCommentsResponseDTO;
 import com.alkemy.ong.dto.CommentsResponseDTO;
 import com.alkemy.ong.model.Comments;
+import com.alkemy.ong.model.News;
+import com.alkemy.ong.model.Users;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -33,6 +35,14 @@ public class CommentsMapper {
             listAllCommentsResponseDto.add(allCommentsResponseDto);
         }
         return listAllCommentsResponseDto;
+    }
+    
+    public Comments comments2Entity(News news, Users users, String body){
+        Comments comment = new Comments();
+        comment.setNews(news);
+        comment.setUsers(users);
+        comment.setBody(body);
+        return comment;
     }
 
 }
