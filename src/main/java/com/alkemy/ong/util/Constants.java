@@ -6,6 +6,8 @@ public final class Constants {
     public static final String REQ_MAPP_ORG = "/organizations";
     public static final String REQ_MAPP_CATEGORIES = "/categories";
     public static final String REQ_MAPP_NEWS = "/news";
+    public static final String REQ_MAPP_GET_ALL_COMMENTS_TO_NEWS = "/{id}/comments";
+    public static final String REQ_MAPP_COMMENTS = "/comments";
     public static final String POINT_GET_MAPP = "/public/{name}";
     public static final String POINT_DELETE_MAPP = "/{id}";
     public static final String POINT_POST_MAPP = "/public";
@@ -71,6 +73,18 @@ public final class Constants {
     public static final String CONTACTS_CREATED_OK = "Contact created successfully";
     public static final String CONTACTS_DELETE_INFO = "Unsubscribe the contact entered by id";
     public static final String CONTACTS_DELETE_OK = "Contact unsubscribed successfully";
+    
+     //CommentController Docs
+    public static final String COMMENTS_GET_INFO = "Get a list of Comments ordered by date";
+    public static final String COMMENTS_GET_OK = "Access Granted. Returns list of comment";
+    public static final String COMMENTS_GET_DENIED = "Access Denied. Not enough credentials to access this route"; 
+    public static final String COMMENTS_POST_INFO = "Create new Comment";
+    public static final String COMMENTS_POST_OK = "Comment created successfully";
+    public static final String COMMENTS_PUT_INFO = "Update a comment related to sent id.";
+    public static final String COMMENTS_PUT_INFO_OK = "Comment successfully updated.";
+    public static final String COMMENTS_DELETE_INFO = "Delete comment by id";
+    public static final String COMMENTS_DELETE_OK = "Comment successfully deleted.";
+    public static final String ERR_COMMENT_NOT_FOUND = "Requested comment was not found";
 
 
     public static final String NOT_DATA_DISPLAY = "No data to display";
@@ -119,6 +133,8 @@ public final class Constants {
     
     //Categories
     public static final String CATEGORIES_PAGE_URL = "localhost:8080/categories/?page=";
+    
+    public static final String FORBIDDEN_MSG = "You don't have enough permissions to perform this action.";
     
     public Constants() {
     }
