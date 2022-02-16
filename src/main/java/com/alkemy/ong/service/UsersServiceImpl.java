@@ -147,6 +147,7 @@ public class UsersServiceImpl implements UsersService {
         userResponse.setEmail(userEntity.get().getEmail());
         userResponse.setFirstName(userEntity.get().getFirstName());
         userResponse.setLastName(userEntity.get().getLastName());
+        userResponse.setRole(userEntity.get().getRole());
         return userResponse;
     }
 
