@@ -19,7 +19,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -49,6 +48,8 @@ public class NewsControllerTest {
 
         when(newsService.findById(2L)).thenThrow(new ParamNotFoundException(""));
         when(newsService.update(2L, newsDTO)).thenThrow(new ParamNotFoundException(""));
+        doThrow(new ParamNotFoundException("")).when(newsService).deleteNew(2L);
+        when(newsService.getAll(2)).thenThrow(new ParamNotFoundException(""));
     }
 
     @Test
@@ -89,7 +90,7 @@ public class NewsControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "ADMIN") // ToDo -> chequear permisos de rutas
+    @WithMockUser(roles = "ADMIN") 
     public void getByIdWhitAdminRole() throws Exception {
 
         this.mockMvc.perform(get("/news/1")
@@ -155,7 +156,7 @@ public class NewsControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(dtoToJson(newsDTO)))
                 .andExpect(status().isBadRequest());
-        
+
         verify(newsService, times(1)).update(2L, newsDTO);
     }
 
@@ -167,9 +168,85 @@ public class NewsControllerTest {
                 .put("/news/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(dtoToJson(new NewsDTO())))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+                .andExpect(status().isBadRequest());
 
         verify(newsService, times(0)).update(1L, new NewsDTO());
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    public void deleteWithAdminRole() throws Exception {
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+                .delete("/news/1"))
+                .andExpect(status().isOk());
+
+        verify(newsService, times(1)).deleteNew(1L);
+    }
+
+    @Test
+    @WithMockUser(roles = "USER")
+    public void deleteWithUserRole() throws Exception {
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+                .delete("/news/1"))
+                .andExpect(status().isForbidden());
+
+        verify(newsService, times(0)).deleteNew(1L);
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    public void deleteWithNonexistentId() throws Exception {
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+                .delete("/news/2"))
+                .andExpect(status().isBadRequest());
+
+        verify(newsService, times(1)).deleteNew(2L);
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    public void getAllWithAdminRole() throws Exception {
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+                .get("/news?page=1"))
+                .andExpect(status().isOk());
+
+        verify(newsService, times(1)).getAll(1);
+    }
+    
+    @Test
+    @WithMockUser(roles = "USER")
+    public void getAllWithUserRole() throws Exception {
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+                .get("/news?page=1"))
+                .andExpect(status().isOk());
+
+        verify(newsService, times(1)).getAll(1);
+    }
+
+    @Test
+    public void getAllWithoutRole() throws Exception {
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+                .get("/news?page=1"))
+                .andExpect(status().isForbidden());
+
+        verify(newsService, times(0)).getAll(1);
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    public void getAllWithNonexistentId() throws Exception {
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+                .get("/news?page=2"))
+                .andExpect(status().isBadRequest());
+
+        verify(newsService, times(1)).getAll(2);
     }
 
     private String dtoToJson(NewsDTO dto) throws IOException {
