@@ -1,6 +1,7 @@
 package com.alkemy.ong.controller;
 
 import com.alkemy.ong.dto.NewsDTO;
+import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.service.NewsService;
 import java.io.IOException;
 import org.junit.jupiter.api.Test;
@@ -46,7 +47,8 @@ public class NewsControllerTest {
                 .idCategory(1L)
                 .build();
 
-        when(newsService.findById(1L)).thenReturn(newsDTO);
+        when(newsService.findById(2L)).thenThrow(new ParamNotFoundException(""));
+        when(newsService.update(2L, newsDTO)).thenThrow(new ParamNotFoundException(""));
     }
 
     @Test
@@ -57,7 +59,7 @@ public class NewsControllerTest {
                 .post("/news")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(dtoToJson(new NewsDTO())))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+                .andExpect(status().isBadRequest());
 
         verify(newsService, times(0)).save(newsDTO);
     }
@@ -70,7 +72,7 @@ public class NewsControllerTest {
                 .post("/news")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(dtoToJson(newsDTO)))
-                .andExpect(MockMvcResultMatchers.status().isCreated());
+                .andExpect(status().isCreated());
 
         verify(newsService, times(1)).save(newsDTO);
     }
@@ -83,18 +85,91 @@ public class NewsControllerTest {
                 .post("/news")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(dtoToJson(newsDTO)))
-                .andExpect(MockMvcResultMatchers.status().isForbidden());
+                .andExpect(status().isForbidden());
     }
 
     @Test
     @WithMockUser(roles = "ADMIN") // ToDo -> chequear permisos de rutas
     public void getByIdWhitAdminRole() throws Exception {
-        
+
         this.mockMvc.perform(get("/news/1")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         verify(newsService, times(1)).findById(1L);
+    }
+
+    @Test
+    public void getByIdWhitoutRole() throws Exception {
+
+        this.mockMvc.perform(get("/news/1")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isForbidden());
+
+        verify(newsService, times(0)).findById(1L);
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    public void getByNonexistentId() throws Exception {
+
+        this.mockMvc.perform(get("/news/2")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+
+        verify(newsService, times(1)).findById(2L);
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    public void updateWithAdminRole() throws Exception {
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+                .put("/news/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(dtoToJson(newsDTO)))
+                .andExpect(status().isOk());
+
+        verify(newsService, times(1)).update(1L, newsDTO);
+    }
+
+    @Test
+    @WithMockUser(roles = "USER")
+    public void doNotUpdateWithUserRole() throws Exception {
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+                .put("/news/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(dtoToJson(newsDTO)))
+                .andExpect(status().isForbidden());
+
+        verify(newsService, times(0)).update(1L, newsDTO);
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    public void doNotUpdateWithNonexistentId() throws Exception {
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+                .put("/news/2")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(dtoToJson(newsDTO)))
+                .andExpect(status().isBadRequest());
+        
+        verify(newsService, times(1)).update(2L, newsDTO);
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    public void doNotUpdateWithNullData() throws Exception {
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+                .put("/news/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(dtoToJson(new NewsDTO())))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+
+        verify(newsService, times(0)).update(1L, new NewsDTO());
     }
 
     private String dtoToJson(NewsDTO dto) throws IOException {
