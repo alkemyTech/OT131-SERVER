@@ -26,7 +26,7 @@ public final class Constants {
     public static final String ERR_ACT_NOT_FOUND = "Requested activity was not found";
     public static final String ERR_AWS_NOT_FOUND = "You haven't selected any file to upload";
     public static final String ERR_AWS_NOT_SAVED = "The file couldn't be saved";
-    public static final String[] SWAGGER_SECURITY = {"swagger-ui.html","/swagger-ui/**","/v3/api-docs/**"};
+    public static final String[] SWAGGER_SECURITY = {"/api/docs/**","swagger-ui.html","/swagger-ui/**","/v3/api-docs/**"};
     public static final String[] URL_ORG_SECURITY = {"/organizations/public/**"};
     public static final String REQ_MAPP_GET_AUTH_ME_USER = "/me";
     public static final String REQ_MAPP_ID = "/{id}";
@@ -88,6 +88,12 @@ public final class Constants {
 
     public static final String NOT_DATA_DISPLAY = "No data to display";
     
+    //Validation Dto
+    public static final String NAME_NOT_NULL_MESSAGE = "Name can't be null";
+    public static final String NAME_NOT_EMPTY_MESSAGE = "Name cannot be empty";
+    public static final String CONTENT_NOT_NULL_MESSAGE = "Content can't be null";
+    public static final String CONTENT_NOT_EMPTY_MESSAGE = "Content cannot be empty";
+    
     //NewsController Docs
     public static final String NEWS_POST_INFO = "Save a news";
     public static final String NEWS_CREATED_OK = "News created successfully";
@@ -99,11 +105,26 @@ public final class Constants {
     public static final String NEWS_DELETE_OK = "News removed successfully";
     public static final String BAD_NEWS_ID = "The news was not found.";
     public static final String ERR_NEWS_NULL_DATA = "The news could not be created. Information is missing.";
+
+    //TestimonialsController Docs
+    public static final String TESTIMONIALS_TAG_NAME = "Testimonials";
+    public static final String TESTIMONIALS_TAG_DESCRIPTION = "Create, update show and delete Testimonials";
+    public static final String TESTIMONIALS_POST_SUMARY = "Add new Testimonials";
+    public static final String TESTIMONIALS_POST_DESCRIPTION = "To add a testimonial, you must access this endpoint";
+    public static final String TESTIMONIALS_PUT_SUMARY = "Update a Testimonials by id";
+    public static final String TESTIMONIALS_PUT_OK = "Update Testimonials by id";
+    public static final String TESTIMONIALS_DELETE_SUMARY = "Delete a Testimonial by id";
+    public static final String TESTIMONIALS_DELETE_DESCRIPTION = "Delete Testimonial by id";
+    public static final String TESTIMONIALS_BAD_REQUEST = "Invalid id supplied";
+    public static final String TESTIMONIALS_NOT_FOUND = "Testimonials not found";
+
+
     
     //Docs
     public static final String CODE_OK = "200";
     public static final String CODE_CREATED = "201";
     public static final String CODE_BAD_REQUEST = "400";
+    public static final String CODE_NOT_FOUND = "404";
     public static final String MEDIA_TYPE_APP_JSON = "application/json";
 
     //Pagination
