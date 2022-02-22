@@ -46,7 +46,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         REQ_MAPP_ACTIVITIES,
                         REQ_MAPP_ORG,
                         REQ_MAPP_CATEGORIES,
-                        REQ_MAPP_NEWS).hasAnyAuthority(AUTHENTICATED_ROLES) // Only authenticated roles can access GET methods
+                        REQ_MAPP_NEWS,
+                        REQ_MAPP_NEWS + REQ_MAPP_ID).hasAnyAuthority(AUTHENTICATED_ROLES) // Only authenticated roles can access GET methods
                 .antMatchers(HttpMethod.PUT,
                 			REQ_MAPP_MEMBERS+"/**").hasAnyAuthority(AUTHENTICATED_ROLES)
                 .antMatchers(HttpMethod.POST, URL_ORG_SECURITY).hasAuthority("ROLE_ADMIN")
