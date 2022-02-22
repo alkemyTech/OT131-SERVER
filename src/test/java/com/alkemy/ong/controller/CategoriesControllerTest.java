@@ -59,7 +59,7 @@ class CategoriesControllerTest {
                 .content(dtoToJson(categoriesDTO)))
                 .andExpect(status().isCreated());
 
-        verify(categoriesService, times(1)).save(categoriesDTO);
+        verify(categoriesService, times(1)).addCategories(categoriesDTO);
     }
 
     @Test
@@ -93,7 +93,7 @@ class CategoriesControllerTest {
                         .content(dtoToJson(new CategoriesDTO())))
                 .andExpect(status().isBadRequest());
 
-        verify(categoriesService, times(0)).save(categoriesDTO);
+        verify(categoriesService, times(0)).addCategories(categoriesDTO);
     }
 
     @Test
@@ -196,7 +196,7 @@ class CategoriesControllerTest {
 
         this.mockMvc.perform(MockMvcRequestBuilders
                         .delete(REQ_MAPP_CATEGORIES + REQ_MAPP_ID, 1))
-                .andExpect(status().isNoContent());
+                .andExpect(status().isOk());
 
         verify(categoriesService, times(1)).deleteCategory(1L);
     }
@@ -230,7 +230,7 @@ class CategoriesControllerTest {
                         .delete(REQ_MAPP_CATEGORIES + REQ_MAPP_ID, 2))
                 .andExpect(status().isBadRequest());
 
-        verify(categoriesService, times(1)).detailCategory(2L);
+        verify(categoriesService, times(1)).deleteCategory(2L);
     }
 
 
