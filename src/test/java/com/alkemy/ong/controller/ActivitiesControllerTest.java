@@ -16,7 +16,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static com.alkemy.ong.util.Constants.REQ_MAPP_ACTIVITIES;
+import static com.alkemy.ong.util.Constants.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -45,17 +45,17 @@ class ActivitiesControllerTest {
     void setUp() {
 
         this.activitiesDTO = ActivitiesDTO.builder()
-                .name("name-test01")
-                .content("content-test01")
-                .image("image-test01")
+                .name(FOO_STRING)
+                .content(FOO_STRING)
+                .image(FOO_STRING)
                 .build();
 
-        when(activitiesService.update(2L, activitiesDTO)).thenThrow(new ParamNotFoundException(""));
-
+        when(activitiesService.update(2L, activitiesDTO)).thenThrow(new ParamNotFoundException(EMPTY_STRING));
+        doThrow(new ParamNotFoundException(EMPTY_STRING)).when(activitiesService).delete(2L);
     }
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(roles = ADMIN_ROLE)
     void saveWithAdminRole() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
@@ -69,7 +69,7 @@ class ActivitiesControllerTest {
 
 
     @Test
-    @WithMockUser(roles = "USER")
+    @WithMockUser(roles = USER_ROLE)
     void doNotSaveWithUserRole() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
@@ -90,7 +90,7 @@ class ActivitiesControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(roles = ADMIN_ROLE)
     void doNotSaveWithNullData() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
@@ -103,7 +103,7 @@ class ActivitiesControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(roles = ADMIN_ROLE)
     void getAllActivesWithAdminRole() throws Exception {
 
         this.mockMvc.perform(get(REQ_MAPP_ACTIVITIES)
@@ -114,7 +114,7 @@ class ActivitiesControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "USER")
+    @WithMockUser(roles = USER_ROLE)
     void getAllActivesWithUserRole() throws Exception {
 
         this.mockMvc.perform(get(REQ_MAPP_ACTIVITIES)
@@ -134,11 +134,11 @@ class ActivitiesControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(roles = ADMIN_ROLE)
     void updateWithAdminRole() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .put(REQ_MAPP_ACTIVITIES + "/1")
+                        .put(REQ_MAPP_ACTIVITIES + REQ_MAPP_ID, 1)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(dtoToJson(activitiesDTO)))
                 .andExpect(status().isOk());
@@ -147,11 +147,11 @@ class ActivitiesControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "USER")
+    @WithMockUser(roles = USER_ROLE)
     void doNotUpdateWithUserRole() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .put(REQ_MAPP_ACTIVITIES + "/1")
+                        .put(REQ_MAPP_ACTIVITIES + REQ_MAPP_ID, 1)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(dtoToJson(activitiesDTO)))
                 .andExpect(status().isForbidden());
@@ -163,7 +163,7 @@ class ActivitiesControllerTest {
     void doNotUpdateWithoutRole() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .put(REQ_MAPP_ACTIVITIES + "/1")
+                        .put(REQ_MAPP_ACTIVITIES + REQ_MAPP_ID, 1)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(dtoToJson(activitiesDTO)))
                 .andExpect(status().isForbidden());
@@ -172,11 +172,11 @@ class ActivitiesControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(roles = ADMIN_ROLE)
     void doNotUpdateWithNonExistentId() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .put(REQ_MAPP_ACTIVITIES + "/2")
+                        .put(REQ_MAPP_ACTIVITIES + REQ_MAPP_ID, 2)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(dtoToJson(activitiesDTO)))
                 .andExpect(status().isBadRequest());
@@ -185,16 +185,59 @@ class ActivitiesControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(roles = ADMIN_ROLE)
     void doNotUpdateWithNullData() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .put(REQ_MAPP_ACTIVITIES + "/1")
+                        .put(REQ_MAPP_ACTIVITIES + REQ_MAPP_ID, 1)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(dtoToJson(new ActivitiesDTO())))
                 .andExpect(status().isBadRequest());
 
         verify(activitiesService, times(0)).update(1L, new ActivitiesDTO());
+    }
+
+    @Test
+    @WithMockUser(roles = ADMIN_ROLE)
+    void deleteWithAdminRole() throws Exception {
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+                .delete(REQ_MAPP_ACTIVITIES + REQ_MAPP_ID, 1))
+                .andExpect(status().isNoContent());
+
+        verify(activitiesService, times(1)).delete(1L);
+    }
+
+    @Test
+    @WithMockUser(USER_ROLE)
+    void doNotDeleteWithUserRole() throws Exception {
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+                .delete(REQ_MAPP_ACTIVITIES + REQ_MAPP_ID, 1))
+                .andExpect(status().isForbidden());
+
+        verify(activitiesService, times(0)).delete(1L);
+    }
+
+    @Test
+    void doNotDeleteWithoutRole() throws Exception {
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+                .delete(REQ_MAPP_ACTIVITIES + REQ_MAPP_ID, 1))
+                .andExpect(status().isForbidden());
+
+        verify(activitiesService, times(0)).delete(1L);
+    }
+
+    @Test
+    @WithMockUser(roles = ADMIN_ROLE)
+    void doNotDeleteWithNonExistentId() throws Exception {
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+                .delete(REQ_MAPP_ACTIVITIES + REQ_MAPP_ID, 2))
+                .andExpect(status().isBadRequest());
+
+        verify(activitiesService, times(1)).delete(2L);
     }
 
     private String dtoToJson(ActivitiesDTO dto) throws IOException {
