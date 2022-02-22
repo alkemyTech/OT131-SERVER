@@ -57,7 +57,7 @@ class CategoriesControllerTest {
                 .post(REQ_MAPP_CATEGORIES)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(dtoToJson(categoriesDTO)))
-                .andExpect(status().isCreated());
+                .andExpect(status().isOk());
 
         verify(categoriesService, times(1)).addCategories(categoriesDTO);
     }
