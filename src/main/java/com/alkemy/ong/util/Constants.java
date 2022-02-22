@@ -118,12 +118,32 @@ public final class Constants {
     public static final String TESTIMONIALS_BAD_REQUEST = "Invalid id supplied";
     public static final String TESTIMONIALS_NOT_FOUND = "Testimonials not found";
 
+    //UsersController Docs
+    public static final String USERS_REGISTER_SUMARY = "Register into the api";
+    public static final String USERS_REGISTER_OK_DESCRIPTION = "Register ok. Return credentials";
+    public static final String USERS_AUTH_SUMARY = "Login into the api";
+    public static final String USERS_LOGIN_OK = "Login ok. Return credentials";
+    public static final String USERS_LOGIN_UNAUTHORIZED = "Unathorized. Error in log credentials";
+    public static final String USERS_PUT_SUMARY = "Update user data";
+    public static final String USERS_PUT_OK = "Update ok. Return credentials";
+    public static final String USERS_DELETE_SUMARY = "Delete user from Database (set active as false)";
+    public static final String USERS_DELETE_DESCRIPTION = "Delete Users by id";
+    public static final String USERS_BAD_REQUEST = "Invalid id supplied";
+    public static final String USERS_NOT_FOUND = "User not fouund. User id does not exist";
+    public static final String USERS_FORBIDDEN = "Forbidden. Only admin users can delete registers from db";
+    public static final String USERS_ME_OK_DESCRIPTION = "Information ok.";
+    public static final String USERS_ME_DESCRIPTION = "Get my information";
+    public static final String USERS_LIST_USERS = "List users";
+    public static final String USERS_LIST_OK = "List ok.";
+
 
     
     //Docs
     public static final String CODE_OK = "200";
     public static final String CODE_CREATED = "201";
     public static final String CODE_BAD_REQUEST = "400";
+    public static final String CODE_UNATHORIZED = "401";
+    public static final String CODE_FORBIDDEN = "403";
     public static final String CODE_NOT_FOUND = "404";
     public static final String MEDIA_TYPE_APP_JSON = "application/json";
 
