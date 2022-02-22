@@ -43,13 +43,20 @@ public class OrganizationsServiceImp implements OrganizationsService {
 	
 	@Override
 	@Transactional
-	public Organizations saveOrganization(Organizations organization) throws Exception {
-		if (organizationRepository.findByName(organization.getName()).isPresent()) {
+	public OrganizationsAllDTO saveOrganization(OrganizationsAllDTO organizationDto) throws Exception {	
+		
+		if (organizationRepository.findByName(organizationDto.getName()).isPresent()) {
 			throw new ParamNotFoundException(NAME_EXIST);
 		}
-		organization.setIsActive(true);
-		organization.setSlide(slidesRepository.findByOrganizationId(organization.getId()).get());
-		return organizationRepository.save(organization);
+		
+		Organizations entity = mapper.map(organizationDto, Organizations.class);
+		
+		entity.setIsActive(true);
+		entity.setSlide(slidesRepository.findByOrganizationId(entity.getId()).get());
+		
+		Organizations entitySaves = organizationRepository.save(entity);
+			
+		return mapper.map(entitySaves, OrganizationsAllDTO.class);
 	}
 
 	@Override
