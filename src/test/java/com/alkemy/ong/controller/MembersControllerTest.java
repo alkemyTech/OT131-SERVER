@@ -53,7 +53,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application_test.properties")
-public class MembersTest {
+public class MembersControllerTest {
 	
 
 	@Autowired
