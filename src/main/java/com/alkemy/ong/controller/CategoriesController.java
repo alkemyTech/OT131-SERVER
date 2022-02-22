@@ -73,7 +73,7 @@ public class CategoriesController {
     @Operation(
             summary = "Delete  Categories",
             description = "To delete a category you must access this endpoint")
-    @DeleteMapping(REQ_MAPP_ID)
+
     @ApiModelProperty(notes="id category",name="id",required=true,value= "http://localhost:8080/categories/1")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "UpdateNew by id" ,
@@ -84,8 +84,8 @@ public class CategoriesController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "category not found",
                     content = @Content) })
-   
 
+    @DeleteMapping(REQ_MAPP_ID)
     public String deleteCategories(@Valid @PathVariable long id) throws Exception {
         return categoriesService.deleteCategory(id);
     }
