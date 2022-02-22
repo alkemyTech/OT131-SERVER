@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alkemy.ong.dto.NewsDTO;
 import com.alkemy.ong.dto.PagesDTO;
 import com.alkemy.ong.service.NewsService;
-import static com.alkemy.ong.util.Constants.NEWS_PAGE_INFO;
-import static com.alkemy.ong.util.Constants.NEWS_PAGE_OK;
-import static com.alkemy.ong.util.Constants.REQ_MAPP_ID;
+import static com.alkemy.ong.util.Constants.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,9 +20,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 import javax.validation.Valid;
 
-import static com.alkemy.ong.util.Constants.REQ_MAPP_NEWS;
-import static com.alkemy.ong.util.Constants.WRONG_PAGE_NUMBER;
-
 @RestController
 @RequestMapping(REQ_MAPP_NEWS)
 public class NewsController {
@@ -32,7 +27,13 @@ public class NewsController {
     @Autowired
     private NewsService newsService;
 
-    @Operation(summary = "Save a new" )
+    @Operation(summary = NEWS_POST_INFO)
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = CODE_CREATED, description = NEWS_CREATED_OK,
+                content = {
+                    @Content(mediaType = MEDIA_TYPE_APP_JSON,
+                            schema = @Schema(implementation = NewsDTO.class))}),
+        @ApiResponse(responseCode = CODE_BAD_REQUEST, description = ERR_NEWS_NULL_DATA)})
     @PostMapping
     public ResponseEntity<NewsDTO> save(@Valid @RequestBody NewsDTO dto) {
 
@@ -40,62 +41,56 @@ public class NewsController {
         return ResponseEntity.status(HttpStatus.CREATED).body(updated);
     }
 
-    @Operation(summary = "Update a new by id" )
+    @Operation(summary = NEWS_PUT_INFO)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "UpdateNew by id" ,
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = NewsDTO.class)) }),
+        @ApiResponse(responseCode = CODE_OK, description = NEWS_PUT_OK,
+                content = {
+                    @Content(mediaType = MEDIA_TYPE_APP_JSON,
+                            schema = @Schema(implementation = NewsDTO.class))}),
 
-            @ApiResponse(responseCode = "400", description = "Invalid id supplied",
-                    content = @Content),
-            @ApiResponse(responseCode = "404", description = "new not found",
-                    content = @Content) })
+        @ApiResponse(responseCode = CODE_BAD_REQUEST, description = BAD_NEWS_ID,
+                content = @Content)})
     @PutMapping(REQ_MAPP_ID)
     public ResponseEntity<NewsDTO> update(@PathVariable Long id, @Valid @RequestBody NewsDTO dto) {
         NewsDTO result = newsService.update(id, dto);
         return ResponseEntity.ok().body(result);
     }
 
-    @Operation(summary = "get a new by id" )
+    @Operation(summary = NEWS_GET_INFO)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "GetNew by id" ,
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = NewsDTO.class)) }),
+        @ApiResponse(responseCode = CODE_OK, description = NEWS_GET_OK,
+                content = {
+                    @Content(mediaType = MEDIA_TYPE_APP_JSON,
+                            schema = @Schema(implementation = NewsDTO.class))}),
 
-            @ApiResponse(responseCode = "400", description = "Invalid id supplied",
-                    content = @Content),
-            @ApiResponse(responseCode = "404", description = "new not found",
-                    content = @Content) })
+        @ApiResponse(responseCode = CODE_BAD_REQUEST, description = BAD_NEWS_ID,
+                content = @Content)})
     @GetMapping(REQ_MAPP_ID)
     public ResponseEntity<NewsDTO> getById(@PathVariable Long id) {
         return ResponseEntity.ok().body(newsService.findById(id));
     }
 
-    @Operation(summary = "Delete a new by id" )
+    @Operation(summary = NEWS_DELETE_INFO)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "DeleteNew by id" ,
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = NewsDTO.class)) }),
+        @ApiResponse(responseCode = CODE_OK, description = NEWS_DELETE_OK),
 
-            @ApiResponse(responseCode = "400", description = "Invalid id supplied",
-                    content = @Content),
-            @ApiResponse(responseCode = "404", description = "new not found",
-                    content = @Content) })
+        @ApiResponse(responseCode = CODE_BAD_REQUEST, description = BAD_NEWS_ID,
+                content = @Content)})
     @DeleteMapping(REQ_MAPP_ID)
-    public ResponseEntity<?> deleteNews(@Valid @PathVariable(value = "id", required = true) Long id) {
+    public ResponseEntity<?> deleteNews(@PathVariable(value = "id", required = true) Long id) {
         newsService.deleteNew(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
-    
+
     @Operation(summary = NEWS_PAGE_INFO)
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = NEWS_PAGE_OK,
+        @ApiResponse(responseCode = CODE_OK, description = NEWS_PAGE_OK,
                 content = {
-                    @Content(mediaType = "application/json",
+                    @Content(mediaType = MEDIA_TYPE_APP_JSON,
                             schema = @Schema(implementation = PagesDTO.class))}),
-        @ApiResponse(responseCode = "400", description = WRONG_PAGE_NUMBER)})
+        @ApiResponse(responseCode = CODE_BAD_REQUEST, description = WRONG_PAGE_NUMBER)})
     @GetMapping
-    public ResponseEntity<?> getPage(@RequestParam Integer page){
+    public ResponseEntity<?> getPage(@RequestParam Integer page) {
         PagesDTO<NewsDTO> response = newsService.getAll(page);
         return ResponseEntity.ok().body(response);
     }
