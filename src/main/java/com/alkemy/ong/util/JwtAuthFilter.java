@@ -38,9 +38,9 @@ public class JwtAuthFilter extends OncePerRequestFilter{
                 } else {
                     SecurityContextHolder.clearContext();
                 }
-            } else {
+            } /*else {
                 SecurityContextHolder.clearContext();
-            }
+            }*/
             chain.doFilter(request, response);
         } catch (ExpiredJwtException | 
                 UnsupportedJwtException | 

@@ -1,7 +1,6 @@
 package com.alkemy.ong.model;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,11 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
+@Builder
 @Entity
 @Data
 @NoArgsConstructor

@@ -115,6 +115,12 @@ public final class Constants {
 
     public static final String REQ_MAPP_DETAIL_CAT = "/{id}";
     
+    
+  //Tests
+    public static final String ADMIN_ROLE = "ADMIN";
+    public static final String USER_ROLE = "USER";
+    public static final String URL_PAGE_TEST = "?page={page}";
+    
     public Constants() {
     }
 

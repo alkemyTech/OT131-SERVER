@@ -1,12 +1,14 @@
 package com.alkemy.ong.dto;
 
-import lombok.AllArgsConstructor;
+import java.time.LocalDate;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import lombok.*;
+import com.alkemy.ong.model.Members;
 
+import lombok.*;
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

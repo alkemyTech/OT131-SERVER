@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import static com.alkemy.ong.util.Constants.*;
-import java.util.List;
-import static com.alkemy.ong.util.Constants.MEMBERS_LIST_OK;
 import com.alkemy.ong.dto.MemberDTO;
 import com.alkemy.ong.dto.NewMemberDTO;
 import com.alkemy.ong.dto.PagesDTO;
@@ -68,8 +66,8 @@ public class MembersController {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = MemberDTO.class)) }),
             @ApiResponse(responseCode = "400", description = ERR_MEMBER_ALREADY_EXISTS) })
     @PostMapping
-    public ResponseEntity<MemberDTO> createMember(@Valid @RequestBody NewMemberDTO memberDTO) {
-        MemberDTO response = membersService.createMember(memberDTO);
+    public ResponseEntity<NewMemberDTO> createMember(@Valid @RequestBody NewMemberDTO memberDTO) {
+    	NewMemberDTO response = membersService.createMember(memberDTO);
         return ResponseEntity.status(HttpStatus.SC_CREATED).body(response);
     }
 
@@ -82,6 +80,6 @@ public class MembersController {
     public ResponseEntity<NewMemberDTO> updateMember(@Valid @RequestBody NewMemberDTO memberDTO,
             @PathVariable Long id) {
         NewMemberDTO response = membersService.updateMember(memberDTO, id);
-        return ResponseEntity.status(HttpStatus.SC_CREATED).body(response);
+        return ResponseEntity.status(HttpStatus.SC_OK).body(response);
     }
 }
