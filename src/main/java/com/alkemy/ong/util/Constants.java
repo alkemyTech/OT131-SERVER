@@ -158,6 +158,7 @@ public final class Constants {
     public static final String ADMIN_ROLE = "ADMIN";
     public static final String USER_ROLE = "USER";
     public static final String FOO_STRING = "Foo";
+    public static final String EMAIL_TEST = "mail@mail.com";
     public static final String EMPTY_STRING = "";
     public static final String URL_PAGE_TEST = "?page={page}";
 
