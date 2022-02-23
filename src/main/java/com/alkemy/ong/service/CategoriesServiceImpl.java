@@ -37,6 +37,21 @@ public class CategoriesServiceImpl implements CategoriesService{
     private ModelMapper mapper = new ModelMapper();
 
     @Override
+    @Transactional
+    public CategoriesDTO save(CategoriesDTO categoriesDTO) {
+
+        if (categoriesRepository.findByName(categoriesDTO.getName()).isPresent()) {
+            throw new AlreadyExistsException(NAME_EXIST);
+        }else{
+            Categories entity = mapper.map(categoriesDTO, Categories.class);
+            Categories entitySaved = categoriesRepository.save(entity);
+
+            return mapper.map(entitySaved, CategoriesDTO.class);
+        }
+
+    }
+
+    @Override
     public CategoriesDTO publicDataCategory(String name){
         Optional<Categories> cat = categoriesRepository.findByName(name);
         return categoriesMapper.converToDTO(cat.get());
@@ -80,7 +95,7 @@ public class CategoriesServiceImpl implements CategoriesService{
         return listName;
     }
 
-    private List<Categories> listAll() {
+    public List<Categories> listAll() {
         return categoriesRepository.findAll();
     }
 
