@@ -6,10 +6,12 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import lombok.Builder;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class NewsDTO {
 
     @NotBlank(message = "The name must be a valid value.")
