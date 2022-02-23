@@ -15,4 +15,14 @@ public class LoginUsersDTO{
     @NotBlank(message = "Password can't be empty")
     private String password;
 
+    public LoginUsersDTO() {
+    }
+
+    public LoginUsersDTO(@NotBlank(message = "Email can't be empty") String email,
+            @NotBlank(message = "Password can't be empty") String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    
 }
