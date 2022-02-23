@@ -194,8 +194,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public List<UsersOkDto> listUsers() {
-    	
+    public List<UsersOkDto> listUsers() {    	
     	return  usersMapper.findallDto(usersRepository.findAll());
     }
 
