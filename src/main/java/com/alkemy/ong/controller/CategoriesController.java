@@ -1,13 +1,11 @@
 package com.alkemy.ong.controller;
 import com.alkemy.ong.dto.CategoriesDTO;
 import com.alkemy.ong.dto.PagesDTO;
-
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,11 +17,8 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
-import static com.alkemy.ong.util.Constants.REQ_MAPP_CATEGORIES;
-import static com.alkemy.ong.util.Constants.REQ_MAPP_DETAIL_CAT;
-import static com.alkemy.ong.util.Constants.REQ_MAPP_ID;
-import static com.alkemy.ong.util.Constants.REQ_MAPP_PAGE;
-import static com.alkemy.ong.util.Constants.WRONG_PAGE_NUMBER;
+import static com.alkemy.ong.util.Constants.*;
+
 
 @RestController
 @RequestMapping(REQ_MAPP_CATEGORIES)
@@ -73,7 +68,7 @@ public class CategoriesController {
     @Operation(
             summary = "Delete  Categories",
             description = "To delete a category you must access this endpoint")
-    @DeleteMapping(REQ_MAPP_ID)
+
     @ApiModelProperty(notes="id category",name="id",required=true,value= "http://localhost:8080/categories/1")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "UpdateNew by id" ,
@@ -84,8 +79,8 @@ public class CategoriesController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "category not found",
                     content = @Content) })
-   
 
+    @DeleteMapping(REQ_MAPP_ID)
     public String deleteCategories(@Valid @PathVariable long id) throws Exception {
         return categoriesService.deleteCategory(id);
     }
@@ -125,7 +120,7 @@ public class CategoriesController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Category not found",
                     content = @Content) })
-    @GetMapping(REQ_MAPP_DETAIL_CAT)
+    @GetMapping(REQ_MAPP_ID)
     public CategoriesDTO detailCategories(@Valid @PathVariable("id") long id) throws Exception{
         return categoriesService.detailCategory(id);
     }

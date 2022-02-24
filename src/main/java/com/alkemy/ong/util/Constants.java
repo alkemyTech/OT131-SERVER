@@ -32,7 +32,6 @@ public final class Constants {
     public static final String REQ_MAPP_ID = "/{id}";
 
     public static final String REQ_MAPP_MEMBERS = "/members";
-    public static final String GET_MAPP_LIST_MEMBERS = "/members";
     public static final String ERR_MEMBER_ALREADY_EXISTS = "Member already exists";
     public static final String ERR_FB_MEMBER_ALREADY_EXISTS = "There is already a member created with the Facebook entered";
     public static final String ERR_IG_MEMBER_ALREADY_EXISTS = "There is already a member created with the Instagram entered";
@@ -174,30 +173,23 @@ public final class Constants {
     //Message the error
     public static final String ERROR_EXIST = "The item you want to add already exists";
 
-    /*
-    Internal Key for Token
-     */
+    
+    //Internal Key for Token
     public static final String SECRET_KEY = "SECRET_KEY";
 
     //Slides Update
-    public static final String REQ_MAPP_UPDATE_SLIDES = "/{id}";
-    public static final String REQ_MAPP_DELETE_SLIDES = "/{id}";
-
     public static final String REQ_MAPP_GET_LIST_USER = "/users";
-
-    public static final String REQ_MAPP_DETAIL_CAT = "/{id}";
-
     public static final String REQ_MAPP_PAGE = "/";
 
     //Categories
     public static final String CATEGORIES_PAGE_URL = "localhost:8080/categories/?page=";
-
     public static final String FORBIDDEN_MSG = "You don't have enough permissions to perform this action.";
 
     //Tests
     public static final String ADMIN_ROLE = "ADMIN";
     public static final String USER_ROLE = "USER";
     public static final String FOO_STRING = "Foo";
+    public static final String EMAIL_TEST = "mail@mail.com";
     public static final String EMPTY_STRING = "";
     public static final String URL_PAGE_TEST = "?page={page}";
 

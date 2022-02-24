@@ -2,7 +2,6 @@
 package com.alkemy.ong.controller;
 
 import com.alkemy.ong.dto.ActivitiesDTO;
-import com.alkemy.ong.model.Activities;
 import com.alkemy.ong.service.ActivitiesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+
 import static com.alkemy.ong.util.Constants.*;
 
 @RestController
@@ -27,10 +27,10 @@ public class ActivitiesController {
 
     @Operation(summary = ACTIVITIES_GET_INFO)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = ACTIVITIES_GET_INFO_OK,
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Activities.class))}),
-            @ApiResponse(responseCode = "400", description = ENTITY_NOT_FOUND,
+            @ApiResponse(responseCode = CODE_OK, description = ACTIVITIES_GET_INFO_OK,
+                    content = {@Content(mediaType = MEDIA_TYPE_APP_JSON,
+                            schema = @Schema(implementation = ActivitiesDTO.class))}),
+            @ApiResponse(responseCode = CODE_BAD_REQUEST, description = ENTITY_NOT_FOUND,
                     content = @Content)})
     @GetMapping
     public ResponseEntity<List<ActivitiesDTO>> getAllActives() {
@@ -39,12 +39,12 @@ public class ActivitiesController {
 
     @Operation(summary = ACTIVITIES_PUT_INFO)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = ACTIVITIES_PUT_INFO_OK,
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Activities.class))}),
-            @ApiResponse(responseCode = "400", description = BAD_REQUEST,
+            @ApiResponse(responseCode = CODE_OK, description = ACTIVITIES_PUT_INFO_OK,
+                    content = {@Content(mediaType = MEDIA_TYPE_APP_JSON,
+                            schema = @Schema(implementation = ActivitiesDTO.class))}),
+            @ApiResponse(responseCode = CODE_BAD_REQUEST, description = BAD_REQUEST,
                     content = @Content),
-            @ApiResponse(responseCode = "404", description = ERR_ACT_NOT_FOUND,
+            @ApiResponse(responseCode = CODE_NOT_FOUND, description = ERR_ACT_NOT_FOUND,
                     content = @Content)})
     @PutMapping(REQ_MAPP_ID)
     public ResponseEntity<ActivitiesDTO> update(@PathVariable Long id,
@@ -55,11 +55,11 @@ public class ActivitiesController {
 
     @Operation(summary = ACTIVITIES_DELETE_INFO)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = ACTIVITIES_DELETE_OK,
+            @ApiResponse(responseCode = CODE_OK, description = ACTIVITIES_DELETE_OK,
                     content = {@Content}),
-            @ApiResponse(responseCode = "400", description = BAD_REQUEST,
+            @ApiResponse(responseCode = CODE_BAD_REQUEST, description = BAD_REQUEST,
                     content = @Content),
-            @ApiResponse(responseCode = "404", description = ERR_ACT_NOT_FOUND,
+            @ApiResponse(responseCode = CODE_NOT_FOUND, description = ERR_ACT_NOT_FOUND,
                     content = @Content)})
     @DeleteMapping(REQ_MAPP_ID)
     public ResponseEntity<Void> delete(@PathVariable Long id) {
@@ -69,18 +69,14 @@ public class ActivitiesController {
 
     @Operation(summary = ACTIVITIES_POST_INFO)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = ACTIVITIES_POST_OK,
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Activities.class))}),
-            @ApiResponse(responseCode = "400", description = BAD_REQUEST,
+            @ApiResponse(responseCode = CODE_OK, description = ACTIVITIES_POST_OK,
+                    content = {@Content(mediaType = MEDIA_TYPE_APP_JSON,
+                            schema = @Schema(implementation = ActivitiesDTO.class))}),
+            @ApiResponse(responseCode = CODE_BAD_REQUEST, description = BAD_REQUEST,
                     content = @Content)})
     @PostMapping
     public ResponseEntity<?> createActivity(@Valid @RequestBody ActivitiesDTO activityDTO) {
 
         return new ResponseEntity<>(activitiesService.save(activityDTO), HttpStatus.CREATED);
-
     }
-
-
-
 }

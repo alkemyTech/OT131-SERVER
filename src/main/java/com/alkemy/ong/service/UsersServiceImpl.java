@@ -56,19 +56,19 @@ public class UsersServiceImpl implements UsersService {
                     new UsernamePasswordAuthenticationToken(loginUser.getEmail(), loginUser.getPassword()));
             Optional<Users> users = usersRepository.findByEmail(auth.getName());
             if (users.isPresent()) {
-                Users user = users.get();
-                if (user.isActive()) {
+               Users user = users.get();
+               if (user.isActive()) {
                     return userToken(users.get());
-                } else {
-                    throw new Exception("Unsubscribed user");
-                }
-            } else {
+              } else {
+                  throw new Exception("Unsubscribed user");
+               }
+           } else {
                 throw new BadCredentialsException("Username does not exist");
-            }
+           }
         } catch (BadCredentialsException e) {
-            throw new BadCredentialsException("Username does not exist");
+           throw new BadCredentialsException("Username does not exist");
         } catch (InternalAuthenticationServiceException e) {
-            throw new InternalAuthenticationServiceException("Username does not exist");
+           throw new InternalAuthenticationServiceException("Username does not exist");
         }
     }
 
@@ -194,8 +194,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public List<UsersOkDto> listUsers() {
-    	
+    public List<UsersOkDto> listUsers() {    	
     	return  usersMapper.findallDto(usersRepository.findAll());
     }
 

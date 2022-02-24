@@ -1,10 +1,17 @@
 package com.alkemy.ong.dto;
 
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UsersOkDto implements Serializable {
 
     private Long id;
@@ -13,8 +20,7 @@ public class UsersOkDto implements Serializable {
     
     private String lastName;
     
-    private String email;
-    
+    private String email;  
     
 
 }

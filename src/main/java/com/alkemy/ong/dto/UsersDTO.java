@@ -5,9 +5,11 @@ import com.alkemy.ong.model.Roles;
 import java.io.Serializable;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+
+import lombok.Builder;
 import lombok.Data;
 
-
+@Builder
 @Data
 public class UsersDTO implements Serializable{
     
