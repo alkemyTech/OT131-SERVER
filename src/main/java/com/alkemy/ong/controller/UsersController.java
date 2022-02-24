@@ -128,7 +128,6 @@ public class UsersController {
     
     @GetMapping(value = REQ_MAPP_GET_LIST_USER)
     public List<UsersOkDto> listUsers() {
-
     	return usersService.listUsers();
     }
 

@@ -2,6 +2,7 @@ package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.CategoriesDTO;
 import com.alkemy.ong.dto.PagesDTO;
+import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.model.Categories;
 
 import java.util.List;
@@ -18,6 +19,8 @@ public interface CategoriesService {
 
     List<String> getAllByName();
 
+    List<Categories> listAll();
+
     CategoriesDTO addCategories(CategoriesDTO categoriesDto);
     
     public CategoriesDTO detailCategory(Long id) throws Exception;
@@ -25,4 +28,6 @@ public interface CategoriesService {
     public 	PagesDTO<CategoriesDTO> getAll(Integer page);
     
     public PagesDTO<CategoriesDTO> responsePage(Page<Categories> page);
+
+    CategoriesDTO save(CategoriesDTO dto) throws ParamNotFoundException;
 }

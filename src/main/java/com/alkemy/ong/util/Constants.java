@@ -73,11 +73,11 @@ public final class Constants {
     public static final String CONTACTS_CREATED_OK = "Contact created successfully";
     public static final String CONTACTS_DELETE_INFO = "Unsubscribe the contact entered by id";
     public static final String CONTACTS_DELETE_OK = "Contact unsubscribed successfully";
-    
-     //CommentController Docs
+
+    //CommentController Docs
     public static final String COMMENTS_GET_INFO = "Get a list of Comments ordered by date";
     public static final String COMMENTS_GET_OK = "Access Granted. Returns list of comment";
-    public static final String COMMENTS_GET_DENIED = "Access Denied. Not enough credentials to access this route"; 
+    public static final String COMMENTS_GET_DENIED = "Access Denied. Not enough credentials to access this route";
     public static final String COMMENTS_POST_INFO = "Create new Comment";
     public static final String COMMENTS_POST_OK = "Comment created successfully";
     public static final String COMMENTS_PUT_INFO = "Update a comment related to sent id.";
@@ -86,14 +86,32 @@ public final class Constants {
     public static final String COMMENTS_DELETE_OK = "Comment successfully deleted.";
     public static final String ERR_COMMENT_NOT_FOUND = "Requested comment was not found";
 
-
     public static final String NOT_DATA_DISPLAY = "No data to display";
     
+    //NewsController Docs
+    public static final String NEWS_POST_INFO = "Save a news";
+    public static final String NEWS_CREATED_OK = "News created successfully";
+    public static final String NEWS_GET_INFO = "Get a news by id";
+    public static final String NEWS_GET_OK = "Get News by id";
+    public static final String NEWS_PUT_INFO = "Update a news by id";
+    public static final String NEWS_PUT_OK = "News updated successfully";
+    public static final String NEWS_DELETE_INFO = "Delete news by id";
+    public static final String NEWS_DELETE_OK = "News removed successfully";
+    public static final String BAD_NEWS_ID = "The news was not found.";
+    public static final String ERR_NEWS_NULL_DATA = "The news could not be created. Information is missing.";
+    
+    //Docs
+    public static final String CODE_OK = "200";
+    public static final String CODE_CREATED = "201";
+    public static final String CODE_BAD_REQUEST = "400";
+    public static final String CODE_NOT_FOUND = "404";
+    public static final String MEDIA_TYPE_APP_JSON = "application/json";
+
     //Pagination
     public static final Integer PAGE_SIZE = 10;
     public static final String PAGE_NOT_FOUND = "The requested page doesn't exist";
     public static final String WRONG_PAGE_NUMBER = "Page number can't be less than 0";
-    
+
     //News
     public static final String NEWS_PAGE_URL = "localhost:8080/news?page=";
     public static final String NEWS_PAGE_INFO = "Shows the paginated news of 10 elements";
@@ -112,7 +130,7 @@ public final class Constants {
     public static final String MEMBERS_PAGE_URL = "localhost:8080/members?page=";
     public static final String MEMBERS_PAGE_INFO = "Returns a page of 10 members elements";
     public static final String MEMBERS_PAGE_OK = "Get members list";
-    
+
     //Message the error
     public static final String ERROR_EXIST = "The item you want to add already exists";
 
@@ -120,29 +138,30 @@ public final class Constants {
     Internal Key for Token
      */
     public static final String SECRET_KEY = "SECRET_KEY";
-    
+
     //Slides Update
     public static final String REQ_MAPP_UPDATE_SLIDES = "/{id}";
     public static final String REQ_MAPP_DELETE_SLIDES = "/{id}";
-    
+
     public static final String REQ_MAPP_GET_LIST_USER = "/users";
 
     public static final String REQ_MAPP_DETAIL_CAT = "/{id}";
-    
- 
-  //Tests
-    public static final String ADMIN_ROLE = "ADMIN";
-    public static final String USER_ROLE = "USER";
-    public static final String URL_PAGE_TEST = "?page={page}";
 
     public static final String REQ_MAPP_PAGE = "/";
-    
+
     //Categories
     public static final String CATEGORIES_PAGE_URL = "localhost:8080/categories/?page=";
-    
+
     public static final String FORBIDDEN_MSG = "You don't have enough permissions to perform this action.";
 
-    
+    //Tests
+    public static final String ADMIN_ROLE = "ADMIN";
+    public static final String USER_ROLE = "USER";
+    public static final String FOO_STRING = "Foo";
+    public static final String EMAIL_TEST = "mail@mail.com";
+    public static final String EMPTY_STRING = "";
+    public static final String URL_PAGE_TEST = "?page={page}";
+
     public Constants() {
     }
 

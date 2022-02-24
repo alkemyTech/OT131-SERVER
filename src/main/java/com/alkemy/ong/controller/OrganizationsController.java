@@ -76,8 +76,8 @@ public class OrganizationsController {
 	   		  @ApiResponse(responseCode = "404", description = "Organization not found", 
 	   		    content = @Content) })
 	@PostMapping()
-	public ResponseEntity<?> createOrganization(@Valid @RequestBody Organizations organization) throws Exception {
-		return new ResponseEntity<Organizations>(organizationService.saveOrganization(organization), HttpStatus.CREATED);
+	public ResponseEntity<OrganizationsAllDTO> createOrganization(@Valid @RequestBody OrganizationsAllDTO organizationDto) throws Exception {
+		return new ResponseEntity<OrganizationsAllDTO>(organizationService.saveOrganization(organizationDto), HttpStatus.CREATED);
 	}
 	
 	@Operation(summary = "Update a organization by id" )
