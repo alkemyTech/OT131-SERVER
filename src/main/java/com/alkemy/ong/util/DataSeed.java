@@ -2,6 +2,7 @@ package com.alkemy.ong.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +19,7 @@ import com.alkemy.ong.repository.UsersRepository;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
-
+@Profile("!test")
 @Component
 public class DataSeed implements CommandLineRunner {
 
