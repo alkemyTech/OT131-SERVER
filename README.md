@@ -1,8 +1,8 @@
-# Proyecto ONG Team 131- Java
+# Proyecto ONG Team 131 - Java 👨‍💻👩‍💻
 
 Desarrollo del back-end de una aplicación REST API utilizando Java 11 como lenguaje de programación principal, Spring Boot como framework, MySQL como base de datos, JPA con Hibernate para la conexión, modelado, manipulación y consultas a la base de datos y dependencias Maven para la implementación de soluciones eficientes aplicando buenas prácticas de desarrollo.
 
-## Patrón de diseño
+## Patrón de diseño 📐
 
 Se ha implementado un patrón de diseño DTO para la creación de objetos planos (POJO) en respuesta a las peticiones HTTP, utilizando una arquitectura organizada por capas conectando Controller > Service > Service Implementation > Repository > Database.
 
@@ -14,7 +14,7 @@ Se implementó una Clase Data Seed utilizando la interfaz CommandLineRunner para
 
 Además, varias entidades cuentan con endpoints con paginación de los resultados para optimización de las consultas a la base de datos.
 
-## Dependencias Maven usadas
+## Dependencias Maven usadas 📦
 
 ### Lombok
 
@@ -49,13 +49,13 @@ Para la generación de documentación detallada y automática de cada endpoint, 
 Para la implementación de pruebas unitarias a cada endpoint desarrollado.
 
 
-## SCRUM y Metodologias ágiles
+## SCRUM y Metodologias ágiles 🙋‍♀️🙋‍♂️
 
 Para la coordinación del desarrollo en equipo de la aplicación, se utilizaron fundamentos de SCRUM y Metodologias ágiles tales como uso de la plataforma JIRA, delegación de incidencias, story points, epics, dailys para actualización del estado del desarrollo y retro dailys para obtención de feedback y retrospección como equipo.
 
 Como canal principal de comunicación del equipo se utilizó la plataforma Slack, complementandolo con videollamadas via Zoom y Google Meets.
 
-## Reglas de permisos según rol
+## Reglas de permisos según rol 🚦
 
 Para la realización de este proyecto, se desarrollaron 2 roles principales: ADMIN y USER.
 
@@ -65,7 +65,7 @@ Por otro lado, el usuario con rol USER solo podrá acceder a los endpoints con p
 
 Finalmente, un usuario sin ningún rol solo podrá acceder a los endpoints correspondientes al registro y login de usuarios para obtener su token generado con JWT.
 
-## Registro de usuarios según DataSeed
+## Registro de usuarios según DataSeed 📋
 
 | User | Password | Rol |
 | ------------- | ------------- | ------------- |
