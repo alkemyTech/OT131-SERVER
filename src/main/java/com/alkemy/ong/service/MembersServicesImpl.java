@@ -31,7 +31,7 @@ public class MembersServicesImpl implements MembersService{
 
     @Override
     @Transactional
-    public MemberDTO createMember(NewMemberDTO memberDTO) {
+    public NewMemberDTO createMember(NewMemberDTO memberDTO) {
 
         if (!memberDTO.getFacebookUrl().isBlank()
                 && membersRepository.findByFacebookUrl(memberDTO.getFacebookUrl()).isPresent()) {
@@ -50,7 +50,7 @@ public class MembersServicesImpl implements MembersService{
 
         Members member = mapper.map(memberDTO, Members.class);
         Members memberSaved = membersRepository.save(member);
-        MemberDTO response = mapper.map(memberSaved, MemberDTO.class);
+        NewMemberDTO response = mapper.map(memberSaved, NewMemberDTO.class);
 
         return response;
     }
@@ -61,6 +61,7 @@ public class MembersServicesImpl implements MembersService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<MemberDTO> getMembers(){
         List<Members> members = membersRepository.findAll();
         List<MemberDTO> membersList = new ArrayList<>();
@@ -73,6 +74,7 @@ public class MembersServicesImpl implements MembersService{
     }
 
     @Override
+    @Transactional
     public void deleteMember(Long id) {
         Optional<Members> member = membersRepository.findById(id);
         if(member.isEmpty()) {
@@ -86,6 +88,7 @@ public class MembersServicesImpl implements MembersService{
     }
 
 	@Override
+	@Transactional
 	public NewMemberDTO updateMember(NewMemberDTO memberDTO,Long id) {
 		Optional<Members> members =membersRepository.findById(id);
 		if (!members.isPresent()) {
