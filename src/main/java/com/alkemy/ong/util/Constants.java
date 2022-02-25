@@ -26,13 +26,12 @@ public final class Constants {
     public static final String ERR_ACT_NOT_FOUND = "Requested activity was not found";
     public static final String ERR_AWS_NOT_FOUND = "You haven't selected any file to upload";
     public static final String ERR_AWS_NOT_SAVED = "The file couldn't be saved";
-    public static final String[] SWAGGER_SECURITY = {"swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**"};
+    public static final String[] SWAGGER_SECURITY = {"/api/docs/**","swagger-ui.html","/swagger-ui/**","/v3/api-docs/**"};
     public static final String[] URL_ORG_SECURITY = {"/organizations/public/**"};
     public static final String REQ_MAPP_GET_AUTH_ME_USER = "/me";
     public static final String REQ_MAPP_ID = "/{id}";
 
     public static final String REQ_MAPP_MEMBERS = "/members";
-    public static final String GET_MAPP_LIST_MEMBERS = "/members";
     public static final String ERR_MEMBER_ALREADY_EXISTS = "Member already exists";
     public static final String ERR_FB_MEMBER_ALREADY_EXISTS = "There is already a member created with the Facebook entered";
     public static final String ERR_IG_MEMBER_ALREADY_EXISTS = "There is already a member created with the Instagram entered";
@@ -87,7 +86,13 @@ public final class Constants {
     public static final String ERR_COMMENT_NOT_FOUND = "Requested comment was not found";
 
     public static final String NOT_DATA_DISPLAY = "No data to display";
-
+    
+    //Validation Dto
+    public static final String NAME_NOT_NULL_MESSAGE = "Name can't be null";
+    public static final String NAME_NOT_EMPTY_MESSAGE = "Name cannot be empty";
+    public static final String CONTENT_NOT_NULL_MESSAGE = "Content can't be null";
+    public static final String CONTENT_NOT_EMPTY_MESSAGE = "Content cannot be empty";
+    
     //NewsController Docs
     public static final String NEWS_POST_INFO = "Save a news";
     public static final String NEWS_CREATED_OK = "News created successfully";
@@ -100,10 +105,42 @@ public final class Constants {
     public static final String BAD_NEWS_ID = "The news was not found.";
     public static final String ERR_NEWS_NULL_DATA = "The news could not be created. Information is missing.";
 
+    //TestimonialsController Docs
+    public static final String TESTIMONIALS_TAG_NAME = "Testimonials";
+    public static final String TESTIMONIALS_TAG_DESCRIPTION = "Create, update show and delete Testimonials";
+    public static final String TESTIMONIALS_POST_SUMARY = "Add new Testimonials";
+    public static final String TESTIMONIALS_POST_DESCRIPTION = "To add a testimonial, you must access this endpoint";
+    public static final String TESTIMONIALS_PUT_SUMARY = "Update a Testimonials by id";
+    public static final String TESTIMONIALS_PUT_OK = "Update Testimonials by id";
+    public static final String TESTIMONIALS_DELETE_SUMARY = "Delete a Testimonial by id";
+    public static final String TESTIMONIALS_DELETE_DESCRIPTION = "Delete Testimonial by id";
+    public static final String TESTIMONIALS_BAD_REQUEST = "Invalid id supplied";
+    public static final String TESTIMONIALS_NOT_FOUND = "Testimonials not found";
+
+    //UsersController Docs
+    public static final String USERS_REGISTER_SUMARY = "Register into the api";
+    public static final String USERS_REGISTER_OK_DESCRIPTION = "Register ok. Return credentials";
+    public static final String USERS_AUTH_SUMARY = "Login into the api";
+    public static final String USERS_LOGIN_OK = "Login ok. Return credentials";
+    public static final String USERS_LOGIN_UNAUTHORIZED = "Unathorized. Error in log credentials";
+    public static final String USERS_PUT_SUMARY = "Update user data";
+    public static final String USERS_PUT_OK = "Update ok. Return credentials";
+    public static final String USERS_DELETE_SUMARY = "Delete user from Database (set active as false)";
+    public static final String USERS_DELETE_DESCRIPTION = "Delete Users by id";
+    public static final String USERS_BAD_REQUEST = "Invalid id supplied";
+    public static final String USERS_NOT_FOUND = "User not fouund. User id does not exist";
+    public static final String USERS_FORBIDDEN = "Forbidden. Only admin users can delete registers from db";
+    public static final String USERS_ME_OK_DESCRIPTION = "Information ok.";
+    public static final String USERS_ME_DESCRIPTION = "Get my information";
+    public static final String USERS_LIST_USERS = "List users";
+    public static final String USERS_LIST_OK = "List ok.";
+
     //Docs
     public static final String CODE_OK = "200";
     public static final String CODE_CREATED = "201";
     public static final String CODE_BAD_REQUEST = "400";
+    public static final String CODE_UNATHORIZED = "401";
+    public static final String CODE_FORBIDDEN = "403";
     public static final String CODE_NOT_FOUND = "404";
     public static final String MEDIA_TYPE_APP_JSON = "application/json";
 
@@ -134,24 +171,15 @@ public final class Constants {
     //Message the error
     public static final String ERROR_EXIST = "The item you want to add already exists";
 
-    /*
-    Internal Key for Token
-     */
+    //Internal Key for Token
     public static final String SECRET_KEY = "SECRET_KEY";
 
     //Slides Update
-    public static final String REQ_MAPP_UPDATE_SLIDES = "/{id}";
-    public static final String REQ_MAPP_DELETE_SLIDES = "/{id}";
-
     public static final String REQ_MAPP_GET_LIST_USER = "/users";
-
-    public static final String REQ_MAPP_DETAIL_CAT = "/{id}";
-
     public static final String REQ_MAPP_PAGE = "/";
 
     //Categories
     public static final String CATEGORIES_PAGE_URL = "localhost:8080/categories/?page=";
-
     public static final String FORBIDDEN_MSG = "You don't have enough permissions to perform this action.";
 
     //Tests

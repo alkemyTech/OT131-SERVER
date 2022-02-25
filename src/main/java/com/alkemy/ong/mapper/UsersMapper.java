@@ -8,7 +8,6 @@ import com.alkemy.ong.dto.UsersOkDto;
 import com.alkemy.ong.model.Users;
 import com.alkemy.ong.repository.RolesRepository;
 import com.alkemy.ong.util.RoleName;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,8 +88,6 @@ public class UsersMapper {
             return dtos;
 
         } catch (Exception e) {
-
-            System.out.print("NO SETEA LA LISTA DTOS: " + e.getMessage());
             return null;
         }
 

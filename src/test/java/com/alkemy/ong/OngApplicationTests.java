@@ -1,4 +1,4 @@
-/*package com.alkemy.ong;
+package com.alkemy.ong;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,4 +10,4 @@ class OngApplicationTests {
 	void contextLoads() {
 	}
 
-}*/
+}

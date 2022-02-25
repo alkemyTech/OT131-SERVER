@@ -2,7 +2,6 @@ package com.alkemy.ong.controller;
 
 import java.util.List;
 import javax.validation.Valid;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,11 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.alkemy.ong.dto.OrganizationsAllDTO;
 import com.alkemy.ong.dto.OrganizationsDTO;
-import com.alkemy.ong.service.OrganizationsServiceImp;
+import com.alkemy.ong.service.OrganizationsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -31,9 +29,7 @@ import static com.alkemy.ong.util.Constants.*;
 public class OrganizationsController {
 
     @Autowired
-    private OrganizationsServiceImp organizationService;
-
-    private ModelMapper mapper = new ModelMapper();
+    private OrganizationsService organizationService;
 
     @Operation(summary = "Get a public data organization")
     @ApiResponses(value = {
@@ -48,7 +44,7 @@ public class OrganizationsController {
                 content = @Content)})
     @GetMapping(POINT_GET_MAPP)
     public ResponseEntity<?> publicDataOrganization(@PathVariable String name) {
-        return new ResponseEntity<>(mapper.map(organizationService.publicDataOrganization(name).get(), OrganizationsDTO.class), HttpStatus.OK);
+        return new ResponseEntity<>(organizationService.publicDataOrganization(name), HttpStatus.OK);
     }
 
     @Operation(summary = "Get a list Organizations")
@@ -92,8 +88,8 @@ public class OrganizationsController {
                 content = @Content),
         @ApiResponse(responseCode = "404", description = "Organization not found",
                 content = @Content)})
-    @PostMapping(POINT_POST_MAPP)
-    public ResponseEntity<?> updateOrganization(@Valid @RequestBody OrganizationsAllDTO organization, @RequestParam(value = "id") long id) throws Exception {
+    @PostMapping(REQ_MAPP_ID)
+    public ResponseEntity<?> updateOrganization(@Valid @RequestBody OrganizationsAllDTO organization, @PathVariable long id) throws Exception {
         return new ResponseEntity<>(organizationService.updateDataOrganization(organization, id), HttpStatus.OK);
     }
 

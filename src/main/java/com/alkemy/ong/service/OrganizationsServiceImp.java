@@ -36,9 +36,13 @@ public class OrganizationsServiceImp implements OrganizationsService {
     }
 
     @Override
-    public Optional<Organizations> publicDataOrganization(String name) {
-        return Optional.of(organizationRepository.findByName(name)
-                .orElseThrow(() -> new NullPointerException(ENTITY_NOT_FOUND)));
+    public OrganizationsDTO publicDataOrganization(String name) {
+        Optional<Organizations> result = organizationRepository.findByName(name);
+
+        if (result.isPresent()) 
+            return mapper.map(result.get(), OrganizationsDTO.class);
+        else 
+            throw new ParamNotFoundException(ENTITY_NOT_FOUND);
     }
 
     @Override
