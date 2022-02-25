@@ -7,11 +7,11 @@ import lombok.Data;
 
 @Data
 @Builder
-public class LoginUsersDTO{
+public class LoginUsersDTO {
 
     @NotBlank(message = "Email can't be empty")
     private String email;
-    
+
     @NotBlank(message = "Password can't be empty")
     private String password;
 
@@ -24,5 +24,4 @@ public class LoginUsersDTO{
         this.password = password;
     }
 
-    
 }

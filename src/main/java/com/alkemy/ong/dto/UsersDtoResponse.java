@@ -9,14 +9,12 @@ public class UsersDtoResponse {
 
     private String firstName;
     private String lastName;
-    private String email;    
+    private String email;
     private String token;
     private Roles role;
 
-    
     public UsersDtoResponse() {
     }
-
 
     public UsersDtoResponse(String firstName, String lastName, String email, String token, Roles role) {
         this.firstName = firstName;
@@ -26,11 +24,10 @@ public class UsersDtoResponse {
         this.role = role;
     }
 
-
     public UsersDtoResponse(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-    
-    }    
+
+    }
 }

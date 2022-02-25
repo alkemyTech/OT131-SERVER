@@ -1,8 +1,5 @@
 package com.alkemy.ong.service;
 
-
-import com.alkemy.ong.dto.UsersRegisterDTO;
-
 import com.alkemy.ong.dto.UsersDTO;
 import com.alkemy.ong.model.Users;
 import com.alkemy.ong.dto.NewUsersDTO;
@@ -31,6 +28,6 @@ public interface UsersService {
     public String extractPayload(String token);
 
     UsersDtoResponse update(Long id, NewUsersDTO dto);
-    
+
     public List<UsersOkDto> listUsers();
 }

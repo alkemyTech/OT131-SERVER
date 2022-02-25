@@ -19,7 +19,6 @@ import static com.alkemy.ong.util.Constants.FORBIDDEN_MSG;
 import static com.alkemy.ong.util.RoleName.ROLE_ADMIN;
 import java.util.List;
 
-
 @Service
 public class CommentsServiceImpl implements CommentsService {
 
@@ -31,41 +30,40 @@ public class CommentsServiceImpl implements CommentsService {
 
     @Autowired
     private UsersService usersService;
-    
+
     @Autowired
     private NewsRepository newsRepository;
-    
+
     @Override
     @Transactional
-    public CommentsResponseDTO create(Long news_id, String body ,String authorization) throws AccessDeniedException{
+    public CommentsResponseDTO create(Long news_id, String body, String authorization) throws AccessDeniedException {
         //verificar news existente
         UsersDtoResponse userLogged = usersService.getUserDetails(authorization);
-        if(newsRepository.findById(news_id).isPresent() && !body.isEmpty() || body != null){
-            
+        if (newsRepository.findById(news_id).isPresent() && !body.isEmpty() || body != null) {
+
             Comments comment = commentsMapper.comments2Entity(
-                    newsRepository.findById(news_id).get(), 
-                    usersService.findByMail(userLogged.getEmail()).get(), 
+                    newsRepository.findById(news_id).get(),
+                    usersService.findByMail(userLogged.getEmail()).get(),
                     body);
-            
+
             commentsRepository.save(comment);
-                    
-                    
-           return commentsMapper.entity2ResponseDTO(comment);
-                
+
+            return commentsMapper.entity2ResponseDTO(comment);
+
         } else {
             throw new AccessDeniedException(FORBIDDEN_MSG);
         }
-             
+
     }
-    
 
     @Override
     @Transactional
     public CommentsResponseDTO update(Long id, CommentsDTO dto, String authorization) throws AccessDeniedException {
 
         Optional<Comments> result = commentsRepository.findById(id);
-        if (result.isEmpty())
+        if (result.isEmpty()) {
             return null;
+        }
 
         Comments entity = result.get();
         verifyComment(entity, dto, authorization);
@@ -80,26 +78,25 @@ public class CommentsServiceImpl implements CommentsService {
 
         UsersDtoResponse userLogged = usersService.getUserDetails(authorization);
 
-        if (!entity.getUsers().getId().equals(dto.getUserId()) || !entity.getNews().getId().equals(dto.getNewsId()) ||
-                !(userLogged.getEmail().equals(entity.getUsers().getEmail()) || userLogged.getRole().getName().equals(ROLE_ADMIN)))
+        if (!entity.getUsers().getId().equals(dto.getUserId()) || !entity.getNews().getId().equals(dto.getNewsId())
+                || !(userLogged.getEmail().equals(entity.getUsers().getEmail()) || userLogged.getRole().getName().equals(ROLE_ADMIN))) {
             throw new AccessDeniedException(FORBIDDEN_MSG);
+        }
     }
-    
-    
+
     @Override
     public List<AllCommentsResponseDTO> getNewAndAllComment(Long id) {
         List<Comments> listComments = commentsRepository.getNewsAndAllComments(id);
-        if(!listComments.isEmpty()){
+        if (!listComments.isEmpty()) {
             return commentsMapper.allCommentsResponseDtoToCommnets(listComments);
-        }else{
+        } else {
             throw new NoDataDisplayException(ERROR_EXIST);
         }
     }
-    
-    
-    @Transactional (readOnly = true)
+
+    @Transactional(readOnly = true)
     @Override
-    public Optional<List<String>> listComments() throws AccessDeniedException {        
+    public Optional<List<String>> listComments() throws AccessDeniedException {
         return commentsRepository.listComments();
     }
 
@@ -108,11 +105,11 @@ public class CommentsServiceImpl implements CommentsService {
     public void delete(Long id, String authorization) throws AccessDeniedException {
         Optional<Comments> result = commentsRepository.findById(id);
         UsersDtoResponse userLogged = usersService.getUserDetails(authorization);
-        if(result.isPresent() && userLogged.getEmail().equals(result.get().getUsers().getEmail()) || userLogged.getRole().getName().equals(ROLE_ADMIN)){
+        if (result.isPresent() && userLogged.getEmail().equals(result.get().getUsers().getEmail()) || userLogged.getRole().getName().equals(ROLE_ADMIN)) {
             commentsRepository.deleteById(id);
-        } else{
+        } else {
             throw new AccessDeniedException(FORBIDDEN_MSG);
         }
     }
-   
+
 }

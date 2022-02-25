@@ -1,13 +1,11 @@
 package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.CategoriesDTO;
-import com.alkemy.ong.dto.NewsDTO;
 import com.alkemy.ong.dto.PagesDTO;
 import com.alkemy.ong.exception.AlreadyExistsException;
 import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.mapper.CategoriesMapper;
 import com.alkemy.ong.model.Categories;
-import com.alkemy.ong.model.News;
 import com.alkemy.ong.repository.CategoriesRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
-
 @Service
-public class CategoriesServiceImpl implements CategoriesService{
+public class CategoriesServiceImpl implements CategoriesService {
 
     @Autowired
     private CategoriesRepository categoriesRepository;
@@ -42,7 +38,7 @@ public class CategoriesServiceImpl implements CategoriesService{
 
         if (categoriesRepository.findByName(categoriesDTO.getName()).isPresent()) {
             throw new AlreadyExistsException(NAME_EXIST);
-        }else{
+        } else {
             Categories entity = mapper.map(categoriesDTO, Categories.class);
             Categories entitySaved = categoriesRepository.save(entity);
 
@@ -52,23 +48,21 @@ public class CategoriesServiceImpl implements CategoriesService{
     }
 
     @Override
-    public CategoriesDTO publicDataCategory(String name){
+    public CategoriesDTO publicDataCategory(String name) {
         Optional<Categories> cat = categoriesRepository.findByName(name);
         return categoriesMapper.converToDTO(cat.get());
     }
-    
+
     @Override
-    public String deleteCategory(Long id) throws Exception{
+    public String deleteCategory(Long id) throws Exception {
         Optional<Categories> category = categoriesRepository.findById(id);
         if (category.isEmpty()) {
-        	throw new ParamNotFoundException (ENTITY_NOT_FOUND);
+            throw new ParamNotFoundException(ENTITY_NOT_FOUND);
         }
         category.get().setActivated(false);
         categoriesRepository.save(category.get());
         return "Eliminado";
     }
-   
-
 
     @Transactional
     public CategoriesDTO update(Long id, CategoriesDTO dto) {
@@ -116,34 +110,36 @@ public class CategoriesServiceImpl implements CategoriesService{
         }
         return categoriesMapper.converToDTO(categoriesRepository.save(categoriesMapper.converToModel(categoriesDto)));
     }
-    
+
     @Override
     public CategoriesDTO detailCategory(Long id) throws Exception {
-    	
-    	return categoriesMapper.converToDTO(categoriesRepository.getById(id));
+
+        return categoriesMapper.converToDTO(categoriesRepository.getById(id));
     }
+
     @Override
-    public 	PagesDTO<CategoriesDTO> getAll(Integer page){
-    	 if (page < 0) {
-    		 throw new ParamNotFoundException(WRONG_PAGE_NUMBER);
-    	 }
-    	  Pageable property = PageRequest.of(page, PAGE_SIZE);
-    	  Page<Categories> pageCategory = categoriesRepository.findAll(property);
-    	  
-    	  return responsePage(pageCategory);
+    public PagesDTO<CategoriesDTO> getAll(Integer page) {
+        if (page < 0) {
+            throw new ParamNotFoundException(WRONG_PAGE_NUMBER);
+        }
+        Pageable property = PageRequest.of(page, PAGE_SIZE);
+        Page<Categories> pageCategory = categoriesRepository.findAll(property);
+
+        return responsePage(pageCategory);
     }
+
     @Override
     public PagesDTO<CategoriesDTO> responsePage(Page<Categories> page) {
-    	if (page.isEmpty()) {
-    		 throw new ParamNotFoundException(PAGE_NOT_FOUND);
+        if (page.isEmpty()) {
+            throw new ParamNotFoundException(PAGE_NOT_FOUND);
+        }
+        Page<CategoriesDTO> pagesCategories = new PageImpl<CategoriesDTO>(
+                page.getContent().stream().map(categ -> mapper.map(categ, CategoriesDTO.class))
+                        .collect(Collectors.toList()),
+                PageRequest.of(page.getNumber(), page.getSize()),
+                page.getTotalElements());
+        return new PagesDTO<CategoriesDTO>(pagesCategories, CATEGORIES_PAGE_URL);
+
     }
-    	Page<CategoriesDTO> pagesCategories = new PageImpl<CategoriesDTO>(
-    			page.getContent().stream().map(categ -> mapper.map(categ, CategoriesDTO.class))
-    			.collect(Collectors.toList()), 
-    					PageRequest.of( page.getNumber(), page.getSize()),
-    					page.getTotalElements());
-    	return new PagesDTO<CategoriesDTO>(pagesCategories,CATEGORIES_PAGE_URL);
-    			
-    }
-    
+
 }

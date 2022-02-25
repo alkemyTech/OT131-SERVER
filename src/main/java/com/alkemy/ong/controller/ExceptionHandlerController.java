@@ -16,40 +16,33 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
-	
-	   @Override
-	    protected ResponseEntity<Object> handleMethodArgumentNotValid(
-	            MethodArgumentNotValidException ex,
-	            HttpHeaders headers,
-	            HttpStatus status,
-	            WebRequest request) {
 
-	        List<String> errors = new ArrayList();
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex,
+            HttpHeaders headers,
+            HttpStatus status,
+            WebRequest request) {
 
-	        for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
-	            errors.add(fieldError.getField() + ": " + fieldError.getDefaultMessage());
-	        }
+        List<String> errors = new ArrayList();
 
-	        ErrorDTO errorDTO = new ErrorDTO(
-	                HttpStatus.BAD_REQUEST,
-	                errors);
+        for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
+            errors.add(fieldError.getField() + ": " + fieldError.getDefaultMessage());
+        }
 
-	        return handleExceptionInternal(ex, errorDTO, headers, errorDTO.getStatus(), request);
-	    }
-	    
-	   @ExceptionHandler(value = {Exception.class})
-	    protected ResponseEntity<Object> handleException(RuntimeException ex, WebRequest request) {
-	        ErrorDTO errorDTO = new ErrorDTO(
-	                HttpStatus.BAD_REQUEST,
-	                Arrays.asList(ex.getMessage())
-	        );
-	        return handleExceptionInternal(ex, errorDTO, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
-	    }   
-	}
+        ErrorDTO errorDTO = new ErrorDTO(
+                HttpStatus.BAD_REQUEST,
+                errors);
 
+        return handleExceptionInternal(ex, errorDTO, headers, errorDTO.getStatus(), request);
+    }
 
-
-
-    
-
-
+    @ExceptionHandler(value = {Exception.class})
+    protected ResponseEntity<Object> handleException(RuntimeException ex, WebRequest request) {
+        ErrorDTO errorDTO = new ErrorDTO(
+                HttpStatus.BAD_REQUEST,
+                Arrays.asList(ex.getMessage())
+        );
+        return handleExceptionInternal(ex, errorDTO, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+}

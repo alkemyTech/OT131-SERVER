@@ -49,9 +49,8 @@ class CategoriesControllerTest {
         doThrow(new ParamNotFoundException(EMPTY_STRING)).when(categoriesService).deleteCategory(2L);
     }
 
-
     @Test
-    @WithMockUser(roles= ADMIN_ROLE)
+    @WithMockUser(roles = ADMIN_ROLE)
     public void saveWithAdminRole() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders
                 .post(REQ_MAPP_CATEGORIES)
@@ -67,9 +66,9 @@ class CategoriesControllerTest {
     void doNotSaveWithUserRole() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .post(REQ_MAPP_CATEGORIES)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(dtoToJson(categoriesDTO)))
+                .post(REQ_MAPP_CATEGORIES)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(dtoToJson(categoriesDTO)))
                 .andExpect(status().isForbidden());
     }
 
@@ -77,9 +76,9 @@ class CategoriesControllerTest {
     void doNotSaveWithoutRole() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .post(REQ_MAPP_CATEGORIES)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(dtoToJson(categoriesDTO)))
+                .post(REQ_MAPP_CATEGORIES)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(dtoToJson(categoriesDTO)))
                 .andExpect(status().isForbidden());
     }
 
@@ -88,9 +87,9 @@ class CategoriesControllerTest {
     void doNotSaveWithNullData() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .post(REQ_MAPP_CATEGORIES)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(dtoToJson(new CategoriesDTO())))
+                .post(REQ_MAPP_CATEGORIES)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(dtoToJson(new CategoriesDTO())))
                 .andExpect(status().isBadRequest());
 
         verify(categoriesService, times(0)).addCategories(categoriesDTO);
@@ -101,7 +100,7 @@ class CategoriesControllerTest {
     void getAllActivesWithAdminRole() throws Exception {
 
         this.mockMvc.perform(get(REQ_MAPP_CATEGORIES)
-                        .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         verify(categoriesService, times(1)).getAllByName();
@@ -112,7 +111,7 @@ class CategoriesControllerTest {
     void getAllActivesWithUserRole() throws Exception {
 
         this.mockMvc.perform(get(REQ_MAPP_CATEGORIES)
-                        .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         verify(categoriesService, times(1)).getAllByName();
@@ -122,7 +121,7 @@ class CategoriesControllerTest {
     void doNotGetAllActivesWithoutRole() throws Exception {
 
         this.mockMvc.perform(get(REQ_MAPP_CATEGORIES)
-                        .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isForbidden());
     }
 
@@ -131,9 +130,9 @@ class CategoriesControllerTest {
     void updateWithAdminRole() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .put(REQ_MAPP_CATEGORIES + REQ_MAPP_ID, 1)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(dtoToJson(categoriesDTO)))
+                .put(REQ_MAPP_CATEGORIES + REQ_MAPP_ID, 1)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(dtoToJson(categoriesDTO)))
                 .andExpect(status().isOk());
 
         verify(categoriesService, times(1)).update(1L, categoriesDTO);
@@ -144,9 +143,9 @@ class CategoriesControllerTest {
     void doNotUpdateWithUserRole() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .put(REQ_MAPP_CATEGORIES + REQ_MAPP_ID, 1)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(dtoToJson(categoriesDTO)))
+                .put(REQ_MAPP_CATEGORIES + REQ_MAPP_ID, 1)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(dtoToJson(categoriesDTO)))
                 .andExpect(status().isForbidden());
 
         verify(categoriesService, times(0)).update(1L, categoriesDTO);
@@ -156,9 +155,9 @@ class CategoriesControllerTest {
     void doNotUpdateWithoutRole() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .put(REQ_MAPP_CATEGORIES + REQ_MAPP_ID, 1)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(dtoToJson(categoriesDTO)))
+                .put(REQ_MAPP_CATEGORIES + REQ_MAPP_ID, 1)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(dtoToJson(categoriesDTO)))
                 .andExpect(status().isForbidden());
 
         verify(categoriesService, times(0)).update(1L, categoriesDTO);
@@ -169,9 +168,9 @@ class CategoriesControllerTest {
     void doNotUpdateWithNonExistentId() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .put(REQ_MAPP_CATEGORIES + REQ_MAPP_ID, 2)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(dtoToJson(categoriesDTO)))
+                .put(REQ_MAPP_CATEGORIES + REQ_MAPP_ID, 2)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(dtoToJson(categoriesDTO)))
                 .andExpect(status().isBadRequest());
 
         verify(categoriesService, times(1)).update(2L, categoriesDTO);
@@ -182,9 +181,9 @@ class CategoriesControllerTest {
     void doNotUpdateWithNullData() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .put(REQ_MAPP_CATEGORIES + REQ_MAPP_ID, 1)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(dtoToJson(new CategoriesDTO())))
+                .put(REQ_MAPP_CATEGORIES + REQ_MAPP_ID, 1)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(dtoToJson(new CategoriesDTO())))
                 .andExpect(status().isBadRequest());
 
         verify(categoriesService, times(0)).update(1L, new CategoriesDTO());
@@ -195,7 +194,7 @@ class CategoriesControllerTest {
     void deleteWithAdminRole() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .delete(REQ_MAPP_CATEGORIES + REQ_MAPP_ID, 1))
+                .delete(REQ_MAPP_CATEGORIES + REQ_MAPP_ID, 1))
                 .andExpect(status().isOk());
 
         verify(categoriesService, times(1)).deleteCategory(1L);
@@ -206,7 +205,7 @@ class CategoriesControllerTest {
     void doNotDeleteWithUserRole() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .delete(REQ_MAPP_CATEGORIES + REQ_MAPP_ID, 1))
+                .delete(REQ_MAPP_CATEGORIES + REQ_MAPP_ID, 1))
                 .andExpect(status().isForbidden());
 
         verify(categoriesService, times(0)).deleteCategory(1L);
@@ -216,7 +215,7 @@ class CategoriesControllerTest {
     void doNotDeleteWithoutRole() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .delete(REQ_MAPP_CATEGORIES + REQ_MAPP_ID, 1))
+                .delete(REQ_MAPP_CATEGORIES + REQ_MAPP_ID, 1))
                 .andExpect(status().isForbidden());
 
         verify(categoriesService, times(0)).deleteCategory(1L);
@@ -227,12 +226,11 @@ class CategoriesControllerTest {
     void doNotDeleteWithNonExistentId() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .delete(REQ_MAPP_CATEGORIES + REQ_MAPP_ID, 2))
+                .delete(REQ_MAPP_CATEGORIES + REQ_MAPP_ID, 2))
                 .andExpect(status().isBadRequest());
 
         verify(categoriesService, times(1)).deleteCategory(2L);
     }
-
 
     private String dtoToJson(CategoriesDTO categoriesDTO) throws IOException {
         return json.write(categoriesDTO).getJson();

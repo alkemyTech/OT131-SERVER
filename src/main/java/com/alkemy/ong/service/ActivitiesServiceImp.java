@@ -31,7 +31,7 @@ public class ActivitiesServiceImp implements ActivitiesService {
 
         if (activitiesRepository.findByName(activityDTO.getName()).isPresent()) {
             throw new AlreadyExistsException(NAME_EXIST);
-        }else{
+        } else {
             Activities entity = mapper.map(activityDTO, Activities.class);
             entity.setCreatedDate(LocalDate.now());
             Activities entitySaved = activitiesRepository.save(entity);
@@ -65,7 +65,7 @@ public class ActivitiesServiceImp implements ActivitiesService {
         entity.setContent(dto.getContent());
         entity.setImage(dto.getImage());
         entity.setModifiedDate(LocalDate.now());
-        
+
         Activities entityUpdated = activitiesRepository.save(entity);
 
         return mapper.map(entityUpdated, ActivitiesDTO.class);

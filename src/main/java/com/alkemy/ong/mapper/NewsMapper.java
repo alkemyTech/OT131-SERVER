@@ -9,17 +9,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class NewsMapper {
-    
+
     private ModelMapper mapper = new ModelMapper();
 
-    public NewsDTO converToDTO(News nw){
-        return new NewsDTO(nw.getName(), nw.getContent(), nw.getImage(),  nw.getCategory().getId(), nw.getDateCreated());
+    public NewsDTO converToDTO(News nw) {
+        return new NewsDTO(nw.getName(), nw.getContent(), nw.getImage(), nw.getCategory().getId(), nw.getDateCreated());
     }
 
-    public News converToModel(NewsDTO newDTO){
+    public News converToModel(NewsDTO newDTO) {
         return new News(newDTO.getName(), newDTO.getContent(), newDTO.getImage());
     }
-    
+
     public List<NewsDTO> listNewsToDto(List<News> list) {
         return list.stream().map(news -> mapper.map(news, NewsDTO.class))
                 .collect(Collectors.toList());

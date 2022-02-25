@@ -5,7 +5,6 @@ import com.alkemy.ong.dto.UsersRegisterDTO;
 import com.alkemy.ong.dto.UsersDTO;
 import com.alkemy.ong.dto.UsersDtoResponse;
 import com.alkemy.ong.dto.UsersOkDto;
-import com.alkemy.ong.model.Roles;
 import com.alkemy.ong.model.Users;
 import com.alkemy.ong.repository.RolesRepository;
 import com.alkemy.ong.util.RoleName;
@@ -19,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UsersMapper {
+
     @Autowired
     RolesRepository rolesRepository;
 
@@ -37,12 +37,11 @@ public class UsersMapper {
         user.setEmail(registerUsersDTO.getEmail());
         user.setPassword(registerUsersDTO.getPassword());
         user.setLastName(registerUsersDTO.getLastName());
-        user.setFirstName(registerUsersDTO.getFirstName());            
+        user.setFirstName(registerUsersDTO.getFirstName());
         return user;
     }
-    
-    
-    public UsersOkDto userOkDtoToUser(Users users){
+
+    public UsersOkDto userOkDtoToUser(Users users) {
         UsersOkDto usersOkDto = new UsersOkDto();
         usersOkDto.setId(users.getId());
         usersOkDto.setFirstName(users.getFirstName());
@@ -61,7 +60,7 @@ public class UsersMapper {
         userEntity.setCreationDate(LocalDate.now());
         userEntity.setActive(true);
         userEntity.setRole(rolesRepository.findByName(RoleName.ROLE_USER).get());
-        
+
         return userEntity;
     }
 
@@ -72,30 +71,29 @@ public class UsersMapper {
                 userEntity.getEmail());
     }
 
-    public List<UsersOkDto> findallDto(List<Users> allEntityUsers){
+    public List<UsersOkDto> findallDto(List<Users> allEntityUsers) {
 
-    	try {
-    		
-    		List<UsersOkDto> dtos = new ArrayList<UsersOkDto>();
-    		
-    		
-    		for (Users user: allEntityUsers) {
-    			UsersOkDto auxDto = new UsersOkDto();
-    			auxDto.setId(user.getId());
-				auxDto.setFirstName(user.getFirstName());
-				auxDto.setLastName(user.getLastName());
-				auxDto.setEmail(user.getEmail());
-				dtos.add(auxDto);
-			}
-    		
-    		return dtos;
-    		
-		} catch (Exception e) {
-			
-			System.out.print("NO SETEA LA LISTA DTOS: " + e.getMessage());
-			return null;
-		}
-    	
+        try {
+
+            List<UsersOkDto> dtos = new ArrayList<UsersOkDto>();
+
+            for (Users user : allEntityUsers) {
+                UsersOkDto auxDto = new UsersOkDto();
+                auxDto.setId(user.getId());
+                auxDto.setFirstName(user.getFirstName());
+                auxDto.setLastName(user.getLastName());
+                auxDto.setEmail(user.getEmail());
+                dtos.add(auxDto);
+            }
+
+            return dtos;
+
+        } catch (Exception e) {
+
+            System.out.print("NO SETEA LA LISTA DTOS: " + e.getMessage());
+            return null;
+        }
+
     }
 
 }

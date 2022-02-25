@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class AWSResponseDTO {
-    
+
     private String fileUrl;
 }

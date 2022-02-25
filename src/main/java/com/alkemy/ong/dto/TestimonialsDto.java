@@ -1,4 +1,3 @@
-
 package com.alkemy.ong.dto;
 
 import java.io.Serializable;
@@ -12,16 +11,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TestimonialsDto implements Serializable{
+public class TestimonialsDto implements Serializable {
 
     private Long id;
-    
-    @NotNull(message ="Name can't be null")
+
+    @NotNull(message = "Name can't be null")
     private String name;
-	
+
     private String image;
-    
+
     private String content;
-    
 
 }

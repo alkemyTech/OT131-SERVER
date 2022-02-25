@@ -1,4 +1,5 @@
 package com.alkemy.ong.model;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -27,39 +28,38 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name="organizations")
+@Table(name = "organizations")
 @EntityListeners(AuditingEntityListener.class)
 public class Organizations {
-	
-	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private long id;
-	@NotNull(message ="Name can't be null")
-	private String name;
-	@NotNull
-	private String images;
-	private String addres;
-	private int phone;
-	@NotNull
-	private String email;
-	@NotNull	
-	private  String welcomeText;
-	@Column (length = 5000)
-	@Size (max = 5000)
-	private String aboutUsText;
-	@Column( name ="modified_date")
-	@UpdateTimestamp
-	private LocalDate modifiedDate;
-	@Column(name= "created_date")
-	@CreationTimestamp
-	private LocalDate createdDate;
-	@OneToMany (mappedBy = "organization")
-	private List <Slides> slide;
-	private Boolean isActive = Boolean.TRUE;
-	
-        private String facebookUrl;
-        private String instagramUrl;
-        private String linkedinUrl;
-	
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @NotNull(message = "Name can't be null")
+    private String name;
+    @NotNull
+    private String images;
+    private String addres;
+    private int phone;
+    @NotNull
+    private String email;
+    @NotNull
+    private String welcomeText;
+    @Column(length = 5000)
+    @Size(max = 5000)
+    private String aboutUsText;
+    @Column(name = "modified_date")
+    @UpdateTimestamp
+    private LocalDate modifiedDate;
+    @Column(name = "created_date")
+    @CreationTimestamp
+    private LocalDate createdDate;
+    @OneToMany(mappedBy = "organization")
+    private List<Slides> slide;
+    private Boolean isActive = Boolean.TRUE;
+
+    private String facebookUrl;
+    private String instagramUrl;
+    private String linkedinUrl;
 
 }

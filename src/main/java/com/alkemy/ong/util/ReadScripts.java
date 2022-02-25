@@ -14,14 +14,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ReadScripts {
-    
+
     @Autowired
     private UsersRepository usersRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
     private DataSource dataSource;
-    
+
     public void dataSourceInitializer(Resource data) {
         DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();
         dataSourceInitializer.setDataSource(dataSource);
@@ -34,8 +34,8 @@ public class ReadScripts {
         populator.addScript(data);
         return populator;
     }
-    
-    public void encodePasswordPopulator(){
+
+    public void encodePasswordPopulator() {
         List<Users> users = usersRepository.findAll();
         users.stream().map(user -> {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -44,5 +44,5 @@ public class ReadScripts {
             usersRepository.save(user);
         });
     }
-    
+
 }

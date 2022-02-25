@@ -9,6 +9,6 @@ public interface ContactsService {
     ContactsDTO save(NewContactsDTO contact);
 
     void delete(Long id);
-    
-    List<ContactsDTO>  findByAll();
+
+    List<ContactsDTO> findByAll();
 }

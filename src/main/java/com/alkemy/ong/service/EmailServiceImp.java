@@ -1,6 +1,5 @@
 package com.alkemy.ong.service;
 
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -69,7 +68,6 @@ public class EmailServiceImp implements EmailService {
     @Async
     public void sendWelcomeEmail(String from, String to) {
 
-
         sendHTML(from, to);
 
     }
@@ -96,7 +94,6 @@ public class EmailServiceImp implements EmailService {
                 + response.getHeaders());
     }
 
-
     public void saveBodyMail() {
 
         WelcomeEmail welcomeEmail = new WelcomeEmail();
@@ -110,11 +107,9 @@ public class EmailServiceImp implements EmailService {
         return "Welcome to ONG Somos Mas!";
     }
 
-
     public String getBodyMail() {
 
         //File file = new File()
-
         String body = "<!doctype html>\r\n"
                 + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:v='urn:schemas-microsoft-com:vml'\r\n"
                 + "	xmlns:o='urn:schemas-microsoft-com:office:office'>\r\n"
@@ -535,6 +530,4 @@ public class EmailServiceImp implements EmailService {
         return body;
     }
 
-
 }
-

@@ -30,15 +30,15 @@ public class TestimonialsServiceImpl implements TestimonialsService {
 
     @Autowired
     private TestimonialsMapper testimonalsMapper;
-    
+
     private ModelMapper mapper = new ModelMapper();
 
     @Transactional
     @Override
     public TestimonialsDto save(TestimonialsAddNewDto testimonialsAddNewDto) {
-        if(testimonialsRepository.findByName(testimonialsAddNewDto.getName()) != null){
+        if (testimonialsRepository.findByName(testimonialsAddNewDto.getName()) != null) {
             return mapper.map(testimonialsRepository.save(mapper.map(testimonialsAddNewDto, Testimonials.class)), TestimonialsDto.class);
-        }else{
+        } else {
             throw new AlreadyExistsException(ERROR_EXIST);
         }
     }
@@ -46,15 +46,15 @@ public class TestimonialsServiceImpl implements TestimonialsService {
     @Transactional
     @Override
     public TestimonialsDto updateTestimonails(TestimonialsDto testimonials, long id) {
-    	Optional<Testimonials> testimonial = testimonialsRepository.findById(id);
-    	if (testimonial.isEmpty()) {
-    		throw new ParamNotFoundException (ENTITY_NOT_FOUND);
-    	}
-    	testimonial.get().setImage(testimonials.getImage());
-    	testimonial.get().setContent(testimonials.getContent());
-    	testimonial.get().setName(testimonials.getName());
-    	testimonialsRepository.save(testimonial.get());
-    	return mapper.map(testimonial.get(), TestimonialsDto.class);
+        Optional<Testimonials> testimonial = testimonialsRepository.findById(id);
+        if (testimonial.isEmpty()) {
+            throw new ParamNotFoundException(ENTITY_NOT_FOUND);
+        }
+        testimonial.get().setImage(testimonials.getImage());
+        testimonial.get().setContent(testimonials.getContent());
+        testimonial.get().setName(testimonials.getName());
+        testimonialsRepository.save(testimonial.get());
+        return mapper.map(testimonial.get(), TestimonialsDto.class);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class TestimonialsServiceImpl implements TestimonialsService {
         if (testimonials.isPresent()) {
             testimonials.get().setIsActive(false);
             testimonialsRepository.save(testimonials.get());
-        }else{
+        } else {
             throw new ParamNotFoundException("Testimonial does not exist");
         }
 
@@ -73,8 +73,9 @@ public class TestimonialsServiceImpl implements TestimonialsService {
     @Transactional(readOnly = true)
     public PagesDTO<TestimonialsResponseDto> getAll(Integer page) {
 
-        if (page < 0)
+        if (page < 0) {
             throw new ParamNotFoundException(WRONG_PAGE_NUMBER);
+        }
 
         Pageable pageRequest = PageRequest.of(page, PAGE_SIZE);
         Page<Testimonials> testimonials = testimonialsRepository.findAll(pageRequest);
@@ -84,16 +85,16 @@ public class TestimonialsServiceImpl implements TestimonialsService {
 
     private PagesDTO<TestimonialsResponseDto> responsePage(Page<Testimonials> page) {
 
-        if (page.isEmpty())
+        if (page.isEmpty()) {
             throw new ParamNotFoundException(PAGE_NOT_FOUND);
+        }
 
         Page<TestimonialsResponseDto> response = new PageImpl<>(
-            testimonalsMapper.entityList2ResponseDTO(page.getContent()),
+                testimonalsMapper.entityList2ResponseDTO(page.getContent()),
                 PageRequest.of(page.getNumber(), page.getSize()),
                 page.getTotalElements()
         );
         return new PagesDTO<>(response, TESTIMONIALS_PAGE_URL);
     }
-
 
 }

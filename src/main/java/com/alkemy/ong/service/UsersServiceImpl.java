@@ -1,7 +1,6 @@
 package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.LoginUsersDTO;
-import com.alkemy.ong.dto.UsersDTO;
 import com.alkemy.ong.dto.UsersOkDto;
 import com.alkemy.ong.model.Users;
 import com.alkemy.ong.mapper.UsersMapper;
@@ -22,7 +21,6 @@ import com.alkemy.ong.dto.UsersDTO;
 import com.alkemy.ong.exception.AlreadyExistsException;
 import com.alkemy.ong.util.JWT;
 
-
 import java.text.MessageFormat;
 import static com.alkemy.ong.util.Constants.*;
 import java.util.Base64;
@@ -30,11 +28,9 @@ import java.util.List;
 
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-
-
 @Service
 public class UsersServiceImpl implements UsersService {
-    
+
     private static final String USER_NOT_FOUND_ERROR_MESSAGE = "User not found: {0}";
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -56,19 +52,19 @@ public class UsersServiceImpl implements UsersService {
                     new UsernamePasswordAuthenticationToken(loginUser.getEmail(), loginUser.getPassword()));
             Optional<Users> users = usersRepository.findByEmail(auth.getName());
             if (users.isPresent()) {
-               Users user = users.get();
-               if (user.isActive()) {
+                Users user = users.get();
+                if (user.isActive()) {
                     return userToken(users.get());
-              } else {
-                  throw new Exception("Unsubscribed user");
-               }
-           } else {
+                } else {
+                    throw new Exception("Unsubscribed user");
+                }
+            } else {
                 throw new BadCredentialsException("Username does not exist");
-           }
+            }
         } catch (BadCredentialsException e) {
-           throw new BadCredentialsException("Username does not exist");
+            throw new BadCredentialsException("Username does not exist");
         } catch (InternalAuthenticationServiceException e) {
-           throw new InternalAuthenticationServiceException("Username does not exist");
+            throw new InternalAuthenticationServiceException("Username does not exist");
         }
     }
 
@@ -155,8 +151,9 @@ public class UsersServiceImpl implements UsersService {
     public UsersDtoResponse update(Long id, NewUsersDTO dto) {
 
         Optional<Users> result = usersRepository.findById(id);
-        if (result.isEmpty() || !result.get().isActive())
+        if (result.isEmpty() || !result.get().isActive()) {
             return null;
+        }
 
         Users entity = result.get();
         entity.setEmail(dto.getEmail());
@@ -175,9 +172,6 @@ public class UsersServiceImpl implements UsersService {
         System.out.println(tokenUser.getToken());
         return tokenUser;
     }
-    
-    
-
 
     @Override
     public String extractPayload(String token) {
@@ -194,8 +188,8 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public List<UsersOkDto> listUsers() {    	
-    	return  usersMapper.findallDto(usersRepository.findAll());
+    public List<UsersOkDto> listUsers() {
+        return usersMapper.findallDto(usersRepository.findAll());
     }
 
 }

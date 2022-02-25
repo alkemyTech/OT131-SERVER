@@ -51,12 +51,12 @@ public class AmazonS3ServiceImpl implements AmazonS3Service {
 
         try {
             File file = convertMultiPartToFile(multipartFile);
-            
+
             String fileName = this.generateFileName(multipartFile);
-            
+
             fileUrl = endpointUrl + fileName;
             this.uploadFileToS3Bucket(fileName, file);
-            
+
             file.delete();
         } catch (FileNotFoundException e) {
             throw new AmazonS3IOException(ERR_AWS_NOT_FOUND);

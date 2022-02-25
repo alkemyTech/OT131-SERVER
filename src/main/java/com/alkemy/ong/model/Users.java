@@ -15,11 +15,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-
-import lombok.Data;
-import lombok.Builder;
-
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Data
@@ -27,6 +23,7 @@ import lombok.NoArgsConstructor;
 @EntityListeners(AuditingEntityListener.class)
 
 public class Users {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

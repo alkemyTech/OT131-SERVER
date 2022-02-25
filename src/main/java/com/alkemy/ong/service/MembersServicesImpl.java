@@ -20,14 +20,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class MembersServicesImpl implements MembersService{
+public class MembersServicesImpl implements MembersService {
 
     @Autowired
     private MembersRepository membersRepository;
     private ModelMapper mapper = new ModelMapper();
     @Autowired
     private MembersMapper membersMapper;
-
 
     @Override
     @Transactional
@@ -56,13 +55,13 @@ public class MembersServicesImpl implements MembersService{
     }
 
     @Override
-    public Members getMember(Long id){ 
+    public Members getMember(Long id) {
         return membersRepository.findById(id).get();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<MemberDTO> getMembers(){
+    public List<MemberDTO> getMembers() {
         List<Members> members = membersRepository.findAll();
         List<MemberDTO> membersList = new ArrayList<>();
 
@@ -77,24 +76,24 @@ public class MembersServicesImpl implements MembersService{
     @Transactional
     public void deleteMember(Long id) {
         Optional<Members> member = membersRepository.findById(id);
-        if(member.isEmpty()) {
+        if (member.isEmpty()) {
             throw new ParamNotFoundException(ENTITY_NOT_FOUND);
         }
-        if(!member.get().getIsActive()) {
+        if (!member.get().getIsActive()) {
             throw new ParamNotFoundException(ERR_MEMBER_ALREADY_REMOVED);
         }
         member.get().setIsActive(false);
         membersRepository.save(member.get());
     }
 
-	@Override
-	@Transactional
-	public NewMemberDTO updateMember(NewMemberDTO memberDTO,Long id) {
-		Optional<Members> members =membersRepository.findById(id);
-		if (!members.isPresent()) {
-			throw new ParamNotFoundException (ENTITY_NOT_FOUND);
-		}
-		if (!memberDTO.getFacebookUrl().isBlank()
+    @Override
+    @Transactional
+    public NewMemberDTO updateMember(NewMemberDTO memberDTO, Long id) {
+        Optional<Members> members = membersRepository.findById(id);
+        if (!members.isPresent()) {
+            throw new ParamNotFoundException(ENTITY_NOT_FOUND);
+        }
+        if (!memberDTO.getFacebookUrl().isBlank()
                 && membersRepository.findByFacebookUrl(memberDTO.getFacebookUrl()).isPresent()) {
             throw new AlreadyExistsException(ERR_FB_MEMBER_ALREADY_EXISTS);
         }
@@ -109,16 +108,16 @@ public class MembersServicesImpl implements MembersService{
             throw new AlreadyExistsException(ERR_LI_MEMBER_ALREADY_EXISTS);
         }
 
-		members.get().setName(memberDTO.getName());
-		members.get().setDescription(memberDTO.getDescription());
-		members.get().setFacebookUrl(memberDTO.getFacebookUrl());
-		members.get().setImage(memberDTO.getImage());
-		members.get().setInstagramUrl(memberDTO.getInstagramUrl());
-		members.get().setLinkedinUrl(memberDTO.getLinkedinUrl());
-		membersRepository.save(members.get());
-		return mapper.map(members.get(), NewMemberDTO.class);
-	
-	}
+        members.get().setName(memberDTO.getName());
+        members.get().setDescription(memberDTO.getDescription());
+        members.get().setFacebookUrl(memberDTO.getFacebookUrl());
+        members.get().setImage(memberDTO.getImage());
+        members.get().setInstagramUrl(memberDTO.getInstagramUrl());
+        members.get().setLinkedinUrl(memberDTO.getLinkedinUrl());
+        membersRepository.save(members.get());
+        return mapper.map(members.get(), NewMemberDTO.class);
+
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -137,12 +136,12 @@ public class MembersServicesImpl implements MembersService{
         if (page.isEmpty()) {
             throw new ParamNotFoundException(PAGE_NOT_FOUND);
         }
-        
+
         Page<MemberDTO> responsePage = new PageImpl(
-                membersMapper.listMembersToDto(page.getContent()), 
-                PageRequest.of(page.getNumber(), page.getSize()), 
+                membersMapper.listMembersToDto(page.getContent()),
+                PageRequest.of(page.getNumber(), page.getSize()),
                 page.getTotalElements());
-        
+
         return new PagesDTO<>(responsePage, NEWS_PAGE_URL);
     }
 

@@ -58,12 +58,12 @@ public class ContactsController {
         contactService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    
+
     @Operation(
-        summary = "List all contacts",
-        description = "List all contacts")
+            summary = "List all contacts",
+            description = "List all contacts")
     @GetMapping()
-    public ResponseEntity<?> listContact(){
+    public ResponseEntity<?> listContact() {
         return ResponseEntity.ok(contactService.findByAll());
     }
 

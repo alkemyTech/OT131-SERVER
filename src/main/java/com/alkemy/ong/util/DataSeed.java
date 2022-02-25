@@ -19,6 +19,7 @@ import com.alkemy.ong.repository.UsersRepository;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
+
 @Profile("!test")
 @Component
 public class DataSeed implements CommandLineRunner {
@@ -30,10 +31,8 @@ public class DataSeed implements CommandLineRunner {
     @Autowired
     private RolesRepository rolesRepository;
     @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
     private OrganizationsRepository organizationsRepository;
-    
+
     @Autowired
     private ReadScripts readScript;
     @Value("classpath:scripts/usersScript.sql")
@@ -72,7 +71,7 @@ public class DataSeed implements CommandLineRunner {
             rolesRepository.save(roleUser);
             user.setRole(roleUser);
             usersRepository.save(user);
-            
+
             readScript.dataSourceInitializer(usersScript);
             readScript.encodePasswordPopulator();
 

@@ -11,14 +11,15 @@ import javax.persistence.Table;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
 @Builder
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "members")
-public class Members implements Serializable{
-    
+public class Members implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -63,6 +64,5 @@ public class Members implements Serializable{
         this.image = image;
         this.description = description;
     }
-    
-    
+
 }

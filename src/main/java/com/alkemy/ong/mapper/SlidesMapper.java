@@ -33,7 +33,7 @@ public class SlidesMapper {
                 .organizationId(entity.getOrganization().getId())
                 .build();
     }
-    
+
     public SlidesUpdateResponseDTO entity3ResponseDTO(Slides entity) {
         return SlidesUpdateResponseDTO.builder()
                 .imageUrl(entity.getImageUrl())

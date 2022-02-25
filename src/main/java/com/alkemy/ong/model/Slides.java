@@ -39,10 +39,10 @@ public class Slides {
     private String text;
 
     @NotNull
-    @Column(name = "order_number", unique= true)
+    @Column(name = "order_number", unique = true)
     private Integer order;
 
-    @NotNull    
+    @NotNull
     @ManyToOne
     private Organizations organization;
 
@@ -58,7 +58,5 @@ public class Slides {
 
     @Column(name = "is_active")
     private boolean isActive = Boolean.TRUE;
-
-
 
 }

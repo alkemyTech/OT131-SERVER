@@ -1,4 +1,3 @@
-
 package com.alkemy.ong.model;
 
 import lombok.AllArgsConstructor;
@@ -54,16 +53,14 @@ public class Activities {
     @Column(name = "is_active")
     private boolean isActive = Boolean.TRUE;
 
-
-	public Activities(@NotNull String name, @NotNull String content, @NotNull String image, LocalDate createdDate,
-			boolean isActive) {
-		super();
-		this.name = name;
-		this.content = content;
-		this.image = image;
-		this.createdDate = createdDate;
-		this.isActive = isActive;
-	}
-       
+    public Activities(@NotNull String name, @NotNull String content, @NotNull String image, LocalDate createdDate,
+            boolean isActive) {
+        super();
+        this.name = name;
+        this.content = content;
+        this.image = image;
+        this.createdDate = createdDate;
+        this.isActive = isActive;
+    }
 
 }

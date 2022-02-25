@@ -2,8 +2,6 @@ package com.alkemy.ong.controller;
 
 import com.alkemy.ong.dto.SlidesUpdateDto;
 import com.alkemy.ong.dto.SlidesUpdateResponseDTO;
-import com.alkemy.ong.model.Slides;
-import com.alkemy.ong.model.Users;
 import com.alkemy.ong.dto.SlidesDTO;
 import com.alkemy.ong.dto.SlidesListDto;
 import com.alkemy.ong.dto.SlidesResponseDTO;
@@ -42,58 +40,60 @@ public class SlidesController {
 
     @Operation(summary = SLIDES_POST_INFO)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = SLIDES_POST_OK,
-                    content = {@Content(mediaType = "application/json",
+        @ApiResponse(responseCode = "200", description = SLIDES_POST_OK,
+                content = {
+                    @Content(mediaType = "application/json",
                             schema = @Schema(implementation = SlidesDTO.class))}),
-            @ApiResponse(responseCode = "400", description = BAD_REQUEST,
-                    content = @Content)})
+        @ApiResponse(responseCode = "400", description = BAD_REQUEST,
+                content = @Content)})
     @PostMapping
     public ResponseEntity<SlidesResponseDTO> save(@Valid @RequestBody SlidesDTO dto) {
 
         SlidesResponseDTO saved = slidesService.save(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
-    
+
     @Operation(summary = SLIDES_GET_INFO)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = SLIDES_GET_INFO,
-                    content = {@Content(mediaType = "application/json",
+        @ApiResponse(responseCode = "200", description = SLIDES_GET_INFO,
+                content = {
+                    @Content(mediaType = "application/json",
                             schema = @Schema(implementation = SlidesListDto.class))}),
-            @ApiResponse(responseCode = "400", description = BAD_REQUEST,
-                    content = @Content)})
+        @ApiResponse(responseCode = "400", description = BAD_REQUEST,
+                content = @Content)})
     @GetMapping
     public List<SlidesListDto> getAll() {
         return slidesService.getAll();
     }
-    
-    
+
     @Operation(summary = "Update slide data")
-    @ApiResponses(value = { 
-    @ApiResponse (responseCode = "200", description = "Update ok. Return credentials" , 
-                                 content = { @Content(mediaType = "application/json", 
-                                   schema = @Schema(implementation = SlidesUpdateDto.class)) }),
-                       
-    @ApiResponse(responseCode = "404", description = "Slide not found. Slide id does not exist", 
-                         content = @Content),})
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Update ok. Return credentials",
+                content = {
+                    @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = SlidesUpdateDto.class))}),
+
+        @ApiResponse(responseCode = "404", description = "Slide not found. Slide id does not exist",
+                content = @Content),})
     @PutMapping(REQ_MAPP_ID)
     private ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody SlidesUpdateDto dto) {
-    	SlidesUpdateResponseDTO result = slidesService.update(id, dto);
-        return result == null?
-                ResponseEntity.status(HttpStatus.NOT_FOUND).build() :
-                ResponseEntity.ok().body(result);
+        SlidesUpdateResponseDTO result = slidesService.update(id, dto);
+        return result == null
+                ? ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+                : ResponseEntity.ok().body(result);
 
     }
-    
-    
+
     @Operation(summary = "Delete slide from Database (set active as false)")
-	@ApiResponses(value = { 
-        @ApiResponse (responseCode = "200", description = "Delete ok. Return credentials" , 
-   				    content = {@Content(mediaType = "application/json") }),
-   		  
-   		@ApiResponse(responseCode = "403", description = "Forbidden. Only admin users can delete registers from db", 
-   		    content = @Content),
-        @ApiResponse(responseCode = "404", description = "S not found. Wrong identifier", 
-   		    content = @Content)})
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Delete ok. Return credentials",
+                content = {
+                    @Content(mediaType = "application/json")}),
+
+        @ApiResponse(responseCode = "403", description = "Forbidden. Only admin users can delete registers from db",
+                content = @Content),
+        @ApiResponse(responseCode = "404", description = "S not found. Wrong identifier",
+                content = @Content)})
     @DeleteMapping(REQ_MAPP_ID)
     private ResponseEntity<?> deleteSlides(@PathVariable(name = "id") Long id) throws Exception {
         try {
@@ -104,13 +104,13 @@ public class SlidesController {
             return ResponseEntity.status(HttpStatus.OK).body(e.getMessage());
         }
     }
-    
+
     @Operation(summary = "Show Slide by Id")
-	@ApiResponses(value = {
-            @ApiResponse(responseCode = "404", description = "Slide not found. Wrong identifier", 
-                        content = @Content)})
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "404", description = "Slide not found. Wrong identifier",
+                content = @Content)})
     @GetMapping(REQ_MAPP_ID)
     public ResponseEntity<SlidesResponseDTO> getById(@PathVariable Long id) {
         return ResponseEntity.ok().body(slidesService.findById(id));
-    }  
+    }
 }

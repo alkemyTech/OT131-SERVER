@@ -31,15 +31,15 @@ public class TestimonialsController {
 
     @Operation(summary = "Delete a testimonial by id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "DeleteTestimonial by id",
-                    content = {
-                            @Content(mediaType = "application/json",
-                                    schema = @Schema(implementation = TestimonialsDto.class))}),
+        @ApiResponse(responseCode = "200", description = "DeleteTestimonial by id",
+                content = {
+                    @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = TestimonialsDto.class))}),
 
-            @ApiResponse(responseCode = "400", description = "Invalid id supplied",
-                    content = @Content),
-            @ApiResponse(responseCode = "404", description = "Testimonial not found",
-                    content = @Content)})
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied",
+                content = @Content),
+        @ApiResponse(responseCode = "404", description = "Testimonial not found",
+                content = @Content)})
     @DeleteMapping(REQ_MAPP_ID)
     public ResponseEntity<?> deleteTestimonials(@Valid @PathVariable(value = "id", required = true) Long id) {
         testimonialsService.delete(id);
@@ -48,15 +48,15 @@ public class TestimonialsController {
 
     @Operation(summary = "Update a Testimonials by id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Update Testimonials by id",
-                    content = {
-                            @Content(mediaType = "application/json",
-                                    schema = @Schema(implementation = TestimonialsDto.class))}),
+        @ApiResponse(responseCode = "200", description = "Update Testimonials by id",
+                content = {
+                    @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = TestimonialsDto.class))}),
 
-            @ApiResponse(responseCode = "400", description = "Invalid id supplied",
-                    content = @Content),
-            @ApiResponse(responseCode = "404", description = "Testimonials not found",
-                    content = @Content)})
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied",
+                content = @Content),
+        @ApiResponse(responseCode = "404", description = "Testimonials not found",
+                content = @Content)})
     @PutMapping(REQ_MAPP_ID)
     public ResponseEntity<?> updateTestimonials(@Valid @RequestBody TestimonialsDto testimonials, @PathVariable long id) throws Exception {
         return new ResponseEntity<>(testimonialsService.updateTestimonails(testimonials, id), HttpStatus.OK);
@@ -72,11 +72,11 @@ public class TestimonialsController {
 
     @Operation(summary = TESTIMONIALS_PAGE_INFO)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = TESTIMONIALS_PAGE_OK,
-                    content = {
-                            @Content(mediaType = "application/json",
-                                    schema = @Schema(implementation = PagesDTO.class))}),
-            @ApiResponse(responseCode = "400", description = WRONG_PAGE_NUMBER)})
+        @ApiResponse(responseCode = "200", description = TESTIMONIALS_PAGE_OK,
+                content = {
+                    @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = PagesDTO.class))}),
+        @ApiResponse(responseCode = "400", description = WRONG_PAGE_NUMBER)})
     @GetMapping
     public ResponseEntity<?> getPage(@RequestParam Integer page) {
         PagesDTO<TestimonialsResponseDto> response = testimonialsService.getAll(page);

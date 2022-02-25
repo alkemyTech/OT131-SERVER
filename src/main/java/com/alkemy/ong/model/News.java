@@ -51,8 +51,8 @@ public class News {
 
     public News(String name, String content, String image) {
         super();
-        this.name=name;
-        this.content=content;
-        this.image=image;
+        this.name = name;
+        this.content = content;
+        this.image = image;
     }
 }

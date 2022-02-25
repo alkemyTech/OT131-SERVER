@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 public class NewContactsDTO {
 
     @NotBlank(message = "The name can't be null or empty")
-    private String name;    
+    private String name;
     private Long phone;
-    
+
     @NotBlank(message = "The email can't be null or empty")
     @Email(message = "Wrong email format")
     private String email;

@@ -22,6 +22,6 @@ public class NewsDTO {
     private String image;
     @NotNull(message = "The News must have a valid category id")
     private Long idCategory;
-    
+
     private LocalDate dateCreated;
 }

@@ -22,11 +22,11 @@ public interface CategoriesService {
     List<Categories> listAll();
 
     CategoriesDTO addCategories(CategoriesDTO categoriesDto);
-    
+
     public CategoriesDTO detailCategory(Long id) throws Exception;
-    
-    public 	PagesDTO<CategoriesDTO> getAll(Integer page);
-    
+
+    public PagesDTO<CategoriesDTO> getAll(Integer page);
+
     public PagesDTO<CategoriesDTO> responsePage(Page<Categories> page);
 
     CategoriesDTO save(CategoriesDTO dto) throws ParamNotFoundException;

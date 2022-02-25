@@ -2,10 +2,8 @@ package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.ActivitiesDTO;
 import com.alkemy.ong.exception.ParamNotFoundException;
-import com.alkemy.ong.model.Activities;
 
 import java.util.List;
-
 
 public interface ActivitiesService {
 

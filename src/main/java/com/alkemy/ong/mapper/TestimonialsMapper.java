@@ -14,8 +14,8 @@ public class TestimonialsMapper {
     private ModelMapper mapper = new ModelMapper();
 
     public List<TestimonialsResponseDto> entityList2ResponseDTO(List<Testimonials> entities) {
-        return entities.stream().map(testimonials ->
-                mapper.map(testimonials, TestimonialsResponseDto.class))
+        return entities.stream().map(testimonials
+                -> mapper.map(testimonials, TestimonialsResponseDto.class))
                 .collect(Collectors.toList());
     }
 }

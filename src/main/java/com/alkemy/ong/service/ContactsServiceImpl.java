@@ -46,7 +46,7 @@ public class ContactsServiceImpl implements ContactsService {
 
         return mapper.map(contactSaved, ContactsDTO.class);
     }
-    
+
     @Override
     @Transactional
     public void delete(Long id) {
@@ -54,7 +54,7 @@ public class ContactsServiceImpl implements ContactsService {
         if (!result.isPresent()) {
             throw new ParamNotFoundException(ERR_CONTACT_NOT_FOUND);
         }
-        
+
         Contacts contact = result.get();
         contact.setActive(false);
         contactRepository.save(contact);
@@ -65,14 +65,14 @@ public class ContactsServiceImpl implements ContactsService {
     public List<ContactsDTO> findByAll() {
         List<ContactsDTO> listContactsDto = new ArrayList<>();
         List<Contacts> listContacts = contactRepository.findByisActiveTrue();
-        if(!listContacts.isEmpty()){
+        if (!listContacts.isEmpty()) {
             for (Contacts listContact : listContacts) {
-                    listContactsDto.add(mapper.map(listContact, ContactsDTO.class));
+                listContactsDto.add(mapper.map(listContact, ContactsDTO.class));
             }
             return listContactsDto;
-        }else{
+        } else {
             throw new NoDataDisplayException(NOT_DATA_DISPLAY);
         }
-        
+
     }
 }

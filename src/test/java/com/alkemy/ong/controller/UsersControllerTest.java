@@ -37,13 +37,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 @AutoConfigureMockMvc
 @AutoConfigureJsonTesters
 public class UsersControllerTest {
-    private static final String ROLE_ADMIN = "ROLE_ADMIN";
     @Autowired
     private MockMvc mockMvc;
     @MockBean
     private UsersServiceImpl usersService;
-    @InjectMocks
-    private UsersController usersController;
     @Autowired
     private JacksonTester<LoginUsersDTO> jsonLogin;
     @Autowired
@@ -54,8 +51,6 @@ public class UsersControllerTest {
     private UsersDtoResponse usersDtoResponse;
     private LoginUsersDTO loginUsersDTO;
     private NewUsersDTO newUsersDTO;
-    @Autowired
-    private JWT jwt;
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -74,9 +69,6 @@ public class UsersControllerTest {
 
         this.usersDtoResponse = UsersDtoResponse.builder()
                 .email(newUsersDTO.getEmail())
-                // .firstName(newUsersDTO.getFirstName())
-                // .role(new Roles(RoleName.ROLE_ADMIN, "description"))
-                // .token("token")
                 .build();
 
     }
@@ -87,11 +79,6 @@ public class UsersControllerTest {
 
     private String dtoNewToJson(NewUsersDTO dto) throws Exception {
         return jsonNew.write(dto).getJson();
-    }
-
-    private String dtoResponseToJson(UsersDtoResponse dto) throws Exception {
-        System.out.println(dto);
-        return jsonRes.write(dto).getJson();
     }
 
     @Test

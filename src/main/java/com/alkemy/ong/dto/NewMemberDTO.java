@@ -1,13 +1,7 @@
 package com.alkemy.ong.dto;
 
-import java.time.LocalDate;
-
 import javax.validation.constraints.*;
-
-import com.alkemy.ong.model.Members;
-
 import lombok.*;
-
 
 @Builder
 @Data

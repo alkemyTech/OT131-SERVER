@@ -1,4 +1,3 @@
-
 package com.alkemy.ong.service;
 
 import com.alkemy.ong.dto.LoginUsersDTO;
@@ -17,10 +16,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class UsersDetailsServiceImp implements UserDetailsService {
-    
+
     @Autowired
     private UsersRepository usersRepository;
     @Autowired
@@ -31,7 +29,7 @@ public class UsersDetailsServiceImp implements UserDetailsService {
         Users userEntity = usersRepository.findByEmail(email).get();
         return new User(userEntity.getEmail(), userEntity.getPassword(), Collections.emptyList()); //Cambiar collection por roles
     }
-    
+
     public UserDetails signin(LoginUsersDTO loginUser) throws Exception {
         UserDetails userDetails;
 
@@ -45,14 +43,9 @@ public class UsersDetailsServiceImp implements UserDetailsService {
             return userDetails;
         } catch (BadCredentialsException e) {
             throw new BadCredentialsException("Invalid username or password");
-        } catch (InternalAuthenticationServiceException e){
+        } catch (InternalAuthenticationServiceException e) {
             throw new InternalAuthenticationServiceException("The entered user does not exist");
         }
     }
 
-    }
-    
-    
-
-
-
+}

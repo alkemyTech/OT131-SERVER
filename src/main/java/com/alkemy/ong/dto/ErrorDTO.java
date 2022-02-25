@@ -8,8 +8,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ErrorDTO {
- 
-	    private HttpStatus status;
-	    private List<String> errors;
-	    
+
+    private HttpStatus status;
+    private List<String> errors;
+
 }

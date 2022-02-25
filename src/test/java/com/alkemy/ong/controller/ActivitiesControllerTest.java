@@ -24,7 +24,6 @@ import java.io.IOException;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureJsonTesters
@@ -59,23 +58,22 @@ class ActivitiesControllerTest {
     void saveWithAdminRole() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .post(REQ_MAPP_ACTIVITIES)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(dtoToJson(activitiesDTO)))
+                .post(REQ_MAPP_ACTIVITIES)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(dtoToJson(activitiesDTO)))
                 .andExpect(status().isCreated());
 
         verify(activitiesService, times(1)).save(activitiesDTO);
     }
-
 
     @Test
     @WithMockUser(roles = USER_ROLE)
     void doNotSaveWithUserRole() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .post(REQ_MAPP_ACTIVITIES)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(dtoToJson(activitiesDTO)))
+                .post(REQ_MAPP_ACTIVITIES)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(dtoToJson(activitiesDTO)))
                 .andExpect(status().isForbidden());
     }
 
@@ -83,9 +81,9 @@ class ActivitiesControllerTest {
     void doNotSaveWithoutRole() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .post(REQ_MAPP_ACTIVITIES)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(dtoToJson(activitiesDTO)))
+                .post(REQ_MAPP_ACTIVITIES)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(dtoToJson(activitiesDTO)))
                 .andExpect(status().isForbidden());
     }
 
@@ -94,9 +92,9 @@ class ActivitiesControllerTest {
     void doNotSaveWithNullData() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .post(REQ_MAPP_ACTIVITIES)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(dtoToJson(new ActivitiesDTO())))
+                .post(REQ_MAPP_ACTIVITIES)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(dtoToJson(new ActivitiesDTO())))
                 .andExpect(status().isBadRequest());
 
         verify(activitiesService, times(0)).save(activitiesDTO);
@@ -107,7 +105,7 @@ class ActivitiesControllerTest {
     void getAllActivesWithAdminRole() throws Exception {
 
         this.mockMvc.perform(get(REQ_MAPP_ACTIVITIES)
-                        .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         verify(activitiesService, times(1)).getAllActives();
@@ -118,7 +116,7 @@ class ActivitiesControllerTest {
     void getAllActivesWithUserRole() throws Exception {
 
         this.mockMvc.perform(get(REQ_MAPP_ACTIVITIES)
-                        .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         verify(activitiesService, times(1)).getAllActives();
@@ -128,7 +126,7 @@ class ActivitiesControllerTest {
     void doNotGetAllActivesWithoutRole() throws Exception {
 
         this.mockMvc.perform(get(REQ_MAPP_ACTIVITIES)
-                        .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isForbidden());
 
     }
@@ -138,9 +136,9 @@ class ActivitiesControllerTest {
     void updateWithAdminRole() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .put(REQ_MAPP_ACTIVITIES + REQ_MAPP_ID, 1)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(dtoToJson(activitiesDTO)))
+                .put(REQ_MAPP_ACTIVITIES + REQ_MAPP_ID, 1)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(dtoToJson(activitiesDTO)))
                 .andExpect(status().isOk());
 
         verify(activitiesService, times(1)).update(1L, activitiesDTO);
@@ -151,9 +149,9 @@ class ActivitiesControllerTest {
     void doNotUpdateWithUserRole() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .put(REQ_MAPP_ACTIVITIES + REQ_MAPP_ID, 1)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(dtoToJson(activitiesDTO)))
+                .put(REQ_MAPP_ACTIVITIES + REQ_MAPP_ID, 1)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(dtoToJson(activitiesDTO)))
                 .andExpect(status().isForbidden());
 
         verify(activitiesService, times(0)).update(1L, activitiesDTO);
@@ -163,9 +161,9 @@ class ActivitiesControllerTest {
     void doNotUpdateWithoutRole() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .put(REQ_MAPP_ACTIVITIES + REQ_MAPP_ID, 1)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(dtoToJson(activitiesDTO)))
+                .put(REQ_MAPP_ACTIVITIES + REQ_MAPP_ID, 1)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(dtoToJson(activitiesDTO)))
                 .andExpect(status().isForbidden());
 
         verify(activitiesService, times(0)).update(1L, activitiesDTO);
@@ -176,9 +174,9 @@ class ActivitiesControllerTest {
     void doNotUpdateWithNonExistentId() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .put(REQ_MAPP_ACTIVITIES + REQ_MAPP_ID, 2)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(dtoToJson(activitiesDTO)))
+                .put(REQ_MAPP_ACTIVITIES + REQ_MAPP_ID, 2)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(dtoToJson(activitiesDTO)))
                 .andExpect(status().isBadRequest());
 
         verify(activitiesService, times(1)).update(2L, activitiesDTO);
@@ -189,9 +187,9 @@ class ActivitiesControllerTest {
     void doNotUpdateWithNullData() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .put(REQ_MAPP_ACTIVITIES + REQ_MAPP_ID, 1)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(dtoToJson(new ActivitiesDTO())))
+                .put(REQ_MAPP_ACTIVITIES + REQ_MAPP_ID, 1)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(dtoToJson(new ActivitiesDTO())))
                 .andExpect(status().isBadRequest());
 
         verify(activitiesService, times(0)).update(1L, new ActivitiesDTO());

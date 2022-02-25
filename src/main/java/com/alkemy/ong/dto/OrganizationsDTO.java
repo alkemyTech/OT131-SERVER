@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrganizationsDTO {
+
     private String name;
     private String images;
     private String addres;

@@ -25,7 +25,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 @Service
-public class NewsServiceImpl implements NewsService{
+public class NewsServiceImpl implements NewsService {
 
     @Autowired
     private NewsRepository newsRepository;
@@ -37,21 +37,21 @@ public class NewsServiceImpl implements NewsService{
     private ModelMapper mapper = new ModelMapper();
 
     @Override
-    public NewsDTO publicDataNew(String name){
+    public NewsDTO publicDataNew(String name) {
         Optional<News> nw = newsRepository.findByName(name);
         return newsMapper.converToDTO(nw.get());
     }
 
     @Transactional
     @Override
-    public void deleteNew(Long id){
+    public void deleteNew(Long id) {
         Optional<News> answer = newsRepository.findById(id);
         System.out.println(answer.toString());
-        if(answer.isPresent()){
+        if (answer.isPresent()) {
             News news = answer.get();
             news.setIsActivated(Boolean.FALSE);
             newsRepository.save(news);
-        }else{
+        } else {
             throw new ParamNotFoundException("News does not exist");
         }
 
@@ -63,9 +63,10 @@ public class NewsServiceImpl implements NewsService{
         News entity = newsMapper.converToModel(dto);
 
         Optional<Categories> categoriesResult = categoriesRepository.findById(dto.getIdCategory());
-        if (categoriesResult.isEmpty())
+        if (categoriesResult.isEmpty()) {
             throw new ParamNotFoundException("The News must have a valid category id");
-        
+        }
+
         entity.setCategory(categoriesResult.get());
         News entitySaved = newsRepository.save(entity);
 
@@ -77,7 +78,7 @@ public class NewsServiceImpl implements NewsService{
     public NewsDTO update(Long id, NewsDTO dto) {
 
         Optional<News> result = newsRepository.findById(id);
-        if (result.isPresent()){
+        if (result.isPresent()) {
             News entity = mapper.map(dto, News.class);
             News entityUpdated = result.get();
             entityUpdated.setDateModified(LocalDate.now());
@@ -94,12 +95,12 @@ public class NewsServiceImpl implements NewsService{
     }
 
     @Override
-    public NewsDTO findById(Long id){
+    public NewsDTO findById(Long id) {
         Optional<News> news = newsRepository.findById(id);
-        if(news.isPresent()){
+        if (news.isPresent()) {
             NewsDTO newsDto = newsMapper.converToDTO(news.get());
             return newsDto;
-        }else{
+        } else {
             throw new ParamNotFoundException("News with id=" + id + " not found.");
         }
     }
@@ -121,12 +122,12 @@ public class NewsServiceImpl implements NewsService{
         if (page.isEmpty()) {
             throw new ParamNotFoundException(PAGE_NOT_FOUND);
         }
-        
+
         Page<NewsDTO> responsePage = new PageImpl(
-                newsMapper.listNewsToDto(page.getContent()), 
-                PageRequest.of(page.getNumber(), page.getSize()), 
+                newsMapper.listNewsToDto(page.getContent()),
+                PageRequest.of(page.getNumber(), page.getSize()),
                 page.getTotalElements());
-        
+
         return new PagesDTO<>(responsePage, NEWS_PAGE_URL);
     }
 }

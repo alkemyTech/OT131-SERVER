@@ -36,8 +36,8 @@ public class CommentsMapper {
         }
         return listAllCommentsResponseDto;
     }
-    
-    public Comments comments2Entity(News news, Users users, String body){
+
+    public Comments comments2Entity(News news, Users users, String body) {
         Comments comment = new Comments();
         comment.setNews(news);
         comment.setUsers(users);

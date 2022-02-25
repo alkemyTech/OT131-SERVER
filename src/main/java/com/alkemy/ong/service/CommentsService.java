@@ -8,14 +8,14 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CommentsService {
-    
-    CommentsResponseDTO create(Long news_id, String body ,String authorization) throws AccessDeniedException;
-     
+
+    CommentsResponseDTO create(Long news_id, String body, String authorization) throws AccessDeniedException;
+
     CommentsResponseDTO update(Long id, CommentsDTO dto, String authorization) throws AccessDeniedException;
-    
+
     List<AllCommentsResponseDTO> getNewAndAllComment(Long id);
 
     Optional<List<String>> listComments() throws AccessDeniedException;
-    
+
     void delete(Long id, String authorization) throws AccessDeniedException;
 }

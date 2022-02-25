@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 @Component
-public class JwtAuthFilter extends OncePerRequestFilter{
+public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final String HEADER = "Authorization";
     private final String PREFIX = "Bearer ";
@@ -42,13 +42,11 @@ public class JwtAuthFilter extends OncePerRequestFilter{
             } else {
                 SecurityContextHolder.clearContext();
             }
-
-            }
             chain.doFilter(request, response);
-        } catch (ExpiredJwtException | 
-                UnsupportedJwtException | 
-                MalformedJwtException e) { 
-            
+        } catch (ExpiredJwtException
+                | UnsupportedJwtException
+                | MalformedJwtException e) {
+
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             ((HttpServletResponse) response).sendError(HttpServletResponse.SC_FORBIDDEN, e.getMessage());
         }
