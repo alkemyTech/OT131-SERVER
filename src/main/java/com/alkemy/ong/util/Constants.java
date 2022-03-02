@@ -176,7 +176,7 @@ public final class Constants {
 
     //Slides Update
     public static final String REQ_MAPP_GET_LIST_USER = "/users";
-    public static final String REQ_MAPP_PAGE = "/";
+    public static final String REQ_MAPP_PAGE = "?page=";
 
     //Categories
     public static final String CATEGORIES_PAGE_URL = "localhost:8080/categories/?page=";
