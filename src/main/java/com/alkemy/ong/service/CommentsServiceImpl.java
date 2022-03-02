@@ -3,13 +3,16 @@ package com.alkemy.ong.service;
 import com.alkemy.ong.dto.CommentsDTO;
 import com.alkemy.ong.dto.CommentsResponseDTO;
 import com.alkemy.ong.dto.AllCommentsResponseDTO;
+import com.alkemy.ong.dto.NewCommentsDTO;
 import com.alkemy.ong.dto.UsersDtoResponse;
 import com.alkemy.ong.exception.NoDataDisplayException;
+import com.alkemy.ong.exception.ParamNotFoundException;
 import com.alkemy.ong.mapper.CommentsMapper;
 import com.alkemy.ong.model.Comments;
 import com.alkemy.ong.repository.CommentsRepository;
 import com.alkemy.ong.repository.NewsRepository;
 import static com.alkemy.ong.util.Constants.ERROR_EXIST;
+import static com.alkemy.ong.util.Constants.ERR_NEWS_NOT_FOUND;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,22 +39,22 @@ public class CommentsServiceImpl implements CommentsService {
 
     @Override
     @Transactional
-    public CommentsResponseDTO create(Long news_id, String body, String authorization) throws AccessDeniedException {
+    public CommentsResponseDTO create(NewCommentsDTO dto, String authorization) {
         //verificar news existente
         UsersDtoResponse userLogged = usersService.getUserDetails(authorization);
-        if (newsRepository.findById(news_id).isPresent() && !body.isEmpty() || body != null) {
+        if (newsRepository.findById(dto.getNewsId()).isPresent()) {
 
             Comments comment = commentsMapper.comments2Entity(
-                    newsRepository.findById(news_id).get(),
+                    newsRepository.findById(dto.getNewsId()).get(),
                     usersService.findByMail(userLogged.getEmail()).get(),
-                    body);
+                    dto.getBody());
 
             commentsRepository.save(comment);
 
             return commentsMapper.entity2ResponseDTO(comment);
 
         } else {
-            throw new AccessDeniedException(FORBIDDEN_MSG);
+            throw new ParamNotFoundException(ERR_NEWS_NOT_FOUND);
         }
 
     }

@@ -2,6 +2,7 @@ package com.alkemy.ong.controller;
 
 import com.alkemy.ong.dto.CommentsDTO;
 import com.alkemy.ong.dto.CommentsResponseDTO;
+import com.alkemy.ong.dto.NewCommentsDTO;
 import com.alkemy.ong.service.CommentsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class CommentsController {
 
     @Operation(summary = COMMENTS_POST_INFO)
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = COMMENTS_POST_OK,
+        @ApiResponse(responseCode = "201", description = COMMENTS_POST_OK,
                 content = {
                     @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CommentsResponseDTO.class))}),
@@ -45,11 +46,10 @@ public class CommentsController {
                 content = @Content),
         @ApiResponse(responseCode = "404", description = ENTITY_NOT_FOUND,
                 content = @Content)})
-    @PostMapping()
-    public ResponseEntity<CommentsResponseDTO> create(@RequestParam Long news_id, @RequestParam String body, HttpServletRequest request) throws AccessDeniedException {
-
-        CommentsResponseDTO response = commentsService.create(news_id, body, request.getHeader("Authorization"));
-        return ResponseEntity.ok().body(response);
+    @PostMapping
+    public ResponseEntity<CommentsResponseDTO> create(@Valid @RequestBody NewCommentsDTO dto, HttpServletRequest request) {
+        CommentsResponseDTO response = commentsService.create(dto, request.getHeader("Authorization"));
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @Operation(summary = COMMENTS_PUT_INFO)

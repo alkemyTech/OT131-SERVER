@@ -49,6 +49,7 @@ public final class Constants {
     public static final String REQ_MAPP_CONTACTS = "/contacts";
     public static final String ERR_CONTACT_NOT_FOUND = "Requested contact was not found";
     public static final String ERR_USER_ALREADY_EXISTS = "User already exists";
+    public static final String ERR_NEWS_NOT_FOUND = "Requested news was not found";
 
     //ActivitiesController Docs
     public static final String ACTIVITIES_GET_INFO = "Get a list of all active activities.";
