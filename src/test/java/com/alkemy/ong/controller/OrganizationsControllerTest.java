@@ -118,10 +118,10 @@ public class OrganizationsControllerTest {
 
     @Test
     @WithMockUser(roles = ADMIN_ROLE)
-    void updateWithAdminRole() throws Exception { // no pasa
+    void updateWithAdminRole() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                .post(REQ_MAPP_ORG + REQ_MAPP_ID, 1)
+                .put(REQ_MAPP_ORG + REQ_MAPP_ID, 1)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(dtoToJson(organizationsDTO)))
                 .andExpect(status().isOk());
@@ -134,7 +134,7 @@ public class OrganizationsControllerTest {
     void doNotUpdateWithUserRole() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                .post(REQ_MAPP_ORG + REQ_MAPP_ID, 1)
+                .put(REQ_MAPP_ORG + REQ_MAPP_ID, 1)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(dtoToJson(organizationsDTO)))
                 .andExpect(status().isForbidden());
@@ -146,7 +146,7 @@ public class OrganizationsControllerTest {
     void doNotUpdateWithoutRole() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                .post(REQ_MAPP_ORG + REQ_MAPP_ID, 1)
+                .put(REQ_MAPP_ORG + REQ_MAPP_ID, 1)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(dtoToJson(organizationsDTO)))
                 .andExpect(status().isForbidden());
@@ -159,7 +159,7 @@ public class OrganizationsControllerTest {
     void doNotUpdateWithNonExistentId() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                .post(REQ_MAPP_ORG + REQ_MAPP_ID, 2)
+                .put(REQ_MAPP_ORG + REQ_MAPP_ID, 2)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(dtoToJson(organizationsDTO)))
                 .andExpect(status().isBadRequest());
@@ -172,7 +172,7 @@ public class OrganizationsControllerTest {
     void doNotUpdateWithNullData() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                .post(REQ_MAPP_ORG + POINT_POST_MAPP)
+                .put(REQ_MAPP_ORG + POINT_POST_MAPP)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(dtoToJson(new OrganizationsAllDTO())))
                 .andExpect(status().isBadRequest());

@@ -22,6 +22,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import static com.alkemy.ong.util.Constants.*;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @Tag(name = "Organizations", description = "Create, update show Organizations")
 @RestController
@@ -88,7 +89,7 @@ public class OrganizationsController {
                 content = @Content),
         @ApiResponse(responseCode = "404", description = "Organization not found",
                 content = @Content)})
-    @PostMapping(REQ_MAPP_ID)
+    @PutMapping(REQ_MAPP_ID)
     public ResponseEntity<?> updateOrganization(@Valid @RequestBody OrganizationsAllDTO organization, @PathVariable long id) throws Exception {
         return new ResponseEntity<>(organizationService.updateDataOrganization(organization, id), HttpStatus.OK);
     }
