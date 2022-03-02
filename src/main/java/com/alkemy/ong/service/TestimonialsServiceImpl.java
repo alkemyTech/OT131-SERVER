@@ -36,7 +36,7 @@ public class TestimonialsServiceImpl implements TestimonialsService {
     @Transactional
     @Override
     public TestimonialsDto save(TestimonialsAddNewDto testimonialsAddNewDto) {
-        if (testimonialsRepository.findByName(testimonialsAddNewDto.getName()) != null) {
+        if (testimonialsRepository.findByName(testimonialsAddNewDto.getName()) == null) {
             return mapper.map(testimonialsRepository.save(mapper.map(testimonialsAddNewDto, Testimonials.class)), TestimonialsDto.class);
         } else {
             throw new AlreadyExistsException(ERROR_EXIST);
